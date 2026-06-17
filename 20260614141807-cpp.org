@@ -1,0 +1,397 @@
+:PROPERTIES:
+:ID:       8667b78f-2dc6-44f2-a893-a3718a247bb2
+:END:
+#+title: CPP
+filetags: CPP
+
+* C++ Basics
+** Objects and Variables
+:PROPERTIES:
+:ID: Objects and Variables
+:END:
+
+In C++ direct memory access is discouraged. So we use objects for that.
+Instead of telling go get the value stored in mailbox number 7532, we tell go get the value stored by this object.
+So that the compiler can figure it out how to retrive the value
+
+Variable
+
+Memory is allocated during the run time.
+
+#+begin_src cpp
+#include <iostream>
+
+int main() {
+
+    int x;
+
+    return 0;
+}
+#+end_src
+
+*** Variable assigment
+#+begin_src cpp
+#include <iostream>
+using namespace std;
+int main() {
+    int x {5};
+    cout << x;
+    return 0;
+}
+#+end_src
+
+#+RESULTS:
+: 5
+
+#+begin_src cpp
+int a;         // default-initialization (no initializer)
+
+// Traditional initialization forms:
+int b = 5;     // copy-initialization (initial value after equals sign)
+int c ( 6 );   // direct-initialization (initial value in parenthesis)
+
+// Modern initialization forms (preferred):
+int d { 7 };   // direct-list-initialization (initial value in braces)
+int e {};      // value-initialization (empty braces)
+#+end_src
+
+*** maybe unused
+
+#+begin_src cpp
+#include <iostream>
+
+int main()
+{
+    [[maybe_unused]] double pi { 3.14159 };  // Don't complain if pi is unused
+    [[maybe_unused]] double gravity { 9.8 }; // Don't complain if gravity is unused
+    [[maybe_unused]] double phi { 1.61803 }; // Don't complain if phi is unused
+
+    std::cout << pi << '\n';
+    std::cout << phi << '\n';
+
+    // The compiler will no longer warn about gravity not being used
+
+    return 0;
+}
+#+end_src
+*** cout and cin
+#+begin_src cpp
+#include <iostream>
+using namespace std;
+int main() {
+    int x{},y{};
+    cin >> x >> y;
+    cout << x << " " <<  y << '\n';
+    return 0;
+}
+#+end_src
+
+#+begin_src cpp
+#include <iostream>
+using namespace std;
+int main() {
+    int x{};
+    cin >> x;
+
+    int y{};
+    cin >> y;
+
+    cout << x << " " << y << "\n";
+    return 0;
+}
+
+#+end_src
+
+#+begin_src cpp
+#include <iostream>  // for std::cout and std::cin
+
+int main()
+{
+    std::cout << "Enter a number: "; // ask user for a number
+    int x{}; // define variable x to hold user input
+    std::cin >> x; // get number from keyboard and store it in variable x
+    std::cout << "You entered " << x << '\n';
+
+    return 0;
+}
+#+end_src
+*** Uninitialized variables and undefined behavioure
+
+Returns garbage value ----> Memory address
+
+#+begin_src cpp
+#include <iostream>
+
+int main() {
+    int x;
+    std::cout << x << '\n';
+    return 0;
+}
+
+#+end_src
+
+#+RESULTS:
+: 32765
+*** Keywords and Identifiers
+
+List of 92 keywords
+
+| Keyword   | Keyword      | Keyword          | Keyword       |
+|-----------+--------------+------------------+---------------|
+| alignas   | const_cast   | int              | static_assert |
+| alignof   | continue     | long             | static_cast   |
+| and       | co_await     | mutable          | struct        |
+| and_eq    | co_return    | namespace        | switch        |
+| asm       | co_yield     | new              | template      |
+| auto      | decltype     | noexcept         | this          |
+| bitand    | default      | not              | thread_local  |
+| bitor     | delete       | not_eq           | throw         |
+| bool      | do           | nullptr          | true          |
+| break     | double       | operator         | try           |
+| case      | dynamic_cast | or               | typedef       |
+| catch     | else         | or_eq            | typeid        |
+| char      | enum         | private          | typename      |
+| char8_t   | explicit     | protected        | union         |
+| char16_t  | export       | public           | unsigned      |
+| char32_t  | extern       | register         | using         |
+| class     | false        | reinterpret_cast | virtual       |
+| compl     | float        | requires         | void          |
+| concept   | for          | return           | volatile      |
+| const     | friend       | short            | wchar_t       |
+| consteval | goto         | signed           | while         |
+| constexpr | if           | sizeof           | xor           |
+| constinit | fnline       | static           | xor_eq        |
+
+
+** Functions and Files
+:PROPERTIES:
+:ID: Functions and Files
+:END:
+
+
+#+begin_src cpp
+#include <iostream>
+
+int returnvalue()
+{
+    int a;
+    std::cin >> a;
+    return a;
+}
+
+int main()
+{
+    int num { returnvalue() };
+
+    std::cout << num << '\n';
+
+    return 0;
+}
+#+end_src
+
+*** Void functions
+#+begin_src cpp
+#include <iostream>
+
+void printHi()
+{
+    std::cout << "Hi" << '\n';
+}
+
+int main() {
+
+    //printHi();
+    std::cout << printHi() << '\n';
+    printf()
+        printf()printf(jsbcb)print()
+    return 0;printf
+}
+#+end_src
+
+
+#+begin_src cpp
+#include <iostream>
+
+int main() {
+
+    unsigned short a{0};
+    std::cout << a << '\n';
+
+    a = -4;
+    std::cout << a << '\n';
+
+    return 0;
+}
+#+end_src
+
+#+RESULTS:
+
+** size_t[[https://www.learncpp.com/cpp-tutorial/fixed-width-integers-and-size-t/][ link to topic]]
+
+#+begin_src cpp
+#include <iostream>
+
+int main(){
+    bool a = true;
+    bool b = false;
+
+    std::cout << a << '\n';
+    std::cout << b << '\n';
+    return 0;
+}
+#+end_src
+
+** Char(ASCII TABLE LINK) [[https://www.learncpp.com/cpp-tutorial/chars/][here]]
+
+#+begin_src cpp
+#include <iostream>
+
+int main() {
+    char grade{65};
+    std::cout << grade << '\n';
+    return 0;
+}
+#+end_src
+
+#+RESULTS:
+: A
+
+#+begin_src cpp
+#include <iostream> //
+
+int main() {
+
+    char grade {};
+
+    std::cin >> grade;
+
+    std::cout << grade << '\n';
+
+    return 0;
+}
+#+end_src
+
+** Implicit and Explicit Coversion
+:PROPERTIES:
+:ID: Implicit and Explicit Coversion
+:END:
+
+Implicit conversion are made by compilers whereas explicit are made manually
+
+Syntax for Exclipit conversion ----> static_cast<new_type>(expression)
+
+#+begin_src cpp :results output
+#include <iostream>
+
+int main() {
+
+    double a{65.5};
+
+    std::cout << a << '\n';
+
+    std::cout << static_cast<int>(a) << '\n';
+
+    std::cout << static_cast<char>(a) << '\n';
+
+    std::cout << static_cast<float>(a) << '\n';
+    return 0;
+}
+#+end_src
+
+#+RESULTS:
+: 65.5
+: 65
+: A
+: 65.5
+
+*** Sign conversion using static_cast
+:PROPERTIES:
+:ID: Sign converstions using static_cast
+:END:
+
+#+begin_src cpp :results output
+#include <iostream>
+
+int main() {
+
+    int x{-1};
+
+    unsigned int y {static_cast<unsigned int>(x)};
+
+    std::cout << y << '\n';
+
+    unsigned int u {4294967295}; //here 4294967295 is largest 32bit unsigned int
+
+    std::cout << static_cast<signed int>(u);
+
+    return 0;
+}
+#+end_src
+
+#+RESULTS:
+: 4294967295
+: -1
+
+#+begin_src cpp
+#include <iostream>
+
+int main() {
+    char a {};
+
+    std::cin >> a;
+
+    int b = a;
+
+    std::cout << "You entered " << a << "," << "which has ACCII code " << b << '\n'; // OR use static_cast<int>(a) instead of another variable
+
+    return 0;
+}
+#+end_src
+
+#+RESULTS:
+*** Quiz [[https://www.learncpp.com/cpp-tutorial/chapter-4-summary-and-quiz/][Questions]]
+
+ Q2.
+ #+begin_src cpp
+#include <iostream>
+
+int main() {
+    double x,y;
+    char c;
+    std::cin >> x >> y;
+    std::cout << "Enter +, -, *, /: " << '\n';
+    std::cin >> c;
+
+    if(c == '+') {
+        std::cout << x+y << '\n';
+    }else if (c == '-'){
+        std::cout << x-y << '\n';
+
+    }else if (c == '*'){
+        std::cout << x*y << '\n';
+    }else if (c == '/'){
+        std::cout << x/y << '\n';
+    }else {
+        std::cout << "" << '\n';
+    }
+
+
+    return 0;
+}
+ #+end_src
+
+ Q3..
+ #+begin_src cpp
+#include <iostream>
+using namespace std; //hello world..
+int main() {
+    int height{};
+    cout << "Enter the height of the tower in meters: ";
+    cin >> height;
+    for(int i=1;height < 0;i++) {
+        height = 9.8 * (i*i)/2;
+        cout << "At " << i << "seconds, " << "the ball is at height: " << height << "meters" << '\n';
+    }
+    return 0;
+}
+ #+end_src
