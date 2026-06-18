@@ -1,30 +1,37 @@
 
 # Table of Contents
 
-1.  [C++ Basics](#org96db128)
-    1.  [Objects and Variables](#org440a5ce)
-        1.  [Variable assigment](#org98aa3ca)
-        2.  [maybe unused](#orgc8e5bcd)
-        3.  [cout and cin](#orgc36a284)
-        4.  [Uninitialized variables and undefined behavioure](#org1385698)
-        5.  [Keywords and Identifiers](#orgc94a986)
-    2.  [Functions and Files](#orgdab2b85)
-        1.  [Void functions](#org415bcc8)
-    3.  [size<sub>t</sub> link to topic](#orgf143b3c)
-    4.  [Char(ASCII TABLE LINK) here](#orgcd4b2d7)
-    5.  [Implicit and Explicit Coversion](#orgb1ba7d8)
-        1.  [Sign conversion using static<sub>cast</sub>](#org698a942)
-        2.  [Quiz Questions](#orge5cd392)
+1.  [C++ Basics](#org65589a1)
+    1.  [Objects and Variables](#org7d1d8bf)
+        1.  [Variable assigment](#org89bc13e)
+        2.  [maybe unused](#org75e6ef4)
+        3.  [cout and cin](#org893468e)
+        4.  [Uninitialized variables and undefined behavioure](#org793ddd3)
+        5.  [Keywords and Identifiers](#org192fd12)
+    2.  [Functions and Files](#orgbde148e)
+        1.  [Void functions](#org8a8ca03)
+    3.  [size<sub>t</sub> link to topic](#org307c6db)
+    4.  [Char(ASCII TABLE LINK) here](#org9d1d875)
+    5.  [Implicit and Explicit Coversion](#org2a1984c)
+        1.  [Sign conversion using static<sub>cast</sub>](#org76e7c92)
+        2.  [Quiz Questions](#orgd4cb653)
+    6.  [Numeral Systems (decimal, binary, hexadecimal)](#org4a3f7b0)
+        1.  [Octal](#orgcb8175b)
+        2.  [hexadecimal](#org2438529)
+        3.  [Binary](#org3ed5209)
+        4.  [Outputting values in decimal, octal and hexadecimal](#org75b70d1)
+        5.  [Outputting values in Binary using std::bitset](#org1c4ff75)
+        6.  [Strings (std::string)](#org887cca5)
 
 filetags: CPP
 
 
-<a id="org96db128"></a>
+<a id="org65589a1"></a>
 
 # C++ Basics
 
 
-<a id="org440a5ce"></a>
+<a id="org7d1d8bf"></a>
 
 ## Objects and Variables
 
@@ -46,7 +53,7 @@ Memory is allocated during the run time.
     }
 
 
-<a id="org98aa3ca"></a>
+<a id="org89bc13e"></a>
 
 ### Variable assigment
 
@@ -67,7 +74,7 @@ Memory is allocated during the run time.
     int e {};
 
 
-<a id="orgc8e5bcd"></a>
+<a id="org75e6ef4"></a>
 
 ### maybe unused
 
@@ -87,7 +94,7 @@ Memory is allocated during the run time.
     }
 
 
-<a id="orgc36a284"></a>
+<a id="org893468e"></a>
 
 ### cout and cin
 
@@ -126,7 +133,7 @@ Memory is allocated during the run time.
     }
 
 
-<a id="org1385698"></a>
+<a id="org793ddd3"></a>
 
 ### Uninitialized variables and undefined behavioure
 
@@ -141,7 +148,7 @@ Returns garbage value -&#x2014;> Memory address
     }
 
 
-<a id="orgc94a986"></a>
+<a id="org192fd12"></a>
 
 ### Keywords and Identifiers
 
@@ -332,7 +339,7 @@ List of 92 keywords
 </table>
 
 
-<a id="orgdab2b85"></a>
+<a id="orgbde148e"></a>
 
 ## Functions and Files
 
@@ -355,7 +362,7 @@ List of 92 keywords
     }
 
 
-<a id="org415bcc8"></a>
+<a id="org8a8ca03"></a>
 
 ### Void functions
 
@@ -389,7 +396,7 @@ List of 92 keywords
     }
 
 
-<a id="orgf143b3c"></a>
+<a id="org307c6db"></a>
 
 ## size<sub>t</sub>[ link to topic](https://www.learncpp.com/cpp-tutorial/fixed-width-integers-and-size-t/)
 
@@ -405,7 +412,7 @@ List of 92 keywords
     }
 
 
-<a id="orgcd4b2d7"></a>
+<a id="org9d1d875"></a>
 
 ## Char(ASCII TABLE LINK) [here](https://www.learncpp.com/cpp-tutorial/chars/)
 
@@ -431,9 +438,11 @@ List of 92 keywords
     }
 
 
-<a id="orgb1ba7d8"></a>
+<a id="org2a1984c"></a>
 
 ## Implicit and Explicit Coversion
+
+:ID: Implicit and Explicit Coversion
 
 Implicit conversion are made by compilers whereas explicit are made manually
 
@@ -456,7 +465,7 @@ Syntax for Exclipit conversion -&#x2014;> static<sub>cast</sub><new<sub>type</su
     }
 
 
-<a id="org698a942"></a>
+<a id="org76e7c92"></a>
 
 ### Sign conversion using static<sub>cast</sub>
 
@@ -492,7 +501,7 @@ Syntax for Exclipit conversion -&#x2014;> static<sub>cast</sub><new<sub>type</su
     }
 
 
-<a id="orge5cd392"></a>
+<a id="orgd4cb653"></a>
 
 ### Quiz [Questions](https://www.learncpp.com/cpp-tutorial/chapter-4-summary-and-quiz/)
 
@@ -549,6 +558,136 @@ Q3.
     
     
         }
+    
+        return 0;
+    }
+
+
+<a id="org4a3f7b0"></a>
+
+## Numeral Systems (decimal, binary, hexadecimal)
+
+
+<a id="orgcb8175b"></a>
+
+### Octal
+
+In octal there are no 8 and 9.
+So 8 is represented as 10 and
+9 - 11
+10 - 12
+15 - 17
+16 - 20
+17 - 21 and so on
+
+For representing it as octal number we use &ldquo;0&rdquo; infront of the number
+
+    #include <iostream>
+    using namespace std;
+    
+    int main() {
+        int x{017};
+        cout << x << '\n';
+        return 0;
+    }
+
+
+<a id="org2438529"></a>
+
+### hexadecimal
+
+Hexadecimal base is 16 and we count like  0, 1, 2, 3, 4, 5, 6, 7, 8, 9, A, B, C, D, E, F, 10, 11, 12, …
+To use hexadecimal we use prefix &ldquo;0x&rdquo;
+
+    #include <iostream>
+    using namespace std;
+    
+    int main() {
+        int x{0xF};
+        int y{0x1A}; //here 1A in hexadecimal means 26 in decimal
+        cout << x << '\n';
+        cout << y << '\n';
+        return 0;
+    }
+
+
+<a id="org3ed5209"></a>
+
+### Binary
+
+Binary has base 2.
+We use prefix 0b for binary numbers
+
+    #include <iostream>
+    using namespace std;
+    
+    int main() {
+        int x{0101}; //octal
+        int y{0x101}; //hexadecimal
+        int z{0b101}; //binary
+    
+        cout << x << '\n';
+        cout << y << '\n';
+        cout << z << '\n';
+        return 0;
+    }
+
+
+<a id="org75b70d1"></a>
+
+### Outputting values in decimal, octal and hexadecimal
+
+    #include <iostream>
+    using namespace std;
+    
+    int main() {
+        int x{44};
+    
+        cout << hex << x << '\n';
+        cout << oct << x << '\n';
+        cout << dec << x << '\n';
+        cout <<  x << '\n';
+    
+        return 0;
+    }
+
+
+<a id="org1c4ff75"></a>
+
+### Outputting values in Binary using std::bitset
+
+    #include <iostream>
+    #include <bitset>
+    
+    using namespace std;
+    
+    int main() {
+        bitset<4> x {5};
+        bitset<8> y {20};
+        bitset<8> z {0xF}; //decimal 15
+    
+        cout << x << '\n';
+        cout << y << '\n';
+        cout << z << '\n';
+        return 0;
+    }
+
+
+<a id="org887cca5"></a>
+
+### Strings (std::string)
+
+To use strings easily. The header <string> helps to input and output stings of different size
+
+    #include <iostream>
+    using namespace std;
+    
+    int main() {
+        string name {"Shiva"};
+        cout << name << '\n';
+    
+        name = "Prasad37";
+        cout << name << '\n';
     
         return 0;
     }

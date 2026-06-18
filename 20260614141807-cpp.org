@@ -268,6 +268,7 @@ int main() {
 #+end_src
 
 ** Implicit and Explicit Coversion
+
 :PROPERTIES:
 :ID: Implicit and Explicit Coversion
 :END:
@@ -406,3 +407,147 @@ int main() {
 }
 #+end_src
 
+** Numeral Systems (decimal, binary, hexadecimal)
+:PROPERTIES:
+:ID: Numeral Systems (Decimal, hexadecimal..)
+:END:
+
+*** Octal
+
+In octal there are no 8 and 9.
+So 8 is represented as 10 and
+9 - 11
+10 - 12
+15 - 17
+16 - 20
+17 - 21 and so on
+
+For representing it as octal number we use "0" infront of the number
+
+#+begin_src cpp :results output
+#include <iostream>
+using namespace std;
+
+int main() {
+    int x{017};
+    cout << x << '\n';
+    return 0;
+}
+#+end_src
+
+#+RESULTS:
+: 15
+
+*** hexadecimal
+Hexadecimal base is 16 and we count like  0, 1, 2, 3, 4, 5, 6, 7, 8, 9, A, B, C, D, E, F, 10, 11, 12, …
+To use hexadecimal we use prefix "0x"
+#+begin_src cpp :results output
+#include <iostream>
+using namespace std;
+
+int main() {
+    int x{0xF};
+    int y{0x1A}; //here 1A in hexadecimal means 26 in decimal
+    cout << x << '\n';
+    cout << y << '\n';
+    return 0;
+}
+#+end_src
+
+#+RESULTS:
+: 15
+: 26
+*** Binary
+Binary has base 2.
+We use prefix 0b for binary numbers
+#+begin_src cpp :results output
+#include <iostream>
+using namespace std;
+
+int main() {
+    int x{0101}; //octal
+    int y{0x101}; //hexadecimal
+    int z{0b101}; //binary
+
+    cout << x << '\n';
+    cout << y << '\n';
+    cout << z << '\n';
+    return 0;
+}
+#+end_src
+
+#+RESULTS:
+: 65
+: 257
+: 5
+*** Outputting values in decimal, octal and hexadecimal
+#+begin_src cpp :results output
+#include <iostream>
+using namespace std;
+
+int main() {
+    int x{44};
+
+    cout << hex << x << '\n';
+    cout << oct << x << '\n';
+    cout << dec << x << '\n';
+    cout <<  x << '\n';
+
+    return 0;
+}
+#+end_src
+
+#+RESULTS:
+: 2c
+: 54
+: 44
+: 44
+*** Outputting values in Binary using std::bitset
+
+#+begin_src cpp :results output
+#include <iostream>
+#include <bitset>
+
+using namespace std;
+
+int main() {
+    bitset<4> x {5};
+    bitset<8> y {20};
+    bitset<8> z {0xF}; //decimal 15
+
+    cout << x << '\n';
+    cout << y << '\n';
+    cout << z << '\n';
+    return 0;
+}
+#+end_src
+
+#+RESULTS:
+: 0101
+: 00010100
+: 00001111
+*** Strings (std::string)
+:PROPERTIES:
+:ID: Strings (std::string)
+:END:
+
+To use strings easily. The header <string> helps to input and output stings of different size
+
+#+begin_src cpp :results output
+#include <iostream>
+using namespace std;
+
+int main() {
+    string name {"Shiva"};
+    cout << name << '\n';
+
+    name = "Prasad37";
+    cout << name << '\n';
+
+    return 0;
+}
+#+end_src
+
+#+RESULTS:
+: Shiva
+: Prasad37
