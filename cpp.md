@@ -1,30 +1,30 @@
 
 # Table of Contents
 
-1.  [C++ Basics](#org1473a94)
-    1.  [Objects and Variables](#orgd7be166)
-        1.  [Variable assigment](#org16b5e21)
-        2.  [maybe unused](#org07efe02)
-        3.  [cout and cin](#org94f4218)
-        4.  [Uninitialized variables and undefined behavioure](#orgb685d4d)
-        5.  [Keywords and Identifiers](#org8246ae2)
-    2.  [Functions and Files](#org314c0c6)
-        1.  [Void functions](#org4683767)
-    3.  [size<sub>t</sub> link to topic](#org95b15fd)
-    4.  [Char(ASCII TABLE LINK) here](#org64bb065)
-    5.  [Implicit and Explicit Coversion](#orgf980cef)
-        1.  [Sign conversion using static<sub>cast</sub>](#org5989338)
-        2.  [Quiz Questions](#org3bceb03)
+1.  [C++ Basics](#orgbe89ce9)
+    1.  [Objects and Variables](#org3509da7)
+        1.  [Variable assigment](#org425cc03)
+        2.  [maybe unused](#org13c564e)
+        3.  [cout and cin](#orgb0859eb)
+        4.  [Uninitialized variables and undefined behavioure](#org35d275c)
+        5.  [Keywords and Identifiers](#orge4e1c83)
+    2.  [Functions and Files](#orgc92757d)
+        1.  [Void functions](#orgf32e683)
+    3.  [size<sub>t</sub> link to topic](#orgeda2dd1)
+    4.  [Char(ASCII TABLE LINK) here](#orgedd152a)
+    5.  [Implicit and Explicit Coversion](#orgb40ea63)
+        1.  [Sign conversion using static<sub>cast</sub>](#org5681678)
+        2.  [Quiz Questions](#orgbff14ab)
 
 filetags: CPP
 
 
-<a id="org1473a94"></a>
+<a id="orgbe89ce9"></a>
 
 # C++ Basics
 
 
-<a id="orgd7be166"></a>
+<a id="org3509da7"></a>
 
 ## Objects and Variables
 
@@ -46,7 +46,7 @@ Memory is allocated during the run time.
     }
 
 
-<a id="org16b5e21"></a>
+<a id="org425cc03"></a>
 
 ### Variable assigment
 
@@ -69,7 +69,7 @@ Memory is allocated during the run time.
     int e {};      // value-initialization (empty braces)
 
 
-<a id="org07efe02"></a>
+<a id="org13c564e"></a>
 
 ### maybe unused
 
@@ -90,7 +90,7 @@ Memory is allocated during the run time.
     }
 
 
-<a id="org94f4218"></a>
+<a id="orgb0859eb"></a>
 
 ### cout and cin
 
@@ -129,7 +129,7 @@ Memory is allocated during the run time.
     }
 
 
-<a id="orgb685d4d"></a>
+<a id="org35d275c"></a>
 
 ### Uninitialized variables and undefined behavioure
 
@@ -144,7 +144,7 @@ Returns garbage value -&#x2014;> Memory address
     }
 
 
-<a id="org8246ae2"></a>
+<a id="orge4e1c83"></a>
 
 ### Keywords and Identifiers
 
@@ -335,7 +335,7 @@ List of 92 keywords
 </table>
 
 
-<a id="org314c0c6"></a>
+<a id="orgc92757d"></a>
 
 ## Functions and Files
 
@@ -358,7 +358,7 @@ List of 92 keywords
     }
 
 
-<a id="org4683767"></a>
+<a id="orgf32e683"></a>
 
 ### Void functions
 
@@ -392,7 +392,7 @@ List of 92 keywords
     }
 
 
-<a id="org95b15fd"></a>
+<a id="orgeda2dd1"></a>
 
 ## size<sub>t</sub>[ link to topic](https://www.learncpp.com/cpp-tutorial/fixed-width-integers-and-size-t/)
 
@@ -408,7 +408,7 @@ List of 92 keywords
     }
 
 
-<a id="org64bb065"></a>
+<a id="orgedd152a"></a>
 
 ## Char(ASCII TABLE LINK) [here](https://www.learncpp.com/cpp-tutorial/chars/)
 
@@ -434,7 +434,7 @@ List of 92 keywords
     }
 
 
-<a id="orgf980cef"></a>
+<a id="orgb40ea63"></a>
 
 ## Implicit and Explicit Coversion
 
@@ -459,7 +459,7 @@ Syntax for Exclipit conversion -&#x2014;> static<sub>cast</sub><new<sub>type</su
     }
 
 
-<a id="org5989338"></a>
+<a id="org5681678"></a>
 
 ### Sign conversion using static<sub>cast</sub>
 
@@ -495,7 +495,7 @@ Syntax for Exclipit conversion -&#x2014;> static<sub>cast</sub><new<sub>type</su
     }
 
 
-<a id="org3bceb03"></a>
+<a id="orgbff14ab"></a>
 
 ### Quiz [Questions](https://www.learncpp.com/cpp-tutorial/chapter-4-summary-and-quiz/)
 
@@ -527,18 +527,32 @@ Q2.
         return 0;
     }
 
-Q3..
+Q3.
 
     #include <iostream>
-    using namespace std; //hello world..
+    using namespace std;
+    
     int main() {
-        int height{};
+        double height{};
         cout << "Enter the height of the tower in meters: ";
         cin >> height;
-        for(int i=1;height < 0;i++) {
-            height = 9.8 * (i*i)/2;
-            cout << "At " << i << "seconds, " << "the ball is at height: " << height << "meters" << '\n';
+    
+        double new_height{height};
+    
+        for(int i=0;new_height > 0;i++) {
+            double distance_fallen = 9.8 * (i*i) /2.0;
+    
+           new_height = height - distance_fallen;
+    
+           if(new_height < 0) {
+               cout << "At " << i << " seconds, " << "the ball is on the ground" << '\n';
+               break;
+           }
+           cout << "At " << i << " seconds, " << "the ball is at height: " << new_height << " meters" << '\n';
+    
+    
         }
+    
         return 0;
     }
 

@@ -162,7 +162,6 @@ List of 92 keywords
 | constexpr | if           | sizeof           | xor           |
 | constinit | fnline       | static           | xor_eq        |
 
-
 ** Functions and Files
 :PROPERTIES:
 :ID: Functions and Files
@@ -380,18 +379,33 @@ int main() {
 }
  #+end_src
 
- Q3..
- #+begin_src cpp
+Q3.
+#+begin_src cpp :results output
 #include <iostream>
-using namespace std; //hello world..
+using namespace std;
+
 int main() {
-    int height{};
+    double height{};
     cout << "Enter the height of the tower in meters: ";
     cin >> height;
-    for(int i=1;height < 0;i++) {
-        height = 9.8 * (i*i)/2;
-        cout << "At " << i << "seconds, " << "the ball is at height: " << height << "meters" << '\n';
+
+    double new_height{height};
+
+    for(int i=0;new_height > 0;i++) {
+        double distance_fallen = 9.8 * (i*i) /2.0;
+
+       new_height = height - distance_fallen;
+
+       if(new_height < 0) {
+           cout << "At " << i << " seconds, " << "the ball is on the ground" << '\n';
+           break;
+       }
+       cout << "At " << i << " seconds, " << "the ball is at height: " << new_height << " meters" << '\n';
+
+
     }
+
     return 0;
 }
- #+end_src
+#+end_src
+
