@@ -1,37 +1,37 @@
 
 # Table of Contents
 
-1.  [C++ Basics](#org65589a1)
-    1.  [Objects and Variables](#org7d1d8bf)
-        1.  [Variable assigment](#org89bc13e)
-        2.  [maybe unused](#org75e6ef4)
-        3.  [cout and cin](#org893468e)
-        4.  [Uninitialized variables and undefined behavioure](#org793ddd3)
-        5.  [Keywords and Identifiers](#org192fd12)
-    2.  [Functions and Files](#orgbde148e)
-        1.  [Void functions](#org8a8ca03)
-    3.  [size<sub>t</sub> link to topic](#org307c6db)
-    4.  [Char(ASCII TABLE LINK) here](#org9d1d875)
-    5.  [Implicit and Explicit Coversion](#org2a1984c)
-        1.  [Sign conversion using static<sub>cast</sub>](#org76e7c92)
-        2.  [Quiz Questions](#orgd4cb653)
-    6.  [Numeral Systems (decimal, binary, hexadecimal)](#org4a3f7b0)
-        1.  [Octal](#orgcb8175b)
-        2.  [hexadecimal](#org2438529)
-        3.  [Binary](#org3ed5209)
-        4.  [Outputting values in decimal, octal and hexadecimal](#org75b70d1)
-        5.  [Outputting values in Binary using std::bitset](#org1c4ff75)
-        6.  [Strings (std::string)](#org887cca5)
+1.  [C++ Basics](#org84dd96a)
+    1.  [Objects and Variables](#org5cae777)
+        1.  [Variable assigment](#orgfd9971f)
+        2.  [maybe unused](#org870f311)
+        3.  [cout and cin](#orge25bae5)
+        4.  [Uninitialized variables and undefined behavioure](#orgc497349)
+        5.  [Keywords and Identifiers](#orga4958e2)
+    2.  [Functions and Files](#org4c5922b)
+        1.  [Void functions](#org8c921f8)
+    3.  [size<sub>t</sub> link to topic](#org94ef97d)
+    4.  [Char(ASCII TABLE LINK) here](#orga021c9c)
+    5.  [Implicit and Explicit Coversion](#org1f67e9b)
+        1.  [Sign conversion using static<sub>cast</sub>](#org83d2075)
+        2.  [Quiz Questions](#org67dffb9)
+    6.  [Numeral Systems (decimal, binary, hexadecimal)](#org264b761)
+        1.  [Octal](#org101ab41)
+        2.  [hexadecimal](#org0c5c7c4)
+        3.  [Binary](#org8104530)
+        4.  [Outputting values in decimal, octal and hexadecimal](#org846a146)
+        5.  [Outputting values in Binary using std::bitset](#org818d429)
+    7.  [Strings (std::string)](#org7f55d3a)
 
 filetags: CPP
 
 
-<a id="org65589a1"></a>
+<a id="org84dd96a"></a>
 
 # C++ Basics
 
 
-<a id="org7d1d8bf"></a>
+<a id="org5cae777"></a>
 
 ## Objects and Variables
 
@@ -53,7 +53,7 @@ Memory is allocated during the run time.
     }
 
 
-<a id="org89bc13e"></a>
+<a id="orgfd9971f"></a>
 
 ### Variable assigment
 
@@ -74,7 +74,7 @@ Memory is allocated during the run time.
     int e {};
 
 
-<a id="org75e6ef4"></a>
+<a id="org870f311"></a>
 
 ### maybe unused
 
@@ -94,7 +94,7 @@ Memory is allocated during the run time.
     }
 
 
-<a id="org893468e"></a>
+<a id="orge25bae5"></a>
 
 ### cout and cin
 
@@ -133,7 +133,7 @@ Memory is allocated during the run time.
     }
 
 
-<a id="org793ddd3"></a>
+<a id="orgc497349"></a>
 
 ### Uninitialized variables and undefined behavioure
 
@@ -148,7 +148,7 @@ Returns garbage value -&#x2014;> Memory address
     }
 
 
-<a id="org192fd12"></a>
+<a id="orga4958e2"></a>
 
 ### Keywords and Identifiers
 
@@ -339,7 +339,7 @@ List of 92 keywords
 </table>
 
 
-<a id="orgbde148e"></a>
+<a id="org4c5922b"></a>
 
 ## Functions and Files
 
@@ -362,7 +362,7 @@ List of 92 keywords
     }
 
 
-<a id="org8a8ca03"></a>
+<a id="org8c921f8"></a>
 
 ### Void functions
 
@@ -396,7 +396,7 @@ List of 92 keywords
     }
 
 
-<a id="org307c6db"></a>
+<a id="org94ef97d"></a>
 
 ## size<sub>t</sub>[ link to topic](https://www.learncpp.com/cpp-tutorial/fixed-width-integers-and-size-t/)
 
@@ -412,7 +412,7 @@ List of 92 keywords
     }
 
 
-<a id="org9d1d875"></a>
+<a id="orga021c9c"></a>
 
 ## Char(ASCII TABLE LINK) [here](https://www.learncpp.com/cpp-tutorial/chars/)
 
@@ -438,7 +438,7 @@ List of 92 keywords
     }
 
 
-<a id="org2a1984c"></a>
+<a id="org1f67e9b"></a>
 
 ## Implicit and Explicit Coversion
 
@@ -465,7 +465,7 @@ Syntax for Exclipit conversion -&#x2014;> static<sub>cast</sub><new<sub>type</su
     }
 
 
-<a id="org76e7c92"></a>
+<a id="org83d2075"></a>
 
 ### Sign conversion using static<sub>cast</sub>
 
@@ -501,7 +501,7 @@ Syntax for Exclipit conversion -&#x2014;> static<sub>cast</sub><new<sub>type</su
     }
 
 
-<a id="orgd4cb653"></a>
+<a id="org67dffb9"></a>
 
 ### Quiz [Questions](https://www.learncpp.com/cpp-tutorial/chapter-4-summary-and-quiz/)
 
@@ -563,12 +563,12 @@ Q3.
     }
 
 
-<a id="org4a3f7b0"></a>
+<a id="org264b761"></a>
 
 ## Numeral Systems (decimal, binary, hexadecimal)
 
 
-<a id="orgcb8175b"></a>
+<a id="org101ab41"></a>
 
 ### Octal
 
@@ -592,7 +592,7 @@ For representing it as octal number we use &ldquo;0&rdquo; infront of the number
     }
 
 
-<a id="org2438529"></a>
+<a id="org0c5c7c4"></a>
 
 ### hexadecimal
 
@@ -611,7 +611,7 @@ To use hexadecimal we use prefix &ldquo;0x&rdquo;
     }
 
 
-<a id="org3ed5209"></a>
+<a id="org8104530"></a>
 
 ### Binary
 
@@ -633,7 +633,7 @@ We use prefix 0b for binary numbers
     }
 
 
-<a id="org75b70d1"></a>
+<a id="org846a146"></a>
 
 ### Outputting values in decimal, octal and hexadecimal
 
@@ -652,7 +652,7 @@ We use prefix 0b for binary numbers
     }
 
 
-<a id="org1c4ff75"></a>
+<a id="org818d429"></a>
 
 ### Outputting values in Binary using std::bitset
 
@@ -673,9 +673,9 @@ We use prefix 0b for binary numbers
     }
 
 
-<a id="org887cca5"></a>
+<a id="org7f55d3a"></a>
 
-### Strings (std::string)
+## Strings (std::string)
 
 To use strings easily. The header <string> helps to input and output stings of different size
 

@@ -526,7 +526,7 @@ int main() {
 : 0101
 : 00010100
 : 00001111
-*** Strings (std::string)
+** Strings (std::string)
 :PROPERTIES:
 :ID: Strings (std::string)
 :END:
