@@ -1,30 +1,30 @@
 
 # Table of Contents
 
-1.  [C++ Basics](#orgbe89ce9)
-    1.  [Objects and Variables](#org3509da7)
-        1.  [Variable assigment](#org425cc03)
-        2.  [maybe unused](#org13c564e)
-        3.  [cout and cin](#orgb0859eb)
-        4.  [Uninitialized variables and undefined behavioure](#org35d275c)
-        5.  [Keywords and Identifiers](#orge4e1c83)
-    2.  [Functions and Files](#orgc92757d)
-        1.  [Void functions](#orgf32e683)
-    3.  [size<sub>t</sub> link to topic](#orgeda2dd1)
-    4.  [Char(ASCII TABLE LINK) here](#orgedd152a)
-    5.  [Implicit and Explicit Coversion](#orgb40ea63)
-        1.  [Sign conversion using static<sub>cast</sub>](#org5681678)
-        2.  [Quiz Questions](#orgbff14ab)
+1.  [C++ Basics](#org96db128)
+    1.  [Objects and Variables](#org440a5ce)
+        1.  [Variable assigment](#org98aa3ca)
+        2.  [maybe unused](#orgc8e5bcd)
+        3.  [cout and cin](#orgc36a284)
+        4.  [Uninitialized variables and undefined behavioure](#org1385698)
+        5.  [Keywords and Identifiers](#orgc94a986)
+    2.  [Functions and Files](#orgdab2b85)
+        1.  [Void functions](#org415bcc8)
+    3.  [size<sub>t</sub> link to topic](#orgf143b3c)
+    4.  [Char(ASCII TABLE LINK) here](#orgcd4b2d7)
+    5.  [Implicit and Explicit Coversion](#orgb1ba7d8)
+        1.  [Sign conversion using static<sub>cast</sub>](#org698a942)
+        2.  [Quiz Questions](#orge5cd392)
 
 filetags: CPP
 
 
-<a id="orgbe89ce9"></a>
+<a id="org96db128"></a>
 
 # C++ Basics
 
 
-<a id="org3509da7"></a>
+<a id="org440a5ce"></a>
 
 ## Objects and Variables
 
@@ -46,7 +46,7 @@ Memory is allocated during the run time.
     }
 
 
-<a id="org425cc03"></a>
+<a id="org98aa3ca"></a>
 
 ### Variable assigment
 
@@ -58,18 +58,16 @@ Memory is allocated during the run time.
         return 0;
     }
 
-    int a;         // default-initialization (no initializer)
+    int a;
     
-    // Traditional initialization forms:
-    int b = 5;     // copy-initialization (initial value after equals sign)
-    int c ( 6 );   // direct-initialization (initial value in parenthesis)
+    int b = 5;
+    int c ( 6 );
     
-    // Modern initialization forms (preferred):
-    int d { 7 };   // direct-list-initialization (initial value in braces)
-    int e {};      // value-initialization (empty braces)
+    int d { 7 };
+    int e {};
 
 
-<a id="org13c564e"></a>
+<a id="orgc8e5bcd"></a>
 
 ### maybe unused
 
@@ -78,19 +76,18 @@ Memory is allocated during the run time.
     int main()
     {
         [[maybe_unused]] double pi { 3.14159 };  // Don't complain if pi is unused
-        [[maybe_unused]] double gravity { 9.8 }; // Don't complain if gravity is unused
-        [[maybe_unused]] double phi { 1.61803 }; // Don't complain if phi is unused
+        [[maybe_unused]] double gravity { 9.8 };
+        [[maybe_unused]] double phi { 1.61803 };
     
         std::cout << pi << '\n';
         std::cout << phi << '\n';
     
-        // The compiler will no longer warn about gravity not being used
     
         return 0;
     }
 
 
-<a id="orgb0859eb"></a>
+<a id="orgc36a284"></a>
 
 ### cout and cin
 
@@ -129,7 +126,7 @@ Memory is allocated during the run time.
     }
 
 
-<a id="org35d275c"></a>
+<a id="org1385698"></a>
 
 ### Uninitialized variables and undefined behavioure
 
@@ -144,7 +141,7 @@ Returns garbage value -&#x2014;> Memory address
     }
 
 
-<a id="orge4e1c83"></a>
+<a id="orgc94a986"></a>
 
 ### Keywords and Identifiers
 
@@ -335,7 +332,7 @@ List of 92 keywords
 </table>
 
 
-<a id="orgc92757d"></a>
+<a id="orgdab2b85"></a>
 
 ## Functions and Files
 
@@ -358,7 +355,7 @@ List of 92 keywords
     }
 
 
-<a id="orgf32e683"></a>
+<a id="org415bcc8"></a>
 
 ### Void functions
 
@@ -392,7 +389,7 @@ List of 92 keywords
     }
 
 
-<a id="orgeda2dd1"></a>
+<a id="orgf143b3c"></a>
 
 ## size<sub>t</sub>[ link to topic](https://www.learncpp.com/cpp-tutorial/fixed-width-integers-and-size-t/)
 
@@ -408,7 +405,7 @@ List of 92 keywords
     }
 
 
-<a id="orgedd152a"></a>
+<a id="orgcd4b2d7"></a>
 
 ## Char(ASCII TABLE LINK) [here](https://www.learncpp.com/cpp-tutorial/chars/)
 
@@ -434,7 +431,7 @@ List of 92 keywords
     }
 
 
-<a id="orgb40ea63"></a>
+<a id="orgb1ba7d8"></a>
 
 ## Implicit and Explicit Coversion
 
@@ -459,7 +456,7 @@ Syntax for Exclipit conversion -&#x2014;> static<sub>cast</sub><new<sub>type</su
     }
 
 
-<a id="org5681678"></a>
+<a id="org698a942"></a>
 
 ### Sign conversion using static<sub>cast</sub>
 
@@ -495,7 +492,7 @@ Syntax for Exclipit conversion -&#x2014;> static<sub>cast</sub><new<sub>type</su
     }
 
 
-<a id="orgbff14ab"></a>
+<a id="orge5cd392"></a>
 
 ### Quiz [Questions](https://www.learncpp.com/cpp-tutorial/chapter-4-summary-and-quiz/)
 

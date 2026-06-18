@@ -44,15 +44,13 @@ int main() {
 : 5
 
 #+begin_src cpp
-int a;         // default-initialization (no initializer)
+int a;
 
-// Traditional initialization forms:
-int b = 5;     // copy-initialization (initial value after equals sign)
-int c ( 6 );   // direct-initialization (initial value in parenthesis)
+int b = 5;
+int c ( 6 );
 
-// Modern initialization forms (preferred):
-int d { 7 };   // direct-list-initialization (initial value in braces)
-int e {};      // value-initialization (empty braces)
+int d { 7 };
+int e {};
 #+end_src
 
 *** maybe unused
@@ -63,13 +61,12 @@ int e {};      // value-initialization (empty braces)
 int main()
 {
     [[maybe_unused]] double pi { 3.14159 };  // Don't complain if pi is unused
-    [[maybe_unused]] double gravity { 9.8 }; // Don't complain if gravity is unused
-    [[maybe_unused]] double phi { 1.61803 }; // Don't complain if phi is unused
+    [[maybe_unused]] double gravity { 9.8 };
+    [[maybe_unused]] double phi { 1.61803 };
 
     std::cout << pi << '\n';
     std::cout << phi << '\n';
 
-    // The compiler will no longer warn about gravity not being used
 
     return 0;
 }
