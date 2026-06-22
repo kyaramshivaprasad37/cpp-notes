@@ -8,6 +8,7 @@ filetags: CPP
 ** Objects and Variables
 :PROPERTIES:
 :ID: Objects and Variables
+:collapsed: true
 :END:
 
 In C++ direct memory access is discouraged. So we use objects for that.
@@ -44,15 +45,16 @@ int main() {
 : 5
 
 #+begin_src cpp
-int a;
+int a;         // default-initialization (no initializer)
 
-int b = 5;
-int c ( 6 );
+// Traditional initialization forms:
+int b = 5;     // copy-initialization (initial value after equals sign)
+int c ( 6 );   // direct-initialization (initial value in parenthesis)
 
-int d { 7 };
-int e {};
+// Modern initialization forms (preferred):
+int d { 7 };   // direct-list-initialization (initial value in braces)
+int e {};      // value-initialization (empty braces)
 #+end_src
-
 *** maybe unused
 
 #+begin_src cpp
@@ -61,12 +63,13 @@ int e {};
 int main()
 {
     [[maybe_unused]] double pi { 3.14159 };  // Don't complain if pi is unused
-    [[maybe_unused]] double gravity { 9.8 };
-    [[maybe_unused]] double phi { 1.61803 };
+    [[maybe_unused]] double gravity { 9.8 }; // Don't complain if gravity is unused
+    [[maybe_unused]] double phi { 1.61803 }; // Don't complain if phi is unused
 
     std::cout << pi << '\n';
     std::cout << phi << '\n';
 
+    // The compiler will no longer warn about gravity not being used
 
     return 0;
 }
@@ -158,7 +161,6 @@ List of 92 keywords
 | consteval | goto         | signed           | while         |
 | constexpr | if           | sizeof           | xor           |
 | constinit | fnline       | static           | xor_eq        |
-
 ** Functions and Files
 :PROPERTIES:
 :ID: Functions and Files
@@ -184,7 +186,6 @@ int main()
     return 0;
 }
 #+end_src
-
 *** Void functions
 #+begin_src cpp
 #include <iostream>
@@ -221,22 +222,20 @@ int main() {
 #+end_src
 
 #+RESULTS:
-
 ** size_t[[https://www.learncpp.com/cpp-tutorial/fixed-width-integers-and-size-t/][ link to topic]]
 
 #+begin_src cpp
 #include <iostream>
 
 int main(){
-    bool a = true;
-    bool b = false;
+    bool a = 0;
+    bool b = 30;
 
     std::cout << a << '\n';
     std::cout << b << '\n';
     return 0;
 }
 #+end_src
-
 ** Char(ASCII TABLE LINK) [[https://www.learncpp.com/cpp-tutorial/chars/][here]]
 
 #+begin_src cpp
@@ -268,7 +267,6 @@ int main() {
 #+end_src
 
 ** Implicit and Explicit Coversion
-
 :PROPERTIES:
 :ID: Implicit and Explicit Coversion
 :END:
@@ -303,7 +301,7 @@ int main() {
 
 *** Sign conversion using static_cast
 :PROPERTIES:
-:ID: Sign converstions using static_cast
+:ID:       Sign converstions using static_cast
 :END:
 
 #+begin_src cpp :results output
@@ -346,6 +344,7 @@ int main() {
 #+end_src
 
 #+RESULTS:
+
 *** Quiz [[https://www.learncpp.com/cpp-tutorial/chapter-4-summary-and-quiz/][Questions]]
 
  Q2.
@@ -407,9 +406,10 @@ int main() {
 }
 #+end_src
 
+* Fundamental Data Types
 ** Numeral Systems (decimal, binary, hexadecimal)
 :PROPERTIES:
-:ID: Numeral Systems (Decimal, hexadecimal..)
+:ID:       Numeral Systems (Decimal, hexadecimal..)
 :END:
 
 *** Octal
@@ -439,6 +439,7 @@ int main() {
 : 15
 
 *** hexadecimal
+
 Hexadecimal base is 16 and we count like  0, 1, 2, 3, 4, 5, 6, 7, 8, 9, A, B, C, D, E, F, 10, 11, 12, …
 To use hexadecimal we use prefix "0x"
 #+begin_src cpp :results output
@@ -457,7 +458,9 @@ int main() {
 #+RESULTS:
 : 15
 : 26
+
 *** Binary
+
 Binary has base 2.
 We use prefix 0b for binary numbers
 #+begin_src cpp :results output
@@ -480,7 +483,9 @@ int main() {
 : 65
 : 257
 : 5
+
 *** Outputting values in decimal, octal and hexadecimal
+
 #+begin_src cpp :results output
 #include <iostream>
 using namespace std;
@@ -502,6 +507,7 @@ int main() {
 : 54
 : 44
 : 44
+
 *** Outputting values in Binary using std::bitset
 
 #+begin_src cpp :results output
@@ -526,12 +532,14 @@ int main() {
 : 0101
 : 00010100
 : 00001111
+
+* Strings
 ** Strings (std::string)
 :PROPERTIES:
-:ID: Strings (std::string)
+:ID:       Strings (std::string)
 :END:
 
-To use strings easily. The header <string> helps to input and output stings of different size
+The header <string> helps to input and output stings of different size
 
 #+begin_src cpp :results output
 #include <iostream>
@@ -551,3 +559,187 @@ int main() {
 #+RESULTS:
 : Shiva
 : Prasad37
+** Strings (std::string_view)
+:PROPERTIES:
+:ID: Strings (std::string_view)
+:END:
+- string_view is used for reading a string in a more cleaner way.
+- Instead of creating a copy of string again where required like std::string.
+- It just points to the original data.
+
+- For modifies and chaning the original string value ---- std::string
+- For viewing the data in the string ---- std::string_view
+
+For using string_view we have to use <string_view> header file
+
+#+begin_src cpp :results output
+#include <iostream>
+#include <string>
+#include <string_view>
+using namespace std;
+
+void string_View(string_view x) {  // here no copy is made it just points to original data
+    cout << x << '\n';
+
+    //string z {"Kyaram"};    Doesnt work here
+    //x += z;
+    //cout << x << '\n';
+}
+
+void String(string y) {  //here it creates the copy so we can modify the contents here
+    cout << y << '\n';
+
+    string z {"Kyaram"};
+    y += z;
+    cout << y << '\n';
+}
+
+int main() {
+    string name {"Shivaprasad"};
+
+    string_View(name);
+
+    String(name);
+
+    return 0;
+}
+#+end_src
+
+Example
+
+#+begin_src cpp :results output
+#include <iostream>
+#include <string>
+#include <string_view>
+using namespace std;
+
+int main() {
+
+    string name {"Shiva"};
+    string_view name1 {name};
+
+    cout << name1 << '\n';
+
+    name1 = "Kyaram";
+    cout << name1 << '\n';
+
+    cout << name << '\n';
+
+    return 0;
+}
+#+end_src
+
+* Operators
+:PROPERTIES:
+:ID: Operators
+:END:
+[[https://www.learncpp.com/cpp-tutorial/operator-precedence-and-associativity/][Operator Precedence table]]
+
+Exponent
+
+#+begin_src cpp :results output
+#include <iostream>
+#include <cmath>
+
+int main() {
+    int x{2};
+    std::cout << std::pow(x,2) << '\n';
+    return 0;
+}
+#+end_src
+* Bit Manipulation
+:PROPERTIES:
+:ID: Bit manipulation
+:END:
+
+Uses of <bitset> library
+
+It has
+1. test()
+2. set()
+3. reset()
+4. flip()
+
+#+begin_src cpp :results output
+#include <iostream>
+#include <bitset>
+using namespace std;
+
+int main() {
+    bitset<8> bits{0b0000'0101};
+
+    cout << bits << '\n';
+    cout << bits.test(2) << '\n';
+    bits.set(1);
+    cout << bits << '\n';
+    bits.reset(0);
+    cout << bits << '\n';
+    bits.flip(0);
+    cout << bits << '\n';
+
+    return 0;
+}
+#+end_src
+
+#+RESULTS:
+: 00000101
+: 1
+: 00000111
+: 00000110
+: 00000111
+
+[[https://www.learncpp.com/cpp-tutorial/bitwise-operators/][Quiz
+]]
+#+begin_src cpp :results output
+#include <bitset>
+#include <iostream>
+
+// "rotl" stands for "rotate left"
+std::bitset<4> rotl(std::bitset<4> bits)
+{
+    if(bits.test(3) == 0) {
+        bits <<= 1;
+    }else {
+       bits <<= 1;
+       bits.set(0);
+    }
+
+    return bits;
+}
+
+int main()
+{
+	std::bitset<4> bits1{ 0b0001 };
+	std::cout << rotl(bits1) << '\n';
+
+	std::bitset<4> bits2{ 0b0101 };
+	std::cout << rotl(bits2) << '\n';
+
+	return 0;
+}
+#+end_src
+
+#+RESULTS:
+: 0010
+: 1010
+
+#+begin_src cpp :results output
+#include <bitset>
+#include <iostream>
+
+std::bitset<4> rotl(std::bitset<4> bits)
+{
+    return (bits<<1) | (bits>>3);
+}
+
+int main()
+{
+    std::bitset<4> bits1{ 0b0001 };
+    std::cout << rotl(bits1) << '\n';
+
+    std::bitset<4> bits2{ 0b1001 };
+    std::cout << rotl(bits2) << '\n';
+
+    return 0;
+}
+#+end_src

@@ -1,37 +1,42 @@
 
 # Table of Contents
 
-1.  [C++ Basics](#org84dd96a)
-    1.  [Objects and Variables](#org5cae777)
-        1.  [Variable assigment](#orgfd9971f)
-        2.  [maybe unused](#org870f311)
-        3.  [cout and cin](#orge25bae5)
-        4.  [Uninitialized variables and undefined behavioure](#orgc497349)
-        5.  [Keywords and Identifiers](#orga4958e2)
-    2.  [Functions and Files](#org4c5922b)
-        1.  [Void functions](#org8c921f8)
-    3.  [size<sub>t</sub> link to topic](#org94ef97d)
-    4.  [Char(ASCII TABLE LINK) here](#orga021c9c)
-    5.  [Implicit and Explicit Coversion](#org1f67e9b)
-        1.  [Sign conversion using static<sub>cast</sub>](#org83d2075)
-        2.  [Quiz Questions](#org67dffb9)
-    6.  [Numeral Systems (decimal, binary, hexadecimal)](#org264b761)
-        1.  [Octal](#org101ab41)
-        2.  [hexadecimal](#org0c5c7c4)
-        3.  [Binary](#org8104530)
-        4.  [Outputting values in decimal, octal and hexadecimal](#org846a146)
-        5.  [Outputting values in Binary using std::bitset](#org818d429)
-    7.  [Strings (std::string)](#org7f55d3a)
+1.  [C++ Basics](#org5ce41f1)
+    1.  [Objects and Variables](#org36c0b20)
+        1.  [Variable assigment](#org9aa1da9)
+        2.  [maybe unused](#org33e55af)
+        3.  [cout and cin](#org4f6319c)
+        4.  [Uninitialized variables and undefined behavioure](#orge5896dc)
+        5.  [Keywords and Identifiers](#org803542d)
+    2.  [Functions and Files](#org58615f6)
+        1.  [Void functions](#org3aa03dc)
+    3.  [size<sub>t</sub> link to topic](#orgac7389c)
+    4.  [Char(ASCII TABLE LINK) here](#orgdd9affb)
+    5.  [Implicit and Explicit Coversion](#orgc5d690d)
+        1.  [Sign conversion using static<sub>cast</sub>](#orgb853944)
+        2.  [Quiz Questions](#org365fabb)
+2.  [Fundamental Data Types](#orgf6c1d96)
+    1.  [Numeral Systems (decimal, binary, hexadecimal)](#orgcbd8f93)
+        1.  [Octal](#orge1e6bd6)
+        2.  [hexadecimal](#org8cfcbc4)
+        3.  [Binary](#orgea1a8ec)
+        4.  [Outputting values in decimal, octal and hexadecimal](#org47d96e8)
+        5.  [Outputting values in Binary using std::bitset](#org023e152)
+3.  [Strings](#org3479492)
+    1.  [Strings (std::string)](#org9b651d7)
+    2.  [Strings (std::string<sub>view</sub>)](#orgfa59d85)
+4.  [Operators](#org3179013)
+5.  [Bit Manipulation](#org4ff886c)
 
 filetags: CPP
 
 
-<a id="org84dd96a"></a>
+<a id="org5ce41f1"></a>
 
 # C++ Basics
 
 
-<a id="org5cae777"></a>
+<a id="org36c0b20"></a>
 
 ## Objects and Variables
 
@@ -53,7 +58,7 @@ Memory is allocated during the run time.
     }
 
 
-<a id="orgfd9971f"></a>
+<a id="org9aa1da9"></a>
 
 ### Variable assigment
 
@@ -65,16 +70,18 @@ Memory is allocated during the run time.
         return 0;
     }
 
-    int a;
+    int a;         // default-initialization (no initializer)
     
-    int b = 5;
-    int c ( 6 );
+    // Traditional initialization forms:
+    int b = 5;     // copy-initialization (initial value after equals sign)
+    int c ( 6 );   // direct-initialization (initial value in parenthesis)
     
-    int d { 7 };
-    int e {};
+    // Modern initialization forms (preferred):
+    int d { 7 };   // direct-list-initialization (initial value in braces)
+    int e {};      // value-initialization (empty braces)
 
 
-<a id="org870f311"></a>
+<a id="org33e55af"></a>
 
 ### maybe unused
 
@@ -83,18 +90,19 @@ Memory is allocated during the run time.
     int main()
     {
         [[maybe_unused]] double pi { 3.14159 };  // Don't complain if pi is unused
-        [[maybe_unused]] double gravity { 9.8 };
-        [[maybe_unused]] double phi { 1.61803 };
+        [[maybe_unused]] double gravity { 9.8 }; // Don't complain if gravity is unused
+        [[maybe_unused]] double phi { 1.61803 }; // Don't complain if phi is unused
     
         std::cout << pi << '\n';
         std::cout << phi << '\n';
     
+        // The compiler will no longer warn about gravity not being used
     
         return 0;
     }
 
 
-<a id="orge25bae5"></a>
+<a id="org4f6319c"></a>
 
 ### cout and cin
 
@@ -133,7 +141,7 @@ Memory is allocated during the run time.
     }
 
 
-<a id="orgc497349"></a>
+<a id="orge5896dc"></a>
 
 ### Uninitialized variables and undefined behavioure
 
@@ -148,7 +156,7 @@ Returns garbage value -&#x2014;> Memory address
     }
 
 
-<a id="orga4958e2"></a>
+<a id="org803542d"></a>
 
 ### Keywords and Identifiers
 
@@ -339,7 +347,7 @@ List of 92 keywords
 </table>
 
 
-<a id="org4c5922b"></a>
+<a id="org58615f6"></a>
 
 ## Functions and Files
 
@@ -362,7 +370,7 @@ List of 92 keywords
     }
 
 
-<a id="org8c921f8"></a>
+<a id="org3aa03dc"></a>
 
 ### Void functions
 
@@ -396,15 +404,15 @@ List of 92 keywords
     }
 
 
-<a id="org94ef97d"></a>
+<a id="orgac7389c"></a>
 
 ## size<sub>t</sub>[ link to topic](https://www.learncpp.com/cpp-tutorial/fixed-width-integers-and-size-t/)
 
     #include <iostream>
     
     int main(){
-        bool a = true;
-        bool b = false;
+        bool a = 0;
+        bool b = 30;
     
         std::cout << a << '\n';
         std::cout << b << '\n';
@@ -412,7 +420,7 @@ List of 92 keywords
     }
 
 
-<a id="orga021c9c"></a>
+<a id="orgdd9affb"></a>
 
 ## Char(ASCII TABLE LINK) [here](https://www.learncpp.com/cpp-tutorial/chars/)
 
@@ -438,11 +446,9 @@ List of 92 keywords
     }
 
 
-<a id="org1f67e9b"></a>
+<a id="orgc5d690d"></a>
 
 ## Implicit and Explicit Coversion
-
-:ID: Implicit and Explicit Coversion
 
 Implicit conversion are made by compilers whereas explicit are made manually
 
@@ -465,7 +471,7 @@ Syntax for Exclipit conversion -&#x2014;> static<sub>cast</sub><new<sub>type</su
     }
 
 
-<a id="org83d2075"></a>
+<a id="orgb853944"></a>
 
 ### Sign conversion using static<sub>cast</sub>
 
@@ -501,7 +507,7 @@ Syntax for Exclipit conversion -&#x2014;> static<sub>cast</sub><new<sub>type</su
     }
 
 
-<a id="org67dffb9"></a>
+<a id="org365fabb"></a>
 
 ### Quiz [Questions](https://www.learncpp.com/cpp-tutorial/chapter-4-summary-and-quiz/)
 
@@ -563,12 +569,17 @@ Q3.
     }
 
 
-<a id="org264b761"></a>
+<a id="orgf6c1d96"></a>
+
+# Fundamental Data Types
+
+
+<a id="orgcbd8f93"></a>
 
 ## Numeral Systems (decimal, binary, hexadecimal)
 
 
-<a id="org101ab41"></a>
+<a id="orge1e6bd6"></a>
 
 ### Octal
 
@@ -592,7 +603,7 @@ For representing it as octal number we use &ldquo;0&rdquo; infront of the number
     }
 
 
-<a id="org0c5c7c4"></a>
+<a id="org8cfcbc4"></a>
 
 ### hexadecimal
 
@@ -611,7 +622,7 @@ To use hexadecimal we use prefix &ldquo;0x&rdquo;
     }
 
 
-<a id="org8104530"></a>
+<a id="orgea1a8ec"></a>
 
 ### Binary
 
@@ -633,7 +644,7 @@ We use prefix 0b for binary numbers
     }
 
 
-<a id="org846a146"></a>
+<a id="org47d96e8"></a>
 
 ### Outputting values in decimal, octal and hexadecimal
 
@@ -652,7 +663,7 @@ We use prefix 0b for binary numbers
     }
 
 
-<a id="org818d429"></a>
+<a id="org023e152"></a>
 
 ### Outputting values in Binary using std::bitset
 
@@ -673,11 +684,16 @@ We use prefix 0b for binary numbers
     }
 
 
-<a id="org7f55d3a"></a>
+<a id="org3479492"></a>
+
+# Strings
+
+
+<a id="org9b651d7"></a>
 
 ## Strings (std::string)
 
-To use strings easily. The header <string> helps to input and output stings of different size
+The header <string> helps to input and output stings of different size
 
     #include <iostream>
     using namespace std;
@@ -688,6 +704,173 @@ To use strings easily. The header <string> helps to input and output stings of d
     
         name = "Prasad37";
         cout << name << '\n';
+    
+        return 0;
+    }
+
+
+<a id="orgfa59d85"></a>
+
+## Strings (std::string<sub>view</sub>)
+
+-   string<sub>view</sub> is used for reading a string in a more cleaner way.
+-   Instead of creating a copy of string again where required like std::string.
+-   It just points to the original data.
+
+-   For modifies and chaning the original string value -&#x2014; std::string
+-   For viewing the data in the string -&#x2014; std::string<sub>view</sub>
+
+For using string<sub>view</sub> we have to use <string<sub>view</sub>> header file
+
+    #include <iostream>
+    #include <string>
+    #include <string_view>
+    using namespace std;
+    
+    void string_View(string_view x) {  // here no copy is made it just points to original data
+        cout << x << '\n';
+    
+        //string z {"Kyaram"};    Doesnt work here
+        //x += z;
+        //cout << x << '\n';
+    }
+    
+    void String(string y) {  //here it creates the copy so we can modify the contents here
+        cout << y << '\n';
+    
+        string z {"Kyaram"};
+        y += z;
+        cout << y << '\n';
+    }
+    
+    int main() {
+        string name {"Shivaprasad"};
+    
+        string_View(name);
+    
+        String(name);
+    
+        return 0;
+    }
+
+Example
+
+    #include <iostream>
+    #include <string>
+    #include <string_view>
+    using namespace std;
+    
+    int main() {
+    
+        string name {"Shiva"};
+        string_view name1 {name};
+    
+        cout << name1 << '\n';
+    
+        name1 = "Kyaram";
+        cout << name1 << '\n';
+    
+        cout << name << '\n';
+    
+        return 0;
+    }
+
+
+<a id="org3179013"></a>
+
+# Operators
+
+[Operator Precedence table](https://www.learncpp.com/cpp-tutorial/operator-precedence-and-associativity/)
+
+Exponent
+
+    #include <iostream>
+    #include <cmath>
+    
+    int main() {
+        int x{2};
+        std::cout << std::pow(x,2) << '\n';
+        return 0;
+    }
+
+
+<a id="org4ff886c"></a>
+
+# Bit Manipulation
+
+Uses of <bitset> library
+
+It has
+
+1.  test()
+2.  set()
+3.  reset()
+4.  flip()
+
+    #include <iostream>
+    #include <bitset>
+    using namespace std;
+    
+    int main() {
+        bitset<8> bits{0b0000'0101};
+    
+        cout << bits << '\n';
+        cout << bits.test(2) << '\n';
+        bits.set(1);
+        cout << bits << '\n';
+        bits.reset(0);
+        cout << bits << '\n';
+        bits.flip(0);
+        cout << bits << '\n';
+    
+        return 0;
+    }
+
+[Quiz
+](https://www.learncpp.com/cpp-tutorial/bitwise-operators/)
+
+    #include <bitset>
+    #include <iostream>
+    
+    // "rotl" stands for "rotate left"
+    std::bitset<4> rotl(std::bitset<4> bits)
+    {
+        if(bits.test(3) == 0) {
+            bits <<= 1;
+        }else {
+           bits <<= 1;
+           bits.set(0);
+        }
+    
+        return bits;
+    }
+    
+    int main()
+    {
+    	std::bitset<4> bits1{ 0b0001 };
+    	std::cout << rotl(bits1) << '\n';
+    
+    	std::bitset<4> bits2{ 0b0101 };
+    	std::cout << rotl(bits2) << '\n';
+    
+    	return 0;
+    }
+
+    #include <bitset>
+    #include <iostream>
+    
+    std::bitset<4> rotl(std::bitset<4> bits)
+    {
+        return (bits<<1) | (bits>>3);
+    }
+    
+    int main()
+    {
+        std::bitset<4> bits1{ 0b0001 };
+        std::cout << rotl(bits1) << '\n';
+    
+        std::bitset<4> bits2{ 0b1001 };
+        std::cout << rotl(bits2) << '\n';
     
         return 0;
     }
