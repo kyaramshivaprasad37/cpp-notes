@@ -1,42 +1,44 @@
 
 # Table of Contents
 
-1.  [C++ Basics](#org5ce41f1)
-    1.  [Objects and Variables](#org36c0b20)
-        1.  [Variable assigment](#org9aa1da9)
-        2.  [maybe unused](#org33e55af)
-        3.  [cout and cin](#org4f6319c)
-        4.  [Uninitialized variables and undefined behavioure](#orge5896dc)
-        5.  [Keywords and Identifiers](#org803542d)
-    2.  [Functions and Files](#org58615f6)
-        1.  [Void functions](#org3aa03dc)
-    3.  [size<sub>t</sub> link to topic](#orgac7389c)
-    4.  [Char(ASCII TABLE LINK) here](#orgdd9affb)
-    5.  [Implicit and Explicit Coversion](#orgc5d690d)
-        1.  [Sign conversion using static<sub>cast</sub>](#orgb853944)
-        2.  [Quiz Questions](#org365fabb)
-2.  [Fundamental Data Types](#orgf6c1d96)
-    1.  [Numeral Systems (decimal, binary, hexadecimal)](#orgcbd8f93)
-        1.  [Octal](#orge1e6bd6)
-        2.  [hexadecimal](#org8cfcbc4)
-        3.  [Binary](#orgea1a8ec)
-        4.  [Outputting values in decimal, octal and hexadecimal](#org47d96e8)
-        5.  [Outputting values in Binary using std::bitset](#org023e152)
-3.  [Strings](#org3479492)
-    1.  [Strings (std::string)](#org9b651d7)
-    2.  [Strings (std::string<sub>view</sub>)](#orgfa59d85)
-4.  [Operators](#org3179013)
-5.  [Bit Manipulation](#org4ff886c)
+1.  [C++ Basics](#orgce65891)
+    1.  [Objects and Variables](#org43ae418)
+        1.  [Variable assigment](#org6b76096)
+        2.  [maybe unused](#orgc9c536b)
+        3.  [cout and cin](#orgf7122e5)
+        4.  [Uninitialized variables and undefined behavioure](#org6bc5587)
+        5.  [Keywords and Identifiers](#org38cd302)
+    2.  [Functions and Files](#orgc0013f3)
+        1.  [Void functions](#org0ddf93f)
+    3.  [size<sub>t</sub> link to topic](#org7c0eb63)
+    4.  [Char(ASCII TABLE LINK) here](#org3879637)
+    5.  [Implicit and Explicit Coversion](#org2c1a044)
+        1.  [Sign conversion using static<sub>cast</sub>](#orga8c7418)
+        2.  [Quiz Questions](#org7a26595)
+2.  [Fundamental Data Types](#orgdb79e01)
+    1.  [Numeral Systems (decimal, binary, hexadecimal)](#org7c6837b)
+        1.  [Octal](#org09777e3)
+        2.  [hexadecimal](#orgb15d936)
+        3.  [Binary](#org1e00bcb)
+        4.  [Outputting values in decimal, octal and hexadecimal](#orgbc14f52)
+        5.  [Outputting values in Binary using std::bitset](#org287142e)
+3.  [Strings](#org5c60500)
+    1.  [Strings (std::string)](#org9312caf)
+    2.  [Strings (std::string<sub>view</sub>)](#org56d8283)
+4.  [Operators](#orgb3a1ff0)
+5.  [Bit Manipulation](#orga99389e)
+    1.  [Uses of <bitset> library](#org68aa713)
+    2.  [Bitmanipulation by bit masks](#orgd403e6d)
 
 filetags: CPP
 
 
-<a id="org5ce41f1"></a>
+<a id="orgce65891"></a>
 
 # C++ Basics
 
 
-<a id="org36c0b20"></a>
+<a id="org43ae418"></a>
 
 ## Objects and Variables
 
@@ -58,11 +60,11 @@ Memory is allocated during the run time.
     }
 
 
-<a id="org9aa1da9"></a>
+<a id="org6b76096"></a>
 
 ### Variable assigment
 
-    #include <iostream>
+    #include <iosteam>
     using namespace std;
     int main() {
         int x {5};
@@ -81,7 +83,7 @@ Memory is allocated during the run time.
     int e {};      // value-initialization (empty braces)
 
 
-<a id="org33e55af"></a>
+<a id="orgc9c536b"></a>
 
 ### maybe unused
 
@@ -102,7 +104,7 @@ Memory is allocated during the run time.
     }
 
 
-<a id="org4f6319c"></a>
+<a id="orgf7122e5"></a>
 
 ### cout and cin
 
@@ -141,7 +143,7 @@ Memory is allocated during the run time.
     }
 
 
-<a id="orge5896dc"></a>
+<a id="org6bc5587"></a>
 
 ### Uninitialized variables and undefined behavioure
 
@@ -156,7 +158,7 @@ Returns garbage value -&#x2014;> Memory address
     }
 
 
-<a id="org803542d"></a>
+<a id="org38cd302"></a>
 
 ### Keywords and Identifiers
 
@@ -347,7 +349,7 @@ List of 92 keywords
 </table>
 
 
-<a id="org58615f6"></a>
+<a id="orgc0013f3"></a>
 
 ## Functions and Files
 
@@ -370,7 +372,7 @@ List of 92 keywords
     }
 
 
-<a id="org3aa03dc"></a>
+<a id="org0ddf93f"></a>
 
 ### Void functions
 
@@ -404,7 +406,7 @@ List of 92 keywords
     }
 
 
-<a id="orgac7389c"></a>
+<a id="org7c0eb63"></a>
 
 ## size<sub>t</sub>[ link to topic](https://www.learncpp.com/cpp-tutorial/fixed-width-integers-and-size-t/)
 
@@ -420,7 +422,7 @@ List of 92 keywords
     }
 
 
-<a id="orgdd9affb"></a>
+<a id="org3879637"></a>
 
 ## Char(ASCII TABLE LINK) [here](https://www.learncpp.com/cpp-tutorial/chars/)
 
@@ -446,7 +448,7 @@ List of 92 keywords
     }
 
 
-<a id="orgc5d690d"></a>
+<a id="org2c1a044"></a>
 
 ## Implicit and Explicit Coversion
 
@@ -471,7 +473,7 @@ Syntax for Exclipit conversion -&#x2014;> static<sub>cast</sub><new<sub>type</su
     }
 
 
-<a id="orgb853944"></a>
+<a id="orga8c7418"></a>
 
 ### Sign conversion using static<sub>cast</sub>
 
@@ -507,7 +509,7 @@ Syntax for Exclipit conversion -&#x2014;> static<sub>cast</sub><new<sub>type</su
     }
 
 
-<a id="org365fabb"></a>
+<a id="org7a26595"></a>
 
 ### Quiz [Questions](https://www.learncpp.com/cpp-tutorial/chapter-4-summary-and-quiz/)
 
@@ -569,17 +571,17 @@ Q3.
     }
 
 
-<a id="orgf6c1d96"></a>
+<a id="orgdb79e01"></a>
 
 # Fundamental Data Types
 
 
-<a id="orgcbd8f93"></a>
+<a id="org7c6837b"></a>
 
 ## Numeral Systems (decimal, binary, hexadecimal)
 
 
-<a id="orge1e6bd6"></a>
+<a id="org09777e3"></a>
 
 ### Octal
 
@@ -603,7 +605,7 @@ For representing it as octal number we use &ldquo;0&rdquo; infront of the number
     }
 
 
-<a id="org8cfcbc4"></a>
+<a id="orgb15d936"></a>
 
 ### hexadecimal
 
@@ -622,7 +624,7 @@ To use hexadecimal we use prefix &ldquo;0x&rdquo;
     }
 
 
-<a id="orgea1a8ec"></a>
+<a id="org1e00bcb"></a>
 
 ### Binary
 
@@ -644,7 +646,7 @@ We use prefix 0b for binary numbers
     }
 
 
-<a id="org47d96e8"></a>
+<a id="orgbc14f52"></a>
 
 ### Outputting values in decimal, octal and hexadecimal
 
@@ -663,7 +665,7 @@ We use prefix 0b for binary numbers
     }
 
 
-<a id="org023e152"></a>
+<a id="org287142e"></a>
 
 ### Outputting values in Binary using std::bitset
 
@@ -684,12 +686,12 @@ We use prefix 0b for binary numbers
     }
 
 
-<a id="org3479492"></a>
+<a id="org5c60500"></a>
 
 # Strings
 
 
-<a id="org9b651d7"></a>
+<a id="org9312caf"></a>
 
 ## Strings (std::string)
 
@@ -709,7 +711,7 @@ The header <string> helps to input and output stings of different size
     }
 
 
-<a id="orgfa59d85"></a>
+<a id="org56d8283"></a>
 
 ## Strings (std::string<sub>view</sub>)
 
@@ -776,7 +778,7 @@ Example
     }
 
 
-<a id="org3179013"></a>
+<a id="orgb3a1ff0"></a>
 
 # Operators
 
@@ -794,11 +796,14 @@ Exponent
     }
 
 
-<a id="org4ff886c"></a>
+<a id="orga99389e"></a>
 
 # Bit Manipulation
 
-Uses of <bitset> library
+
+<a id="org68aa713"></a>
+
+## Uses of <bitset> library
 
 It has
 
@@ -826,8 +831,7 @@ It has
         return 0;
     }
 
-[Quiz
-](https://www.learncpp.com/cpp-tutorial/bitwise-operators/)
+[Quiz](https://www.learncpp.com/cpp-tutorial/bitwise-operators/)
 
     #include <bitset>
     #include <iostream>
@@ -847,13 +851,13 @@ It has
     
     int main()
     {
-    	std::bitset<4> bits1{ 0b0001 };
-    	std::cout << rotl(bits1) << '\n';
+        std::bitset<4> bits1{ 0b0001 };
+        std::cout << rotl(bits1) << '\n';
     
-    	std::bitset<4> bits2{ 0b0101 };
-    	std::cout << rotl(bits2) << '\n';
+        std::bitset<4> bits2{ 0b0101 };
+        std::cout << rotl(bits2) << '\n';
     
-    	return 0;
+        return 0;
     }
 
     #include <bitset>
@@ -872,6 +876,86 @@ It has
         std::bitset<4> bits2{ 0b1001 };
         std::cout << rotl(bits2) << '\n';
     
+        return 0;
+    }
+
+
+<a id="orgd403e6d"></a>
+
+## Bitmanipulation by bit masks
+
+Bit masks &#x2014; These are predefined set of bits used to select which specific will be modified
+
+    #include <cstdint>
+    
+    constexpr std::uint8_t mask0{ 0b0000'0001 }; // represents bit 0
+    constexpr std::uint8_t mask1{ 0b0000'0010 }; // represents bit 1
+    constexpr std::uint8_t mask2{ 0b0000'0100 }; // represents bit 2
+    constexpr std::uint8_t mask3{ 0b0000'1000 }; // represents bit 3
+    constexpr std::uint8_t mask4{ 0b0001'0000 }; // represents bit 4
+    constexpr std::uint8_t mask5{ 0b0010'0000 }; // represents bit 5
+    constexpr std::uint8_t mask6{ 0b0100'0000 }; // represents bit 6
+    constexpr std::uint8_t mask7{ 0b1000'0000 }; // represents bit 7
+
+1.  Checking if a bit is on or off by using bit masks - We use AND(&) operator.
+2.  To set a bit - we use OR equals(|=) operator
+3.  To reset a bit - We use bitwise AND and bitwise NOT operator (&= ~)
+4.  To flip a bit - we use bitwise XOR (^=) operator
+
+    #include <iostream>
+    #include <cstdint>
+    
+    int main() {
+        constexpr std::uint8_t mask0{ 0b0000'0001 }; // represents bit 0
+        constexpr std::uint8_t mask1{ 0b0000'0010 }; // represents bit 1
+        constexpr std::uint8_t mask2{ 0b0000'0100 }; // represents bit 2
+        constexpr std::uint8_t mask3{ 0b0000'1000 }; // represents bit 3
+        constexpr std::uint8_t mask4{ 0b0001'0000 }; // represents bit 4
+        constexpr std::uint8_t mask5{ 0b0010'0000 }; // represents bit 5
+        constexpr std::uint8_t mask6{ 0b0100'0000 }; // represents bit 6
+        constexpr std::uint8_t mask7{ 0b1000'0000 }; // represents bit 7
+    
+        std::uint8_t flags {0b0000'0101}; // It means bit 0 and 2 are ON.
+    
+        std::cout << (static_cast<bool>(flags & mask0)? "ON\n" : "OFF\n");  // TO CHECK ON AND OFF
+    
+        std::cout << (static_cast<bool>(flags & mask1)? "ON\n" : "OFF\n");
+    
+        flags |= mask1; // TO SET THE BIT
+        flags |= (mask3 | mask4 | mask5); // TO SET MULTIPLE BITS
+        std::cout << (static_cast<bool>(flags & mask1)? "ON\n" : "OFF\n");
+    
+        flags &= ~mask1; //TO RESET THE BIT
+        std::cout << (static_cast<bool>(flags & mask1)? "ON\n" : "OFF\n");
+    
+        flags ^= mask1; //TO FLIP THE BIT
+        std::cout << (static_cast<bool>(flags & mask1)? "ON\n" : "OFF\n");
+    
+        return 0;
+    }
+
+[Quiz](https://www.learncpp.com/cpp-tutorial/bit-manipulation-with-bitwise-operators-and-bit-masks/)
+
+    #include <bitset>
+    #include <cstdint>
+    #include <iostream>
+    
+    int main()
+    {
+        [[maybe_unused]] constexpr std::uint8_t option_viewed{ 0x01 };
+        [[maybe_unused]] constexpr std::uint8_t option_edited{ 0x02 };
+        [[maybe_unused]] constexpr std::uint8_t option_favorited{ 0x04 };
+        [[maybe_unused]] constexpr std::uint8_t option_shared{ 0x08 };
+        [[maybe_unused]] constexpr std::uint8_t option_deleted{ 0x10 };
+    
+        std::uint8_t myArticleFlags{ option_favorited };
+        std::cout << std::bitset<8>{ myArticleFlags } << '\n';
+    
+        myArticleFlags |= option_viewed;
+        std::cout << (static_cast<bool>(option_favorited & option_deleted)? "NOT DELETED\n" : "DELETED\n");
+    
+        myArticleFlags &= ~option_favorited;
+        std::cout << std::bitset<8>{ myArticleFlags } << '\n';
         return 0;
     }
 

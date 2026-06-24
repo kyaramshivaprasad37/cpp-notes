@@ -32,7 +32,7 @@ int main() {
 
 *** Variable assigment
 #+begin_src cpp
-#include <iostream>
+#include <iosteam>
 using namespace std;
 int main() {
     int x {5};
@@ -648,12 +648,10 @@ int main() {
 }
 #+end_src
 * Bit Manipulation
+** Uses of <bitset> library
 :PROPERTIES:
-:ID: Bit manipulation
+:ID: <Uses of <bitset> library>
 :END:
-
-Uses of <bitset> library
-
 It has
 1. test()
 2. set()
@@ -688,8 +686,8 @@ int main() {
 : 00000110
 : 00000111
 
-[[https://www.learncpp.com/cpp-tutorial/bitwise-operators/][Quiz
-]]
+[[https://www.learncpp.com/cpp-tutorial/bitwise-operators/][Quiz]]
+
 #+begin_src cpp :results output
 #include <bitset>
 #include <iostream>
@@ -709,13 +707,13 @@ std::bitset<4> rotl(std::bitset<4> bits)
 
 int main()
 {
-	std::bitset<4> bits1{ 0b0001 };
-	std::cout << rotl(bits1) << '\n';
+    std::bitset<4> bits1{ 0b0001 };
+    std::cout << rotl(bits1) << '\n';
 
-	std::bitset<4> bits2{ 0b0101 };
-	std::cout << rotl(bits2) << '\n';
+    std::bitset<4> bits2{ 0b0101 };
+    std::cout << rotl(bits2) << '\n';
 
-	return 0;
+    return 0;
 }
 #+end_src
 
@@ -743,3 +741,103 @@ int main()
     return 0;
 }
 #+end_src
+
+** Bitmanipulation by bit masks
+:PROPERTIES:
+:ID: Bitmanipulation by bit masks
+:END:
+
+Bit masks --- These are predefined set of bits used to select which specific will be modified
+
+#+begin_src cpp :results output
+#include <cstdint>
+
+constexpr std::uint8_t mask0{ 0b0000'0001 }; // represents bit 0
+constexpr std::uint8_t mask1{ 0b0000'0010 }; // represents bit 1
+constexpr std::uint8_t mask2{ 0b0000'0100 }; // represents bit 2
+constexpr std::uint8_t mask3{ 0b0000'1000 }; // represents bit 3
+constexpr std::uint8_t mask4{ 0b0001'0000 }; // represents bit 4
+constexpr std::uint8_t mask5{ 0b0010'0000 }; // represents bit 5
+constexpr std::uint8_t mask6{ 0b0100'0000 }; // represents bit 6
+constexpr std::uint8_t mask7{ 0b1000'0000 }; // represents bit 7
+#+end_src
+
+
+1. Checking if a bit is on or off by using bit masks - We use AND(&) operator.
+2. To set a bit - we use OR equals(|=) operator
+3. To reset a bit - We use bitwise AND and bitwise NOT operator (&= ~)
+4. To flip a bit - we use bitwise XOR (^=) operator
+
+#+begin_src cpp :results output
+#include <iostream>
+#include <cstdint>
+
+int main() {
+    constexpr std::uint8_t mask0{ 0b0000'0001 }; // represents bit 0
+    constexpr std::uint8_t mask1{ 0b0000'0010 }; // represents bit 1
+    constexpr std::uint8_t mask2{ 0b0000'0100 }; // represents bit 2
+    constexpr std::uint8_t mask3{ 0b0000'1000 }; // represents bit 3
+    constexpr std::uint8_t mask4{ 0b0001'0000 }; // represents bit 4
+    constexpr std::uint8_t mask5{ 0b0010'0000 }; // represents bit 5
+    constexpr std::uint8_t mask6{ 0b0100'0000 }; // represents bit 6
+    constexpr std::uint8_t mask7{ 0b1000'0000 }; // represents bit 7
+
+    std::uint8_t flags {0b0000'0101}; // It means bit 0 and 2 are ON.
+
+    std::cout << (static_cast<bool>(flags & mask0)? "ON\n" : "OFF\n");  // TO CHECK ON AND OFF
+
+    std::cout << (static_cast<bool>(flags & mask1)? "ON\n" : "OFF\n");
+
+    flags |= mask1; // TO SET THE BIT
+    flags |= (mask3 | mask4 | mask5); // TO SET MULTIPLE BITS
+    std::cout << (static_cast<bool>(flags & mask1)? "ON\n" : "OFF\n");
+
+    flags &= ~mask1; //TO RESET THE BIT
+    std::cout << (static_cast<bool>(flags & mask1)? "ON\n" : "OFF\n");
+
+    flags ^= mask1; //TO FLIP THE BIT
+    std::cout << (static_cast<bool>(flags & mask1)? "ON\n" : "OFF\n");
+
+    return 0;
+}
+
+#+end_src
+
+#+RESULTS:
+: ON
+: OFF
+: ON
+: OFF
+: ON
+
+[[https://www.learncpp.com/cpp-tutorial/bit-manipulation-with-bitwise-operators-and-bit-masks/][Quiz]]
+
+#+begin_src cpp :results output
+#include <bitset>
+#include <cstdint>
+#include <iostream>
+
+int main()
+{
+    [[maybe_unused]] constexpr std::uint8_t option_viewed{ 0x01 };
+    [[maybe_unused]] constexpr std::uint8_t option_edited{ 0x02 };
+    [[maybe_unused]] constexpr std::uint8_t option_favorited{ 0x04 };
+    [[maybe_unused]] constexpr std::uint8_t option_shared{ 0x08 };
+    [[maybe_unused]] constexpr std::uint8_t option_deleted{ 0x10 };
+
+    std::uint8_t myArticleFlags{ option_favorited };
+    std::cout << std::bitset<8>{ myArticleFlags } << '\n';
+
+    myArticleFlags |= option_viewed;
+    std::cout << (static_cast<bool>(option_favorited & option_deleted)? "NOT DELETED\n" : "DELETED\n");
+
+    myArticleFlags &= ~option_favorited;
+    std::cout << std::bitset<8>{ myArticleFlags } << '\n';
+    return 0;
+}
+#+end_src
+
+#+RESULTS:
+: 00000100
+: DELETED
+: 00000001
