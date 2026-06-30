@@ -1,44 +1,50 @@
 
 # Table of Contents
 
-1.  [C++ Basics](#orgce65891)
-    1.  [Objects and Variables](#org43ae418)
-        1.  [Variable assigment](#org6b76096)
-        2.  [maybe unused](#orgc9c536b)
-        3.  [cout and cin](#orgf7122e5)
-        4.  [Uninitialized variables and undefined behavioure](#org6bc5587)
-        5.  [Keywords and Identifiers](#org38cd302)
-    2.  [Functions and Files](#orgc0013f3)
-        1.  [Void functions](#org0ddf93f)
-    3.  [size<sub>t</sub> link to topic](#org7c0eb63)
-    4.  [Char(ASCII TABLE LINK) here](#org3879637)
-    5.  [Implicit and Explicit Coversion](#org2c1a044)
-        1.  [Sign conversion using static<sub>cast</sub>](#orga8c7418)
-        2.  [Quiz Questions](#org7a26595)
-2.  [Fundamental Data Types](#orgdb79e01)
-    1.  [Numeral Systems (decimal, binary, hexadecimal)](#org7c6837b)
-        1.  [Octal](#org09777e3)
-        2.  [hexadecimal](#orgb15d936)
-        3.  [Binary](#org1e00bcb)
-        4.  [Outputting values in decimal, octal and hexadecimal](#orgbc14f52)
-        5.  [Outputting values in Binary using std::bitset](#org287142e)
-3.  [Strings](#org5c60500)
-    1.  [Strings (std::string)](#org9312caf)
-    2.  [Strings (std::string<sub>view</sub>)](#org56d8283)
-4.  [Operators](#orgb3a1ff0)
-5.  [Bit Manipulation](#orga99389e)
-    1.  [Uses of <bitset> library](#org68aa713)
-    2.  [Bitmanipulation by bit masks](#orgd403e6d)
+1.  [C++ Basics](#orga297864)
+    1.  [Objects and Variables](#org31be1de)
+        1.  [Variable assigment](#orgb3b2a08)
+        2.  [maybe unused](#org09796a9)
+        3.  [cout and cin](#org40368a7)
+        4.  [Uninitialized variables and undefined behavioure](#orgb15ae1a)
+        5.  [Keywords and Identifiers](#org7679e81)
+    2.  [Functions and Files](#orgc6d9068)
+        1.  [Void functions](#org03616ec)
+    3.  [size<sub>t</sub> link to topic](#orga35330f)
+    4.  [Char(ASCII TABLE LINK) here](#orge559b31)
+    5.  [Implicit and Explicit Coversion](#org56eee23)
+        1.  [Sign conversion using static<sub>cast</sub>](#orgca46d33)
+        2.  [Quiz Questions](#org84cbe5c)
+2.  [Fundamental Data Types](#org1488e43)
+    1.  [Numeral Systems (decimal, binary, hexadecimal)](#org9f060c5)
+        1.  [Octal](#orgdd3818b)
+        2.  [hexadecimal](#orgb4409e6)
+        3.  [Binary](#org373a20f)
+        4.  [Outputting values in decimal, octal and hexadecimal](#org0239ce1)
+        5.  [Outputting values in Binary using std::bitset](#org252aac3)
+3.  [Strings](#orgf52b39f)
+    1.  [Strings (std::string)](#org180d263)
+    2.  [Strings (std::string<sub>view</sub>)](#org8d89721)
+4.  [Operators](#orgc5098bf)
+5.  [Bit Manipulation](#org2e62b01)
+    1.  [Uses of <bitset> library](#orgbd86ba4)
+    2.  [Bitmanipulation by bit masks](#org596093c)
+6.  [Namespace and scope resolution](#org6e771da)
+    1.  [Static local variables](#org0c055e7)
+7.  [Control Flow](#orga105f51)
+    1.  [Switch case](#orgef2aa86)
+    2.  [goto statements](#orgdace6d9)
+    3.  [While loop](#org4d47404)
 
 filetags: CPP
 
 
-<a id="orgce65891"></a>
+<a id="orga297864"></a>
 
 # C++ Basics
 
 
-<a id="org43ae418"></a>
+<a id="org31be1de"></a>
 
 ## Objects and Variables
 
@@ -60,7 +66,7 @@ Memory is allocated during the run time.
     }
 
 
-<a id="org6b76096"></a>
+<a id="orgb3b2a08"></a>
 
 ### Variable assigment
 
@@ -83,7 +89,7 @@ Memory is allocated during the run time.
     int e {};      // value-initialization (empty braces)
 
 
-<a id="orgc9c536b"></a>
+<a id="org09796a9"></a>
 
 ### maybe unused
 
@@ -104,7 +110,7 @@ Memory is allocated during the run time.
     }
 
 
-<a id="orgf7122e5"></a>
+<a id="org40368a7"></a>
 
 ### cout and cin
 
@@ -143,7 +149,7 @@ Memory is allocated during the run time.
     }
 
 
-<a id="org6bc5587"></a>
+<a id="orgb15ae1a"></a>
 
 ### Uninitialized variables and undefined behavioure
 
@@ -158,7 +164,7 @@ Returns garbage value -&#x2014;> Memory address
     }
 
 
-<a id="org38cd302"></a>
+<a id="org7679e81"></a>
 
 ### Keywords and Identifiers
 
@@ -349,7 +355,7 @@ List of 92 keywords
 </table>
 
 
-<a id="orgc0013f3"></a>
+<a id="orgc6d9068"></a>
 
 ## Functions and Files
 
@@ -372,7 +378,7 @@ List of 92 keywords
     }
 
 
-<a id="org0ddf93f"></a>
+<a id="org03616ec"></a>
 
 ### Void functions
 
@@ -406,7 +412,7 @@ List of 92 keywords
     }
 
 
-<a id="org7c0eb63"></a>
+<a id="orga35330f"></a>
 
 ## size<sub>t</sub>[ link to topic](https://www.learncpp.com/cpp-tutorial/fixed-width-integers-and-size-t/)
 
@@ -422,7 +428,7 @@ List of 92 keywords
     }
 
 
-<a id="org3879637"></a>
+<a id="orge559b31"></a>
 
 ## Char(ASCII TABLE LINK) [here](https://www.learncpp.com/cpp-tutorial/chars/)
 
@@ -448,7 +454,7 @@ List of 92 keywords
     }
 
 
-<a id="org2c1a044"></a>
+<a id="org56eee23"></a>
 
 ## Implicit and Explicit Coversion
 
@@ -473,7 +479,7 @@ Syntax for Exclipit conversion -&#x2014;> static<sub>cast</sub><new<sub>type</su
     }
 
 
-<a id="orga8c7418"></a>
+<a id="orgca46d33"></a>
 
 ### Sign conversion using static<sub>cast</sub>
 
@@ -509,7 +515,7 @@ Syntax for Exclipit conversion -&#x2014;> static<sub>cast</sub><new<sub>type</su
     }
 
 
-<a id="org7a26595"></a>
+<a id="org84cbe5c"></a>
 
 ### Quiz [Questions](https://www.learncpp.com/cpp-tutorial/chapter-4-summary-and-quiz/)
 
@@ -571,17 +577,17 @@ Q3.
     }
 
 
-<a id="orgdb79e01"></a>
+<a id="org1488e43"></a>
 
 # Fundamental Data Types
 
 
-<a id="org7c6837b"></a>
+<a id="org9f060c5"></a>
 
 ## Numeral Systems (decimal, binary, hexadecimal)
 
 
-<a id="org09777e3"></a>
+<a id="orgdd3818b"></a>
 
 ### Octal
 
@@ -605,7 +611,7 @@ For representing it as octal number we use &ldquo;0&rdquo; infront of the number
     }
 
 
-<a id="orgb15d936"></a>
+<a id="orgb4409e6"></a>
 
 ### hexadecimal
 
@@ -624,7 +630,7 @@ To use hexadecimal we use prefix &ldquo;0x&rdquo;
     }
 
 
-<a id="org1e00bcb"></a>
+<a id="org373a20f"></a>
 
 ### Binary
 
@@ -646,7 +652,7 @@ We use prefix 0b for binary numbers
     }
 
 
-<a id="orgbc14f52"></a>
+<a id="org0239ce1"></a>
 
 ### Outputting values in decimal, octal and hexadecimal
 
@@ -665,7 +671,7 @@ We use prefix 0b for binary numbers
     }
 
 
-<a id="org287142e"></a>
+<a id="org252aac3"></a>
 
 ### Outputting values in Binary using std::bitset
 
@@ -686,12 +692,12 @@ We use prefix 0b for binary numbers
     }
 
 
-<a id="org5c60500"></a>
+<a id="orgf52b39f"></a>
 
 # Strings
 
 
-<a id="org9312caf"></a>
+<a id="org180d263"></a>
 
 ## Strings (std::string)
 
@@ -711,7 +717,7 @@ The header <string> helps to input and output stings of different size
     }
 
 
-<a id="org56d8283"></a>
+<a id="org8d89721"></a>
 
 ## Strings (std::string<sub>view</sub>)
 
@@ -778,7 +784,7 @@ Example
     }
 
 
-<a id="orgb3a1ff0"></a>
+<a id="orgc5098bf"></a>
 
 # Operators
 
@@ -796,12 +802,12 @@ Exponent
     }
 
 
-<a id="orga99389e"></a>
+<a id="org2e62b01"></a>
 
 # Bit Manipulation
 
 
-<a id="org68aa713"></a>
+<a id="orgbd86ba4"></a>
 
 ## Uses of <bitset> library
 
@@ -880,7 +886,7 @@ It has
     }
 
 
-<a id="orgd403e6d"></a>
+<a id="org596093c"></a>
 
 ## Bitmanipulation by bit masks
 
@@ -956,6 +962,200 @@ Bit masks &#x2014; These are predefined set of bits used to select which specifi
     
         myArticleFlags &= ~option_favorited;
         std::cout << std::bitset<8>{ myArticleFlags } << '\n';
+        return 0;
+    }
+
+Q1. Write a program that asks the user to input a number between 0 and 255. Print this number as an 8-bit binary number (of the form #### ####). Don’t use any bitwise operators. Don’t use std::bitset
+
+    #include <iostream>
+    using namespace std;
+    
+    int main() {
+        int decimal_num{};
+    
+        cout << "Enter a number between 0 and 255\n";
+        cin >> decimal_num;
+    
+        for(int divisor{128}; divisor >= 1; divisor /= 2) {
+            if((decimal_num/divisor)%2 == 0) {
+                cout << '0';
+            }else {
+                cout << '1';
+            }
+        }
+    
+        return 0;
+    }
+
+
+<a id="org6e771da"></a>
+
+# Namespace and scope resolution
+
+    #include <iostream>
+    using namespace std;
+    
+    namespace Foo
+    {
+        int dosomething(int a, int b) {
+            return a+b;
+        }
+    }
+    namespace Goo
+    {
+        int dosomething(int a, int b) {
+            return a-b;
+        }
+    }
+    
+    int main()
+    {
+        cout << Goo::dosomething(1,2) << '\n';  // "::" ------> called scope resolution operator
+        cout << Foo::dosomething(1,2) << '\n';
+        return 0;
+    }
+
+
+<a id="org0c055e7"></a>
+
+## Static local variables
+
+local varibales &#x2014; created at the start of block and destroyed at the end of block
+static local varibales &#x2013;&#x2014; created at the start of program and destroyed at the end of program.
+
+example without static
+
+    #include <iostream>
+    using namespace std;
+    
+    void increment()
+    {
+        int x{1};
+        ++x;
+        cout << x << "\n";
+    }
+    
+    int main() {
+        increment();
+        increment();
+        increment();
+        return 0;
+    }
+
+example with static
+
+    #include <iostream>
+    using namespace std;
+    
+    void increment()
+    {
+        static int x{1};
+        x++;
+        cout << x << "\n";
+    }
+    int main() {
+       increment();
+       increment();
+       increment();
+        return 0;
+    }
+
+
+<a id="orga105f51"></a>
+
+# Control Flow
+
+
+<a id="orgef2aa86"></a>
+
+## Switch case
+
+    #include <iostream>
+    using namespace std;
+    
+    int main() {
+    
+        int x{3};
+    
+        switch(x)
+        {
+        case 1:
+            cout << "One" << "\n";
+            break;
+        case 2:
+            cout << "Two" << "\n";
+            break;
+        default:
+            cout << "Error" << "\n";
+            break;
+        }
+    
+        return 0;
+    }
+
+
+<a id="orgdace6d9"></a>
+
+## goto statements
+
+    #include <iostream>
+    using namespace std;
+    
+        void printhello(bool is)
+        {
+            if(is)
+            {
+                goto end;
+            }
+            cout << "Hello" << "\n";
+    end:
+         cout << "end" << "\n";
+        }
+    
+    int main() {
+        printhello(true);
+        //printhello(false);
+        return 0;
+    }
+
+
+<a id="org4d47404"></a>
+
+## While loop
+
+    #include <iostream>
+    using namespace std;
+    
+    int main() {
+        char alp{65};
+    
+       while(alp <= 90)
+       {
+           cout << alp << "-" << static_cast<int>(alp) << "\n";
+           alp++;
+       }
+    
+        return 0;
+    }
+
+    #include <iostream>
+    using namespace std;
+    
+    int main() {
+        int x{5};
+    
+        while(x > 0)
+        {
+            int i = x;
+            while(i > 0)
+            {
+                cout << i << " ";
+                i--;
+            }
+            cout << "\n";
+            x--;
+        }
+    
         return 0;
     }
 
