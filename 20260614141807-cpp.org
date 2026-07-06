@@ -5,6 +5,9 @@
 filetags: CPP
 
 * C++ Basics
+:PROPERTIES:
+:collapsed: true
+:END:
 ** Objects and Variables
 :PROPERTIES:
 :ID: Objects and Variables
@@ -29,7 +32,6 @@ int main() {
     return 0;
 }
 #+end_src
-
 *** Variable assigment
 #+begin_src cpp
 #include <iosteam>
@@ -166,7 +168,6 @@ List of 92 keywords
 :ID: Functions and Files
 :END:
 
-
 #+begin_src cpp
 #include <iostream>
 
@@ -199,9 +200,7 @@ int main() {
 
     //printHi();
     std::cout << printHi() << '\n';
-    printf()
-        printf()printf(jsbcb)print()
-    return 0;printf
+    return 0;
 }
 #+end_src
 
@@ -223,19 +222,6 @@ int main() {
 
 #+RESULTS:
 ** size_t[[https://www.learncpp.com/cpp-tutorial/fixed-width-integers-and-size-t/][ link to topic]]
-
-#+begin_src cpp
-#include <iostream>
-
-int main(){
-    bool a = 0;
-    bool b = 30;
-
-    std::cout << a << '\n';
-    std::cout << b << '\n';
-    return 0;
-}
-#+end_src
 ** Char(ASCII TABLE LINK) [[https://www.learncpp.com/cpp-tutorial/chars/][here]]
 
 #+begin_src cpp
@@ -265,7 +251,6 @@ int main() {
     return 0;
 }
 #+end_src
-
 ** Implicit and Explicit Coversion
 :PROPERTIES:
 :ID: Implicit and Explicit Coversion
@@ -298,7 +283,6 @@ int main() {
 : 65
 : A
 : 65.5
-
 *** Sign conversion using static_cast
 :PROPERTIES:
 :ID:       Sign converstions using static_cast
@@ -344,7 +328,6 @@ int main() {
 #+end_src
 
 #+RESULTS:
-
 *** Quiz [[https://www.learncpp.com/cpp-tutorial/chapter-4-summary-and-quiz/][Questions]]
 
  Q2.
@@ -405,13 +388,14 @@ int main() {
     return 0;
 }
 #+end_src
-
 * Fundamental Data Types
+:PROPERTIES:
+:collapsed: true
+:END:
 ** Numeral Systems (decimal, binary, hexadecimal)
 :PROPERTIES:
 :ID:       Numeral Systems (Decimal, hexadecimal..)
 :END:
-
 *** Octal
 
 In octal there are no 8 and 9.
@@ -437,7 +421,6 @@ int main() {
 
 #+RESULTS:
 : 15
-
 *** hexadecimal
 
 Hexadecimal base is 16 and we count like  0, 1, 2, 3, 4, 5, 6, 7, 8, 9, A, B, C, D, E, F, 10, 11, 12, …
@@ -458,7 +441,6 @@ int main() {
 #+RESULTS:
 : 15
 : 26
-
 *** Binary
 
 Binary has base 2.
@@ -483,7 +465,6 @@ int main() {
 : 65
 : 257
 : 5
-
 *** Outputting values in decimal, octal and hexadecimal
 
 #+begin_src cpp :results output
@@ -507,7 +488,6 @@ int main() {
 : 54
 : 44
 : 44
-
 *** Outputting values in Binary using std::bitset
 
 #+begin_src cpp :results output
@@ -532,14 +512,16 @@ int main() {
 : 0101
 : 00010100
 : 00001111
-
 * Strings
+:PROPERTIES:
+:collapsed: true
+:END:
 ** Strings (std::string)
 :PROPERTIES:
 :ID:       Strings (std::string)
 :END:
 
-The header <string> helps to input and output stings of different size
+The header <string> helps to input and output strings of different size
 
 #+begin_src cpp :results output
 #include <iostream>
@@ -628,7 +610,6 @@ int main() {
     return 0;
 }
 #+end_src
-
 * Operators
 :PROPERTIES:
 :ID: Operators
@@ -648,6 +629,9 @@ int main() {
 }
 #+end_src
 * Bit Manipulation
+:PROPERTIES:
+:collapsed: true
+:END:
 ** Uses of <bitset> library
 :PROPERTIES:
 :ID: <Uses of <bitset> library>
@@ -741,7 +725,6 @@ int main()
     return 0;
 }
 #+end_src
-
 ** Bitmanipulation by bit masks
 :PROPERTIES:
 :ID: Bitmanipulation by bit masks
@@ -895,7 +878,6 @@ int main()
 #+RESULTS:
 : -1
 : 3
-
 ** Static local variables
 :PROPERTIES:
 :ID: Static local variables
@@ -953,6 +935,9 @@ int main() {
 : 3
 : 4
 * Control Flow
+:PROPERTIES:
+:collapsed: true
+:END:
 ** Switch case
 :PROPERTIES:
 :ID: Switch case
@@ -986,6 +971,10 @@ int main() {
 #+RESULTS:
 : Error
 ** goto statements
+:PROPERTIES:
+:ID: goto statements
+:END:
+
 #+begin_src cpp :results output
 #include <iostream>
 using namespace std;
@@ -1011,6 +1000,10 @@ int main() {
 #+RESULTS:
 : end
 ** While loop
+:PROPERTIES:
+:ID: While Loop
+:END:
+
 #+begin_src cpp :results output
 #include <iostream>
 using namespace std;
@@ -1027,6 +1020,8 @@ int main() {
     return 0;
 }
 #+end_src
+
+
 
 #+begin_src cpp :results output
 #include <iostream>
@@ -1058,3 +1053,215 @@ int main() {
 : 2 1
 : 1
 
+
+#+begin_src cpp :results output
+#include <iostream>
+using namespace std;
+
+int main() {
+    int x{1};
+
+    while(x <= 5)
+    {
+        int y{5};
+
+        while(y>=1){
+           if(y <= x){
+               cout << y << ' ';
+           }else {
+               cout << " ";
+           }
+           --y;
+        }
+        cout << "\n";
+        ++x;
+    }
+    return 0;
+}
+#+end_src
+
+#+RESULTS:
+:     1
+:    2 1
+:   3 2 1
+:  4 3 2 1
+: 5 4 3 2 1
+
+#+begin_src cpp :results output
+#include <iostream>
+using namespace std;
+
+void fizzbuzz(int x)
+{
+    for(int i=1;i<=x;i++)
+    {
+        if(i%3==0 && i%5==0) {
+            cout << "FizzBuzz" << "\n";
+        }else if(i%5==0){
+           cout << "Buzz" << "\n";
+        }else if(i%3==0){
+            cout << "Fizz" << "\n";
+        }else if(i%7==0){
+            cout << "pop" << "\n";
+        }else{
+            cout << i << "\n";
+        }
+    }
+}
+
+int main() {
+    int y;
+    cin >> y;
+    fizzbuzz(y);
+
+    return 0;
+}
+#+end_src
+** Do While
+** For Loop
+** std::exit
+:PROPERTIES:
+:ID: std::exit
+:END:
+
+When main function is returned a special function std::exit() is called with return value from main.
++ It performs number of cleanup functions.
+  1. Objects with static storage duration are destroyed.
+  2. Then some other miscellaneous file cleanup is done if any files were used.
++ calling std::exit explicitly.
+  std::exit() is called implicitly when main function is returned. But we can also explicitly call the function
+  For that we have to use <cstdlib> library
+
+  #+begin_src cpp :results output
+#include <iostream>
+#include <cstdlib>
+using namespace std;
+
+int main() {
+
+    cout << "Before exit" << "\n";
+
+    exit(0);
+
+    cout << "after exit" << "\n"; //This statement is never exucuted
+
+    return 0;
+}
+#+end_src
+
+std::exit() doesnt clean up local variable.Means
+1. closing database and networks.
+2. deallocating memory
+
+For this we have to call another cleanup function before std::exit.
+For making this easier there is another fucntion called std::atexit
+std::atexit is called automatically when std::exit is called -------------> std::atexit(cleanup)
+here cleanup is a function.
+* Mersenne Twister
+:PROPERTIES:
+:ID: Mersenne twister
+:END:
+
+#+begin_src cpp :results output
+#include <iostream>
+#include <random>
+
+int main() {
+    std::mt19937 mt{};
+
+    for(int i=0;i<=10;i++)
+    {
+        std::cout << mt() << "\n";
+    }
+    return 0;
+}
+#+end_src
+
+#+RESULTS:
+#+begin_example
+3499211612
+581869302
+3890346734
+3586334585
+545404204
+4161255391
+3922919429
+949333985
+2715962298
+1323567403
+418932835
+#+end_example
+* Function Templates
+
+#+begin_src cpp :results output
+#include <iostream>
+using namespace std;
+
+template <typename T>
+
+T add(T x,T y)
+{
+    return x+y;
+}
+
+int main() {
+   cout <<  add<float>(1.2,2.5) << "\n";
+    return 0;
+}
+#+end_src
+
+#+RESULTS:
+: 3.7
+
+* Constexpr and Consteval Functions
+:PROPERTIES:
+:ID: constexpr and consteval functions
+:END:
+
+constexpr functions are initialized at the compile time.
+They may or maybe not be initialized at the compile time. But consteval functions are always evaluated at the compile time.
+
+#+begin_src cpp :results output
+#include <iostream>
+using namespace std;
+
+constexpr int add(int x,int y)
+{
+    return x+y;
+}
+
+int main() {
+    constexpr int x {add(1,2)};
+    cout << x << "\n";
+
+    return 0;
+}
+#+end_src
+
+#+RESULTS:
+: 3
+
+consteval functions have to evaluate at the compile time only or else it will through an error.
+These functions are also called as immediate fucntions
+
+#+begin_src cpp :flags -std=gnu++20  :results output
+#include <iostream>
+using namespace std;
+
+consteval int add(int x,int y)
+{
+    return x+y;
+}
+
+int main() {
+
+    constexpr int a{add(10,20)}; // This will evaluate
+    cout << a << "\n";
+
+    cout << add(10,20) << "\n"; // This will evaluate
+
+    int b{20};
+    cout << add(10,b); //This will not evaluate.
+    return 0;
+}
+#+end_src
