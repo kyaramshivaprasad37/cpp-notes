@@ -1,56 +1,57 @@
 
 # Table of Contents
 
-1.  [C++ Basics](#org7778b98)
-    1.  [Objects and Variables](#org14f19b2)
-        1.  [Variable assigment](#org8cab941)
-        2.  [maybe unused](#org791e088)
-        3.  [cout and cin](#org2712667)
-        4.  [Uninitialized variables and undefined behavioure](#org20d4775)
-        5.  [Keywords and Identifiers](#orgc46158d)
-    2.  [Functions and Files](#orgf1ac64d)
-        1.  [Void functions](#org35cb39d)
-    3.  [size<sub>t</sub> link to topic](#orgb20cc1b)
-    4.  [Char(ASCII TABLE LINK) here](#orgc9774da)
-    5.  [Implicit and Explicit Coversion](#org2bf12d1)
-        1.  [Sign conversion using static<sub>cast</sub>](#org6a5def7)
-        2.  [Quiz Questions](#orgf22c68b)
-2.  [Fundamental Data Types](#orgd57a9c9)
-    1.  [Numeral Systems (decimal, binary, hexadecimal)](#org6ee59db)
-        1.  [Octal](#orgcc9cb29)
-        2.  [hexadecimal](#orgd2e963d)
-        3.  [Binary](#orgaa405bf)
-        4.  [Outputting values in decimal, octal and hexadecimal](#org2a5311f)
-        5.  [Outputting values in Binary using std::bitset](#orge3b1a88)
-3.  [Strings](#orgc6ad569)
-    1.  [Strings (std::string)](#orgd2e1ee0)
-    2.  [Strings (std::string<sub>view</sub>)](#org3d8af9b)
-4.  [Operators](#orgb678b6d)
-5.  [Bit Manipulation](#orga5d12e0)
-    1.  [Uses of <bitset> library](#org078284e)
-    2.  [Bitmanipulation by bit masks](#org2c8b7ff)
-6.  [Namespace and scope resolution](#org92e1be8)
-    1.  [Static local variables](#orgd0a28ea)
-7.  [Control Flow](#org25c889f)
-    1.  [Switch case](#org17923a4)
-    2.  [goto statements](#org7a6c24e)
-    3.  [While loop](#org72e60ab)
-    4.  [Do While](#org76dd18a)
-    5.  [For Loop](#orgf43f23d)
-    6.  [std::exit](#org2d4fdd4)
-8.  [Mersenne Twister](#org1113343)
-9.  [Function Templates](#org05da268)
-10. [Constexpr and Consteval Functions](#orgdbb6580)
+1.  [C++ Basics](#orgda0f472)
+    1.  [Objects and Variables](#org8066558)
+        1.  [Variable assigment](#org85be80c)
+        2.  [maybe unused](#org9741409)
+        3.  [cout and cin](#orgd73ea8d)
+        4.  [Uninitialized variables and undefined behavioure](#org161f718)
+        5.  [Keywords and Identifiers](#org817776c)
+    2.  [Functions and Files](#org071d598)
+        1.  [Void functions](#org360ef86)
+    3.  [size<sub>t</sub> link to topic](#org72a2045)
+    4.  [Char(ASCII TABLE LINK) here](#orge1c2461)
+    5.  [Implicit and Explicit Coversion](#org59722f7)
+        1.  [Sign conversion using static<sub>cast</sub>](#org79930b3)
+        2.  [Quiz Questions](#org7602977)
+2.  [Fundamental Data Types](#org3bade83)
+    1.  [Numeral Systems (decimal, binary, hexadecimal)](#org4a74de9)
+        1.  [Octal](#orgf0a948d)
+        2.  [hexadecimal](#org161f02a)
+        3.  [Binary](#orgec48dff)
+        4.  [Outputting values in decimal, octal and hexadecimal](#orgd8273e2)
+        5.  [Outputting values in Binary using std::bitset](#orge35fbd8)
+3.  [Strings](#org17c2c9a)
+    1.  [Strings (std::string)](#org2ce2a02)
+    2.  [Strings (std::string<sub>view</sub>)](#org591ea24)
+4.  [Operators](#orgb3909f5)
+5.  [Bit Manipulation](#orgab65268)
+    1.  [Uses of <bitset> library](#org98433b6)
+    2.  [Bitmanipulation by bit masks](#orgc234684)
+6.  [Namespace and scope resolution](#org8a1cbf2)
+    1.  [Static local variables](#orgd2ab808)
+7.  [Control Flow](#org1732ff2)
+    1.  [Switch case](#orga451df6)
+    2.  [goto statements](#orgc2d6348)
+    3.  [While loop](#orga82dd54)
+    4.  [Do While](#org3bf6398)
+    5.  [For Loop](#orgfe7a75f)
+    6.  [std::exit](#orga93af01)
+8.  [Mersenne Twister](#org16afbeb)
+9.  [Function Templates](#org1721d47)
+10. [Constexpr and Consteval Functions](#org8ef2654)
+11. [Compound data types](#orgfcca196)
 
 filetags: CPP
 
 
-<a id="org7778b98"></a>
+<a id="orgda0f472"></a>
 
 # C++ Basics
 
 
-<a id="org14f19b2"></a>
+<a id="org8066558"></a>
 
 ## Objects and Variables
 
@@ -72,7 +73,7 @@ Memory is allocated during the run time.
     }
 
 
-<a id="org8cab941"></a>
+<a id="org85be80c"></a>
 
 ### Variable assigment
 
@@ -95,7 +96,7 @@ Memory is allocated during the run time.
     int e {};      // value-initialization (empty braces)
 
 
-<a id="org791e088"></a>
+<a id="org9741409"></a>
 
 ### maybe unused
 
@@ -116,7 +117,7 @@ Memory is allocated during the run time.
     }
 
 
-<a id="org2712667"></a>
+<a id="orgd73ea8d"></a>
 
 ### cout and cin
 
@@ -155,7 +156,7 @@ Memory is allocated during the run time.
     }
 
 
-<a id="org20d4775"></a>
+<a id="org161f718"></a>
 
 ### Uninitialized variables and undefined behavioure
 
@@ -170,7 +171,7 @@ Returns garbage value -&#x2014;> Memory address
     }
 
 
-<a id="orgc46158d"></a>
+<a id="org817776c"></a>
 
 ### Keywords and Identifiers
 
@@ -361,7 +362,7 @@ List of 92 keywords
 </table>
 
 
-<a id="orgf1ac64d"></a>
+<a id="org071d598"></a>
 
 ## Functions and Files
 
@@ -384,7 +385,7 @@ List of 92 keywords
     }
 
 
-<a id="org35cb39d"></a>
+<a id="org360ef86"></a>
 
 ### Void functions
 
@@ -416,12 +417,12 @@ List of 92 keywords
     }
 
 
-<a id="orgb20cc1b"></a>
+<a id="org72a2045"></a>
 
 ## size<sub>t</sub>[ link to topic](https://www.learncpp.com/cpp-tutorial/fixed-width-integers-and-size-t/)
 
 
-<a id="orgc9774da"></a>
+<a id="orge1c2461"></a>
 
 ## Char(ASCII TABLE LINK) [here](https://www.learncpp.com/cpp-tutorial/chars/)
 
@@ -447,7 +448,7 @@ List of 92 keywords
     }
 
 
-<a id="org2bf12d1"></a>
+<a id="org59722f7"></a>
 
 ## Implicit and Explicit Coversion
 
@@ -472,7 +473,7 @@ Syntax for Exclipit conversion -&#x2014;> static<sub>cast</sub><new<sub>type</su
     }
 
 
-<a id="org6a5def7"></a>
+<a id="org79930b3"></a>
 
 ### Sign conversion using static<sub>cast</sub>
 
@@ -508,7 +509,7 @@ Syntax for Exclipit conversion -&#x2014;> static<sub>cast</sub><new<sub>type</su
     }
 
 
-<a id="orgf22c68b"></a>
+<a id="org7602977"></a>
 
 ### Quiz [Questions](https://www.learncpp.com/cpp-tutorial/chapter-4-summary-and-quiz/)
 
@@ -570,17 +571,17 @@ Q3.
     }
 
 
-<a id="orgd57a9c9"></a>
+<a id="org3bade83"></a>
 
 # Fundamental Data Types
 
 
-<a id="org6ee59db"></a>
+<a id="org4a74de9"></a>
 
 ## Numeral Systems (decimal, binary, hexadecimal)
 
 
-<a id="orgcc9cb29"></a>
+<a id="orgf0a948d"></a>
 
 ### Octal
 
@@ -604,7 +605,7 @@ For representing it as octal number we use &ldquo;0&rdquo; infront of the number
     }
 
 
-<a id="orgd2e963d"></a>
+<a id="org161f02a"></a>
 
 ### hexadecimal
 
@@ -623,7 +624,7 @@ To use hexadecimal we use prefix &ldquo;0x&rdquo;
     }
 
 
-<a id="orgaa405bf"></a>
+<a id="orgec48dff"></a>
 
 ### Binary
 
@@ -645,7 +646,7 @@ We use prefix 0b for binary numbers
     }
 
 
-<a id="org2a5311f"></a>
+<a id="orgd8273e2"></a>
 
 ### Outputting values in decimal, octal and hexadecimal
 
@@ -664,7 +665,7 @@ We use prefix 0b for binary numbers
     }
 
 
-<a id="orge3b1a88"></a>
+<a id="orge35fbd8"></a>
 
 ### Outputting values in Binary using std::bitset
 
@@ -685,12 +686,12 @@ We use prefix 0b for binary numbers
     }
 
 
-<a id="orgc6ad569"></a>
+<a id="org17c2c9a"></a>
 
 # Strings
 
 
-<a id="orgd2e1ee0"></a>
+<a id="org2ce2a02"></a>
 
 ## Strings (std::string)
 
@@ -710,7 +711,7 @@ The header <string> helps to input and output strings of different size
     }
 
 
-<a id="org3d8af9b"></a>
+<a id="org591ea24"></a>
 
 ## Strings (std::string<sub>view</sub>)
 
@@ -777,7 +778,7 @@ Example
     }
 
 
-<a id="orgb678b6d"></a>
+<a id="orgb3909f5"></a>
 
 # Operators
 
@@ -795,12 +796,12 @@ Exponent
     }
 
 
-<a id="orga5d12e0"></a>
+<a id="orgab65268"></a>
 
 # Bit Manipulation
 
 
-<a id="org078284e"></a>
+<a id="org98433b6"></a>
 
 ## Uses of <bitset> library
 
@@ -879,7 +880,7 @@ It has
     }
 
 
-<a id="org2c8b7ff"></a>
+<a id="orgc234684"></a>
 
 ## Bitmanipulation by bit masks
 
@@ -981,7 +982,7 @@ Q1. Write a program that asks the user to input a number between 0 and 255. Prin
     }
 
 
-<a id="org92e1be8"></a>
+<a id="org8a1cbf2"></a>
 
 # Namespace and scope resolution
 
@@ -1009,7 +1010,7 @@ Q1. Write a program that asks the user to input a number between 0 and 255. Prin
     }
 
 
-<a id="orgd0a28ea"></a>
+<a id="orgd2ab808"></a>
 
 ## Static local variables
 
@@ -1054,12 +1055,12 @@ example with static
     }
 
 
-<a id="org25c889f"></a>
+<a id="org1732ff2"></a>
 
 # Control Flow
 
 
-<a id="org17923a4"></a>
+<a id="orga451df6"></a>
 
 ## Switch case
 
@@ -1087,7 +1088,7 @@ example with static
     }
 
 
-<a id="org7a6c24e"></a>
+<a id="orgc2d6348"></a>
 
 ## goto statements
 
@@ -1112,7 +1113,7 @@ example with static
     }
 
 
-<a id="org72e60ab"></a>
+<a id="orga82dd54"></a>
 
 ## While loop
 
@@ -1206,17 +1207,17 @@ example with static
     }
 
 
-<a id="org76dd18a"></a>
+<a id="org3bf6398"></a>
 
 ## Do While
 
 
-<a id="orgf43f23d"></a>
+<a id="orgfe7a75f"></a>
 
 ## For Loop
 
 
-<a id="org2d4fdd4"></a>
+<a id="orga93af01"></a>
 
 ## std::exit
 
@@ -1255,7 +1256,7 @@ std::atexit is called automatically when std::exit is called --------&#x2013;&#x
 here cleanup is a function.
 
 
-<a id="org1113343"></a>
+<a id="org16afbeb"></a>
 
 # Mersenne Twister
 
@@ -1273,7 +1274,7 @@ here cleanup is a function.
     }
 
 
-<a id="org05da268"></a>
+<a id="org1721d47"></a>
 
 # Function Templates
 
@@ -1293,7 +1294,7 @@ here cleanup is a function.
     }
 
 
-<a id="orgdbb6580"></a>
+<a id="org8ef2654"></a>
 
 # Constexpr and Consteval Functions
 
@@ -1337,4 +1338,28 @@ These functions are also called as immediate fucntions
         cout << add(10,b); //This will not evaluate.
         return 0;
     }
+
+
+<a id="orgfcca196"></a>
+
+# Compound data types
+
+<div class="mindmap" id="org57f544e">
+<p>
+   ╭─ Functions
+   ├─ C-style arrays
+   ├─ Pointer Types ┬─ Pointer to Object
+   │                ╰─ pointer to function
+   ├─ Pointer to member types ┬─ pointer to data member
+   │                          ╰─ pointer to member function
+«» ┼─ Reference types ┬─ L-value references
+   │                  ╰─ R-value references
+   ├─ Enumerated Types ┬─ Unscoped enumerations
+   │                   ╰─ Scoped enumerations
+   │              ╭─ Structs
+   ╰─ Class Types ┼─ Classes
+                  ╰─ Unions
+</p>
+
+</div>
 

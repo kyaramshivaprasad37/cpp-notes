@@ -1265,3 +1265,20 @@ int main() {
     return 0;
 }
 #+end_src
+* Compound data types
+
+#+begin_mindmap
+   ╭─ Functions
+   ├─ C-style arrays
+   ├─ Pointer Types ┬─ Pointer to Object
+   │                ╰─ pointer to function
+   ├─ Pointer to member types ┬─ pointer to data member
+   │                          ╰─ pointer to member function
+«» ┼─ Reference types ┬─ L-value references
+   │                  ╰─ R-value references
+   ├─ Enumerated Types ┬─ Unscoped enumerations
+   │                   ╰─ Scoped enumerations
+   │              ╭─ Structs
+   ╰─ Class Types ┼─ Classes
+                  ╰─ Unions
+#+end_mindmap
