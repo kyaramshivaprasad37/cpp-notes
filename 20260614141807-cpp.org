@@ -1266,6 +1266,9 @@ int main() {
 }
 #+end_src
 * Compound data types
+:PROPERTIES:
+:ID: Compound data types
+:END:
 
 #+begin_mindmap
    ╭─ Functions
@@ -1282,3 +1285,730 @@ int main() {
    ╰─ Class Types ┼─ Classes
                   ╰─ Unions
 #+end_mindmap
+
+** L-value references
+*** Non-const L value references
+#+begin_src cpp :results output
+#include <iostream>
+using namespace std;
+
+int main() {
+    int x{2};
+    int& y{x};
+    cout << y << "\n";
+    cout << x << "\n";
+
+    x = 4;
+    cout << y << "\n";
+    cout << x << "\n";
+
+    y = 5;
+    cout << y << "\n";
+    cout << x << "\n";
+    return 0;
+}
+#+end_src
+
+#+RESULTS:
+: 2
+: 2
+: 4
+: 4
+: 5
+: 5
+*** Const L-value referencs
+
+#+begin_src cpp :results output
+#include <iostream>
+using namespace std;
+
+int main() {
+
+    const int x {2};
+    const int& ref{x};
+
+    cout << ref << "\n";
+
+    return 0;
+}
+#+end_src
+
+#+RESULTS:
+: 2
+
+#+begin_src cpp :results output
+#include <iostream>
+using namespace std;
+
+int main() {
+    int x{2};
+    const int& ref{x};
+
+    cout << ref << "\n";
+    cout << x << "\n";
+
+    x = 3;      // Modified by variables.
+    cout << ref << "\n";
+
+    ref = 4;    // Cannot be modified by ref since it is const
+    cout << ref << "\n";
+
+    return 0;
+}
+#+end_src
+
+#+RESULTS:
+
+If we initialize lvalue const reference to rvalue.
+Then a temporary object is created with rvalue and reference to const is bound to that temporary object.
+Temporary objects are destroyed at the end of the statement.
+But this creates a dangling ref so that compilers extend the lifetime of temporary objects to match the lifetime of ref.
+
+Non-const lvalue references require an lvalue (an object with a persistent memory address) because they are designed to allow modification of the referenced object.  Rvalues (such as temporary objects or literals) do not have a persistent memory address and are immutable; binding a non-const reference to them would allow modifications to an object that is immediately destroyed or cannot be changed, leading to undefined behavior or logical errors.
+
+#+begin_src cpp :results output
+#include <iostream>
+using namespace std;
+
+int main() {
+    const int& ref{2};
+    cout << ref << "\n";
+    return 0;
+}
+#+end_src
+
+#+RESULTS:
+: 2
+
+with diif data types.
+#+begin_src cpp :results output
+#include <iostream>
+using namespace std;
+
+int main() {
+    char alp{'T'};
+
+    const int& ref{alp};
+
+    cout << ref << "\n";
+    return 0;
+}
+#+end_src
+
+#+RESULTS:
+: 84
+
+#+begin_src cpp :results output
+#include <iostream>
+using namespace std;
+
+int main() {
+    double x {5};
+    const int& ref{x};
+    cout << ref << "\n";
+    return 0;
+}
+#+end_src
+
+#+RESULTS:
+: 5
+** Pass by reference
+:PROPERTIES:
+:ID: Pass by reference
+:END:
+
+#+begin_src cpp :results output
+#include <iostream>
+#include <string>
+using namespace std;
+
+void printname(string x)
+{
+    cout << x << "\n" ;
+}
+
+int main() {
+
+    string name {"Shiva"};
+
+    printname(name);
+
+    return 0;
+}
+#+end_src
+
+#+RESULTS:
+: Shiva
+
+Although the above program works fine.It is inefficent to make a copy of a string and will be destroyed  after the function.
+So we use pass by reference.
+
+#+begin_src cpp :results output
+#include <iostream>
+#include <string>
+using namespace std;
+
+void printname(string& ref)  //here we ref to name instead of making a copy
+{
+    cout << ref << "\n";
+    ref = "Shiva";
+    cout << ref << "\n";
+}
+
+int main() {
+    string name{"Prasad"};
+    printname(name);
+
+    return 0;
+}
+#+end_src
+
+#+RESULTS:
+: Prasad
+: Shiva
+
+#+begin_src cpp :results output
+#include <iostream>
+using namespace std;
+void passbyvalue(int x)
+{
+    cout << &x << "\n";
+}
+
+void passbyreference(int& x)
+{
+    cout << &x << "\n";
+}
+int main() {
+    int x{2};
+    cout << &x << "\n";
+    passbyvalue(x);
+    passbyreference(x);
+    return 0;
+}
+#+end_src
+
+#+RESULTS:
+: 0x7ffc696819a4
+: 0x7ffc6968198c
+: 0x7ffc696819a4
+
+Here we can notice the address of passbyreference and original varible is same.
+
+** pass by const lvalue reference
+:PROPERTIES:
+:ID: pass by const lvalue reference
+:END:
+Unlike non-const lvalue reference for which we can bind to modifiable lvalues.
+pass by const lvalue reference can be bind to modifiable, non-modifiable lvalues and rvalues.
+
+#+begin_src cpp :results output
+#include <iostream>
+using namespace std;
+
+void print(const int& ref)
+{
+    cout << ref << "\n";
+}
+
+int main() {
+
+    int x{2};  // we can pass nonconst varibales (modifiable)
+    print(x);
+
+    const int y{3};  // we can pass const varibales (non-modifiable)
+    print(y);
+
+    print(4);  // we can pass literal
+
+    return 0;
+}
+#+end_src
+
+#+RESULTS:
+: 2
+: 3
+: 4
+
+** why prefer std::string_view to const std::string&
+:PROPERTIES:
+:ID: why prefer std::string_view to const std::string&
+:END:
+
+| Argument Type          | std::string_view parameter | const std::string& parameter                 |
+|------------------------+----------------------------+----------------------------------------------|
+| std::string            | Inexpensive conversion     | Inexpensive reference binding                |
+| std::string_view       | Inexpensive copy           | Expensive explicit conversion to std::string |
+| C-style string/literal | Inexpensive conversion     | Expensive conversion                         |
+
+#+begin_src cpp :results output
+#include <iostream>
+#include <string>
+#include <string_view>
+
+void printSV(std::string_view sv)
+{
+    std::cout << sv << '\n';
+}
+
+void printS(const std::string& s)
+{
+    std::cout << s << '\n';
+}
+
+int main()
+{
+    std::string s{ "Hello, world" };
+    std::string_view sv { s };
+
+    // Pass to `std::string_view` parameter
+    printSV(s);              // ok: inexpensive conversion from std::string to std::string_view
+    printSV(sv);             // ok: inexpensive copy of std::string_view
+    printSV("Hello, world"); // ok: inexpensive conversion of C-style string literal to std::string_view
+
+    // pass to `const std::string&` parameter
+    printS(s);              // ok: inexpensive bind to std::string argument
+    printS(sv);             // compile error: cannot implicit convert std::string_view to std::string
+    printS(static_cast<std::string>(sv)); // bad: expensive creation of std::string temporary
+    printS("Hello, world"); // bad: expensive creation of std::string temporary
+
+    return 0;
+}
+#+end_src
+
+** Pointers
+*** Deference operator
+:PROPERTIES:
+:ID: Deference operator
+:END:
+& is address-of operator which returns address of object.
+While * is used to return value at a given memory address as an lvalue.
+
+#+begin_src cpp :results output
+#include <iostream>
+using namespace std;
+
+int main() {
+    int x{1};
+
+    cout << x << "\n";
+    cout << &x << "\n";  // gives address
+    cout << *(&x) << "\n";  // gives value at that address
+
+    return 0;
+}
+#+end_src
+
+#+RESULTS:
+: 1
+: 0x7fff38edddc4
+: 1
+*** Pointer
+:PROPERTIES:
+:ID: Pointer
+:END:
+
+A Pointer is an object that holds a memory address as its value. This allows us to store the address of some other objects to use later.
+
+#+begin_src cpp :results output
+int;  // a normal int
+int&; // an lvalue reference to an int value
+
+int*; // a pointer to an int value (holds the address of an integer value)
+#+end_src
+
+#+begin_src cpp :results output
+#include <iostream>
+using namespace std;
+
+int main() {
+    int x{1};
+    int* ptr{&x};
+    cout << *ptr << "\n";
+    *ptr = 2;
+    cout << *ptr << "\n";
+
+    return 0;
+}
+#+end_src
+
+#+RESULTS:
+: 1
+: 2
+
+
+| Pointers                                       | References                                   |
+|------------------------------------------------+----------------------------------------------|
+| It can change the varibale it is being pointed | It cannot be changed it is being refered to. |
+| Pointers are objects                           | References are not objects.                  |
+| Pointers can point to nothing                  | References must always bound to an object    |
+| Pointers are not required to be initialized    | References must be initialized               |
+
+- The size of the pointer is independent to it is being pointed, instead it depends on architecture of the computer.
+- In a 32 bit computer 4 bytes are taken and in 64 bit computer 8 bytes are taken.
+
+*** Address of operator returns a pointer
+:PROPERTIES:
+:ID: Address of operator returns a pointer
+:END:
+The address of operator doesnt returns address of its operand as literal, Instead it returns a pointer to the operand.
+
+#+begin_src cpp :results output
+#include <iostream>
+#include <typeinfo>
+using namespace std;
+
+int main() {
+    int x{1};
+
+    cout << typeid(x).name() << "\n";
+    cout << typeid(&x).name() << "\n";
+
+    return 0;
+}
+#+end_src
+
+#+RESULTS:
+: i
+: Pi
+*** null pointers as boolean values
+:PROPERTIES:
+:ID: null pointers as boolean values
+:END:
+
+- Null pointer is implicitly converted to boolean value false.
+- Not Null pointer is implicitly converted to boolean value true.
+
+#+begin_src cpp :results output
+#include <iostream>
+using namespace std;
+
+int main() {
+    int* ptr{};
+
+    if(ptr) {
+        cout << "Not Null" << "\n";
+    }else {
+        cout << "Null" << "\n";
+    return 0;
+}
+#+end_src
+
+#+RESULTS:
+: Null
+*** pointer to const
+
+1. If the object is const then the pointer should be const.
+2. If the object is non-const, we can still point a const pointer to it but we cannot change the value of object by deferencing pointer.
+
+#+begin_src cpp :results output
+#include <iostream>
+using namespace std;
+
+int main() {
+
+    const int x{2};
+    const int* ptr{&x};
+
+    cout << *ptr << "\n";
+
+    return 0;
+}
+#+end_src
+
+#+RESULTS:
+: 2
+
+we also make pointer ifself const. i.e, it doesnt change the address it is holding.
+
+#+begin_src cpp :results output
+#include <iostream>
+using namespace std;
+
+int main() {
+    int x{1};
+
+    int* const ptr{&x};
+    cout << *ptr << "\n";
+
+    int y{2}
+    ptr = &y; // Do not possible
+
+    return 0;
+}
+#+end_src
+
+Const pointer to a const value
+With this we cannot change the address and the value.
+
+#+begin_src cpp :results output
+#include <iostream>
+using namespace std;
+
+int main() {
+    int x{2};
+    const int* const ptr{&x};
+
+    cout << *ptr << "\n";
+
+    int y{3};
+
+    ,*ptr = 3; // Not possible
+    ptr = &y
+    return 0;
+}
+#+end_src
+
+#+RESULTS:
+*** pass by address
+
+#+begin_src cpp :results output
+#include <iostream>
+#include <string>
+
+void printByValue(std::string val) // The function parameter is a copy of str
+{
+    std::cout << val << '\n'; // print the value via the copy
+}
+
+void printByReference(const std::string& ref) // The function parameter is a reference that binds to str
+{
+    std::cout << ref << '\n'; // print the value via the reference
+}
+
+void printByAddress(const std::string* ptr) // The function parameter is a pointer that holds the address of str
+{
+    std::cout << *ptr << '\n'; // print the value via the dereferenced pointer
+}
+
+int main()
+{
+    std::string str{ "Hello, world!" };
+
+    printByValue(str); // pass str by value, makes a copy of str
+    printByReference(str); // pass str by reference, does not make a copy of str
+    printByAddress(&str); // pass str by address, does not make a copy of str
+
+    return 0;
+}
+#+end_src
+** Operator overloading
+
+Operator overloading = writing your own function that runs when someone uses +, ==, <<, etc. on your custom data type.
+
+#+begin_src cpp :results output
+#include <iostream>
+using namespace std;
+
+struct Point {
+    int x;
+    int y;
+};
+
+Point operator+(Point a, Point b) {
+    Point result;
+    result.x = a.x + b.x;
+    result.y = a.y + b.y;
+
+    return result;
+}
+
+int main() {
+    Point P1{1,2};
+    Point P2{4,5};
+    Point P3;
+    P3 = P1 + P2;
+    cout << P3.y;
+    return 0;
+}
+#+end_src
+
+#+RESULTS:
+: 7
+
+
+#+begin_src cpp :results output
+#include <iostream>
+using namespace std;
+
+struct Point {
+    int x;
+    int y;
+};
+
+bool operator==(Point a, Point b) {
+   return (a.x == b.x) && (a.y == b.y);
+}
+
+int main() {
+    Point p1{1,2};
+    Point p2{1,2};
+    if(p1 == p2)
+        cout << "Equal" << "\n";
+    else
+        cout << "Not equal" << "\n";
+    return 0;
+}
+#+end_src
+
+#+RESULTS:
+: Equal
+
+#+begin_src cpp :results output
+#include <iostream>
+using namespace std;
+
+struct Point {
+    int x, int y;
+};
+
+void
+
+int main() {
+    Point P1{1,2};
+    return 0;
+}
+#+end_src
+** Enumerations
+Enumerations are implicitly constexpr.
+*** Unscoped Enumerations
+:PROPERTIES:
+:ID: Unscoped Enumerations
+:END:
+Each enumeration is numbered from 0. We can explicitly number a enumeration, any undefined enumeration will be given one value greater than the previous one.
+
+#+begin_src cpp :results output
+#include <iostream>
+using namespace std;
+
+namespace nothing{
+    enum Color {
+        red,
+        white,
+        yellow,
+    };
+}
+
+int main() {
+
+    nothing::Color apple{nothing::red}; //apple will store integral value 0.
+
+    cout << apple << "\n";
+
+    return 0;
+}
+#+end_src
+
+#+RESULTS:
+: 0
+
+#+begin_src cpp :results output
+#include <iostream>
+using namespace std;
+enum color {
+    red,
+    white,
+    yellow,
+};
+
+int main() {
+    color apple{static_cast<color>(2)};
+    cout << apple << "\n";
+    Return 0;
+}
+#+end_src
+
+#+RESULTS:
+: 2
+
+#+begin_src cpp :results output
+#include <iostream>
+#include <string_view>
+using namespace std;
+
+enum Color {red, white, yellow, blue};
+
+constexpr string_view Print(Color ref)
+{
+    switch(ref) {
+        case red: return "red";
+        case white: return "white";
+        case yellow: return "Yellow";
+        default: return "Error";
+    }
+}
+
+int main() {
+    constexpr Color apple{yellow};
+    cout << Print(apple) << "\n";
+    return 0;
+}
+#+end_src
+
+#+RESULTS:
+: Yellow
+
+#+begin_src cpp :results output
+#include <iostream>
+#include <string_view>
+using namespace std;
+
+namespace nothing {
+    enum Color {white, yellow, red};
+};
+
+constexpr string_view print(nothing::Color ref) {
+    switch(ref){
+        case white: return "white";
+        case yellow: return "yellow";
+        case red: return "red";
+        default: return "Error";
+    }
+}
+
+
+int main() {
+
+    nothing::Color jersey{nothing::white};
+
+    cout << print(jersey) << "\n";
+
+    return 0;
+}
+#+end_src
+*** scoped Enumerations
+:PROPERTIES:
+:ID: Scoped Enumerations
+:END:
+
+#+begin_src cpp :results output
+#include <iostream>
+using namespace std;
+
+enum class Color {white, red, green};
+
+int main() {
+    Color color {Color::white};
+
+    return 0;
+}
+#+end_src
+
+
+#+begin_src cpp :results output
+#include <iostream>
+using namespace std;
+
+enum class cartoon {doreman, shinchan, bheem};
+
+int main() {
+
+    using enum cartoon;
+
+    cartoon fav{shinchan};
+
+    return 0;
+}
+#+end_src
+
+#+RESULTS:

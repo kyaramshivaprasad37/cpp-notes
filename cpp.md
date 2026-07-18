@@ -1,57 +1,74 @@
 
 # Table of Contents
 
-1.  [C++ Basics](#orgda0f472)
-    1.  [Objects and Variables](#org8066558)
-        1.  [Variable assigment](#org85be80c)
-        2.  [maybe unused](#org9741409)
-        3.  [cout and cin](#orgd73ea8d)
-        4.  [Uninitialized variables and undefined behavioure](#org161f718)
-        5.  [Keywords and Identifiers](#org817776c)
-    2.  [Functions and Files](#org071d598)
-        1.  [Void functions](#org360ef86)
-    3.  [size<sub>t</sub> link to topic](#org72a2045)
-    4.  [Char(ASCII TABLE LINK) here](#orge1c2461)
-    5.  [Implicit and Explicit Coversion](#org59722f7)
-        1.  [Sign conversion using static<sub>cast</sub>](#org79930b3)
-        2.  [Quiz Questions](#org7602977)
-2.  [Fundamental Data Types](#org3bade83)
-    1.  [Numeral Systems (decimal, binary, hexadecimal)](#org4a74de9)
-        1.  [Octal](#orgf0a948d)
-        2.  [hexadecimal](#org161f02a)
-        3.  [Binary](#orgec48dff)
-        4.  [Outputting values in decimal, octal and hexadecimal](#orgd8273e2)
-        5.  [Outputting values in Binary using std::bitset](#orge35fbd8)
-3.  [Strings](#org17c2c9a)
-    1.  [Strings (std::string)](#org2ce2a02)
-    2.  [Strings (std::string<sub>view</sub>)](#org591ea24)
-4.  [Operators](#orgb3909f5)
-5.  [Bit Manipulation](#orgab65268)
-    1.  [Uses of <bitset> library](#org98433b6)
-    2.  [Bitmanipulation by bit masks](#orgc234684)
-6.  [Namespace and scope resolution](#org8a1cbf2)
-    1.  [Static local variables](#orgd2ab808)
-7.  [Control Flow](#org1732ff2)
-    1.  [Switch case](#orga451df6)
-    2.  [goto statements](#orgc2d6348)
-    3.  [While loop](#orga82dd54)
-    4.  [Do While](#org3bf6398)
-    5.  [For Loop](#orgfe7a75f)
-    6.  [std::exit](#orga93af01)
-8.  [Mersenne Twister](#org16afbeb)
-9.  [Function Templates](#org1721d47)
-10. [Constexpr and Consteval Functions](#org8ef2654)
-11. [Compound data types](#orgfcca196)
+1.  [C++ Basics](#org082c5e1)
+    1.  [Objects and Variables](#org3132d2f)
+        1.  [Variable assigment](#org1048ed5)
+        2.  [maybe unused](#orgfa7d78a)
+        3.  [cout and cin](#orgb97a733)
+        4.  [Uninitialized variables and undefined behavioure](#orga7b9b2b)
+        5.  [Keywords and Identifiers](#org8947c32)
+    2.  [Functions and Files](#org47611cd)
+        1.  [Void functions](#org96e7eeb)
+    3.  [size<sub>t</sub> link to topic](#orgcc43bc1)
+    4.  [Char(ASCII TABLE LINK) here](#org21770d5)
+    5.  [Implicit and Explicit Coversion](#org96bee46)
+        1.  [Sign conversion using static<sub>cast</sub>](#org4be921c)
+        2.  [Quiz Questions](#orgfbc6ce1)
+2.  [Fundamental Data Types](#org6d5f047)
+    1.  [Numeral Systems (decimal, binary, hexadecimal)](#org55917e5)
+        1.  [Octal](#org7a67f63)
+        2.  [hexadecimal](#orgbea7f0f)
+        3.  [Binary](#org676b606)
+        4.  [Outputting values in decimal, octal and hexadecimal](#org500578b)
+        5.  [Outputting values in Binary using std::bitset](#org11b7683)
+3.  [Strings](#orgcb3297f)
+    1.  [Strings (std::string)](#orgbfc75f3)
+    2.  [Strings (std::string<sub>view</sub>)](#orga2d6ffa)
+4.  [Operators](#orgf3d22fc)
+5.  [Bit Manipulation](#orgecb1835)
+    1.  [Uses of <bitset> library](#orgfae5ee6)
+    2.  [Bitmanipulation by bit masks](#orga2bd893)
+6.  [Namespace and scope resolution](#org54cab63)
+    1.  [Static local variables](#org816a2a7)
+7.  [Control Flow](#org2c97993)
+    1.  [Switch case](#orgcc99ea7)
+    2.  [goto statements](#org104a408)
+    3.  [While loop](#org64cf470)
+    4.  [Do While](#orgeebab27)
+    5.  [For Loop](#org7153908)
+    6.  [std::exit](#orgbd04d1f)
+8.  [Mersenne Twister](#org4f6ce75)
+9.  [Function Templates](#org9e4e3a2)
+10. [Constexpr and Consteval Functions](#org82480ec)
+11. [Compound data types](#org66f8735)
+    1.  [L-value references](#org4ce7688)
+        1.  [Non-const L value references](#orgcf7c3c6)
+        2.  [Const L-value referencs](#org39a5b10)
+    2.  [Pass by reference](#org3ce532c)
+    3.  [pass by const lvalue reference](#orge120364)
+    4.  [why prefer std::string<sub>view</sub> to const std::string&](#org575bb61)
+    5.  [Pointers](#org8dd933d)
+        1.  [Deference operator](#orgc9b7cc1)
+        2.  [Pointer](#org53fcb61)
+        3.  [Address of operator returns a pointer](#org1525d8c)
+        4.  [null pointers as boolean values](#org7c13018)
+        5.  [pointer to const](#org22bb163)
+        6.  [pass by address](#org9e2c099)
+    6.  [Operator overloading](#orga12e21d)
+    7.  [Enumerations](#orgfaebefe)
+        1.  [Unscoped Enumerations](#orgb6007ec)
+        2.  [scoped Enumerations](#org4fd894b)
 
 filetags: CPP
 
 
-<a id="orgda0f472"></a>
+<a id="org082c5e1"></a>
 
 # C++ Basics
 
 
-<a id="org8066558"></a>
+<a id="org3132d2f"></a>
 
 ## Objects and Variables
 
@@ -73,7 +90,7 @@ Memory is allocated during the run time.
     }
 
 
-<a id="org85be80c"></a>
+<a id="org1048ed5"></a>
 
 ### Variable assigment
 
@@ -96,7 +113,7 @@ Memory is allocated during the run time.
     int e {};      // value-initialization (empty braces)
 
 
-<a id="org9741409"></a>
+<a id="orgfa7d78a"></a>
 
 ### maybe unused
 
@@ -117,7 +134,7 @@ Memory is allocated during the run time.
     }
 
 
-<a id="orgd73ea8d"></a>
+<a id="orgb97a733"></a>
 
 ### cout and cin
 
@@ -156,7 +173,7 @@ Memory is allocated during the run time.
     }
 
 
-<a id="org161f718"></a>
+<a id="orga7b9b2b"></a>
 
 ### Uninitialized variables and undefined behavioure
 
@@ -171,7 +188,7 @@ Returns garbage value -&#x2014;> Memory address
     }
 
 
-<a id="org817776c"></a>
+<a id="org8947c32"></a>
 
 ### Keywords and Identifiers
 
@@ -362,7 +379,7 @@ List of 92 keywords
 </table>
 
 
-<a id="org071d598"></a>
+<a id="org47611cd"></a>
 
 ## Functions and Files
 
@@ -385,7 +402,7 @@ List of 92 keywords
     }
 
 
-<a id="org360ef86"></a>
+<a id="org96e7eeb"></a>
 
 ### Void functions
 
@@ -417,12 +434,12 @@ List of 92 keywords
     }
 
 
-<a id="org72a2045"></a>
+<a id="orgcc43bc1"></a>
 
 ## size<sub>t</sub>[ link to topic](https://www.learncpp.com/cpp-tutorial/fixed-width-integers-and-size-t/)
 
 
-<a id="orge1c2461"></a>
+<a id="org21770d5"></a>
 
 ## Char(ASCII TABLE LINK) [here](https://www.learncpp.com/cpp-tutorial/chars/)
 
@@ -448,7 +465,7 @@ List of 92 keywords
     }
 
 
-<a id="org59722f7"></a>
+<a id="org96bee46"></a>
 
 ## Implicit and Explicit Coversion
 
@@ -473,7 +490,7 @@ Syntax for Exclipit conversion -&#x2014;> static<sub>cast</sub><new<sub>type</su
     }
 
 
-<a id="org79930b3"></a>
+<a id="org4be921c"></a>
 
 ### Sign conversion using static<sub>cast</sub>
 
@@ -509,7 +526,7 @@ Syntax for Exclipit conversion -&#x2014;> static<sub>cast</sub><new<sub>type</su
     }
 
 
-<a id="org7602977"></a>
+<a id="orgfbc6ce1"></a>
 
 ### Quiz [Questions](https://www.learncpp.com/cpp-tutorial/chapter-4-summary-and-quiz/)
 
@@ -571,17 +588,17 @@ Q3.
     }
 
 
-<a id="org3bade83"></a>
+<a id="org6d5f047"></a>
 
 # Fundamental Data Types
 
 
-<a id="org4a74de9"></a>
+<a id="org55917e5"></a>
 
 ## Numeral Systems (decimal, binary, hexadecimal)
 
 
-<a id="orgf0a948d"></a>
+<a id="org7a67f63"></a>
 
 ### Octal
 
@@ -605,7 +622,7 @@ For representing it as octal number we use &ldquo;0&rdquo; infront of the number
     }
 
 
-<a id="org161f02a"></a>
+<a id="orgbea7f0f"></a>
 
 ### hexadecimal
 
@@ -624,7 +641,7 @@ To use hexadecimal we use prefix &ldquo;0x&rdquo;
     }
 
 
-<a id="orgec48dff"></a>
+<a id="org676b606"></a>
 
 ### Binary
 
@@ -646,7 +663,7 @@ We use prefix 0b for binary numbers
     }
 
 
-<a id="orgd8273e2"></a>
+<a id="org500578b"></a>
 
 ### Outputting values in decimal, octal and hexadecimal
 
@@ -665,7 +682,7 @@ We use prefix 0b for binary numbers
     }
 
 
-<a id="orge35fbd8"></a>
+<a id="org11b7683"></a>
 
 ### Outputting values in Binary using std::bitset
 
@@ -686,12 +703,12 @@ We use prefix 0b for binary numbers
     }
 
 
-<a id="org17c2c9a"></a>
+<a id="orgcb3297f"></a>
 
 # Strings
 
 
-<a id="org2ce2a02"></a>
+<a id="orgbfc75f3"></a>
 
 ## Strings (std::string)
 
@@ -711,7 +728,7 @@ The header <string> helps to input and output strings of different size
     }
 
 
-<a id="org591ea24"></a>
+<a id="orga2d6ffa"></a>
 
 ## Strings (std::string<sub>view</sub>)
 
@@ -778,7 +795,7 @@ Example
     }
 
 
-<a id="orgb3909f5"></a>
+<a id="orgf3d22fc"></a>
 
 # Operators
 
@@ -796,12 +813,12 @@ Exponent
     }
 
 
-<a id="orgab65268"></a>
+<a id="orgecb1835"></a>
 
 # Bit Manipulation
 
 
-<a id="org98433b6"></a>
+<a id="orgfae5ee6"></a>
 
 ## Uses of <bitset> library
 
@@ -880,7 +897,7 @@ It has
     }
 
 
-<a id="orgc234684"></a>
+<a id="orga2bd893"></a>
 
 ## Bitmanipulation by bit masks
 
@@ -982,7 +999,7 @@ Q1. Write a program that asks the user to input a number between 0 and 255. Prin
     }
 
 
-<a id="org8a1cbf2"></a>
+<a id="org54cab63"></a>
 
 # Namespace and scope resolution
 
@@ -1010,7 +1027,7 @@ Q1. Write a program that asks the user to input a number between 0 and 255. Prin
     }
 
 
-<a id="orgd2ab808"></a>
+<a id="org816a2a7"></a>
 
 ## Static local variables
 
@@ -1055,12 +1072,12 @@ example with static
     }
 
 
-<a id="org1732ff2"></a>
+<a id="org2c97993"></a>
 
 # Control Flow
 
 
-<a id="orga451df6"></a>
+<a id="orgcc99ea7"></a>
 
 ## Switch case
 
@@ -1088,7 +1105,7 @@ example with static
     }
 
 
-<a id="orgc2d6348"></a>
+<a id="org104a408"></a>
 
 ## goto statements
 
@@ -1113,7 +1130,7 @@ example with static
     }
 
 
-<a id="orga82dd54"></a>
+<a id="org64cf470"></a>
 
 ## While loop
 
@@ -1207,17 +1224,17 @@ example with static
     }
 
 
-<a id="org3bf6398"></a>
+<a id="orgeebab27"></a>
 
 ## Do While
 
 
-<a id="orgfe7a75f"></a>
+<a id="org7153908"></a>
 
 ## For Loop
 
 
-<a id="orga93af01"></a>
+<a id="orgbd04d1f"></a>
 
 ## std::exit
 
@@ -1256,7 +1273,7 @@ std::atexit is called automatically when std::exit is called --------&#x2013;&#x
 here cleanup is a function.
 
 
-<a id="org16afbeb"></a>
+<a id="org4f6ce75"></a>
 
 # Mersenne Twister
 
@@ -1274,7 +1291,7 @@ here cleanup is a function.
     }
 
 
-<a id="org1721d47"></a>
+<a id="org9e4e3a2"></a>
 
 # Function Templates
 
@@ -1294,7 +1311,7 @@ here cleanup is a function.
     }
 
 
-<a id="org8ef2654"></a>
+<a id="org82480ec"></a>
 
 # Constexpr and Consteval Functions
 
@@ -1340,11 +1357,11 @@ These functions are also called as immediate fucntions
     }
 
 
-<a id="orgfcca196"></a>
+<a id="org66f8735"></a>
 
 # Compound data types
 
-<div class="mindmap" id="org57f544e">
+<div class="mindmap" id="orgeba555d">
 <p>
    ╭─ Functions
    ├─ C-style arrays
@@ -1362,4 +1379,698 @@ These functions are also called as immediate fucntions
 </p>
 
 </div>
+
+
+<a id="org4ce7688"></a>
+
+## L-value references
+
+
+<a id="orgcf7c3c6"></a>
+
+### Non-const L value references
+
+    #include <iostream>
+    using namespace std;
+    
+    int main() {
+        int x{2};
+        int& y{x};
+        cout << y << "\n";
+        cout << x << "\n";
+    
+        x = 4;
+        cout << y << "\n";
+        cout << x << "\n";
+    
+        y = 5;
+        cout << y << "\n";
+        cout << x << "\n";
+        return 0;
+    }
+
+
+<a id="org39a5b10"></a>
+
+### Const L-value referencs
+
+    #include <iostream>
+    using namespace std;
+    
+    int main() {
+    
+        const int x {2};
+        const int& ref{x};
+    
+        cout << ref << "\n";
+    
+        return 0;
+    }
+
+    #include <iostream>
+    using namespace std;
+    
+    int main() {
+        int x{2};
+        const int& ref{x};
+    
+        cout << ref << "\n";
+        cout << x << "\n";
+    
+        x = 3;      // Modified by variables.
+        cout << ref << "\n";
+    
+        ref = 4;    // Cannot be modified by ref since it is const
+        cout << ref << "\n";
+    
+        return 0;
+    }
+
+If we initialize lvalue const reference to rvalue.
+Then a temporary object is created with rvalue and reference to const is bound to that temporary object.
+Temporary objects are destroyed at the end of the statement.
+But this creates a dangling ref so that compilers extend the lifetime of temporary objects to match the lifetime of ref.
+
+Non-const lvalue references require an lvalue (an object with a persistent memory address) because they are designed to allow modification of the referenced object.  Rvalues (such as temporary objects or literals) do not have a persistent memory address and are immutable; binding a non-const reference to them would allow modifications to an object that is immediately destroyed or cannot be changed, leading to undefined behavior or logical errors.
+
+    #include <iostream>
+    using namespace std;
+    
+    int main() {
+        const int& ref{2};
+        cout << ref << "\n";
+        return 0;
+    }
+
+with diif data types.
+
+    #include <iostream>
+    using namespace std;
+    
+    int main() {
+        char alp{'T'};
+    
+        const int& ref{alp};
+    
+        cout << ref << "\n";
+        return 0;
+    }
+
+    #include <iostream>
+    using namespace std;
+    
+    int main() {
+        double x {5};
+        const int& ref{x};
+        cout << ref << "\n";
+        return 0;
+    }
+
+
+<a id="org3ce532c"></a>
+
+## Pass by reference
+
+    #include <iostream>
+    #include <string>
+    using namespace std;
+    
+    void printname(string x)
+    {
+        cout << x << "\n" ;
+    }
+    
+    int main() {
+    
+        string name {"Shiva"};
+    
+        printname(name);
+    
+        return 0;
+    }
+
+Although the above program works fine.It is inefficent to make a copy of a string and will be destroyed  after the function.
+So we use pass by reference.
+
+    #include <iostream>
+    #include <string>
+    using namespace std;
+    
+    void printname(string& ref)  //here we ref to name instead of making a copy
+    {
+        cout << ref << "\n";
+        ref = "Shiva";
+        cout << ref << "\n";
+    }
+    
+    int main() {
+        string name{"Prasad"};
+        printname(name);
+    
+        return 0;
+    }
+
+    #include <iostream>
+    using namespace std;
+    void passbyvalue(int x)
+    {
+        cout << &x << "\n";
+    }
+    
+    void passbyreference(int& x)
+    {
+        cout << &x << "\n";
+    }
+    int main() {
+        int x{2};
+        cout << &x << "\n";
+        passbyvalue(x);
+        passbyreference(x);
+        return 0;
+    }
+
+Here we can notice the address of passbyreference and original varible is same.
+
+
+<a id="orge120364"></a>
+
+## pass by const lvalue reference
+
+Unlike non-const lvalue reference for which we can bind to modifiable lvalues.
+pass by const lvalue reference can be bind to modifiable, non-modifiable lvalues and rvalues.
+
+    #include <iostream>
+    using namespace std;
+    
+    void print(const int& ref)
+    {
+        cout << ref << "\n";
+    }
+    
+    int main() {
+    
+        int x{2};  // we can pass nonconst varibales (modifiable)
+        print(x);
+    
+        const int y{3};  // we can pass const varibales (non-modifiable)
+        print(y);
+    
+        print(4);  // we can pass literal
+    
+        return 0;
+    }
+
+
+<a id="org575bb61"></a>
+
+## why prefer std::string<sub>view</sub> to const std::string&
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Argument Type</th>
+<th scope="col" class="org-left">std::string<sub>view</sub> parameter</th>
+<th scope="col" class="org-left">const std::string&amp; parameter</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">std::string</td>
+<td class="org-left">Inexpensive conversion</td>
+<td class="org-left">Inexpensive reference binding</td>
+</tr>
+
+<tr>
+<td class="org-left">std::string<sub>view</sub></td>
+<td class="org-left">Inexpensive copy</td>
+<td class="org-left">Expensive explicit conversion to std::string</td>
+</tr>
+
+<tr>
+<td class="org-left">C-style string/literal</td>
+<td class="org-left">Inexpensive conversion</td>
+<td class="org-left">Expensive conversion</td>
+</tr>
+</tbody>
+</table>
+
+    #include <iostream>
+    #include <string>
+    #include <string_view>
+    
+    void printSV(std::string_view sv)
+    {
+        std::cout << sv << '\n';
+    }
+    
+    void printS(const std::string& s)
+    {
+        std::cout << s << '\n';
+    }
+    
+    int main()
+    {
+        std::string s{ "Hello, world" };
+        std::string_view sv { s };
+    
+        // Pass to `std::string_view` parameter
+        printSV(s);              // ok: inexpensive conversion from std::string to std::string_view
+        printSV(sv);             // ok: inexpensive copy of std::string_view
+        printSV("Hello, world"); // ok: inexpensive conversion of C-style string literal to std::string_view
+    
+        // pass to `const std::string&` parameter
+        printS(s);              // ok: inexpensive bind to std::string argument
+        printS(sv);             // compile error: cannot implicit convert std::string_view to std::string
+        printS(static_cast<std::string>(sv)); // bad: expensive creation of std::string temporary
+        printS("Hello, world"); // bad: expensive creation of std::string temporary
+    
+        return 0;
+    }
+
+
+<a id="org8dd933d"></a>
+
+## Pointers
+
+
+<a id="orgc9b7cc1"></a>
+
+### Deference operator
+
+& is address-of operator which returns address of object.
+While \* is used to return value at a given memory address as an lvalue.
+
+    #include <iostream>
+    using namespace std;
+    
+    int main() {
+        int x{1};
+    
+        cout << x << "\n";
+        cout << &x << "\n";  // gives address
+        cout << *(&x) << "\n";  // gives value at that address
+    
+        return 0;
+    }
+
+
+<a id="org53fcb61"></a>
+
+### Pointer
+
+A Pointer is an object that holds a memory address as its value. This allows us to store the address of some other objects to use later.
+
+    int;  // a normal int
+    int&; // an lvalue reference to an int value
+    
+    int*; // a pointer to an int value (holds the address of an integer value)
+
+    #include <iostream>
+    using namespace std;
+    
+    int main() {
+        int x{1};
+        int* ptr{&x};
+        cout << *ptr << "\n";
+        *ptr = 2;
+        cout << *ptr << "\n";
+    
+        return 0;
+    }
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Pointers</th>
+<th scope="col" class="org-left">References</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">It can change the varibale it is being pointed</td>
+<td class="org-left">It cannot be changed it is being refered to.</td>
+</tr>
+
+<tr>
+<td class="org-left">Pointers are objects</td>
+<td class="org-left">References are not objects.</td>
+</tr>
+
+<tr>
+<td class="org-left">Pointers can point to nothing</td>
+<td class="org-left">References must always bound to an object</td>
+</tr>
+
+<tr>
+<td class="org-left">Pointers are not required to be initialized</td>
+<td class="org-left">References must be initialized</td>
+</tr>
+</tbody>
+</table>
+
+-   The size of the pointer is independent to it is being pointed, instead it depends on architecture of the computer.
+-   In a 32 bit computer 4 bytes are taken and in 64 bit computer 8 bytes are taken.
+
+
+<a id="org1525d8c"></a>
+
+### Address of operator returns a pointer
+
+The address of operator doesnt returns address of its operand as literal, Instead it returns a pointer to the operand.
+
+    #include <iostream>
+    #include <typeinfo>
+    using namespace std;
+    
+    int main() {
+        int x{1};
+    
+        cout << typeid(x).name() << "\n";
+        cout << typeid(&x).name() << "\n";
+    
+        return 0;
+    }
+
+
+<a id="org7c13018"></a>
+
+### null pointers as boolean values
+
+-   Null pointer is implicitly converted to boolean value false.
+-   Not Null pointer is implicitly converted to boolean value true.
+
+    #include <iostream>
+    using namespace std;
+    
+    int main() {
+        int* ptr{};
+    
+        if(ptr) {
+            cout << "Not Null" << "\n";
+        }else {
+            cout << "Null" << "\n";
+        return 0;
+    }
+
+
+<a id="org22bb163"></a>
+
+### pointer to const
+
+1.  If the object is const then the pointer should be const.
+2.  If the object is non-const, we can still point a const pointer to it but we cannot change the value of object by deferencing pointer.
+
+    #include <iostream>
+    using namespace std;
+    
+    int main() {
+    
+        const int x{2};
+        const int* ptr{&x};
+    
+        cout << *ptr << "\n";
+    
+        return 0;
+    }
+
+we also make pointer ifself const. i.e, it doesnt change the address it is holding.
+
+    #include <iostream>
+    using namespace std;
+    
+    int main() {
+        int x{1};
+    
+        int* const ptr{&x};
+        cout << *ptr << "\n";
+    
+        int y{2}
+        ptr = &y; // Do not possible
+    
+        return 0;
+    }
+
+Const pointer to a const value
+With this we cannot change the address and the value.
+
+    #include <iostream>
+    using namespace std;
+    
+    int main() {
+        int x{2};
+        const int* const ptr{&x};
+    
+        cout << *ptr << "\n";
+    
+        int y{3};
+    
+        *ptr = 3; // Not possible
+        ptr = &y
+        return 0;
+    }
+
+
+<a id="org9e2c099"></a>
+
+### pass by address
+
+    #include <iostream>
+    #include <string>
+    
+    void printByValue(std::string val) // The function parameter is a copy of str
+    {
+        std::cout << val << '\n'; // print the value via the copy
+    }
+    
+    void printByReference(const std::string& ref) // The function parameter is a reference that binds to str
+    {
+        std::cout << ref << '\n'; // print the value via the reference
+    }
+    
+    void printByAddress(const std::string* ptr) // The function parameter is a pointer that holds the address of str
+    {
+        std::cout << *ptr << '\n'; // print the value via the dereferenced pointer
+    }
+    
+    int main()
+    {
+        std::string str{ "Hello, world!" };
+    
+        printByValue(str); // pass str by value, makes a copy of str
+        printByReference(str); // pass str by reference, does not make a copy of str
+        printByAddress(&str); // pass str by address, does not make a copy of str
+    
+        return 0;
+    }
+
+
+<a id="orga12e21d"></a>
+
+## Operator overloading
+
+Operator overloading = writing your own function that runs when someone uses +, ==, <<, etc. on your custom data type.
+
+    #include <iostream>
+    using namespace std;
+    
+    struct Point {
+        int x;
+        int y;
+    };
+    
+    Point operator+(Point a, Point b) {
+        Point result;
+        result.x = a.x + b.x;
+        result.y = a.y + b.y;
+    
+        return result;
+    }
+    
+    int main() {
+        Point P1{1,2};
+        Point P2{4,5};
+        Point P3;
+        P3 = P1 + P2;
+        cout << P3.y;
+        return 0;
+    }
+
+    #include <iostream>
+    using namespace std;
+    
+    struct Point {
+        int x;
+        int y;
+    };
+    
+    bool operator==(Point a, Point b) {
+       return (a.x == b.x) && (a.y == b.y);
+    }
+    
+    int main() {
+        Point p1{1,2};
+        Point p2{1,2};
+        if(p1 == p2)
+            cout << "Equal" << "\n";
+        else
+            cout << "Not equal" << "\n";
+        return 0;
+    }
+
+    #include <iostream>
+    using namespace std;
+    
+    struct Point {
+        int x, int y;
+    };
+    
+    void
+    
+    int main() {
+        Point P1{1,2};
+        return 0;
+    }
+
+
+<a id="orgfaebefe"></a>
+
+## Enumerations
+
+Enumerations are implicitly constexpr.
+
+
+<a id="orgb6007ec"></a>
+
+### Unscoped Enumerations
+
+Each enumeration is numbered from 0. We can explicitly number a enumeration, any undefined enumeration will be given one value greater than the previous one.
+
+    #include <iostream>
+    using namespace std;
+    
+    namespace nothing{
+        enum Color {
+            red,
+            white,
+            yellow,
+        };
+    }
+    
+    int main() {
+    
+        nothing::Color apple{nothing::red}; //apple will store integral value 0.
+    
+        cout << apple << "\n";
+    
+        return 0;
+    }
+
+    #include <iostream>
+    using namespace std;
+    enum color {
+        red,
+        white,
+        yellow,
+    };
+    
+    int main() {
+        color apple{static_cast<color>(2)};
+        cout << apple << "\n";
+        Return 0;
+    }
+
+    #include <iostream>
+    #include <string_view>
+    using namespace std;
+    
+    enum Color {red, white, yellow, blue};
+    
+    constexpr string_view Print(Color ref)
+    {
+        switch(ref) {
+            case red: return "red";
+            case white: return "white";
+            case yellow: return "Yellow";
+            default: return "Error";
+        }
+    }
+    
+    int main() {
+        constexpr Color apple{yellow};
+        cout << Print(apple) << "\n";
+        return 0;
+    }
+
+    #include <iostream>
+    #include <string_view>
+    using namespace std;
+    
+    namespace nothing {
+        enum Color {white, yellow, red};
+    };
+    
+    constexpr string_view print(nothing::Color ref) {
+        switch(ref){
+            case white: return "white";
+            case yellow: return "yellow";
+            case red: return "red";
+            default: return "Error";
+        }
+    }
+    
+    
+    int main() {
+    
+        nothing::Color jersey{nothing::white};
+    
+        cout << print(jersey) << "\n";
+    
+        return 0;
+    }
+
+
+<a id="org4fd894b"></a>
+
+### scoped Enumerations
+
+    #include <iostream>
+    using namespace std;
+    
+    enum class Color {white, red, green};
+    
+    int main() {
+        Color color {Color::white};
+    
+        return 0;
+    }
+
+    #include <iostream>
+    using namespace std;
+    
+    enum class cartoon {doreman, shinchan, bheem};
+    
+    int main() {
+    
+        using enum cartoon;
+    
+        cartoon fav{shinchan};
+    
+        return 0;
+    }
 
