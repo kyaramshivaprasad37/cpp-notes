@@ -6,12 +6,11 @@ filetags: CPP
 
 * C++ Basics
 :PROPERTIES:
-:collapsed: true
+:ID: C++ Basics
 :END:
 ** Objects and Variables
 :PROPERTIES:
 :ID: Objects and Variables
-:collapsed: true
 :END:
 
 In C++ direct memory access is discouraged. So we use objects for that.
@@ -222,7 +221,13 @@ int main() {
 
 #+RESULTS:
 ** size_t[[https://www.learncpp.com/cpp-tutorial/fixed-width-integers-and-size-t/][ link to topic]]
+:PROPERTIES:
+:ID:       2713ca30-66c4-4558-9c6d-fedb727f44dd
+:END:
 ** Char(ASCII TABLE LINK) [[https://www.learncpp.com/cpp-tutorial/chars/][here]]
+:PROPERTIES:
+:ID:       1cd7f4f7-4b72-4216-8122-afc737007b5a
+:END:
 
 #+begin_src cpp
 #include <iostream>
@@ -390,7 +395,7 @@ int main() {
 #+end_src
 * Fundamental Data Types
 :PROPERTIES:
-:collapsed: true
+:ID:       edec4bd0-e758-49cb-9d94-f3ddb493ddb6
 :END:
 ** Numeral Systems (decimal, binary, hexadecimal)
 :PROPERTIES:
@@ -849,7 +854,9 @@ int main() {
 }
 #+end_src
 * Namespace and scope resolution
-
+:PROPERTIES:
+:ID: Namespace and scope resolution
+:END:
 #+begin_src cpp :results output
 #include <iostream>
 using namespace std;
@@ -1859,16 +1866,24 @@ int main() {
 using namespace std;
 
 struct Point {
-    int x, int y;
+    int x; int y;
 };
 
-void
+ostream& operator+(ostream& hi, Point& p) {
+    hi << "X: " << p.x << " Y: " << p.y;
+    return hi;
+}
 
 int main() {
     Point P1{1,2};
+    cout + P1;
     return 0;
 }
 #+end_src
+
+#+RESULTS:
+: X: 1 Y: 2
+
 ** Enumerations
 Enumerations are implicitly constexpr.
 *** Unscoped Enumerations
@@ -2012,3 +2027,497 @@ int main() {
 #+end_src
 
 #+RESULTS:
+** Struct
+:PROPERTIES:
+:ID: struct
+:END:
+
+A struct is a program defined data type that allows us to bundle multiple variables together into a single type.
+
+1. Defining a struct
+#+begin_src cpp :results output
+#include <iostream>
+using namespace std;
+
+struct Employee {
+    int id;
+    int age;
+    double salary;
+}
+
+int main() {
+
+    return 0;
+}
+#+end_src
+
+By declaring the struct it cannot occupy any space. But by initialization the object does.
+
+Variables inside a group are called members.
+
+2. Initialing a object.
+
+#+begin_src cpp :results output
+#include <iostream>
+using namespace std;
+
+struct Employee {
+    int id;
+    int age;
+    double salary;
+}
+
+int main() {
+    Employee gachibowli{};  // Object as created with the three varibles.
+    return 0;
+}
+#+end_src
+
+3. To access a specific member we use member selecion operator (.).
+
+#+begin_src cpp :results output
+#include <iostream>
+using namespace std;
+
+struct Employee {
+    int id;
+    int age;
+    double salary;
+};
+
+int main() {
+    Employee gachibowli{};  // Object as created with the three varibles.
+
+    gachibowli.id = 1;
+    cout << gachibowli.id << "\n";
+
+    gachibowli.age = 67;
+    cout << gachibowli.age << "\n";
+    return 0;
+}
+#+end_src
+
+#+RESULTS:
+: 1
+: 67
+
+
+#+begin_src cpp :results output
+#include <iostream>
+using namespace std;
+
+struct Point {
+    int x{};
+    int y{};
+};
+
+struct triangle {
+    Point a{};
+    Point b{};
+    Point c{};
+};
+
+int main() {
+
+    Point a{2,3};
+    Point b{3,4};
+    Point c{4,5};
+
+    triangle tri{a,b,c};
+
+    triangle* ptr(&tri);
+
+    cout << (ptr -> c).x << "\n";
+
+    return 0;
+}
+#+end_src
+
+#+RESULTS:
+: 4
+** Classes (OOP)
+
+#+begin_src cpp :results output
+#include <iostream>
+using namespace std;
+
+class Date {
+public:
+    int m_day{};
+    int m_month{};
+    int m_year{};
+};
+
+void printdate(Date& date)
+{
+    cout << date.m_day << "/" << date.m_month << "/" << date.m_year << "\n";
+}
+int main() {
+    Date date{19, 06, 2026};
+    printdate(date);
+    return 0;
+}
+#+end_src
+
+*** member functions
+:PROPERTIES:
+:ID: member function
+:END:
+#+begin_src cpp :results output
+#include <iostream>
+using namespace std;
+
+class Date {
+public:
+    int m_day{};
+    int m_month{};
+    int m_year{};
+
+    void print() {
+        cout << m_day << "/" << m_month << "/" << m_year << "\n";
+    }
+};
+
+int main() {
+    Date date{19, 06, 2026};
+
+    date.print();
+    return 0;
+}
+#+end_src
+
+#+RESULTS:
+: 19/6/2026
+
+- member function with const object
+
+  if the object is const then the member fucntion should also have to be a member fucntion.
+
+#+begin_src cpp :results output
+#include <iostream>
+using namespace std;
+class Car
+{
+public:
+    int model{};
+    int color_code{};
+
+    void print() const {
+       cout << "Model: " << model << " Color Code: " << color_code << "\n";
+    }
+};
+int main() {
+
+    const Car swift{1,79879};
+
+    swift.print();
+
+    return 0;
+}
+#+end_src
+
+#+RESULTS:
+: Model: 1 Color Code: 79879
+\j*** access functions
+ #+begin_src cpp :results output
+#include <iostream>
+usjing namespace std;
+
+class House {
+    int m_house_no{21};
+    int m_members{9};
+
+public:
+    void print() {
+        cout << m_house_no << " " << m_members << "\n";
+    }
+
+    int gethouseno() const {return m_house_no;}
+    void sethouseno(int houseno) {m_house_no = houseno;}
+
+    int getmembers() const {return m_members;}
+    void setmembers(int members) {m_members = members;}
+};
+
+int main() {
+
+    House my_house{};
+
+    my_house.print();
+
+    my_house.sethouseno(44);
+    my_house.setmembers(4);
+
+    cout << my_house.gethouseno() << "\n";
+    cout << my_house.getmembers() << "\n";
+
+    return 0;
+\}
+#+end_src
+*** returning data members by lvalue reference
+:PROPERTIES:
+:ID:       d4ed5775-4900-4c30-aec6-ca6815d371b8
+:END:
+#+begin_src cpp :results output
+#include <iostream>
+using namespace std;
+
+class House {
+    int m_houseno{12};
+    int m_members{3};
+
+public:
+    void print() {
+        cout << m_houseno << " " << m_members << "\n";
+    }
+
+    int& gethouseno() {return m_houseno;}
+};
+
+int main() {
+    House myhouse{};
+    cout <<  myhouse.gethouseno();
+    return 0;
+}
+#+end_src
+
+#+RESULTS:
+: 12
+
+#+begin_src cpp :results output
+#include <iostream>
+#include <string>
+using namespace std;
+class Bike{
+    string m_name{};
+public:
+
+    void setname(string_view name) {m_name = name;}
+
+    string getname_byvalue() {
+        return m_name;
+    }
+
+    string& getname_byreference() {
+        return m_name;
+    }
+};
+
+int main() {
+    Bike bmw{};
+    cout << bmw.getname_byvalue() << "\n";
+    bmw.setname("BMW");
+    cout << bmw.getname_byreference() << "\n";
+    return 0;
+}
+#+end_src
+*** constructor
+:PROPERTIES:
+:ID:       7eefd7b1-cbe6-4f3e-8cdf-13c2ec75f43c
+:END:
+#+begin_src cpp :results output
+#include <iostream>
+using namespace std;
+
+class Foo{
+    int m_a;
+    int m_b;
+
+public:
+    Foo(int a,int b) {
+        this->m_a = a;
+        this->m_b = b;
+    }
+
+    //Foo(int a,int b) : m_a {a}, m_b {b}; {}
+
+    void print() {
+        cout << m_a << " " << m_b << "\n";
+    }
+};
+
+int main() {
+    Foo f{3,9};
+    f.print();
+    return 0;
+}
+#+end_src
+
+1. A constructor is a special member function invoked when an object of class is created. It shares same name as class and has no return type.
+2. It is responsible for initializing data members and setting initial state.
+
+
+Delegating constructors
+Constructors are allowed to delegate (transfer responsibility for) initialization to another constructor from the same class type. This process is sometimes called constructor chaining and such constructors are called delegating constructors.
+
+   #+begin_src cpp :results output
+#include <iostream>
+using namespace std;
+
+class Employee{
+    string m_name{};
+    int m_id{};
+public:
+    Employee(string name) :Employee(name, 0) {}
+
+    Employee(string name, int id) : m_name {name}, m_id {id} {}
+
+    void print() {
+        cout << m_name << " " << m_id << "\n";
+    }
+};
+
+int main() {
+    Employee e1{"shiva"};
+    e1.print();
+
+    Employee e2{"shiva",9};
+    e2.print();
+    return 0;
+}
+#+end_src
+
+#+RESULTS:
+: shiva 0
+: shiva 9
+
+Reducing construtor using default arguments
+   #+begin_src cpp :results output
+#include <iostream>
+using namespace std;
+
+class Employee{
+    string m_name{};
+    int m_id{};
+public:
+    Employee(string name, int id = 0) : m_name {name}, m_id {id} {}
+
+    void print() {
+        cout << m_name << " " << m_id << "\n";
+    }
+};
+
+int main() {
+    Employee e1{"shiva"};
+    e1.print();
+
+    Employee e2{"shiva",9};
+    e2.print();
+    return 0;
+}
+#+end_src
+
+#+RESULTS:
+: shiva 0
+: shiva 9
+
+#+begin_src cpp :results output
+#include <iostream>
+using namespace std;
+
+class Ball {
+    string m_color{"black"};
+    double m_radius{10.0};
+public:
+    Ball() {
+        print();
+    }
+
+    Ball(string color) : m_color {color} {
+        print();
+    }
+
+    Ball(double radius) : m_radius {radius} {
+        print();
+    }
+
+    Ball(string color, double radius) : m_color {color} , m_radius {radius} {
+        print();
+    }
+
+    void print() {
+        cout << "Ball(" << m_color << ", " << m_radius << ")" <<  "\n";
+    }
+};
+int main() {
+    Ball def{};
+    Ball blue("blue");
+    Ball twenty{20};
+    Ball bluetwenty{"blue", 20};
+    return 0;
+}
+#+end_src
+
+#+RESULTS:
+: Ball(black, 10)
+: Ball(blue, 10)
+: Ball(black, 20)
+: Ball(blue, 20)
+
+#+begin_src cpp :results output
+#include <iostream>
+using namespace std;
+
+class Ball{
+    string m_name{};
+    double m_radius{};
+public:
+    Ball(double radius) : Ball{"black", radius} {}
+
+    Ball(string name = "black",double radius = 10.0) : m_name {name} , m_radius {radius} {print();}
+
+    void print() {
+        cout << "Ball(" << m_name << ", " << m_radius << ")" <<  "\n";
+    }
+};
+
+int main() {
+    Ball def{};
+    Ball blue("blue");
+    Ball twenty{20};
+    Ball bluetwenty{"blue", 20};
+    return 0;
+}
+#+end_src
+
+#+RESULTS:
+: Ball(black, 10)
+: Ball(blue, 10)
+: Ball(black, 20)
+: Ball(blue, 20)
+*** temporary object
+:PROPERTIES:
+:ID:       db0d93d4-f8b4-421c-aa05-cd9097953cbd
+:END:
+#+begin_src cpp :results output
+#include <iostream>
+using namespace std;
+
+class Point{
+    int m_x{};
+    int m_y{};
+
+public:
+    Point(int x, int y) : m_x {x} , m_y {y} {};
+
+    int x() {return m_x;}
+    int y() {return m_y;}
+};
+
+void print(Point p) {
+    cout << p.x() << " " << p.y() << "\n";
+}
+
+int main() {
+    Point p1{1,2};
+    print(p1);
+    print(Point {3,4}  );
+    print({1,2});
+    return 0;
+}
+#+end_src
+
+#+RESULTS:
+: 1 2
+: 3 4
+: 1 2

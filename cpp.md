@@ -1,74 +1,80 @@
 
 # Table of Contents
 
-1.  [C++ Basics](#org082c5e1)
-    1.  [Objects and Variables](#org3132d2f)
-        1.  [Variable assigment](#org1048ed5)
-        2.  [maybe unused](#orgfa7d78a)
-        3.  [cout and cin](#orgb97a733)
-        4.  [Uninitialized variables and undefined behavioure](#orga7b9b2b)
-        5.  [Keywords and Identifiers](#org8947c32)
-    2.  [Functions and Files](#org47611cd)
-        1.  [Void functions](#org96e7eeb)
-    3.  [size<sub>t</sub> link to topic](#orgcc43bc1)
-    4.  [Char(ASCII TABLE LINK) here](#org21770d5)
-    5.  [Implicit and Explicit Coversion](#org96bee46)
-        1.  [Sign conversion using static<sub>cast</sub>](#org4be921c)
-        2.  [Quiz Questions](#orgfbc6ce1)
-2.  [Fundamental Data Types](#org6d5f047)
-    1.  [Numeral Systems (decimal, binary, hexadecimal)](#org55917e5)
-        1.  [Octal](#org7a67f63)
-        2.  [hexadecimal](#orgbea7f0f)
-        3.  [Binary](#org676b606)
-        4.  [Outputting values in decimal, octal and hexadecimal](#org500578b)
-        5.  [Outputting values in Binary using std::bitset](#org11b7683)
-3.  [Strings](#orgcb3297f)
-    1.  [Strings (std::string)](#orgbfc75f3)
-    2.  [Strings (std::string<sub>view</sub>)](#orga2d6ffa)
-4.  [Operators](#orgf3d22fc)
-5.  [Bit Manipulation](#orgecb1835)
-    1.  [Uses of <bitset> library](#orgfae5ee6)
-    2.  [Bitmanipulation by bit masks](#orga2bd893)
-6.  [Namespace and scope resolution](#org54cab63)
-    1.  [Static local variables](#org816a2a7)
-7.  [Control Flow](#org2c97993)
-    1.  [Switch case](#orgcc99ea7)
-    2.  [goto statements](#org104a408)
-    3.  [While loop](#org64cf470)
-    4.  [Do While](#orgeebab27)
-    5.  [For Loop](#org7153908)
-    6.  [std::exit](#orgbd04d1f)
-8.  [Mersenne Twister](#org4f6ce75)
-9.  [Function Templates](#org9e4e3a2)
-10. [Constexpr and Consteval Functions](#org82480ec)
-11. [Compound data types](#org66f8735)
-    1.  [L-value references](#org4ce7688)
-        1.  [Non-const L value references](#orgcf7c3c6)
-        2.  [Const L-value referencs](#org39a5b10)
-    2.  [Pass by reference](#org3ce532c)
-    3.  [pass by const lvalue reference](#orge120364)
-    4.  [why prefer std::string<sub>view</sub> to const std::string&](#org575bb61)
-    5.  [Pointers](#org8dd933d)
-        1.  [Deference operator](#orgc9b7cc1)
-        2.  [Pointer](#org53fcb61)
-        3.  [Address of operator returns a pointer](#org1525d8c)
-        4.  [null pointers as boolean values](#org7c13018)
-        5.  [pointer to const](#org22bb163)
-        6.  [pass by address](#org9e2c099)
-    6.  [Operator overloading](#orga12e21d)
-    7.  [Enumerations](#orgfaebefe)
-        1.  [Unscoped Enumerations](#orgb6007ec)
-        2.  [scoped Enumerations](#org4fd894b)
+1.  [C++ Basics](#org2f2a857)
+    1.  [Objects and Variables](#org5d3b60a)
+        1.  [Variable assigment](#org1daebad)
+        2.  [maybe unused](#org3fa717a)
+        3.  [cout and cin](#org8375dc9)
+        4.  [Uninitialized variables and undefined behavioure](#org15e175b)
+        5.  [Keywords and Identifiers](#org602fa76)
+    2.  [Functions and Files](#orgab1df8a)
+        1.  [Void functions](#orgbc6fff9)
+    3.  [size<sub>t</sub> link to topic](#orge9bb897)
+    4.  [Char(ASCII TABLE LINK) here](#orgbe77678)
+    5.  [Implicit and Explicit Coversion](#org534ffdf)
+        1.  [Sign conversion using static<sub>cast</sub>](#orgf3c394f)
+        2.  [Quiz Questions](#orged0aae1)
+2.  [Fundamental Data Types](#orgb7eb5a2)
+    1.  [Numeral Systems (decimal, binary, hexadecimal)](#org8d0791f)
+        1.  [Octal](#orgbd7925c)
+        2.  [hexadecimal](#org8c6f1c3)
+        3.  [Binary](#orgc51f97d)
+        4.  [Outputting values in decimal, octal and hexadecimal](#orgf0af727)
+        5.  [Outputting values in Binary using std::bitset](#org5d28953)
+3.  [Strings](#org2fcaab5)
+    1.  [Strings (std::string)](#orgd255c44)
+    2.  [Strings (std::string<sub>view</sub>)](#org2d76be8)
+4.  [Operators](#org9dba00f)
+5.  [Bit Manipulation](#orgadd5df5)
+    1.  [Uses of <bitset> library](#orgb3ed89d)
+    2.  [Bitmanipulation by bit masks](#org6cad92b)
+6.  [Namespace and scope resolution](#orgc96ed56)
+    1.  [Static local variables](#org562a8d5)
+7.  [Control Flow](#org1b61556)
+    1.  [Switch case](#orgd07e2b1)
+    2.  [goto statements](#orgc4d38a6)
+    3.  [While loop](#org369dfa3)
+    4.  [Do While](#org11bdbea)
+    5.  [For Loop](#org478623e)
+    6.  [std::exit](#org43b8354)
+8.  [Mersenne Twister](#orgc149021)
+9.  [Function Templates](#org6706983)
+10. [Constexpr and Consteval Functions](#org82cba16)
+11. [Compound data types](#org8d422e7)
+    1.  [L-value references](#org8ebda4c)
+        1.  [Non-const L value references](#orgcc743fe)
+        2.  [Const L-value referencs](#orgaa6e0f6)
+    2.  [Pass by reference](#orgfb333c7)
+    3.  [pass by const lvalue reference](#orgc43e82a)
+    4.  [why prefer std::string<sub>view</sub> to const std::string&](#org5b1917f)
+    5.  [Pointers](#orgda01cd2)
+        1.  [Deference operator](#orge5a20a6)
+        2.  [Pointer](#org7f6a0a1)
+        3.  [Address of operator returns a pointer](#org3be4a2e)
+        4.  [null pointers as boolean values](#orgb42b231)
+        5.  [pointer to const](#orgb146ffc)
+        6.  [pass by address](#org8ccc027)
+    6.  [Operator overloading](#org0598a61)
+    7.  [Enumerations](#org2e080fd)
+        1.  [Unscoped Enumerations](#org9628e9a)
+        2.  [scoped Enumerations](#org068d341)
+    8.  [Struct](#org06ad57b)
+    9.  [Classes (OOP)](#orgc1a890c)
+        1.  [member functions](#orgab24533)
+        2.  [returning data members by lvalue reference](#org76e9e08)
+        3.  [constructor](#org6eac825)
+        4.  [temporary object](#orgd42c3ef)
 
 filetags: CPP
 
 
-<a id="org082c5e1"></a>
+<a id="org2f2a857"></a>
 
 # C++ Basics
 
 
-<a id="org3132d2f"></a>
+<a id="org5d3b60a"></a>
 
 ## Objects and Variables
 
@@ -90,7 +96,7 @@ Memory is allocated during the run time.
     }
 
 
-<a id="org1048ed5"></a>
+<a id="org1daebad"></a>
 
 ### Variable assigment
 
@@ -113,7 +119,7 @@ Memory is allocated during the run time.
     int e {};      // value-initialization (empty braces)
 
 
-<a id="orgfa7d78a"></a>
+<a id="org3fa717a"></a>
 
 ### maybe unused
 
@@ -134,7 +140,7 @@ Memory is allocated during the run time.
     }
 
 
-<a id="orgb97a733"></a>
+<a id="org8375dc9"></a>
 
 ### cout and cin
 
@@ -173,7 +179,7 @@ Memory is allocated during the run time.
     }
 
 
-<a id="orga7b9b2b"></a>
+<a id="org15e175b"></a>
 
 ### Uninitialized variables and undefined behavioure
 
@@ -188,7 +194,7 @@ Returns garbage value -&#x2014;> Memory address
     }
 
 
-<a id="org8947c32"></a>
+<a id="org602fa76"></a>
 
 ### Keywords and Identifiers
 
@@ -379,7 +385,7 @@ List of 92 keywords
 </table>
 
 
-<a id="org47611cd"></a>
+<a id="orgab1df8a"></a>
 
 ## Functions and Files
 
@@ -402,7 +408,7 @@ List of 92 keywords
     }
 
 
-<a id="org96e7eeb"></a>
+<a id="orgbc6fff9"></a>
 
 ### Void functions
 
@@ -434,12 +440,12 @@ List of 92 keywords
     }
 
 
-<a id="orgcc43bc1"></a>
+<a id="orge9bb897"></a>
 
 ## size<sub>t</sub>[ link to topic](https://www.learncpp.com/cpp-tutorial/fixed-width-integers-and-size-t/)
 
 
-<a id="org21770d5"></a>
+<a id="orgbe77678"></a>
 
 ## Char(ASCII TABLE LINK) [here](https://www.learncpp.com/cpp-tutorial/chars/)
 
@@ -465,7 +471,7 @@ List of 92 keywords
     }
 
 
-<a id="org96bee46"></a>
+<a id="org534ffdf"></a>
 
 ## Implicit and Explicit Coversion
 
@@ -490,7 +496,7 @@ Syntax for Exclipit conversion -&#x2014;> static<sub>cast</sub><new<sub>type</su
     }
 
 
-<a id="org4be921c"></a>
+<a id="orgf3c394f"></a>
 
 ### Sign conversion using static<sub>cast</sub>
 
@@ -526,7 +532,7 @@ Syntax for Exclipit conversion -&#x2014;> static<sub>cast</sub><new<sub>type</su
     }
 
 
-<a id="orgfbc6ce1"></a>
+<a id="orged0aae1"></a>
 
 ### Quiz [Questions](https://www.learncpp.com/cpp-tutorial/chapter-4-summary-and-quiz/)
 
@@ -588,17 +594,17 @@ Q3.
     }
 
 
-<a id="org6d5f047"></a>
+<a id="orgb7eb5a2"></a>
 
 # Fundamental Data Types
 
 
-<a id="org55917e5"></a>
+<a id="org8d0791f"></a>
 
 ## Numeral Systems (decimal, binary, hexadecimal)
 
 
-<a id="org7a67f63"></a>
+<a id="orgbd7925c"></a>
 
 ### Octal
 
@@ -622,7 +628,7 @@ For representing it as octal number we use &ldquo;0&rdquo; infront of the number
     }
 
 
-<a id="orgbea7f0f"></a>
+<a id="org8c6f1c3"></a>
 
 ### hexadecimal
 
@@ -641,7 +647,7 @@ To use hexadecimal we use prefix &ldquo;0x&rdquo;
     }
 
 
-<a id="org676b606"></a>
+<a id="orgc51f97d"></a>
 
 ### Binary
 
@@ -663,7 +669,7 @@ We use prefix 0b for binary numbers
     }
 
 
-<a id="org500578b"></a>
+<a id="orgf0af727"></a>
 
 ### Outputting values in decimal, octal and hexadecimal
 
@@ -682,7 +688,7 @@ We use prefix 0b for binary numbers
     }
 
 
-<a id="org11b7683"></a>
+<a id="org5d28953"></a>
 
 ### Outputting values in Binary using std::bitset
 
@@ -703,12 +709,12 @@ We use prefix 0b for binary numbers
     }
 
 
-<a id="orgcb3297f"></a>
+<a id="org2fcaab5"></a>
 
 # Strings
 
 
-<a id="orgbfc75f3"></a>
+<a id="orgd255c44"></a>
 
 ## Strings (std::string)
 
@@ -728,7 +734,7 @@ The header <string> helps to input and output strings of different size
     }
 
 
-<a id="orga2d6ffa"></a>
+<a id="org2d76be8"></a>
 
 ## Strings (std::string<sub>view</sub>)
 
@@ -795,7 +801,7 @@ Example
     }
 
 
-<a id="orgf3d22fc"></a>
+<a id="org9dba00f"></a>
 
 # Operators
 
@@ -813,12 +819,12 @@ Exponent
     }
 
 
-<a id="orgecb1835"></a>
+<a id="orgadd5df5"></a>
 
 # Bit Manipulation
 
 
-<a id="orgfae5ee6"></a>
+<a id="orgb3ed89d"></a>
 
 ## Uses of <bitset> library
 
@@ -897,7 +903,7 @@ It has
     }
 
 
-<a id="orga2bd893"></a>
+<a id="org6cad92b"></a>
 
 ## Bitmanipulation by bit masks
 
@@ -999,7 +1005,7 @@ Q1. Write a program that asks the user to input a number between 0 and 255. Prin
     }
 
 
-<a id="org54cab63"></a>
+<a id="orgc96ed56"></a>
 
 # Namespace and scope resolution
 
@@ -1027,7 +1033,7 @@ Q1. Write a program that asks the user to input a number between 0 and 255. Prin
     }
 
 
-<a id="org816a2a7"></a>
+<a id="org562a8d5"></a>
 
 ## Static local variables
 
@@ -1072,12 +1078,12 @@ example with static
     }
 
 
-<a id="org2c97993"></a>
+<a id="org1b61556"></a>
 
 # Control Flow
 
 
-<a id="orgcc99ea7"></a>
+<a id="orgd07e2b1"></a>
 
 ## Switch case
 
@@ -1105,7 +1111,7 @@ example with static
     }
 
 
-<a id="org104a408"></a>
+<a id="orgc4d38a6"></a>
 
 ## goto statements
 
@@ -1130,7 +1136,7 @@ example with static
     }
 
 
-<a id="org64cf470"></a>
+<a id="org369dfa3"></a>
 
 ## While loop
 
@@ -1224,17 +1230,17 @@ example with static
     }
 
 
-<a id="orgeebab27"></a>
+<a id="org11bdbea"></a>
 
 ## Do While
 
 
-<a id="org7153908"></a>
+<a id="org478623e"></a>
 
 ## For Loop
 
 
-<a id="orgbd04d1f"></a>
+<a id="org43b8354"></a>
 
 ## std::exit
 
@@ -1273,7 +1279,7 @@ std::atexit is called automatically when std::exit is called --------&#x2013;&#x
 here cleanup is a function.
 
 
-<a id="org4f6ce75"></a>
+<a id="orgc149021"></a>
 
 # Mersenne Twister
 
@@ -1291,7 +1297,7 @@ here cleanup is a function.
     }
 
 
-<a id="org9e4e3a2"></a>
+<a id="org6706983"></a>
 
 # Function Templates
 
@@ -1311,7 +1317,7 @@ here cleanup is a function.
     }
 
 
-<a id="org82480ec"></a>
+<a id="org82cba16"></a>
 
 # Constexpr and Consteval Functions
 
@@ -1357,11 +1363,11 @@ These functions are also called as immediate fucntions
     }
 
 
-<a id="org66f8735"></a>
+<a id="org8d422e7"></a>
 
 # Compound data types
 
-<div class="mindmap" id="orgeba555d">
+<div class="mindmap" id="orgf1a82c1">
 <p>
    ╭─ Functions
    ├─ C-style arrays
@@ -1381,12 +1387,12 @@ These functions are also called as immediate fucntions
 </div>
 
 
-<a id="org4ce7688"></a>
+<a id="org8ebda4c"></a>
 
 ## L-value references
 
 
-<a id="orgcf7c3c6"></a>
+<a id="orgcc743fe"></a>
 
 ### Non-const L value references
 
@@ -1410,7 +1416,7 @@ These functions are also called as immediate fucntions
     }
 
 
-<a id="org39a5b10"></a>
+<a id="orgaa6e0f6"></a>
 
 ### Const L-value referencs
 
@@ -1487,7 +1493,7 @@ with diif data types.
     }
 
 
-<a id="org3ce532c"></a>
+<a id="orgfb333c7"></a>
 
 ## Pass by reference
 
@@ -1552,7 +1558,7 @@ So we use pass by reference.
 Here we can notice the address of passbyreference and original varible is same.
 
 
-<a id="orge120364"></a>
+<a id="orgc43e82a"></a>
 
 ## pass by const lvalue reference
 
@@ -1581,7 +1587,7 @@ pass by const lvalue reference can be bind to modifiable, non-modifiable lvalues
     }
 
 
-<a id="org575bb61"></a>
+<a id="org5b1917f"></a>
 
 ## why prefer std::string<sub>view</sub> to const std::string&
 
@@ -1657,12 +1663,12 @@ pass by const lvalue reference can be bind to modifiable, non-modifiable lvalues
     }
 
 
-<a id="org8dd933d"></a>
+<a id="orgda01cd2"></a>
 
 ## Pointers
 
 
-<a id="orgc9b7cc1"></a>
+<a id="orge5a20a6"></a>
 
 ### Deference operator
 
@@ -1683,7 +1689,7 @@ While \* is used to return value at a given memory address as an lvalue.
     }
 
 
-<a id="org53fcb61"></a>
+<a id="org7f6a0a1"></a>
 
 ### Pointer
 
@@ -1748,7 +1754,7 @@ A Pointer is an object that holds a memory address as its value. This allows us 
 -   In a 32 bit computer 4 bytes are taken and in 64 bit computer 8 bytes are taken.
 
 
-<a id="org1525d8c"></a>
+<a id="org3be4a2e"></a>
 
 ### Address of operator returns a pointer
 
@@ -1768,7 +1774,7 @@ The address of operator doesnt returns address of its operand as literal, Instea
     }
 
 
-<a id="org7c13018"></a>
+<a id="orgb42b231"></a>
 
 ### null pointers as boolean values
 
@@ -1789,7 +1795,7 @@ The address of operator doesnt returns address of its operand as literal, Instea
     }
 
 
-<a id="org22bb163"></a>
+<a id="orgb146ffc"></a>
 
 ### pointer to const
 
@@ -1846,7 +1852,7 @@ With this we cannot change the address and the value.
     }
 
 
-<a id="org9e2c099"></a>
+<a id="org8ccc027"></a>
 
 ### pass by address
 
@@ -1880,7 +1886,7 @@ With this we cannot change the address and the value.
     }
 
 
-<a id="orga12e21d"></a>
+<a id="org0598a61"></a>
 
 ## Operator overloading
 
@@ -1937,25 +1943,29 @@ Operator overloading = writing your own function that runs when someone uses +, 
     using namespace std;
     
     struct Point {
-        int x, int y;
+        int x; int y;
     };
     
-    void
+    ostream& operator+(ostream& hi, Point& p) {
+        hi << "X: " << p.x << " Y: " << p.y;
+        return hi;
+    }
     
     int main() {
         Point P1{1,2};
+        cout + P1;
         return 0;
     }
 
 
-<a id="orgfaebefe"></a>
+<a id="org2e080fd"></a>
 
 ## Enumerations
 
 Enumerations are implicitly constexpr.
 
 
-<a id="orgb6007ec"></a>
+<a id="org9628e9a"></a>
 
 ### Unscoped Enumerations
 
@@ -2045,7 +2055,7 @@ Each enumeration is numbered from 0. We can explicitly number a enumeration, any
     }
 
 
-<a id="org4fd894b"></a>
+<a id="org068d341"></a>
 
 ### scoped Enumerations
 
@@ -2071,6 +2081,441 @@ Each enumeration is numbered from 0. We can explicitly number a enumeration, any
     
         cartoon fav{shinchan};
     
+        return 0;
+    }
+
+
+<a id="org06ad57b"></a>
+
+## Struct
+
+A struct is a program defined data type that allows us to bundle multiple variables together into a single type.
+
+1.  Defining a struct
+
+    #include <iostream>
+    using namespace std;
+    
+    struct Employee {
+        int id;
+        int age;
+        double salary;
+    }
+    
+    int main() {
+    
+        return 0;
+    }
+
+By declaring the struct it cannot occupy any space. But by initialization the object does.
+
+Variables inside a group are called members.
+
+1.  Initialing a object.
+
+    #include <iostream>
+    using namespace std;
+    
+    struct Employee {
+        int id;
+        int age;
+        double salary;
+    }
+    
+    int main() {
+        Employee gachibowli{};  // Object as created with the three varibles.
+        return 0;
+    }
+
+1.  To access a specific member we use member selecion operator (.).
+
+    #include <iostream>
+    using namespace std;
+    
+    struct Employee {
+        int id;
+        int age;
+        double salary;
+    };
+    
+    int main() {
+        Employee gachibowli{};  // Object as created with the three varibles.
+    
+        gachibowli.id = 1;
+        cout << gachibowli.id << "\n";
+    
+        gachibowli.age = 67;
+        cout << gachibowli.age << "\n";
+        return 0;
+    }
+
+    #include <iostream>
+    using namespace std;
+    
+    struct Point {
+        int x{};
+        int y{};
+    };
+    
+    struct triangle {
+        Point a{};
+        Point b{};
+        Point c{};
+    };
+    
+    int main() {
+    
+        Point a{2,3};
+        Point b{3,4};
+        Point c{4,5};
+    
+        triangle tri{a,b,c};
+    
+        triangle* ptr(&tri);
+    
+        cout << (ptr -> c).x << "\n";
+    
+        return 0;
+    }
+
+
+<a id="orgc1a890c"></a>
+
+## Classes (OOP)
+
+    #include <iostream>
+    using namespace std;
+    
+    class Date {
+    public:
+        int m_day{};
+        int m_month{};
+        int m_year{};
+    };
+    
+    void printdate(Date& date)
+    {
+        cout << date.m_day << "/" << date.m_month << "/" << date.m_year << "\n";
+    }
+    int main() {
+        Date date{19, 06, 2026};
+        printdate(date);
+        return 0;
+    }
+
+
+<a id="orgab24533"></a>
+
+### member functions
+
+    #include <iostream>
+    using namespace std;
+    
+    class Date {
+    public:
+        int m_day{};
+        int m_month{};
+        int m_year{};
+    
+        void print() {
+            cout << m_day << "/" << m_month << "/" << m_year << "\n";
+        }
+    };
+    
+    int main() {
+        Date date{19, 06, 2026};
+    
+        date.print();
+        return 0;
+    }
+
+-   member function with const object
+    
+    if the object is const then the member fucntion should also have to be a member fucntion.
+
+    #include <iostream>
+    using namespace std;
+    class Car
+    {
+    public:
+        int model{};
+        int color_code{};
+    
+        void print() const {
+           cout << "Model: " << model << " Color Code: " << color_code << "\n";
+        }
+    };
+    int main() {
+    
+        const Car swift{1,79879};
+    
+        swift.print();
+    
+        return 0;
+    }
+
+\j*\*\* access functions
+
+    #include <iostream>
+    usjing namespace std;
+    
+    class House {
+        int m_house_no{21};
+        int m_members{9};
+    
+    public:
+        void print() {
+            cout << m_house_no << " " << m_members << "\n";
+        }
+    
+        int gethouseno() const {return m_house_no;}
+        void sethouseno(int houseno) {m_house_no = houseno;}
+    
+        int getmembers() const {return m_members;}
+        void setmembers(int members) {m_members = members;}
+    };
+    
+    int main() {
+    
+        House my_house{};
+    
+        my_house.print();
+    
+        my_house.sethouseno(44);
+        my_house.setmembers(4);
+    
+        cout << my_house.gethouseno() << "\n";
+        cout << my_house.getmembers() << "\n";
+    
+        return 0;
+    \}
+
+
+<a id="org76e9e08"></a>
+
+### returning data members by lvalue reference
+
+    #include <iostream>
+    using namespace std;
+    
+    class House {
+        int m_houseno{12};
+        int m_members{3};
+    
+    public:
+        void print() {
+            cout << m_houseno << " " << m_members << "\n";
+        }
+    
+        int& gethouseno() {return m_houseno;}
+    };
+    
+    int main() {
+        House myhouse{};
+        cout <<  myhouse.gethouseno();
+        return 0;
+    }
+
+    #include <iostream>
+    #include <string>
+    using namespace std;
+    class Bike{
+        string m_name{};
+    public:
+    
+        void setname(string_view name) {m_name = name;}
+    
+        string getname_byvalue() {
+            return m_name;
+        }
+    
+        string& getname_byreference() {
+            return m_name;
+        }
+    };
+    
+    int main() {
+        Bike bmw{};
+        cout << bmw.getname_byvalue() << "\n";
+        bmw.setname("BMW");
+        cout << bmw.getname_byreference() << "\n";
+        return 0;
+    }
+
+
+<a id="org6eac825"></a>
+
+### constructor
+
+    #include <iostream>
+    using namespace std;
+    
+    class Foo{
+        int m_a;
+        int m_b;
+    
+    public:
+        Foo(int a,int b) {
+            this->m_a = a;
+            this->m_b = b;
+        }
+    
+        //Foo(int a,int b) : m_a {a}, m_b {b}; {}
+    
+        void print() {
+            cout << m_a << " " << m_b << "\n";
+        }
+    };
+    
+    int main() {
+        Foo f{3,9};
+        f.print();
+        return 0;
+    }
+
+1.  A constructor is a special member function invoked when an object of class is created. It shares same name as class and has no return type.
+2.  It is responsible for initializing data members and setting initial state.
+
+Delegating constructors
+Constructors are allowed to delegate (transfer responsibility for) initialization to another constructor from the same class type. This process is sometimes called constructor chaining and such constructors are called delegating constructors.
+
+    #include <iostream>
+    using namespace std;
+    
+    class Employee{
+        string m_name{};
+        int m_id{};
+    public:
+        Employee(string name) :Employee(name, 0) {}
+    
+        Employee(string name, int id) : m_name {name}, m_id {id} {}
+    
+        void print() {
+            cout << m_name << " " << m_id << "\n";
+        }
+    };
+    
+    int main() {
+        Employee e1{"shiva"};
+        e1.print();
+    
+        Employee e2{"shiva",9};
+        e2.print();
+        return 0;
+    }
+
+Reducing construtor using default arguments
+
+    #include <iostream>
+    using namespace std;
+    
+    class Employee{
+        string m_name{};
+        int m_id{};
+    public:
+        Employee(string name, int id = 0) : m_name {name}, m_id {id} {}
+    
+        void print() {
+            cout << m_name << " " << m_id << "\n";
+        }
+    };
+    
+    int main() {
+        Employee e1{"shiva"};
+        e1.print();
+    
+        Employee e2{"shiva",9};
+        e2.print();
+        return 0;
+    }
+
+    #include <iostream>
+    using namespace std;
+    
+    class Ball {
+        string m_color{"black"};
+        double m_radius{10.0};
+    public:
+        Ball() {
+            print();
+        }
+    
+        Ball(string color) : m_color {color} {
+            print();
+        }
+    
+        Ball(double radius) : m_radius {radius} {
+            print();
+        }
+    
+        Ball(string color, double radius) : m_color {color} , m_radius {radius} {
+            print();
+        }
+    
+        void print() {
+            cout << "Ball(" << m_color << ", " << m_radius << ")" <<  "\n";
+        }
+    };
+    int main() {
+        Ball def{};
+        Ball blue("blue");
+        Ball twenty{20};
+        Ball bluetwenty{"blue", 20};
+        return 0;
+    }
+
+    #include <iostream>
+    using namespace std;
+    
+    class Ball{
+        string m_name{};
+        double m_radius{};
+    public:
+        Ball(double radius) : Ball{"black", radius} {}
+    
+        Ball(string name = "black",double radius = 10.0) : m_name {name} , m_radius {radius} {print();}
+    
+        void print() {
+            cout << "Ball(" << m_name << ", " << m_radius << ")" <<  "\n";
+        }
+    };
+    
+    int main() {
+        Ball def{};
+        Ball blue("blue");
+        Ball twenty{20};
+        Ball bluetwenty{"blue", 20};
+        return 0;
+    }
+
+
+<a id="orgd42c3ef"></a>
+
+### temporary object
+
+    #include <iostream>
+    using namespace std;
+    
+    class Point{
+        int m_x{};
+        int m_y{};
+    
+    public:
+        Point(int x, int y) : m_x {x} , m_y {y} {};
+    
+        int x() {return m_x;}
+        int y() {return m_y;}
+    };
+    
+    void print(Point p) {
+        cout << p.x() << " " << p.y() << "\n";
+    }
+    
+    int main() {
+        Point p1{1,2};
+        print(p1);
+        print(Point {3,4}  );
+        print({1,2});
         return 0;
     }
 
