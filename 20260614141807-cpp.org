@@ -1,3 +1,10 @@
+:REVEAL_PROPERTIES:
+#+REVEAL_ROOT: https://cdn.jsdelivr.net/npm/reveal.js
+#+REVEAL_REVEAL_JS_VERSION: 4
+#+REVEAL_THEME: night
+#+OPTIONS: timestamp:nil toc:1 num:nil
+:END:
+
 :PROPERTIES:
 :ID:       8667b78f-2dc6-44f2-a893-a3718a247bb2
 :END:
@@ -1896,6 +1903,22 @@ Each enumeration is numbered from 0. We can explicitly number a enumeration, any
 #include <iostream>
 using namespace std;
 
+enum Color {red,white, yellow};
+
+int main() {
+    Color car{white};
+    cout << car << "\n";
+    return 0;
+}
+#+end_src
+
+#+RESULTS:
+: 1
+
+#+begin_src cpp :results output
+#include <iostream>
+using namespace std;
+
 namespace nothing{
     enum Color {
         red,
@@ -2004,7 +2027,7 @@ enum class Color {white, red, green};
 
 int main() {
     Color color {Color::white};
-
+    cout << color << "\n";
     return 0;
 }
 #+end_src
@@ -2025,8 +2048,6 @@ int main() {
     return 0;
 }
 #+end_src
-
-#+RESULTS:
 ** Struct
 :PROPERTIES:
 :ID: struct
@@ -2521,3 +2542,210 @@ int main() {
 : 1 2
 : 3 4
 : 1 2
+
+- callling a constructor in a function creates a temporary object
+*** delegating [[id:7eefd7b1-cbe6-4f3e-8cdf-13c2ec75f43c][constructor]]
+:PROPERTIES:
+:ID:       75ef050f-974c-4aee-aaef-fb6c29857536
+:END:
+To make one [[id:7eefd7b1-cbe6-4f3e-8cdf-13c2ec75f43c][constructor]] delegate to another construtor simply call the constructor in member initialization list of another [[id:7eefd7b1-cbe6-4f3e-8cdf-13c2ec75f43c][constructor]].
+
+#+begin_src cpp :results output
+#include <iostream>
+using namespace std;
+
+class Employee {
+    string m_name{};
+    int m_age{};
+public:
+    Employee(string name) : Employee(name, 0) {}
+
+    Employee(string name, int age) : m_name {name} , m_age {age} {cout << m_name << " " << m_age << "\n";}
+};
+
+int main() {
+    Employee e1{"Shiva"};
+    Employee e2{"PRASAD",2};
+    return 0;
+}
+#+end_src
+
+#+RESULTS:
+: Shiva 0
+: PRASAD 2
+*** copy [[id:7eefd7b1-cbe6-4f3e-8cdf-13c2ec75f43c][constructor]]
+
+A copy construtor is a construtor that is used to initialize an object using an existing object.
+
+A copy [[id:7eefd7b1-cbe6-4f3e-8cdf-13c2ec75f43c][constructor]] is implicitly created by compiler when we create a object using another object like in below. Although we can create copy [[id:7eefd7b1-cbe6-4f3e-8cdf-13c2ec75f43c][constructor]] manually.
+
+#+begin_src cpp :results output
+#include <iostream>
+using namespace std;
+
+class Number {
+    int m_a{};
+    int m_b{};
+public:
+    Number(int a, int b) : m_a {a}, m_b{b} {}
+
+    void print() {
+        cout << m_a << " " << m_b << endl;
+    }
+};
+
+int main() {
+    Number x{3,5};
+    Number y{x};
+    x.print();
+    y.print();
+    return 0;
+}
+#+end_src
+
+#+RESULTS:
+: 3 5
+: 3 5
+
+initiallzing a copy construtor manually.
+
+#+begin_src cpp :results output
+#include <iostream>
+using namespace std;
+
+class Number {
+    int m_a{};
+    int m_b{};
+public:
+    Number(int a, int b) : m_a {a}, m_b{b} {}
+
+    Number(Number& num) : m_a {num.m_a} , m_b {num.m_b} {
+        cout << "Copy constructor is called" << "\n";
+    }
+
+    void print() {
+        cout << m_a << " " << m_b << endl;
+    }
+};
+
+int main() {
+    Number x{3,5};
+    Number y{x}; // here copy construtor is called
+    x.print();
+    y.print();
+    return 0;
+}
+#+end_src
+
+#+RESULTS:
+: Copy constructor is called
+: 3 5
+: 3 5
+
+creating a default copy construtor using *default*
+
+#+begin_src cpp :results output
+#include <iostream>
+using namespace std;
+
+class Fraction {
+    int m_a{};
+    int m_b{};
+public:
+    Fraction(int a, int b) : m_a{a}, m_b {b} {}
+
+    Fraction(const Fraction& fraction) = default;
+
+    void print() {
+        cout << m_a << " " << m_b << "\n";
+    }
+};
+
+int main() {
+    Fraction f{1,2};
+    Fraction f1{f};
+    f.print();
+    f1.print();
+    return 0;
+}
+#+end_src
+
+#+RESULTS:
+: 1 2
+: 1 2
+
+using = delete to prevent copies
+
+#+begin_src cpp :results output
+#include <iostream>
+
+class Fraction
+{
+private:
+    int m_numerator{ 0 };
+    int m_denominator{ 1 };
+
+public:
+    // Default constructor
+    Fraction(int numerator=0, int denominator=1)
+        : m_numerator{numerator}, m_denominator{denominator}
+    {
+    }
+
+    // Delete the copy constructor so no copies can be made
+    Fraction(const Fraction& fraction) = delete;
+
+    void print() const
+    {
+        std::cout << "Fraction(" << m_numerator << ", " << m_denominator << ")\n";
+    }
+};
+
+int main()
+{
+    Fraction f { 5, 3 };
+    Fraction fCopy { f }; // compile error: copy constructor has been deleted
+
+    return 0;
+}
+#+end_src
+
+*** pass by value and copy construtor
+
+when we pass an object by value to a function if the argument and parameter are of same class type then implicitly copy construtort is called.
+
+in the beow code when an object is passed as value to a function then explicitly created copy construtor is invoked.
+
+#+begin_src cpp :results output
+#include <iostream>
+using namespace std;
+
+class Number {
+    int m_a{};
+    int m_b{};
+public:
+    Number(int a, int b) : m_a {a}, m_b{b} {}
+
+    Number(Number& num)  : m_a {num.m_a} , m_b {num.m_b} {
+       cout << "copy construtor is called" << "\n";
+   }
+
+    void print() {
+        cout << m_a << " " <<  m_b << "\n";
+    }
+};
+
+void fun(Number x) {
+    x.print();
+}
+
+int main() {
+    Number x{12,3};
+    fun(x);
+    return 0;
+}
+#+end_src
+
+#+RESULTS:
+: copy construtor is called
+: 12 3

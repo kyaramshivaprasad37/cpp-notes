@@ -1,80 +1,28 @@
 
 # Table of Contents
 
-1.  [C++ Basics](#org2f2a857)
-    1.  [Objects and Variables](#org5d3b60a)
-        1.  [Variable assigment](#org1daebad)
-        2.  [maybe unused](#org3fa717a)
-        3.  [cout and cin](#org8375dc9)
-        4.  [Uninitialized variables and undefined behavioure](#org15e175b)
-        5.  [Keywords and Identifiers](#org602fa76)
-    2.  [Functions and Files](#orgab1df8a)
-        1.  [Void functions](#orgbc6fff9)
-    3.  [size<sub>t</sub> link to topic](#orge9bb897)
-    4.  [Char(ASCII TABLE LINK) here](#orgbe77678)
-    5.  [Implicit and Explicit Coversion](#org534ffdf)
-        1.  [Sign conversion using static<sub>cast</sub>](#orgf3c394f)
-        2.  [Quiz Questions](#orged0aae1)
-2.  [Fundamental Data Types](#orgb7eb5a2)
-    1.  [Numeral Systems (decimal, binary, hexadecimal)](#org8d0791f)
-        1.  [Octal](#orgbd7925c)
-        2.  [hexadecimal](#org8c6f1c3)
-        3.  [Binary](#orgc51f97d)
-        4.  [Outputting values in decimal, octal and hexadecimal](#orgf0af727)
-        5.  [Outputting values in Binary using std::bitset](#org5d28953)
-3.  [Strings](#org2fcaab5)
-    1.  [Strings (std::string)](#orgd255c44)
-    2.  [Strings (std::string<sub>view</sub>)](#org2d76be8)
-4.  [Operators](#org9dba00f)
-5.  [Bit Manipulation](#orgadd5df5)
-    1.  [Uses of <bitset> library](#orgb3ed89d)
-    2.  [Bitmanipulation by bit masks](#org6cad92b)
-6.  [Namespace and scope resolution](#orgc96ed56)
-    1.  [Static local variables](#org562a8d5)
-7.  [Control Flow](#org1b61556)
-    1.  [Switch case](#orgd07e2b1)
-    2.  [goto statements](#orgc4d38a6)
-    3.  [While loop](#org369dfa3)
-    4.  [Do While](#org11bdbea)
-    5.  [For Loop](#org478623e)
-    6.  [std::exit](#org43b8354)
-8.  [Mersenne Twister](#orgc149021)
-9.  [Function Templates](#org6706983)
-10. [Constexpr and Consteval Functions](#org82cba16)
-11. [Compound data types](#org8d422e7)
-    1.  [L-value references](#org8ebda4c)
-        1.  [Non-const L value references](#orgcc743fe)
-        2.  [Const L-value referencs](#orgaa6e0f6)
-    2.  [Pass by reference](#orgfb333c7)
-    3.  [pass by const lvalue reference](#orgc43e82a)
-    4.  [why prefer std::string<sub>view</sub> to const std::string&](#org5b1917f)
-    5.  [Pointers](#orgda01cd2)
-        1.  [Deference operator](#orge5a20a6)
-        2.  [Pointer](#org7f6a0a1)
-        3.  [Address of operator returns a pointer](#org3be4a2e)
-        4.  [null pointers as boolean values](#orgb42b231)
-        5.  [pointer to const](#orgb146ffc)
-        6.  [pass by address](#org8ccc027)
-    6.  [Operator overloading](#org0598a61)
-    7.  [Enumerations](#org2e080fd)
-        1.  [Unscoped Enumerations](#org9628e9a)
-        2.  [scoped Enumerations](#org068d341)
-    8.  [Struct](#org06ad57b)
-    9.  [Classes (OOP)](#orgc1a890c)
-        1.  [member functions](#orgab24533)
-        2.  [returning data members by lvalue reference](#org76e9e08)
-        3.  [constructor](#org6eac825)
-        4.  [temporary object](#orgd42c3ef)
+-   [C++ Basics](#orgaafe190)
+-   [Fundamental Data Types](#org6807d81)
+-   [Strings](#org91ff57a)
+-   [Operators](#org8131a16)
+-   [Bit Manipulation](#org5d89c27)
+-   [Namespace and scope resolution](#org59d3d1b)
+-   [Control Flow](#org1b8a3e8)
+-   [Mersenne Twister](#org9ca010b)
+-   [Function Templates](#org363d411)
+-   [Constexpr and Consteval Functions](#orge2580bb)
+-   [Compound data types](#org1533cf4)
+
+
+:ID:       8667b78f-2dc6-44f2-a893-a3718a247bb2
 
 filetags: CPP
 
 
-<a id="org2f2a857"></a>
+<a id="orgaafe190"></a>
 
 # C++ Basics
 
-
-<a id="org5d3b60a"></a>
 
 ## Objects and Variables
 
@@ -95,8 +43,6 @@ Memory is allocated during the run time.
         return 0;
     }
 
-
-<a id="org1daebad"></a>
 
 ### Variable assigment
 
@@ -119,8 +65,6 @@ Memory is allocated during the run time.
     int e {};      // value-initialization (empty braces)
 
 
-<a id="org3fa717a"></a>
-
 ### maybe unused
 
     #include <iostream>
@@ -139,8 +83,6 @@ Memory is allocated during the run time.
         return 0;
     }
 
-
-<a id="org8375dc9"></a>
 
 ### cout and cin
 
@@ -179,8 +121,6 @@ Memory is allocated during the run time.
     }
 
 
-<a id="org15e175b"></a>
-
 ### Uninitialized variables and undefined behavioure
 
 Returns garbage value -&#x2014;> Memory address
@@ -193,8 +133,6 @@ Returns garbage value -&#x2014;> Memory address
         return 0;
     }
 
-
-<a id="org602fa76"></a>
 
 ### Keywords and Identifiers
 
@@ -385,8 +323,6 @@ List of 92 keywords
 </table>
 
 
-<a id="orgab1df8a"></a>
-
 ## Functions and Files
 
     #include <iostream>
@@ -407,8 +343,6 @@ List of 92 keywords
         return 0;
     }
 
-
-<a id="orgbc6fff9"></a>
 
 ### Void functions
 
@@ -440,12 +374,8 @@ List of 92 keywords
     }
 
 
-<a id="orge9bb897"></a>
-
 ## size<sub>t</sub>[ link to topic](https://www.learncpp.com/cpp-tutorial/fixed-width-integers-and-size-t/)
 
-
-<a id="orgbe77678"></a>
 
 ## Char(ASCII TABLE LINK) [here](https://www.learncpp.com/cpp-tutorial/chars/)
 
@@ -471,8 +401,6 @@ List of 92 keywords
     }
 
 
-<a id="org534ffdf"></a>
-
 ## Implicit and Explicit Coversion
 
 Implicit conversion are made by compilers whereas explicit are made manually
@@ -495,8 +423,6 @@ Syntax for Exclipit conversion -&#x2014;> static<sub>cast</sub><new<sub>type</su
         return 0;
     }
 
-
-<a id="orgf3c394f"></a>
 
 ### Sign conversion using static<sub>cast</sub>
 
@@ -531,8 +457,6 @@ Syntax for Exclipit conversion -&#x2014;> static<sub>cast</sub><new<sub>type</su
         return 0;
     }
 
-
-<a id="orged0aae1"></a>
 
 ### Quiz [Questions](https://www.learncpp.com/cpp-tutorial/chapter-4-summary-and-quiz/)
 
@@ -594,17 +518,13 @@ Q3.
     }
 
 
-<a id="orgb7eb5a2"></a>
+<a id="org6807d81"></a>
 
 # Fundamental Data Types
 
 
-<a id="org8d0791f"></a>
-
 ## Numeral Systems (decimal, binary, hexadecimal)
 
-
-<a id="orgbd7925c"></a>
 
 ### Octal
 
@@ -628,8 +548,6 @@ For representing it as octal number we use &ldquo;0&rdquo; infront of the number
     }
 
 
-<a id="org8c6f1c3"></a>
-
 ### hexadecimal
 
 Hexadecimal base is 16 and we count like  0, 1, 2, 3, 4, 5, 6, 7, 8, 9, A, B, C, D, E, F, 10, 11, 12, …
@@ -646,8 +564,6 @@ To use hexadecimal we use prefix &ldquo;0x&rdquo;
         return 0;
     }
 
-
-<a id="orgc51f97d"></a>
 
 ### Binary
 
@@ -669,8 +585,6 @@ We use prefix 0b for binary numbers
     }
 
 
-<a id="orgf0af727"></a>
-
 ### Outputting values in decimal, octal and hexadecimal
 
     #include <iostream>
@@ -687,8 +601,6 @@ We use prefix 0b for binary numbers
         return 0;
     }
 
-
-<a id="org5d28953"></a>
 
 ### Outputting values in Binary using std::bitset
 
@@ -709,12 +621,10 @@ We use prefix 0b for binary numbers
     }
 
 
-<a id="org2fcaab5"></a>
+<a id="org91ff57a"></a>
 
 # Strings
 
-
-<a id="orgd255c44"></a>
 
 ## Strings (std::string)
 
@@ -733,8 +643,6 @@ The header <string> helps to input and output strings of different size
         return 0;
     }
 
-
-<a id="org2d76be8"></a>
 
 ## Strings (std::string<sub>view</sub>)
 
@@ -801,7 +709,7 @@ Example
     }
 
 
-<a id="org9dba00f"></a>
+<a id="org8131a16"></a>
 
 # Operators
 
@@ -819,12 +727,10 @@ Exponent
     }
 
 
-<a id="orgadd5df5"></a>
+<a id="org5d89c27"></a>
 
 # Bit Manipulation
 
-
-<a id="orgb3ed89d"></a>
 
 ## Uses of <bitset> library
 
@@ -902,8 +808,6 @@ It has
         return 0;
     }
 
-
-<a id="org6cad92b"></a>
 
 ## Bitmanipulation by bit masks
 
@@ -1005,7 +909,7 @@ Q1. Write a program that asks the user to input a number between 0 and 255. Prin
     }
 
 
-<a id="orgc96ed56"></a>
+<a id="org59d3d1b"></a>
 
 # Namespace and scope resolution
 
@@ -1032,8 +936,6 @@ Q1. Write a program that asks the user to input a number between 0 and 255. Prin
         return 0;
     }
 
-
-<a id="org562a8d5"></a>
 
 ## Static local variables
 
@@ -1078,12 +980,10 @@ example with static
     }
 
 
-<a id="org1b61556"></a>
+<a id="org1b8a3e8"></a>
 
 # Control Flow
 
-
-<a id="orgd07e2b1"></a>
 
 ## Switch case
 
@@ -1111,8 +1011,6 @@ example with static
     }
 
 
-<a id="orgc4d38a6"></a>
-
 ## goto statements
 
     #include <iostream>
@@ -1135,8 +1033,6 @@ example with static
         return 0;
     }
 
-
-<a id="org369dfa3"></a>
 
 ## While loop
 
@@ -1230,17 +1126,11 @@ example with static
     }
 
 
-<a id="org11bdbea"></a>
-
 ## Do While
 
 
-<a id="org478623e"></a>
-
 ## For Loop
 
-
-<a id="org43b8354"></a>
 
 ## std::exit
 
@@ -1279,7 +1169,7 @@ std::atexit is called automatically when std::exit is called --------&#x2013;&#x
 here cleanup is a function.
 
 
-<a id="orgc149021"></a>
+<a id="org9ca010b"></a>
 
 # Mersenne Twister
 
@@ -1297,7 +1187,7 @@ here cleanup is a function.
     }
 
 
-<a id="org6706983"></a>
+<a id="org363d411"></a>
 
 # Function Templates
 
@@ -1317,7 +1207,7 @@ here cleanup is a function.
     }
 
 
-<a id="org82cba16"></a>
+<a id="orge2580bb"></a>
 
 # Constexpr and Consteval Functions
 
@@ -1363,11 +1253,11 @@ These functions are also called as immediate fucntions
     }
 
 
-<a id="org8d422e7"></a>
+<a id="org1533cf4"></a>
 
 # Compound data types
 
-<div class="mindmap" id="orgf1a82c1">
+<div class="mindmap" id="org77f295b">
 <p>
    ╭─ Functions
    ├─ C-style arrays
@@ -1387,12 +1277,8 @@ These functions are also called as immediate fucntions
 </div>
 
 
-<a id="org8ebda4c"></a>
-
 ## L-value references
 
-
-<a id="orgcc743fe"></a>
 
 ### Non-const L value references
 
@@ -1415,8 +1301,6 @@ These functions are also called as immediate fucntions
         return 0;
     }
 
-
-<a id="orgaa6e0f6"></a>
 
 ### Const L-value referencs
 
@@ -1493,8 +1377,6 @@ with diif data types.
     }
 
 
-<a id="orgfb333c7"></a>
-
 ## Pass by reference
 
     #include <iostream>
@@ -1558,8 +1440,6 @@ So we use pass by reference.
 Here we can notice the address of passbyreference and original varible is same.
 
 
-<a id="orgc43e82a"></a>
-
 ## pass by const lvalue reference
 
 Unlike non-const lvalue reference for which we can bind to modifiable lvalues.
@@ -1586,8 +1466,6 @@ pass by const lvalue reference can be bind to modifiable, non-modifiable lvalues
         return 0;
     }
 
-
-<a id="org5b1917f"></a>
 
 ## why prefer std::string<sub>view</sub> to const std::string&
 
@@ -1663,12 +1541,8 @@ pass by const lvalue reference can be bind to modifiable, non-modifiable lvalues
     }
 
 
-<a id="orgda01cd2"></a>
-
 ## Pointers
 
-
-<a id="orge5a20a6"></a>
 
 ### Deference operator
 
@@ -1688,8 +1562,6 @@ While \* is used to return value at a given memory address as an lvalue.
         return 0;
     }
 
-
-<a id="org7f6a0a1"></a>
 
 ### Pointer
 
@@ -1754,8 +1626,6 @@ A Pointer is an object that holds a memory address as its value. This allows us 
 -   In a 32 bit computer 4 bytes are taken and in 64 bit computer 8 bytes are taken.
 
 
-<a id="org3be4a2e"></a>
-
 ### Address of operator returns a pointer
 
 The address of operator doesnt returns address of its operand as literal, Instead it returns a pointer to the operand.
@@ -1773,8 +1643,6 @@ The address of operator doesnt returns address of its operand as literal, Instea
         return 0;
     }
 
-
-<a id="orgb42b231"></a>
 
 ### null pointers as boolean values
 
@@ -1794,8 +1662,6 @@ The address of operator doesnt returns address of its operand as literal, Instea
         return 0;
     }
 
-
-<a id="orgb146ffc"></a>
 
 ### pointer to const
 
@@ -1852,8 +1718,6 @@ With this we cannot change the address and the value.
     }
 
 
-<a id="org8ccc027"></a>
-
 ### pass by address
 
     #include <iostream>
@@ -1885,8 +1749,6 @@ With this we cannot change the address and the value.
         return 0;
     }
 
-
-<a id="org0598a61"></a>
 
 ## Operator overloading
 
@@ -1958,18 +1820,25 @@ Operator overloading = writing your own function that runs when someone uses +, 
     }
 
 
-<a id="org2e080fd"></a>
-
 ## Enumerations
 
 Enumerations are implicitly constexpr.
 
 
-<a id="org9628e9a"></a>
-
 ### Unscoped Enumerations
 
 Each enumeration is numbered from 0. We can explicitly number a enumeration, any undefined enumeration will be given one value greater than the previous one.
+
+    #include <iostream>
+    using namespace std;
+    
+    enum Color {red,white, yellow};
+    
+    int main() {
+        Color car{white};
+        cout << car << "\n";
+        return 0;
+    }
 
     #include <iostream>
     using namespace std;
@@ -2055,8 +1924,6 @@ Each enumeration is numbered from 0. We can explicitly number a enumeration, any
     }
 
 
-<a id="org068d341"></a>
-
 ### scoped Enumerations
 
     #include <iostream>
@@ -2066,7 +1933,7 @@ Each enumeration is numbered from 0. We can explicitly number a enumeration, any
     
     int main() {
         Color color {Color::white};
-    
+        cout << color << "\n";
         return 0;
     }
 
@@ -2084,8 +1951,6 @@ Each enumeration is numbered from 0. We can explicitly number a enumeration, any
         return 0;
     }
 
-
-<a id="org06ad57b"></a>
 
 ## Struct
 
@@ -2179,8 +2044,6 @@ Variables inside a group are called members.
     }
 
 
-<a id="orgc1a890c"></a>
-
 ## Classes (OOP)
 
     #include <iostream>
@@ -2203,8 +2066,6 @@ Variables inside a group are called members.
         return 0;
     }
 
-
-<a id="orgab24533"></a>
 
 ### member functions
 
@@ -2291,8 +2152,6 @@ Variables inside a group are called members.
     \}
 
 
-<a id="org76e9e08"></a>
-
 ### returning data members by lvalue reference
 
     #include <iostream>
@@ -2343,7 +2202,7 @@ Variables inside a group are called members.
     }
 
 
-<a id="org6eac825"></a>
+<a id="org0ce53c7"></a>
 
 ### constructor
 
@@ -2489,8 +2348,6 @@ Reducing construtor using default arguments
     }
 
 
-<a id="orgd42c3ef"></a>
-
 ### temporary object
 
     #include <iostream>
@@ -2516,6 +2373,183 @@ Reducing construtor using default arguments
         print(p1);
         print(Point {3,4}  );
         print({1,2});
+        return 0;
+    }
+
+-   callling a constructor in a function creates a temporary object
+
+
+### delegating [constructor](#org0ce53c7)
+
+To make one [constructor](#org0ce53c7) delegate to another construtor simply call the constructor in member initialization list of another [constructor](#org0ce53c7).
+
+    #include <iostream>
+    using namespace std;
+    
+    class Employee {
+        string m_name{};
+        int m_age{};
+    public:
+        Employee(string name) : Employee(name, 0) {}
+    
+        Employee(string name, int age) : m_name {name} , m_age {age} {cout << m_name << " " << m_age << "\n";}
+    };
+    
+    int main() {
+        Employee e1{"Shiva"};
+        Employee e2{"PRASAD",2};
+        return 0;
+    }
+
+
+### copy [constructor](#org0ce53c7)
+
+A copy construtor is a construtor that is used to initialize an object using an existing object.
+
+A copy [constructor](#org0ce53c7) is implicitly created by compiler when we create a object using another object like in below. Although we can create copy [constructor](#org0ce53c7) manually.
+
+    #include <iostream>
+    using namespace std;
+    
+    class Number {
+        int m_a{};
+        int m_b{};
+    public:
+        Number(int a, int b) : m_a {a}, m_b{b} {}
+    
+        void print() {
+            cout << m_a << " " << m_b << endl;
+        }
+    };
+    
+    int main() {
+        Number x{3,5};
+        Number y{x};
+        x.print();
+        y.print();
+        return 0;
+    }
+
+initiallzing a copy construtor manually.
+
+    #include <iostream>
+    using namespace std;
+    
+    class Number {
+        int m_a{};
+        int m_b{};
+    public:
+        Number(int a, int b) : m_a {a}, m_b{b} {}
+    
+        Number(Number& num) : m_a {num.m_a} , m_b {num.m_b} {
+            cout << "Copy constructor is called" << "\n";
+        }
+    
+        void print() {
+            cout << m_a << " " << m_b << endl;
+        }
+    };
+    
+    int main() {
+        Number x{3,5};
+        Number y{x}; // here copy construtor is called
+        x.print();
+        y.print();
+        return 0;
+    }
+
+creating a default copy construtor using **default**
+
+    #include <iostream>
+    using namespace std;
+    
+    class Fraction {
+        int m_a{};
+        int m_b{};
+    public:
+        Fraction(int a, int b) : m_a{a}, m_b {b} {}
+    
+        Fraction(const Fraction& fraction) = default;
+    
+        void print() {
+            cout << m_a << " " << m_b << "\n";
+        }
+    };
+    
+    int main() {
+        Fraction f{1,2};
+        Fraction f1{f};
+        f.print();
+        f1.print();
+        return 0;
+    }
+
+using = delete to prevent copies
+
+    #include <iostream>
+    
+    class Fraction
+    {
+    private:
+        int m_numerator{ 0 };
+        int m_denominator{ 1 };
+    
+    public:
+        // Default constructor
+        Fraction(int numerator=0, int denominator=1)
+            : m_numerator{numerator}, m_denominator{denominator}
+        {
+        }
+    
+        // Delete the copy constructor so no copies can be made
+        Fraction(const Fraction& fraction) = delete;
+    
+        void print() const
+        {
+            std::cout << "Fraction(" << m_numerator << ", " << m_denominator << ")\n";
+        }
+    };
+    
+    int main()
+    {
+        Fraction f { 5, 3 };
+        Fraction fCopy { f }; // compile error: copy constructor has been deleted
+    
+        return 0;
+    }
+
+
+### pass by value and copy construtor
+
+when we pass an object by value to a function if the argument and parameter are of same class type then implicitly copy construtort is called.
+
+in the beow code when an object is passed as value to a function then explicitly created copy construtor is invoked.
+
+    #include <iostream>
+    using namespace std;
+    
+    class Number {
+        int m_a{};
+        int m_b{};
+    public:
+        Number(int a, int b) : m_a {a}, m_b{b} {}
+    
+        Number(Number& num)  : m_a {num.m_a} , m_b {num.m_b} {
+           cout << "copy construtor is called" << "\n";
+       }
+    
+        void print() {
+            cout << m_a << " " <<  m_b << "\n";
+        }
+    };
+    
+    void fun(Number x) {
+        x.print();
+    }
+    
+    int main() {
+        Number x{12,3};
+        fun(x);
         return 0;
     }
 
