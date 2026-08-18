@@ -1,28 +1,95 @@
 
 # Table of Contents
 
--   [C++ Basics](#orgaafe190)
--   [Fundamental Data Types](#org6807d81)
--   [Strings](#org91ff57a)
--   [Operators](#org8131a16)
--   [Bit Manipulation](#org5d89c27)
--   [Namespace and scope resolution](#org59d3d1b)
--   [Control Flow](#org1b8a3e8)
--   [Mersenne Twister](#org9ca010b)
--   [Function Templates](#org363d411)
--   [Constexpr and Consteval Functions](#orge2580bb)
--   [Compound data types](#org1533cf4)
-
-
-:ID:       8667b78f-2dc6-44f2-a893-a3718a247bb2
+1.  [C++ Basics](#org6c4436a)
+    1.  [Objects and Variables](#org85a92a0)
+        1.  [Variable assigment](#org0886ece)
+        2.  [maybe unused](#org01645c5)
+        3.  [cout and cin](#org96ca010)
+        4.  [Uninitialized variables and undefined behavioure](#org9af47f0)
+        5.  [Keywords and Identifiers](#orgc251cbd)
+    2.  [Functions and Files](#org2972582)
+        1.  [Void functions](#orgf95ad01)
+    3.  [size<sub>t</sub> link to topic](#org536c32d)
+    4.  [Char(ASCII TABLE LINK) here](#orgfa317d9)
+    5.  [Implicit and Explicit Coversion](#org1bc822d)
+        1.  [Sign conversion using static<sub>cast</sub>](#orga77d74a)
+        2.  [Quiz Questions](#org5d892f7)
+2.  [Fundamental Data Types](#orge905c9f)
+    1.  [Numeral Systems (decimal, binary, hexadecimal)](#orgf2786e2)
+        1.  [Octal](#org2c6de68)
+        2.  [hexadecimal](#org8a09420)
+        3.  [Binary](#org208a554)
+        4.  [Outputting values in decimal, octal and hexadecimal](#org4ac68cb)
+        5.  [Outputting values in Binary using std::bitset](#org5d376fc)
+3.  [Strings](#orga8108b7)
+    1.  [Strings (std::string)](#orgfef55fe)
+    2.  [Strings (std::string<sub>view</sub>)](#orgb35f150)
+4.  [Operators](#org27523e1)
+5.  [Bit Manipulation](#org5e3eed4)
+    1.  [Uses of <bitset> library](#org95344a1)
+    2.  [Bitmanipulation by bit masks](#orga9c0c47)
+6.  [Namespace and scope resolution](#orgc69de68)
+    1.  [Static local variables](#orga4b9889)
+7.  [Control Flow](#org2dce714)
+    1.  [Switch case](#orgd7e0935)
+    2.  [goto statements](#org32e418e)
+    3.  [While loop](#org4720dcb)
+    4.  [Do While](#org7b78fbb)
+    5.  [For Loop](#orgc1edacf)
+    6.  [std::exit](#org876e9bc)
+8.  [Mersenne Twister](#org31ea37d)
+9.  [Function Templates](#org5a948bc)
+10. [Constexpr and Consteval Functions](#org1143065)
+11. [Compound data types](#org610e46b)
+    1.  [L-value references](#orgd85f3d2)
+        1.  [Non-const L value references](#orga99197e)
+        2.  [Const L-value referencs](#org7a21801)
+    2.  [Pass by reference](#orgd448421)
+    3.  [pass by const lvalue reference](#org6029a9f)
+    4.  [why prefer std::string<sub>view</sub> to const std::string&](#org89e4565)
+    5.  [Pointers](#org9cc6e2a)
+        1.  [Deference operator](#orgbc143fa)
+        2.  [Pointer](#orgf709363)
+        3.  [Address of operator returns a pointer](#org0a0cb23)
+        4.  [null pointers as boolean values](#orge1c76ba)
+        5.  [pointer to const](#org840d3a6)
+        6.  [pass by address](#orgad0d2b6)
+    6.  [Operator overloading](#org8eb8ac1)
+    7.  [Enumerations](#orgad41ebd)
+        1.  [Unscoped Enumerations](#orgfa9a074)
+        2.  [scoped Enumerations](#orgc94470f)
+    8.  [Struct](#org720764c)
+    9.  [Classes (OOP)](#org63228f7)
+        1.  [member functions](#org035384e)
+        2.  [returning data members by lvalue reference](#org279e922)
+        3.  [constructor](#org4553342)
+        4.  [temporary object](#org13515d4)
+        5.  [delegating constructor](#org9093ad4)
+        6.  [copy constructor](#org2189800)
+        7.  [pass by value and copy construtor](#org84e816b)
+        8.  [Copy elison](#org986d5e5)
+        9.  [User defined conversions](#org1bfe78e)
+        10. [constexpr member functions](#org1ed13ca)
+        11. [the hidden this pointer](#org49f2006)
+        12. [member function chaining using \*this](#orge74e53f)
+        13. [Destructor](#orgf98ac61)
+        14. [static member variables and functions](#org0d7ca31)
+        15. [friend non-member functions](#org5ec8132)
+        16. [friend class and friend member function](#orgae33396)
+12. [Dynamic arrays](#orgd196f69)
+    1.  [Introduction to std::vector](#org837f057)
+        1.  [passing a std::vector using generic template or abbreviated function template](#orgc6472d9)
 
 filetags: CPP
 
 
-<a id="orgaafe190"></a>
+<a id="org6c4436a"></a>
 
 # C++ Basics
 
+
+<a id="org85a92a0"></a>
 
 ## Objects and Variables
 
@@ -43,6 +110,8 @@ Memory is allocated during the run time.
         return 0;
     }
 
+
+<a id="org0886ece"></a>
 
 ### Variable assigment
 
@@ -65,6 +134,8 @@ Memory is allocated during the run time.
     int e {};      // value-initialization (empty braces)
 
 
+<a id="org01645c5"></a>
+
 ### maybe unused
 
     #include <iostream>
@@ -83,6 +154,8 @@ Memory is allocated during the run time.
         return 0;
     }
 
+
+<a id="org96ca010"></a>
 
 ### cout and cin
 
@@ -121,6 +194,8 @@ Memory is allocated during the run time.
     }
 
 
+<a id="org9af47f0"></a>
+
 ### Uninitialized variables and undefined behavioure
 
 Returns garbage value -&#x2014;> Memory address
@@ -133,6 +208,8 @@ Returns garbage value -&#x2014;> Memory address
         return 0;
     }
 
+
+<a id="orgc251cbd"></a>
 
 ### Keywords and Identifiers
 
@@ -323,6 +400,8 @@ List of 92 keywords
 </table>
 
 
+<a id="org2972582"></a>
+
 ## Functions and Files
 
     #include <iostream>
@@ -343,6 +422,8 @@ List of 92 keywords
         return 0;
     }
 
+
+<a id="orgf95ad01"></a>
 
 ### Void functions
 
@@ -374,8 +455,12 @@ List of 92 keywords
     }
 
 
+<a id="org536c32d"></a>
+
 ## size<sub>t</sub>[ link to topic](https://www.learncpp.com/cpp-tutorial/fixed-width-integers-and-size-t/)
 
+
+<a id="orgfa317d9"></a>
 
 ## Char(ASCII TABLE LINK) [here](https://www.learncpp.com/cpp-tutorial/chars/)
 
@@ -401,6 +486,8 @@ List of 92 keywords
     }
 
 
+<a id="org1bc822d"></a>
+
 ## Implicit and Explicit Coversion
 
 Implicit conversion are made by compilers whereas explicit are made manually
@@ -423,6 +510,8 @@ Syntax for Exclipit conversion -&#x2014;> static<sub>cast</sub><new<sub>type</su
         return 0;
     }
 
+
+<a id="orga77d74a"></a>
 
 ### Sign conversion using static<sub>cast</sub>
 
@@ -457,6 +546,8 @@ Syntax for Exclipit conversion -&#x2014;> static<sub>cast</sub><new<sub>type</su
         return 0;
     }
 
+
+<a id="org5d892f7"></a>
 
 ### Quiz [Questions](https://www.learncpp.com/cpp-tutorial/chapter-4-summary-and-quiz/)
 
@@ -518,13 +609,17 @@ Q3.
     }
 
 
-<a id="org6807d81"></a>
+<a id="orge905c9f"></a>
 
 # Fundamental Data Types
 
 
+<a id="orgf2786e2"></a>
+
 ## Numeral Systems (decimal, binary, hexadecimal)
 
+
+<a id="org2c6de68"></a>
 
 ### Octal
 
@@ -548,6 +643,8 @@ For representing it as octal number we use &ldquo;0&rdquo; infront of the number
     }
 
 
+<a id="org8a09420"></a>
+
 ### hexadecimal
 
 Hexadecimal base is 16 and we count like  0, 1, 2, 3, 4, 5, 6, 7, 8, 9, A, B, C, D, E, F, 10, 11, 12, …
@@ -564,6 +661,8 @@ To use hexadecimal we use prefix &ldquo;0x&rdquo;
         return 0;
     }
 
+
+<a id="org208a554"></a>
 
 ### Binary
 
@@ -585,6 +684,8 @@ We use prefix 0b for binary numbers
     }
 
 
+<a id="org4ac68cb"></a>
+
 ### Outputting values in decimal, octal and hexadecimal
 
     #include <iostream>
@@ -601,6 +702,8 @@ We use prefix 0b for binary numbers
         return 0;
     }
 
+
+<a id="org5d376fc"></a>
 
 ### Outputting values in Binary using std::bitset
 
@@ -621,10 +724,12 @@ We use prefix 0b for binary numbers
     }
 
 
-<a id="org91ff57a"></a>
+<a id="orga8108b7"></a>
 
 # Strings
 
+
+<a id="orgfef55fe"></a>
 
 ## Strings (std::string)
 
@@ -643,6 +748,8 @@ The header <string> helps to input and output strings of different size
         return 0;
     }
 
+
+<a id="orgb35f150"></a>
 
 ## Strings (std::string<sub>view</sub>)
 
@@ -709,7 +816,7 @@ Example
     }
 
 
-<a id="org8131a16"></a>
+<a id="org27523e1"></a>
 
 # Operators
 
@@ -727,10 +834,12 @@ Exponent
     }
 
 
-<a id="org5d89c27"></a>
+<a id="org5e3eed4"></a>
 
 # Bit Manipulation
 
+
+<a id="org95344a1"></a>
 
 ## Uses of <bitset> library
 
@@ -808,6 +917,8 @@ It has
         return 0;
     }
 
+
+<a id="orga9c0c47"></a>
 
 ## Bitmanipulation by bit masks
 
@@ -909,7 +1020,7 @@ Q1. Write a program that asks the user to input a number between 0 and 255. Prin
     }
 
 
-<a id="org59d3d1b"></a>
+<a id="orgc69de68"></a>
 
 # Namespace and scope resolution
 
@@ -936,6 +1047,8 @@ Q1. Write a program that asks the user to input a number between 0 and 255. Prin
         return 0;
     }
 
+
+<a id="orga4b9889"></a>
 
 ## Static local variables
 
@@ -980,10 +1093,12 @@ example with static
     }
 
 
-<a id="org1b8a3e8"></a>
+<a id="org2dce714"></a>
 
 # Control Flow
 
+
+<a id="orgd7e0935"></a>
 
 ## Switch case
 
@@ -1011,6 +1126,8 @@ example with static
     }
 
 
+<a id="org32e418e"></a>
+
 ## goto statements
 
     #include <iostream>
@@ -1033,6 +1150,8 @@ example with static
         return 0;
     }
 
+
+<a id="org4720dcb"></a>
 
 ## While loop
 
@@ -1126,11 +1245,17 @@ example with static
     }
 
 
+<a id="org7b78fbb"></a>
+
 ## Do While
 
 
+<a id="orgc1edacf"></a>
+
 ## For Loop
 
+
+<a id="org876e9bc"></a>
 
 ## std::exit
 
@@ -1169,7 +1294,7 @@ std::atexit is called automatically when std::exit is called --------&#x2013;&#x
 here cleanup is a function.
 
 
-<a id="org9ca010b"></a>
+<a id="org31ea37d"></a>
 
 # Mersenne Twister
 
@@ -1187,7 +1312,7 @@ here cleanup is a function.
     }
 
 
-<a id="org363d411"></a>
+<a id="org5a948bc"></a>
 
 # Function Templates
 
@@ -1207,7 +1332,7 @@ here cleanup is a function.
     }
 
 
-<a id="orge2580bb"></a>
+<a id="org1143065"></a>
 
 # Constexpr and Consteval Functions
 
@@ -1253,11 +1378,11 @@ These functions are also called as immediate fucntions
     }
 
 
-<a id="org1533cf4"></a>
+<a id="org610e46b"></a>
 
 # Compound data types
 
-<div class="mindmap" id="org77f295b">
+<div class="mindmap" id="org2a9ed90">
 <p>
    ╭─ Functions
    ├─ C-style arrays
@@ -1277,8 +1402,12 @@ These functions are also called as immediate fucntions
 </div>
 
 
+<a id="orgd85f3d2"></a>
+
 ## L-value references
 
+
+<a id="orga99197e"></a>
 
 ### Non-const L value references
 
@@ -1301,6 +1430,8 @@ These functions are also called as immediate fucntions
         return 0;
     }
 
+
+<a id="org7a21801"></a>
 
 ### Const L-value referencs
 
@@ -1377,6 +1508,8 @@ with diif data types.
     }
 
 
+<a id="orgd448421"></a>
+
 ## Pass by reference
 
     #include <iostream>
@@ -1440,6 +1573,8 @@ So we use pass by reference.
 Here we can notice the address of passbyreference and original varible is same.
 
 
+<a id="org6029a9f"></a>
+
 ## pass by const lvalue reference
 
 Unlike non-const lvalue reference for which we can bind to modifiable lvalues.
@@ -1466,6 +1601,8 @@ pass by const lvalue reference can be bind to modifiable, non-modifiable lvalues
         return 0;
     }
 
+
+<a id="org89e4565"></a>
 
 ## why prefer std::string<sub>view</sub> to const std::string&
 
@@ -1541,8 +1678,12 @@ pass by const lvalue reference can be bind to modifiable, non-modifiable lvalues
     }
 
 
+<a id="org9cc6e2a"></a>
+
 ## Pointers
 
+
+<a id="orgbc143fa"></a>
 
 ### Deference operator
 
@@ -1562,6 +1703,8 @@ While \* is used to return value at a given memory address as an lvalue.
         return 0;
     }
 
+
+<a id="orgf709363"></a>
 
 ### Pointer
 
@@ -1626,6 +1769,8 @@ A Pointer is an object that holds a memory address as its value. This allows us 
 -   In a 32 bit computer 4 bytes are taken and in 64 bit computer 8 bytes are taken.
 
 
+<a id="org0a0cb23"></a>
+
 ### Address of operator returns a pointer
 
 The address of operator doesnt returns address of its operand as literal, Instead it returns a pointer to the operand.
@@ -1643,6 +1788,8 @@ The address of operator doesnt returns address of its operand as literal, Instea
         return 0;
     }
 
+
+<a id="orge1c76ba"></a>
 
 ### null pointers as boolean values
 
@@ -1662,6 +1809,8 @@ The address of operator doesnt returns address of its operand as literal, Instea
         return 0;
     }
 
+
+<a id="org840d3a6"></a>
 
 ### pointer to const
 
@@ -1718,6 +1867,8 @@ With this we cannot change the address and the value.
     }
 
 
+<a id="orgad0d2b6"></a>
+
 ### pass by address
 
     #include <iostream>
@@ -1749,6 +1900,8 @@ With this we cannot change the address and the value.
         return 0;
     }
 
+
+<a id="org8eb8ac1"></a>
 
 ## Operator overloading
 
@@ -1820,10 +1973,14 @@ Operator overloading = writing your own function that runs when someone uses +, 
     }
 
 
+<a id="orgad41ebd"></a>
+
 ## Enumerations
 
 Enumerations are implicitly constexpr.
 
+
+<a id="orgfa9a074"></a>
 
 ### Unscoped Enumerations
 
@@ -1924,6 +2081,8 @@ Each enumeration is numbered from 0. We can explicitly number a enumeration, any
     }
 
 
+<a id="orgc94470f"></a>
+
 ### scoped Enumerations
 
     #include <iostream>
@@ -1951,6 +2110,8 @@ Each enumeration is numbered from 0. We can explicitly number a enumeration, any
         return 0;
     }
 
+
+<a id="org720764c"></a>
 
 ## Struct
 
@@ -2044,6 +2205,8 @@ Variables inside a group are called members.
     }
 
 
+<a id="org63228f7"></a>
+
 ## Classes (OOP)
 
     #include <iostream>
@@ -2066,6 +2229,8 @@ Variables inside a group are called members.
         return 0;
     }
 
+
+<a id="org035384e"></a>
 
 ### member functions
 
@@ -2152,6 +2317,8 @@ Variables inside a group are called members.
     \}
 
 
+<a id="org279e922"></a>
+
 ### returning data members by lvalue reference
 
     #include <iostream>
@@ -2202,7 +2369,7 @@ Variables inside a group are called members.
     }
 
 
-<a id="org0ce53c7"></a>
+<a id="org4553342"></a>
 
 ### constructor
 
@@ -2348,6 +2515,8 @@ Reducing construtor using default arguments
     }
 
 
+<a id="org13515d4"></a>
+
 ### temporary object
 
     #include <iostream>
@@ -2379,9 +2548,11 @@ Reducing construtor using default arguments
 -   callling a constructor in a function creates a temporary object
 
 
-### delegating [constructor](#org0ce53c7)
+<a id="org9093ad4"></a>
 
-To make one [constructor](#org0ce53c7) delegate to another construtor simply call the constructor in member initialization list of another [constructor](#org0ce53c7).
+### delegating [constructor](#org4553342)
+
+To make one [constructor](#org4553342) delegate to another construtor simply call the constructor in member initialization list of another [constructor](#org4553342).
 
     #include <iostream>
     using namespace std;
@@ -2402,11 +2573,13 @@ To make one [constructor](#org0ce53c7) delegate to another construtor simply cal
     }
 
 
-### copy [constructor](#org0ce53c7)
+<a id="org2189800"></a>
+
+### copy [constructor](#org4553342)
 
 A copy construtor is a construtor that is used to initialize an object using an existing object.
 
-A copy [constructor](#org0ce53c7) is implicitly created by compiler when we create a object using another object like in below. Although we can create copy [constructor](#org0ce53c7) manually.
+A copy [constructor](#org4553342) is implicitly created by compiler when we create a object using another object like in below. Although we can create copy [constructor](#org4553342) manually.
 
     #include <iostream>
     using namespace std;
@@ -2519,6 +2692,8 @@ using = delete to prevent copies
     }
 
 
+<a id="org84e816b"></a>
+
 ### pass by value and copy construtor
 
 when we pass an object by value to a function if the argument and parameter are of same class type then implicitly copy construtort is called.
@@ -2550,6 +2725,811 @@ in the beow code when an object is passed as value to a function then explicitly
     int main() {
         Number x{12,3};
         fun(x);
+        return 0;
+    }
+
+
+<a id="org986d5e5"></a>
+
+### Copy elison
+
+Copy elision is a compiler optimization technique that allows the compiler to remove unnecessary copying of objects. In other words, in cases where the compiler would normally call a copy constructor, the compiler is free to rewrite the code to avoid the call to the copy constructor altogether. When the compiler optimizes away a call to the copy constructor, we say the constructor has been elided.
+
+
+<a id="org1bfe78e"></a>
+
+### User defined conversions
+
+here even though we the function **gets** has parameter Numbers class type in arguments we gave int. So the compiler implicitly converts the types.
+These type of functions are called **user defined functions**.
+
+    #include <iostream>
+    using namespace std;
+    
+    class Numbers {
+        int m_a{};
+    public:
+        Numbers(int a) : m_a {a} {}
+    
+        void print() {
+            cout << m_a << "\n";
+        }
+    
+    };
+    
+    void gets(Numbers num) {
+        num.print();
+    }
+    
+    int main() {
+        gets(2);
+        return 0;
+    }
+
+
+<a id="org1ed13ca"></a>
+
+### constexpr member functions
+
+    #include <iostream>
+    using namespace std;
+    
+    struct Numbers {
+        int m_a{};
+        int m_b{};
+    
+        constexpr void print() {
+            cout << m_a << " " << m_b << "\n";
+        }
+    };
+    
+    int main() {
+        Numbers num{1,2};
+        num.print();
+    
+        constexpr num1{3,4};
+        num1.print();
+    
+        return 0;
+    }
+
+This works for aggregate functions functions like **struct** but not for **class**
+
+    #include <iostream>
+    using namespace std;
+    
+    class Numbers {
+        int m_a{};
+        int m_b{};
+    
+    public:
+        Numbers(int a, int b) : m_a{ a } , m_b {b} {}
+    
+        constexpr void print() {
+            cout << m_a << " " << m_b << "\n";
+        }
+    };
+    int main() {
+        constexpr Numbers num{21,2};
+        num.print() ;
+        return 0;
+    }
+
+here when object is created the construtor is called which is of type class Numbers which is not constexpr so it doesnt run at runtime.
+
+    #include <iostream>
+    using namespace std;
+    
+    class Numbers {
+        int m_a{};
+        int m_b{};
+    
+    public:
+        constexpr Numbers(int a, int b) : m_a{ a } , m_b {b} {}
+    
+        constexpr void print() {
+            cout << m_a << " " << m_b << "\n";
+        }
+    };
+    int main() {
+        constexpr Numbers num{21,2};
+        num.print();
+        return 0;
+    }
+
+😭
+
+    #include <iostream>
+    using namespace std;
+    
+    class so{
+        int m_a{};
+    public:
+        so(int a) : m_a {a} {}
+    
+        void print() {
+            cout << m_a << "\n";
+        }
+    };
+    
+    int main() {
+        so a{1};
+        a.print();
+    
+        so* b{&a};
+        b->print();
+        return 0;
+    }
+
+
+<a id="org49f2006"></a>
+
+### the hidden this pointer
+
+Inside every member function the keyword this is a const pointer that holds the address of current of object.
+
+    #include <iostream>
+    using namespace std;
+    
+    class numbers{
+        int m_a{};
+    public:
+        numbers(int a) :m_a {a} {}
+    
+        void print() {
+            cout << this->m_a<< "\n";
+        }
+    };
+    
+    int main() {
+        numbers n{1};
+        n.print(&n);
+        return 0;
+    }
+
+in the above the code can work simply if we put **m<sub>a</sub>** instead of **this->m<sub>a</sub>**
+but this proves that there is a pointer of type numbers which stores address of object. so by using this->m<sub>a</sub> it can access the m<sub>a</sub> member.
+
+    #include <iostream>
+    using namespace std;
+    
+    class Simple{
+       int m_a{};
+    public:
+        void set_a(int a) {
+            m_a = a;
+        }
+    
+        int get_a() {
+            return m_a;
+        }
+    };
+    
+    int main() {
+        Simple x{};
+        x.set_a(2);
+        cout << x.get_a() << "\n";
+        return 0;
+    }
+
+here the compiler rewrites **x.set<sub>a</sub>(2)** as **Simple::set<sub>a</sub>(&Simple, 2)** internally
+
+then the set<sub>a</sub> function also changes in the class as
+
+**void set<sub>a</sub>(int a) {m<sub>a</sub> = a}** ------&#x2013;&#x2014;>>  static void set<sub>a</sub>(Simple\* const this, int a) {this->m<sub>a</sub> =a;}
+
+1.  When we call simple.set<sub>a</sub>(2), the compiler actually calls Simple::set<sub>a</sub>(&simple, 2) and simple is passed by address to the function
+2.  The function has hidden parameter named **this** which receives the address of simple.
+3.  member variables inside set<sub>a</sub>() are prefixed with **this->** which points to simple. So when compiler evaluates this->m<sub>a</sub>, its actually resolving to simple.m<sub>a</sub>
+
+4.  Each member function has single this pointer parameter that points to the implicit object.
+    
+    Explicitly referencing this
+    
+        #include <iostream>
+        using namespace std;
+        
+        struct something {
+            int a{};
+        
+            void set_a(int a) {
+                this->a = a;
+            }
+        
+            int get_a() {
+                return a;
+            }
+        };
+        
+        int main() {
+            something a{};
+            a.set_a(1);
+            cout << a.get_a();
+            return 0;
+        }
+
+    1
+
+    #include <iostream>
+    using namespace std;
+    
+    class something{
+        int a{};
+    public:
+        void get() {
+            cout << *this << "\n";
+        }
+    };
+    
+    int main() {
+        int a{1};
+        int* ptr{&a};
+        cout << *ptr << "\n";
+        something s{};
+        s.get();
+        return 0;
+    }
+
+
+<a id="orge74e53f"></a>
+
+### member function chaining using \*this
+
+    #include <iostream>
+    using namespace std;
+    
+    class Cal{
+        int m_a{0};
+    public:
+        void add(int a) {m_a += a;}
+        void sub(int a) {m_a -= a;}
+        void mul(int a) {m_a *= a;}
+    
+        int get() {
+            return m_a;
+        }
+    };
+    
+    int main() {
+        Cal cal{};
+        cal.add(3);
+        cal.sub(1);
+        cal.mul(4);
+        cout << cal.get();
+        return 0;
+    }
+
+Here to add, sub, and mul we need to call three diffrent member fuuntions seperating but with member fucntion chaining we can do it in a single line.
+
+    #include <iostream>
+    using namespace std;
+    
+    class Cal{
+        int m_a{0};
+    public:
+        Cal& add(int a) {
+            m_a += a;
+            return *this;
+        }
+    
+        Cal& sub(int a) {
+            m_a -= a;
+            return *this;
+        }
+    
+        Cal& mul(int a) {
+            m_a *= a;
+            return *this;
+        }
+    
+        int get() {
+            return m_a;
+        }
+    
+        void reset() {
+            *this = {};
+        }
+    };
+    
+    int main() {
+        Cal a{};
+        a.add(3).sub(1).mul(3);
+        cout << a.get() << "\n";
+    
+        a.reset();
+    
+        cout << a.get();
+        return 0;
+    }
+
+here first add(3) runs and adds value 3 to m<sub>a</sub> then it returns reference of the Cal object so
+a.add(3).sub(1).mul(3) -&#x2013;&#x2014;> a.sub(1).mul(3)
+
+-   Here we can reset the value of members using a member fucntion reset by \*this = {}
+-   it creates a temporary Cal using default values of members and assigns it to current object.
+
+
+<a id="orgf98ac61"></a>
+
+### Destructor
+
+-   Destructor is used for cleaning
+-   It is called automatically when an object of a class is destroyed.
+-   It doesnt have any arguments.
+-   It doesnt have any return type.
+-   It has name name as class preceding with a tilde(~).
+-   Although we can call destructor explicitly it is called automatically almost every time.
+-   If we dont not declare a dedtructot the compiler will implicitly declare a destructor with empty body.
+    
+        #include <iostream>
+        using namespace std;
+        
+        class Simple{
+            int m_id{};
+        public:
+            Simple(int id)  : m_id {id} {}
+        
+            ~Simple() {
+                cout << "Destructor" << m_id << "\n";
+            }
+        
+        };
+        
+        int main() {
+            Simple s1(1);
+            {
+                Simple s2(2);
+            }//s2 dies here so destructor of s2 is called first.
+            return 0;
+        }//s1 dies here.
+
+    Destructor2
+    Destructor1
+
+
+<a id="org0d7ca31"></a>
+
+### static member variables and functions
+
+    #include <iostream>
+    using namespace std;
+    
+    struct Something{
+        static int a;
+    };
+    
+    int Something::a{1};
+    
+    int main() {
+    
+        Something something1{};
+        Something something2{};
+    
+        something1.a = 2;
+    
+        cout << something1.a << "\n";
+        cout << something2.a << "\n";
+    
+        return 0;
+    }
+
+Here we can see eventhough we changed the value of a for **something1** it has also changed for **something2**
+
+**Static members are not associated with class objects** - we know that when we create a object it occupies memory for it, but when it comes to static member variables it will be created at the start of the program and destroyed at the program so it is independent of class object.
+
+**When can say that - static members are global variables that live inside the scope region of a class**
+
+Because it is independent of object we can access it with class name and scope resolution operator. just like above
+
+It is declared as forward declare and the static members are accessed independent of access control like **private** **protected**, because the forward definations are not considered a way to access.
+
+If we include a header file which has class definations there wont be initialized.
+We have to initialize using access specifier but we can initialize to a static member if is inline.
+
+    #include <iostream>
+    using namespace std;
+    
+    struct Something{
+        static inline int a{1};
+    };
+    
+    int main() {
+        Something something{};
+        cout << something.a;
+        return 0;
+    }
+
+Consider this
+
+    #include <iostream>
+    using namespace std;
+    
+    class Something {
+        static inline int m_a{1};
+    
+    public:
+        int get() {
+            return m_a;
+        }
+    };
+    
+    int main() {
+        Something s{};
+        cout << s.get();
+        return 0;
+    }
+
+even though this works for getting the value it need to create a object.
+for this reason we use static member functions.
+
+    #include <iostream>
+    using namespace std;
+    
+    class Something{
+        static inline int m_a{1};
+    public:
+        static int get() {
+            return m_a;
+        }
+    };
+    
+    int main() {
+        cout << Something::get();
+        return 0;
+    }
+
+here we accessed a private data member using static member function without creating an object.
+
+-   static member functions do not have \*this pointer.
+
+
+<a id="org5ec8132"></a>
+
+### friend non-member functions
+
+Friend function or member is used for access private or protected data of a class to another class or function.
+
+**friend is a class or function (member or non-member) that has been granted full access to the private and protected members of another class.**
+
+    #include <iostream>
+    using namespace std;
+    
+    class Something{
+        int m_a{};
+    public:
+        Something(int a) : m_a {a} {}
+    
+        friend void print(const Something& something); //declaration of friend function
+    };
+    
+    
+    void print(const Something& something) {
+        cout << something.m_a;
+    }
+    
+    int main() {
+        Something nothing{1};
+        print(nothing);
+        return 0;
+    }
+
+defining friend non-member inside a class
+
+    #include <iostream>
+    using namespace std;
+    
+    class Something{
+        int m_a{};
+    public:
+        Something(int a) : m_a {a} {}
+    
+        friend void print(const Something& something) {
+            cout << something.m_a;
+        }
+    };
+    
+    int main() {
+        Something nothing{1};
+        print(nothing);
+        return 0;
+    }
+
+
+<a id="orgae33396"></a>
+
+### friend class and friend member function
+
+A friend Class is that can access private and protected member of another class.
+
+    #include <iostream>
+    using namespace std;
+    
+    class Storage{
+        int m_d{};
+        int m_n{};
+    public:
+        Storage(int d,int n) : m_d {d} , m_n {n} {}
+    
+        friend class Display;
+    };
+    
+    class Display{
+        bool first{};
+    
+    public:
+        Display(bool b) : first {b} {}
+    
+        void displaystorage(Storage& storage) {
+            if(first) {
+                cout << storage.m_d << " " << storage.m_n << "\n";
+            }else {
+                cout << storage.m_n<< " " << storage.m_d << "\n";
+            }
+        }
+    };
+    
+    int main() {
+        Storage storage{10,20};
+        Display display{false};
+    
+        display.displaystorage(storage); //here we are acessing the members of class Storage from class display
+    
+        return 0;
+    }
+
+friend member funtion - instead of making an entire class friend we can make a function from another class a friend.
+this can be done like this
+
+    #include <iostream>
+    using namespace std;
+    
+    class Display {};
+    
+    class Storage{
+        int m_a{};
+        int m_n{};
+    
+    public:
+        Storageaint a, int n) : m_a {a} , m_n{n} {}
+    
+        friend void Display::displaystorage(const Storage& storage);
+    };
+    
+    class Display{
+        bool is{};
+    public:
+    
+        Display(bool b) : b{is} {}
+    
+        void displaystorage(const Storage& storage) {
+            if(is) {
+                cout << m_a << " " << m_n << "\n";
+            }else {
+                cout << m_n << " " << m_a << "\n";
+            }
+        }
+    };
+    
+    int main() {
+    
+        Storage storage{10,20};
+        Display display{true};
+    
+        display.displaystorage();
+    
+        return 0;
+    }
+
+This doesnt work because the compiler will throw an error the it hasnt seen full defination of class Display
+
+Instead we can do something like this
+
+    #include <iostream>
+    using namespace std;
+    
+    class Storage;
+    
+    class Display{
+       bool is{};
+    public:
+        Display(bool b) : is{b} {}
+        void displaystorage(Storage& storage);  // This is the reason we farward declared class Storage.
+    };
+    
+    class Storage{
+        int m_n{};
+        int m_a{};
+    public:
+        Storage(int n, int a) : m_n{n} , m_a{a} {}
+    
+        friend void Display::displaystorage(Storage& storage);
+    };
+    
+    void Display::displaystorage(Storage& storage) {
+        if(is) {
+            cout << storage.m_n << " " << storage.m_a << "\n";
+        }else {
+            cout << storage.m_a << " " << storage.m_n << "\n";
+        }
+    }
+    
+    int main() {
+        Storage storage{10,20};
+        Display display{false};
+        display.displaystorage(storage);
+        return 0;
+    }
+
+[Quiz](https://www.learncpp.com/cpp-tutorial/friend-classes-and-friend-member-functions/)
+
+    #include <iostream>
+    using namespace std;
+    
+    class Vector{
+        double m_x{};
+        double m_y{};
+        double m_z{};
+    public:
+        Vector(double x, double y, double z) : m_x{x}, m_y{y} , m_z{z} {}
+    
+        void print() {
+            cout << "x: " << m_x << " y: " << m_y << " z: " << m_z << "\n";
+        }
+    
+        friend class Point;
+    };
+    
+    class Point{
+        double m_x{};
+        double m_y{};
+        double m_z{};
+    public:
+        Point(double x,double y,double z) :m_x {x}, m_y{y}, m_z{z} {}
+    
+        void print() {
+            cout << "x: " << m_x << " y: " << m_y << " z: " << m_z << "\n";
+        }
+    
+        void movebyvector(Point& point) {
+            cout << point.m_x + m_x << " " << point.m_y + m_y << " " << point.m_z + m_z << "\n";
+        }
+    };
+    
+    int main() {
+        Vector vector{1.2, 2.2, 3.4};
+        Point point{2.3, 3.4, 4.9};
+        point.movebyvector(point);
+        return 0;
+    }
+
+
+<a id="orgd196f69"></a>
+
+# Dynamic arrays
+
+
+<a id="org837f057"></a>
+
+## Introduction to std::vector
+
+    #include <iostream>
+    #include <vector>
+    
+    int main() {
+        std::vector<int> empty{};
+        std::vector<int> whole{0,1,2,3};
+    
+        std::cout << whole[2];
+        return 0;
+    }
+
+Containers typically have a special constructor called a list constructor that allows us to construct an instance of the container using an initializer list. The list constructor does three things:
+
+1.  Ensures the container has enough storage to hold all the initialization values (if needed).
+2.  Sets the length of the container to the number of elements in the initializer list (if needed).
+3.  Initializes the elements to the values in the initializer list (in sequential order).
+
+    #include <iostream>
+    #include <vector>
+    using namespace std;
+    
+    int main() {
+        const vector<int> arr{1,2};
+        cout << arr[1];
+        return 0;
+    }
+
+length using size() member function.
+
+    #include <iostream>
+    #include <vector>
+    using namespace std;
+    
+    int main() {
+        vector arr{1,2,3};
+        cout << arr.size() << "\n";
+        cout << size(arr);
+        return 0;
+    }
+
+Since size() member function supports only unsigned numbers when we assign the length to a variable using size() it may result in signed/unsigned conversion warnings
+
+Instead we cast using static cast
+
+    #include <iostream>
+    #include <vector>
+    using namespace std;
+    
+    int main() {
+        vector arr{1,2};
+        //int length {arr.size()}; gives warning
+        int length (static_cast<int>(arr.size()));
+        cout << length;
+        return 0;
+    }
+
+using ssize for length
+
+-   Since ssize is non-member function and returns lenght as long signed int we also need to cast this.j
+    
+        #include <iostream>
+        #include <vector>
+        using namespace std;
+        
+        int main() {
+            vector arr{1,2,3};
+            int length {std::ssize(arr)};
+            cout << length << "\n";
+            return 0;
+        }
+
+pass by reference
+
+    #include <iostream>
+    #include <vector>
+    using namespace std;
+    
+    void fun(const vector<int>& arr) {
+        cout << arr[0];
+    }
+    
+    int main() {
+        vector arr{1,2,3,4};
+        fun(arr);
+        return 0;
+    }
+
+we have to mention type of data in function parameter
+we can use template
+
+    #include <iostream>
+    #include <vector>
+    using namespace std;
+    template <typename T>
+    void fun(const vector<T>& arr) {
+        cout << arr[0] << "\n";
+    }
+    
+    int main() {
+        vector arr1{1,2,3};
+        vector arr2{1.2, 3.2};
+        fun(arr1);
+        fun(arr2);
+        return 0;
+    }
+
+
+<a id="orgc6472d9"></a>
+
+### passing a std::vector using generic template or abbreviated function template
+
+we can also create a template that can accpet any type of object.
+
+    #include <iostream>
+    using namespace std;
+    
+    int main() {
+    
         return 0;
     }
 

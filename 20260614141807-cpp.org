@@ -1,13 +1,11 @@
-:REVEAL_PROPERTIES:
-#+REVEAL_ROOT: https://cdn.jsdelivr.net/npm/reveal.js
-#+REVEAL_REVEAL_JS_VERSION: 4
-#+REVEAL_THEME: night
-#+OPTIONS: timestamp:nil toc:1 num:nil
+:PROPERTIES:
+:ID:       4cadd76b-bcf2-4e35-8205-41c606109a13
 :END:
 
-:PROPERTIES:
-:ID:       8667b78f-2dc6-44f2-a893-a3718a247bb2
-:END:
+#+REVEAL_ROOT: https://cdn.jsdelivr.net/npm/reveal.js
+#+REVEAL_VERSION: 4
+#+OPTIONS: reveal_slide_number:t
+
 #+title: CPP
 filetags: CPP
 
@@ -526,7 +524,7 @@ int main() {
 : 00001111
 * Strings
 :PROPERTIES:
-:collapsed: true
+:ID:       f325424f-36cb-44cc-8ab1-d062e4292603
 :END:
 ** Strings (std::string)
 :PROPERTIES:
@@ -642,7 +640,7 @@ int main() {
 #+end_src
 * Bit Manipulation
 :PROPERTIES:
-:collapsed: true
+:ID:       8c53eb59-116d-4f75-9345-128c4a166dcb
 :END:
 ** Uses of <bitset> library
 :PROPERTIES:
@@ -950,7 +948,7 @@ int main() {
 : 4
 * Control Flow
 :PROPERTIES:
-:collapsed: true
+:ID:       34549f34-c05a-4e23-ae24-8bdeb948cd13
 :END:
 ** Switch case
 :PROPERTIES:
@@ -1206,6 +1204,9 @@ int main() {
 418932835
 #+end_example
 * Function Templates
+:PROPERTIES:
+:ID:       c1cad433-f953-497d-bbeb-fdc708761b6d
+:END:
 
 #+begin_src cpp :results output
 #include <iostream>
@@ -1301,7 +1302,13 @@ int main() {
 #+end_mindmap
 
 ** L-value references
+:PROPERTIES:
+:ID:       d46624f3-8fc2-47a4-a8a4-2e9fc383bf7f
+:END:
 *** Non-const L value references
+:PROPERTIES:
+:ID:       3e48fd10-66f1-4f0c-88c0-fde9e796e724
+:END:
 #+begin_src cpp :results output
 #include <iostream>
 using namespace std;
@@ -1331,6 +1338,9 @@ int main() {
 : 5
 : 5
 *** Const L-value referencs
+:PROPERTIES:
+:ID:       673d6af3-7c66-4f0b-8f1d-4017bb8e2c10
+:END:
 
 #+begin_src cpp :results output
 #include <iostream>
@@ -1591,6 +1601,9 @@ int main()
 #+end_src
 
 ** Pointers
+:PROPERTIES:
+:ID:       6c8fabe5-ab23-4a14-85da-a530791a14f5
+:END:
 *** Deference operator
 :PROPERTIES:
 :ID: Deference operator
@@ -1711,6 +1724,9 @@ int main() {
 #+RESULTS:
 : Null
 *** pointer to const
+:PROPERTIES:
+:ID:       819dd8ff-8d93-490b-80ad-ba2fc8e45b09
+:END:
 
 1. If the object is const then the pointer should be const.
 2. If the object is non-const, we can still point a const pointer to it but we cannot change the value of object by deferencing pointer.
@@ -1775,6 +1791,9 @@ int main() {
 
 #+RESULTS:
 *** pass by address
+:PROPERTIES:
+:ID:       5c717542-3df3-46cb-ba1f-efb5f1a0e718
+:END:
 
 #+begin_src cpp :results output
 #include <iostream>
@@ -1807,6 +1826,9 @@ int main()
 }
 #+end_src
 ** Operator overloading
+:PROPERTIES:
+:ID:       91f9c503-f53a-4d51-a398-10c9fe7be9dc
+:END:
 
 Operator overloading = writing your own function that runs when someone uses +, ==, <<, etc. on your custom data type.
 
@@ -1892,6 +1914,9 @@ int main() {
 : X: 1 Y: 2
 
 ** Enumerations
+:PROPERTIES:
+:ID:       596bd0f2-f28c-40bb-9ec0-8de3600fc987
+:END:
 Enumerations are implicitly constexpr.
 *** Unscoped Enumerations
 :PROPERTIES:
@@ -2032,6 +2057,8 @@ int main() {
 }
 #+end_src
 
+#+RESULTS:
+
 
 #+begin_src cpp :results output
 #include <iostream>
@@ -2157,6 +2184,9 @@ int main() {
 #+RESULTS:
 : 4
 ** Classes (OOP)
+:PROPERTIES:
+:ID:       cd2cfe93-4c05-43da-aced-0b891ab966dd
+:END:
 
 #+begin_src cpp :results output
 #include <iostream>
@@ -2574,6 +2604,9 @@ int main() {
 : Shiva 0
 : PRASAD 2
 *** copy [[id:7eefd7b1-cbe6-4f3e-8cdf-13c2ec75f43c][constructor]]
+:PROPERTIES:
+:ID:       6f470fe6-37ac-4cc1-97aa-bb5d0fdd4e90
+:END:
 
 A copy construtor is a construtor that is used to initialize an object using an existing object.
 
@@ -2711,6 +2744,9 @@ int main()
 #+end_src
 
 *** pass by value and copy construtor
+:PROPERTIES:
+:ID:       5dbdde02-e9f6-425f-943b-82d9f409f40c
+:END:
 
 when we pass an object by value to a function if the argument and parameter are of same class type then implicitly copy construtort is called.
 
@@ -2749,3 +2785,919 @@ int main() {
 #+RESULTS:
 : copy construtor is called
 : 12 3
+*** Copy elison
+:PROPERTIES:
+:ID:       cb683dcd-2755-4ed2-85a8-c1ea0626e6b2
+:END:
+Copy elision is a compiler optimization technique that allows the compiler to remove unnecessary copying of objects. In other words, in cases where the compiler would normally call a copy constructor, the compiler is free to rewrite the code to avoid the call to the copy constructor altogether. When the compiler optimizes away a call to the copy constructor, we say the constructor has been elided.
+
+*** User defined conversions
+:PROPERTIES:
+:ID:       2919e6a9-86ae-4c40-a82f-8ad364b0849c
+:END:
+
+here even though we the function *gets* has parameter Numbers class type in arguments we gave int. So the compiler implicitly converts the types.
+These type of functions are called *user defined functions*.
+
+#+begin_src cpp :results output
+#include <iostream>
+using namespace std;
+
+class Numbers {
+    int m_a{};
+public:
+    Numbers(int a) : m_a {a} {}
+
+    void print() {
+        cout << m_a << "\n";
+    }
+
+};
+
+void gets(Numbers num) {
+    num.print();
+}
+
+int main() {
+    gets(2);
+    return 0;
+}
+#+end_src
+
+#+RESULTS:
+: 2
+*** constexpr member functions
+:PROPERTIES:
+:ID:       ed2b9127-74e0-4db5-9d00-2a70e8ae9217
+:END:
+#+begin_src cpp :results output
+#include <iostream>
+using namespace std;
+
+struct Numbers {
+    int m_a{};
+    int m_b{};
+
+    constexpr void print() {
+        cout << m_a << " " << m_b << "\n";
+    }
+};
+
+int main() {
+    Numbers num{1,2};
+    num.print();
+
+    constexpr num1{3,4};
+    num1.print();
+
+    return 0;
+}
+#+end_src
+
+#+RESULTS:
+: 1 2
+
+This works for aggregate functions functions like *struct* but not for *class*
+
+#+begin_src cpp :results output
+#include <iostream>
+using namespace std;
+
+class Numbers {
+    int m_a{};
+    int m_b{};
+
+public:
+    Numbers(int a, int b) : m_a{ a } , m_b {b} {}
+
+    constexpr void print() {
+        cout << m_a << " " << m_b << "\n";
+    }
+};
+int main() {
+    constexpr Numbers num{21,2};
+    num.print() ;
+    return 0;
+}
+#+end_src
+
+#+RESULTS:
+
+here when object is created the construtor is called which is of type class Numbers which is not constexpr so it doesnt run at runtime.
+
+#+begin_src cpp :results output
+#include <iostream>
+using namespace std;
+
+class Numbers {
+    int m_a{};
+    int m_b{};
+
+public:
+    constexpr Numbers(int a, int b) : m_a{ a } , m_b {b} {}
+
+    constexpr void print() {
+        cout << m_a << " " << m_b << "\n";
+    }
+};
+int main() {
+    constexpr Numbers num{21,2};
+    num.print();
+    return 0;
+}
+#+end_src
+
+#+RESULTS:
+
+😭
+
+
+#+begin_src cpp :results output
+#include <iostream>
+using namespace std;
+
+class so{
+    int m_a{};
+public:
+    so(int a) : m_a {a} {}
+
+    void print() {
+        cout << m_a << "\n";
+    }
+};
+
+int main() {
+    so a{1};
+    a.print();
+
+    so* b{&a};
+    b->print();
+    return 0;
+}
+#+end_src
+
+#+RESULTS:
+: 1
+: 1
+
+*** the hidden this pointer
+:PROPERTIES:
+:ID:       0027b492-1478-49c8-8761-9b7a46f57973
+:END:
+
+Inside every member function the keyword this is a const pointer that holds the address of current of object.
+
+#+begin_src cpp :results output
+#include <iostream>
+using namespace std;
+
+class numbers{
+    int m_a{};
+public:
+    numbers(int a) :m_a {a} {}
+
+    void print() {
+        cout << this->m_a<< "\n";
+    }
+};
+
+int main() {
+    numbers n{1};
+    n.print(&n);
+    return 0;
+}
+#+end_src
+
+#+RESULTS:
+
+in the above the code can work simply if we put *m_a* instead of *this->m_a*
+but this proves that there is a pointer of type numbers which stores address of object. so by using this->m_a it can access the m_a member.
+
+#+begin_src cpp :results output
+#include <iostream>
+using namespace std;
+
+class Simple{
+   int m_a{};
+public:
+    void set_a(int a) {
+        m_a = a;
+    }
+
+    int get_a() {
+        return m_a;
+    }
+};
+
+int main() {
+    Simple x{};
+    x.set_a(2);
+    cout << x.get_a() << "\n";
+    return 0;
+}
+#+end_src
+
+#+RESULTS:
+: 2
+
+here the compiler rewrites *x.set_a(2)* as *Simple::set_a(&Simple, 2)* internally
+
+then the set_a function also changes in the class as
+
+*void set_a(int a) {m_a = a}* ----------->>  static void set_a(Simple* const this, int a) {this->m_a =a;}
+
+1. When we call simple.set_a(2), the compiler actually calls Simple::set_a(&simple, 2) and simple is passed by address to the function
+2. The function has hidden parameter named *this* which receives the address of simple.
+3. member variables inside set_a() are prefixed with *this->* which points to simple. So when compiler evaluates this->m_a, its actually resolving to simple.m_a
+
+- Each member function has single this pointer parameter that points to the implicit object.
+
+  Explicitly referencing this
+
+  #+begin_src cpp :results output
+#include <iostream>
+using namespace std;
+
+struct something {
+    int a{};
+
+    void set_a(int a) {
+        this->a = a;
+    }
+
+    int get_a() {
+        return a;
+    }
+};
+
+int main() {
+    something a{};
+    a.set_a(1);
+    cout << a.get_a();
+    return 0;
+}
+#+end_src
+
+#+RESULTS:
+: 1
+
+#+begin_src cpp :results output
+#include <iostream>
+using namespace std;
+
+class something{
+    int a{};
+public:
+    void get() {
+        cout << *this << "\n";
+    }
+};
+
+int main() {
+    int a{1};
+    int* ptr{&a};
+    cout << *ptr << "\n";
+    something s{};
+    s.get();
+    return 0;
+}
+#+end_src
+
+#+RESULTS:
+*** member function chaining using *this
+:PROPERTIES:
+:ID:       c6d769ca-d2a1-45fd-99c3-4db1f9010bcd
+:END:
+
+#+begin_src cpp :results output
+#include <iostream>
+using namespace std;
+
+class Cal{
+    int m_a{0};
+public:
+    void add(int a) {m_a += a;}
+    void sub(int a) {m_a -= a;}
+    void mul(int a) {m_a *= a;}
+
+    int get() {
+        return m_a;
+    }
+};
+
+int main() {
+    Cal cal{};
+    cal.add(3);
+    cal.sub(1);
+    cal.mul(4);
+    cout << cal.get();
+    return 0;
+}
+#+end_src
+
+#+RESULTS:
+: 8
+
+Here to add, sub, and mul we need to call three diffrent member fuuntions seperating but with member fucntion chaining we can do it in a single line.
+
+#+begin_src cpp :results output
+#include <iostream>
+using namespace std;
+
+class Cal{
+    int m_a{0};
+public:
+    Cal& add(int a) {
+        m_a += a;
+        return *this;
+    }
+
+    Cal& sub(int a) {
+        m_a -= a;
+        return *this;
+    }
+
+    Cal& mul(int a) {
+        m_a *= a;
+        return *this;
+    }
+
+    int get() {
+        return m_a;
+    }
+
+    void reset() {
+        ,*this = {};
+    }
+};
+
+int main() {
+    Cal a{};
+    a.add(3).sub(1).mul(3);
+    cout << a.get() << "\n";
+
+    a.reset();
+
+    cout << a.get();
+    return 0;
+}
+#+end_src
+
+#+RESULTS:
+: 6
+: 0
+
+here first add(3) runs and adds value 3 to m_a then it returns reference of the Cal object so
+a.add(3).sub(1).mul(3) ------> a.sub(1).mul(3)
+
+- Here we can reset the value of members using a member fucntion reset by *this = {}
+- it creates a temporary Cal using default values of members and assigns it to current object.
+*** Destructor
+:PROPERTIES:
+:ID:       727d415a-b93b-4d78-b574-c737c4e976fb
+:END:
+- Destructor is used for cleaning
+- It is called automatically when an object of a class is destroyed.
+- It doesnt have any arguments.
+- It doesnt have any return type.
+- It has name name as class preceding with a tilde(~).
+- Although we can call destructor explicitly it is called automatically almost every time.
+- If we dont not declare a dedtructot the compiler will implicitly declare a destructor with empty body.
+
+  #+begin_src cpp :results output
+#include <iostream>
+using namespace std;
+
+class Simple{
+    int m_id{};
+public:
+    Simple(int id)  : m_id {id} {}
+
+    ~Simple() {
+        cout << "Destructor" << m_id << "\n";
+    }
+
+};
+
+int main() {
+    Simple s1(1);
+    {
+        Simple s2(2);
+    }//s2 dies here so destructor of s2 is called first.
+    return 0;
+}//s1 dies here.
+#+end_src
+
+#+RESULTS:
+: Destructor2
+: Destructor1
+*** static member variables and functions
+:PROPERTIES:
+:ID:       2bb1cb78-ea45-49ed-b90a-ff2b263501ba
+:END:
+
+#+begin_src cpp :results output
+#include <iostream>
+using namespace std;
+
+struct Something{
+    static int a;
+};
+
+int Something::a{1};
+
+int main() {
+
+    Something something1{};
+    Something something2{};
+
+    something1.a = 2;
+
+    cout << something1.a << "\n";
+    cout << something2.a << "\n";
+
+    return 0;
+}
+#+end_src
+
+#+RESULTS:
+: 2
+: 2
+
+Here we can see eventhough we changed the value of a for *something1* it has also changed for *something2*
+
+*Static members are not associated with class objects* - we know that when we create a object it occupies memory for it, but when it comes to static member variables it will be created at the start of the program and destroyed at the program so it is independent of class object.
+
+*When can say that - static members are global variables that live inside the scope region of a class*
+
+Because it is independent of object we can access it with class name and scope resolution operator. just like above
+
+It is declared as forward declare and the static members are accessed independent of access control like *private* *protected*, because the forward definations are not considered a way to access.
+
+If we include a header file which has class definations there wont be initialized.
+We have to initialize using access specifier but we can initialize to a static member if is inline.
+
+#+begin_src cpp :results output
+#include <iostream>
+using namespace std;
+
+struct Something{
+    static inline int a{1};
+};
+
+int main() {
+    Something something{};
+    cout << something.a;
+    return 0;
+}
+#+end_src
+
+#+RESULTS:
+: 1
+
+Consider this
+
+#+begin_src cpp :results output
+#include <iostream>
+using namespace std;
+
+class Something {
+    static inline int m_a{1};
+
+public:
+    int get() {
+        return m_a;
+    }
+};
+
+int main() {
+    Something s{};
+    cout << s.get();
+    return 0;
+}
+#+end_src
+
+#+RESULTS:
+: 1
+
+even though this works for getting the value it need to create a object.
+for this reason we use static member functions.
+
+#+begin_src cpp :results output
+#include <iostream>
+using namespace std;
+
+class Something{
+    static inline int m_a{1};
+public:
+    static int get() {
+        return m_a;
+    }
+};
+
+int main() {
+    cout << Something::get();
+    return 0;
+}
+#+end_src
+
+#+RESULTS:
+: 1
+
+here we accessed a private data member using static member function without creating an object.
+
+- static member functions do not have *this pointer.
+*** friend non-member functions
+:PROPERTIES:
+:ID:       de60d992-7ba5-4cf8-99ba-5ef22151eba3
+:END:
+
+Friend function or member is used for access private or protected data of a class to another class or function.
+
+*friend is a class or function (member or non-member) that has been granted full access to the private and protected members of another class.*
+
+#+begin_src cpp :results output
+#include <iostream>
+using namespace std;
+
+class Something{
+    int m_a{};
+public:
+    Something(int a) : m_a {a} {}
+
+    friend void print(const Something& something); //declaration of friend function
+};
+
+
+void print(const Something& something) {
+    cout << something.m_a;
+}
+
+int main() {
+    Something nothing{1};
+    print(nothing);
+    return 0;
+}
+#+end_src
+
+#+RESULTS:
+: 1
+
+defining friend non-member inside a class
+
+#+begin_src cpp :results output
+#include <iostream>
+using namespace std;
+
+class Something{
+    int m_a{};
+public:
+    Something(int a) : m_a {a} {}
+
+    friend void print(const Something& something) {
+        cout << something.m_a;
+    }
+};
+
+int main() {
+    Something nothing{1};
+    print(nothing);
+    return 0;
+}
+#+end_src
+*** friend class and friend member function
+:PROPERTIES:
+:ID:       246e1d8a-20cb-44b9-8832-7fcf8c38e48f
+:END:
+ A friend Class is that can access private and protected member of another class.
+
+#+begin_src cpp :results output
+#include <iostream>
+using namespace std;
+
+class Storage{
+    int m_d{};
+    int m_n{};
+public:
+    Storage(int d,int n) : m_d {d} , m_n {n} {}
+
+    friend class Display;
+};
+
+class Display{
+    bool first{};
+
+public:
+    Display(bool b) : first {b} {}
+
+    void displaystorage(Storage& storage) {
+        if(first) {
+            cout << storage.m_d << " " << storage.m_n << "\n";
+        }else {
+            cout << storage.m_n<< " " << storage.m_d << "\n";
+        }
+    }
+};
+
+int main() {
+    Storage storage{10,20};
+    Display display{false};
+
+    display.displaystorage(storage); //here we are acessing the members of class Storage from class display
+
+    return 0;
+}
+#+end_src
+
+friend member funtion - instead of making an entire class friend we can make a function from another class a friend.
+this can be done like this
+
+#+begin_src cpp :results output
+#include <iostream>
+using namespace std;
+
+class Display {};
+
+class Storage{
+    int m_a{};
+    int m_n{};
+
+public:
+    Storageaint a, int n) : m_a {a} , m_n{n} {}
+
+    friend void Display::displaystorage(const Storage& storage);
+};
+
+class Display{
+    bool is{};
+public:
+
+    Display(bool b) : b{is} {}
+
+    void displaystorage(const Storage& storage) {
+        if(is) {
+            cout << m_a << " " << m_n << "\n";
+        }else {
+            cout << m_n << " " << m_a << "\n";
+        }
+    }
+};
+
+int main() {
+
+    Storage storage{10,20};
+    Display display{true};
+
+    display.displaystorage();
+
+    return 0;
+}
+#+end_src
+
+This doesnt work because the compiler will throw an error the it hasnt seen full defination of class Display
+
+Instead we can do something like this
+
+#+begin_src cpp :results output
+#include <iostream>
+using namespace std;
+
+class Storage;
+
+class Display{
+   bool is{};
+public:
+    Display(bool b) : is{b} {}
+    void displaystorage(Storage& storage);  // This is the reason we farward declared class Storage.
+};
+
+class Storage{
+    int m_n{};
+    int m_a{};
+public:
+    Storage(int n, int a) : m_n{n} , m_a{a} {}
+
+    friend void Display::displaystorage(Storage& storage);
+};
+
+void Display::displaystorage(Storage& storage) {
+    if(is) {
+        cout << storage.m_n << " " << storage.m_a << "\n";
+    }else {
+        cout << storage.m_a << " " << storage.m_n << "\n";
+    }
+}
+
+int main() {
+    Storage storage{10,20};
+    Display display{false};
+    display.displaystorage(storage);
+    return 0;
+}
+#+end_src
+
+#+RESULTS:
+: 20 10
+
+[[https://www.learncpp.com/cpp-tutorial/friend-classes-and-friend-member-functions/][Quiz]]
+
+#+begin_src cpp :results output
+#include <iostream>
+using namespace std;
+
+class Vector{
+    double m_x{};
+    double m_y{};
+    double m_z{};
+public:
+    Vector(double x, double y, double z) : m_x{x}, m_y{y} , m_z{z} {}
+
+    void print() {
+        cout << "x: " << m_x << " y: " << m_y << " z: " << m_z << "\n";
+    }
+
+    friend class Point;
+};
+
+class Point{
+    double m_x{};
+    double m_y{};
+    double m_z{};
+public:
+    Point(double x,double y,double z) :m_x {x}, m_y{y}, m_z{z} {}
+
+    void print() {
+        cout << "x: " << m_x << " y: " << m_y << " z: " << m_z << "\n";
+    }
+
+    void movebyvector(Point& point) {
+        cout << point.m_x + m_x << " " << point.m_y + m_y << " " << point.m_z + m_z << "\n";
+    }
+};
+
+int main() {
+    Vector vector{1.2, 2.2, 3.4};
+    Point point{2.3, 3.4, 4.9};
+    point.movebyvector(point);
+    return 0;
+}
+#+end_src
+
+#+RESULTS:
+: 4.6 6.8 9.8
+
+
+
+* Dynamic arrays
+** Introduction to std::vector
+
+#+begin_src cpp :results output
+#include <iostream>
+#include <vector>
+
+int main() {
+    std::vector<int> empty{};
+    std::vector<int> whole{0,1,2,3};
+
+    std::cout << whole[2];
+    return 0;
+}
+#+end_src
+
+#+RESULTS:
+: 02
+
+Containers typically have a special constructor called a list constructor that allows us to construct an instance of the container using an initializer list. The list constructor does three things:
+
+1. Ensures the container has enough storage to hold all the initialization values (if needed).
+2. Sets the length of the container to the number of elements in the initializer list (if needed).
+3. Initializes the elements to the values in the initializer list (in sequential order).
+
+#+begin_src cpp :results output
+#include <iostream>
+#include <vector>
+using namespace std;
+
+int main() {
+    const vector<int> arr{1,2};
+    cout << arr[1];
+    return 0;
+}
+#+end_src
+
+#+RESULTS:
+
+length using size() member function.
+
+#+begin_src cpp :results output
+#include <iostream>
+#include <vector>
+using namespace std;
+
+int main() {
+    vector arr{1,2,3};
+    cout << arr.size() << "\n";
+    cout << size(arr);
+    return 0;
+}
+#+end_src
+
+#+RESULTS:
+: 3
+: 3
+
+Since size() member function supports only unsigned numbers when we assign the length to a variable using size() it may result in signed/unsigned conversion warnings
+
+Instead we cast using static cast
+
+#+begin_src cpp :results output
+#include <iostream>
+#include <vector>
+using namespace std;
+
+int main() {
+    vector arr{1,2};
+    //int length {arr.size()}; gives warning
+    int length (static_cast<int>(arr.size()));
+    cout << length;
+    return 0;
+}
+#+end_src
+
+#+RESULTS:
+: 2
+
+using ssize for length
+- Since ssize is non-member function and returns lenght as long signed int we also need to cast this.j
+
+  #+begin_src cpp :results output
+#include <iostream>
+#include <vector>
+using namespace std;
+
+int main() {
+    vector arr{1,2,3};
+    int length {std::ssize(arr)};
+    cout << length << "\n";
+    return 0;
+}
+#+end_src
+
+pass by reference
+
+#+begin_src cpp :results output
+#include <iostream>
+#include <vector>
+using namespace std;
+
+void fun(const vector<int>& arr) {
+    cout << arr[0];
+}
+
+int main() {
+    vector arr{1,2,3,4};
+    fun(arr);
+    return 0;
+}
+#+end_src
+
+#+RESULTS:
+: 1
+
+we have to mention type of data in function parameter
+we can use template
+
+#+begin_src cpp :results output
+#include <iostream>
+#include <vector>
+using namespace std;
+template <typename T>
+void fun(const vector<T>& arr) {
+    cout << arr[0] << "\n";
+}
+
+int main() {
+    vector arr1{1,2,3};
+    vector arr2{1.2, 3.2};
+    fun(arr1);
+    fun(arr2);
+    return 0;
+}
+#+end_src
+
+#+RESULTS:
+: 1
+: 1.2
+
+*** passing a std::vector using generic template or abbreviated function template
+we can also create a template that can accpet any type of object.
+
+#+begin_src cpp :results output
+#include <iostream>
+using namespace std;
+
+int main() {
+
+    return 0;
+}
+#+end_src
