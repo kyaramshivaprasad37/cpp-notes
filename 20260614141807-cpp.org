@@ -1188,21 +1188,6 @@ int main() {
     return 0;
 }
 #+end_src
-
-#+RESULTS:
-#+begin_example
-3499211612
-581869302
-3890346734
-3586334585
-545404204
-4161255391
-3922919429
-949333985
-2715962298
-1323567403
-418932835
-#+end_example
 * Function Templates
 :PROPERTIES:
 :ID:       c1cad433-f953-497d-bbeb-fdc708761b6d
@@ -2790,7 +2775,6 @@ int main() {
 :ID:       cb683dcd-2755-4ed2-85a8-c1ea0626e6b2
 :END:
 Copy elision is a compiler optimization technique that allows the compiler to remove unnecessary copying of objects. In other words, in cases where the compiler would normally call a copy constructor, the compiler is free to rewrite the code to avoid the call to the copy constructor altogether. When the compiler optimizes away a call to the copy constructor, we say the constructor has been elided.
-
 *** User defined conversions
 :PROPERTIES:
 :ID:       2919e6a9-86ae-4c40-a82f-8ad364b0849c
@@ -3220,10 +3204,6 @@ int main() {
 }
 #+end_src
 
-#+RESULTS:
-: 2
-: 2
-
 Here we can see eventhough we changed the value of a for *something1* it has also changed for *something2*
 
 *Static members are not associated with class objects* - we know that when we create a object it occupies memory for it, but when it comes to static member variables it will be created at the start of the program and destroyed at the program so it is independent of class object.
@@ -3546,10 +3526,14 @@ int main() {
 #+RESULTS:
 : 4.6 6.8 9.8
 
-
-
 * Dynamic arrays
+:PROPERTIES:
+:ID:       1242bc2a-31ab-446a-827f-634b0acc47e8
+:END:
 ** Introduction to std::vector
+:PROPERTIES:
+:ID:       ab5728bc-2c84-427e-8be7-6a9cc16a0c40
+:END:
 
 #+begin_src cpp :results output
 #include <iostream>
@@ -3690,14 +3674,250 @@ int main() {
 : 1.2
 
 *** passing a std::vector using generic template or abbreviated function template
+:PROPERTIES:
+:ID:       3bce83e1-e5a7-4f8f-966f-95208dcdda80
+:END:
 we can also create a template that can accpet any type of object.
+
+#+begin_src cpp :results output
+#include <iostream>
+#include <vector>
+using namespace std;
+template<typename T>
+
+void print(const T& arr) {  // will accept any type of object that has an overload operator
+
+    cout << arr[2] << "\n";
+}
+
+int main() {
+    vector arr1{1,2,3};
+    print(arr1);
+    vector arr2{11.1,10.2,11.3};
+    print(arr2);
+
+    return 0;
+}
+#+end_src
+
+#+RESULTS:
+: 3
+: 11.3
+
+#+begin_src cpp :results output
+#include <iostream>
+#include <vector>
+using namespace std;
+
+void print(const auto& arr) {
+    cout << arr[0];
+}
+
+int main() {
+    vector arr{1,2,3};
+    print(arr);
+    return 0;
+}
+#+end_src
+
+#+RESULTS:
+: 1
+
+#+begin_src cpp :results output
+#include <iostream>
+#include <vector>
+using namespace std;
+template <typename T>
+void print(const T& arr, int n) {
+    if(n<arr.size()) {
+        cout << arr[n] << "\n";
+    }else {
+        cout << "N should be less than the size of array" << "\n";
+    }
+}
+
+int main() {
+    vector arr{1,2,3,4};
+    print(arr,5);
+
+    vector arr1{4.5, 3.4, 6.7};
+    print(arr1,2);
+    return 0;
+}
+#+end_src
+*** move semantics
+:PROPERTIES:
+:ID:       3ea4a6d2-e5fa-46bd-a7d5-6519af114de1
+:END:
+*Move semantics is an optimization that allow us, under certain circumstances, to inexpensively transfer ownership of some data members from one object to another object(rather than making a more expensive copy)*
+
+- Normally when an object is being initialized with an object of the same type, copy semantic will be used.
+*** arrays and loop
+:PROPERTIES:
+:ID:       764b4e33-2cc1-4dfa-884d-a5783b127126
+:END:
+#+begin_src cpp :results output
+#include <iostream>
+#include <vector>
+#include <cstddef>
+using namespace std;
+
+void avg(vector<int>& arr){
+    size_t length (arr.size());
+    int sum = 0;
+    for(size_t index = 0; index < length; ++index) {
+        sum += arr[index];
+    }
+    int avg = sum / static_cast<int>(length);
+    cout << avg << "\n";
+}
+
+int main() {
+    vector arr{1,2,3,4,5,6,7};
+    avg(arr);
+    return 0;
+}
+#+end_src
+
+#+RESULTS:
+: 4
+*** template arrays and loop
+:PROPERTIES:
+:ID:       d4e383bc-cad4-459c-b27f-61961dcfe55e
+:END:
+#+begin_src cpp :results output
+#include <iostream>
+#include <vector>
+#include <cstddef>
+using namespace std;
+template <typename T>
+
+void avg(vector<T>& arr) {
+    size_t length {arr.size()};
+    T sum = 0;
+
+    for(size_t index = 0; index < length; ++index) {
+        sum += arr[index];
+    }
+    T avg = sum / static_cast<int>(length);
+    cout << avg << "\n";
+}
+
+int main() {
+    vector arr1{1,2,3};
+    avg(arr1);
+
+    vector arr2{2.4,5.6,7.8};
+    avg(arr2);
+    return 0;
+}
+#+end_src
+
+#+RESULTS:
+: 2
+: 5.26667
+
+#+begin_src cpp :results output
+#include <iostream>
+#include <vector>
+#include <cstddef>
+using namespace std;
+template <typename T>
+
+T print(vector<T>& arr) {
+    size_t length {arr.size()};
+
+}
+
+T getnumber() {
+    int n{};
+    do {
+        cout << "Enter a number blw 1 to 9" << "\n";
+        cin >> n;
+    }while(n < 1 || n > 9);
+
+    return
+}
+
+int main() {
+
+    vector arr{1,6,4,6,3,3,8};
+    return 0;
+}
+#+end_src
 
 #+begin_src cpp :results output
 #include <iostream>
 using namespace std;
 
 int main() {
+    int arr[5] = {2,2,3,4,5};
+    int n;
+    cin >> n;
+    //int found = 0;
+    for(int i=0;i<5;i++) {
+        if(arr[i] == n){
+            cout << i << "\n";
+            //found = 1;
+            return 0;
+        }
+    }
+    // if(!found) {
+    //     cout << "Element not found" << "\n";
+    // }
+    cout << "Element not found";
 
     return 0;
 }
 #+end_src
+
+#+RESULTS:
+
+#+begin_src cpp :results output
+#include <iostream>
+#include <vector>
+#include <cstddef>
+#include <limits>
+using namespace std;
+
+int fun(vector<int>& arr, int val) {
+    for(size_t index = 0; index < arr.size();++index) {
+        if(arr[index] == val) {
+            return static_cast<int>(index);
+            //return true;
+        }
+    }
+    return -1;
+}
+
+int get() {
+    int num;
+    do{
+        cout << "Enter a number between 1 to 9: " << "\n";
+        cin >> num;
+
+        if(!cin) {
+            cin.clear();
+        }
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    } while(num < 1 || num > 9);
+
+    return num;
+}
+
+int main() {
+    vector arr{1,2,7,3,5};
+    int num {get()};
+    int ans = fun(arr , num);
+    if(ans != -1) {
+        cout << "The index of the number " << num << " is: " << ans << '\n';
+    }else {
+        cout << "The number does not exist in the array" << "\n";
+    }
+    return 0;
+}
+#+end_src
+
+Here we use cin.clear to start the broken input method, it checks if the input method is broken if it is then start it again.
+And cin.ignore the dump what we dont want means it clear the clogged pipe of inputs and keeps only valid.
+The '\n' is for the cin.ignore to know where it to stop.
