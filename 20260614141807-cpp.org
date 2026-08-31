@@ -3871,8 +3871,6 @@ int main() {
 }
 #+end_src
 
-#+RESULTS:
-
 #+begin_src cpp :results output
 #include <iostream>
 #include <vector>
@@ -3921,3 +3919,581 @@ int main() {
 Here we use cin.clear to start the broken input method, it checks if the input method is broken if it is then start it again.
 And cin.ignore the dump what we dont want means it clear the clogged pipe of inputs and keeps only valid.
 The '\n' is for the cin.ignore to know where it to stop.
+** Range based for Loops
+:PROPERTIES:
+:ID:       5163ff1a-fc7a-471b-8a8b-6c0302b83ecb
+:END:
+#+begin_src cpp :results output
+#include <iostream>
+#include <vector>
+using namespace std;
+
+int main() {
+    vector arr {1,2,3,4,5};
+    for(int num:arr) {
+        cout << num << " ";
+    }
+    return 0;
+}
+#+end_src
+
+#+RESULTS:
+: 1 2 3 4 5
+
+#+begin_src cpp :results output
+#include <iostream>
+#include <vector>
+using namespace std;
+
+int main() {
+    vector arr {1,2,3,44,4};
+    for(auto num : arr) {
+        cout << num << " ";
+    }
+    return 0;
+}
+#+end_src
+
+#+RESULTS:
+: 1 2 3 44 4
+
+Avoid this for strings. use reference
+
+#+begin_src cpp :results output
+#include <iostream>
+#include <vector>
+using namespace std;
+
+int main() {
+    vector arr {"Spiderman","No", "way", "Home"};
+    for(auto& word : arr ) {
+        //word = "Blank";  we can also change the values from here since it is reference
+        cout << word << " ";
+    }
+
+
+    return 0;
+}
+#+end_src
+
+#+RESULTS:
+: Blank Blank Blank Blank
+
+*For range based for loops, prefer to define the elements type as*
+- auto        - when u want to modify copies of elements
+- auto&       - when u want to modify original elements.
+- const auto& - when u only want to view elements.
+** Using unscoped emumerators for indexing
+:PROPERTIES:
+:ID:       d04bbae6-231f-41bf-919d-679f21adec80
+:END:
+
+#+begin_src cpp :results output
+#include <iostream>
+#include <vector>
+using namespace std;
+
+namespace Names {
+    enum Name {Shiva,prasad,sunny,venkatesh};
+}
+
+int main() {
+    vector marks {10,90,78,89};
+    marks[Names::prasad] = 100;
+    for(int mark : marks) {
+        cout << mark << " ";
+    }
+    return 0;
+}
+#+end_src
+
+#+RESULTS:
+: 10 100 78 89
+** resizing std::vector at runtime
+:PROPERTIES:
+:ID:       fa55b4c5-d6fb-44df-9322-ec6c3184734c
+:END:
+
+#+begin_src cpp :results output
+#include <iostream>
+#include <vector>
+using namespace std;
+
+int main() {
+    vector a{1,2,4};
+    cout << a.size() << "\n";
+    a.resize(5);
+
+    for(auto i : a) {
+        cout << i << " ";
+    }
+    cout << "\n";
+    cout << a.size();
+    return 0;
+}
+#+end_src
+
+#+RESULTS:
+: 3
+: 1 2 4 0 0
+: 5
+
+#+begin_src cpp :results output
+#include <iostream>
+#include <vector>
+using namespace std;
+
+int main() {
+    vector a{1,2,3,4,5};
+    cout << a.size() << "\n";
+
+    for(auto i : a) {
+        cout << i << " ";
+    }
+    cout << "\n";
+    a.resize(3);
+    cout << a.size() << "\n";
+
+    for(auto i : a) {
+        cout << i << " ";
+    }
+    return 0;
+}
+#+end_src
+
+#+RESULTS:
+: 5
+: 1 2 3 4 5
+: 3
+: 1 2 3
+
+*Reallocation Process*
+- std::vector acquires new memory with capacity for the desired number of elements. These elements are value-initialized.
+- The elements in the old memory are copied (or moved, if possible) into the new memory. The old memory is then returned to the system.
+- The capacity and length of the std::vector are set to the new values.
+
+*** length and capacity
+:PROPERTIES:
+:ID:       ff769aa6-347e-4b18-bb40-058a22fa0a6b
+:END:
+#+begin_src cpp :results output
+#include <iostream>
+#include <vector>
+using namespace std;
+
+void print(vector<int>& a){
+    cout << "Length: " << a.size() << " Capacity: " << a.capacity() << "\n";
+}
+
+int main() {
+    vector a{1,2,3,4,5};
+
+    print(a);
+    for(auto i:a) {
+        cout << i << " ";
+    }
+    cout << "\n";
+
+    a.resize(3);
+    print(a);
+    for(auto i:a) {
+        cout << i << " ";
+    }
+    cout << "\n";
+
+    a.resize(5);
+    print(a);
+    for(auto i:a) {
+        cout << i << " ";
+    }
+    return 0;
+}
+#+end_src
+
+#+RESULTS:
+: Length: 5 Capacity: 5
+: 1 2 3 4 5
+: Length: 3 Capacity: 5
+: 1 2 3
+: Length: 5 Capacity: 5
+: 1 2 3 0 0
+
+When we initialized our vector with 5 elements, the capacity was set to 5, indicating that our vector initially allocated space for 5 elements. The length was also set to 5, indicating that all of those elements are in use.
+
+After we called v.resize(3), the length was changed to 3 to fulfill our request for a smaller array. However, note that the capacity is still 5, meaning that the vector did not do a reallocation!
+
+Finally, we called v.resize(5). Because the vector already had a capacity of 5, it did not need to reallocate. It simply changed the length back to 5, and value-initialized the last two elements.
+
+*** shrink_to_fit
+:PROPERTIES:
+:ID:       116dd243-8ec6-4aa3-8a5b-05e613df75af
+:END:
+#+begin_src cpp :results output
+#include <iostream>
+#include <vector>
+using namespace std;
+void print(vector<int>& a) {
+    cout << "Length: " << a.size() << " Capacity: " << a.capacity() << "\n";
+}
+int main() {
+    vector arr{1,2,3,4,5,6};
+    print(arr);
+    for(auto i : arr) {
+        cout << i << " ";
+    }
+    cout << "\n";
+
+    arr.resize(3);
+    print(arr);
+    for(auto i : arr) {
+        cout << i << " ";
+    }
+    cout << '\n';
+
+    arr.shrink_to_fit();
+    print(arr);
+    for(auto i : arr) {
+        cout << i << " ";
+    }
+
+    return 0;
+}
+#+end_src
+
+#+RESULTS:
+: Length: 6 Capacity: 6
+: 1 2 3 4 5 6
+: Length: 3 Capacity: 6
+: 1 2 3
+: Length: 3 Capacity: 3
+: 1 2 3
+** std::vector and stack behaviour
+:PROPERTIES:
+:ID:       acd90f7a-3082-4250-ba52-ccc7650fc428
+:END:
+In programming, a stack is a container data type where the insertion and removal of elements occurs in a LIFO(last in first out) manner. This is commonly implemented via two operations named push and pop:
+
+| Push        | puts new element on top of stack     |                                    |
+| Pop         | remove the top element from top      | may return removed element or void |
+| Top or Peek | get the top element of the stack     | do not remove item                 |
+| Emptying    | Determine if stack has no elements   |                                    |
+| Size        | count how many elememts in the stack |                                    |
+
+stack behaviour with std::vector
+
+| push_back()    | put new element on top of stack             | Add elements to end of vector                     |
+| pop_back()     | Remove element from the stack               | Returns void,removes element at the end of vector |
+| back()         | get the top element on the stack            | does not remove item                              |
+| emplace_back() | Alternate form of push_back() more effcient | Add elememts to the vector                        |
+
+#+begin_src cpp :results output
+#include <iostream>
+#include <vector>
+using namespace std;
+
+void print(vector<int>& stack) {
+    if(stack.empty()) {
+        cout << "Empty" << '\n';
+    }
+
+    for(auto i : stack) {
+        cout << i << ' ';
+    }
+    cout << '\n';
+
+   cout << "Length: " << stack.size() << " capacity: " << stack.capacity() << '\n';
+}
+
+int main() {
+    vector<int> stack{};
+    print(stack);
+
+    stack.push_back(1);
+    print(stack);
+
+    stack.push_back(2);
+    print(stack);
+    return 0;
+}
+#+end_src
+
+#+RESULTS:
+: Empty
+:
+: Length: 0 capacity: 0
+: 1
+: Length: 1 capacity: 1
+: 1 2
+: Length: 2 capacity: 2
+** reserve member function
+:PROPERTIES:
+:ID:       619c0814-e97c-4b1d-9bcf-85d9f2f8430a
+:END:
+#+begin_src cpp :results output
+#include <iostream>
+#include <vector>
+using namespace std;
+
+void print(vector<int>& a) {
+    if(a.empty()) {
+        cout << "Empty" << '\n';
+    }
+    for(auto i : a) {
+        cout << i << ' ';
+    }
+    cout << '\n';
+    cout << "Length: " << a.size() << " Capacity: " << a.capacity() << '\n';
+}
+
+int main() {
+    vector<int> stack{};
+
+    print(stack);
+
+    stack.reserve(6);
+    print(stack);
+
+    stack.push_back(1);
+    print(stack);
+
+    stack.push_back(2);
+    print(stack);
+    return 0;
+}
+#+end_src
+
+#+RESULTS:
+#+begin_example
+Empty
+
+Length: 0 Capacity: 0
+Empty
+
+Length: 0 Capacity: 6
+1
+Length: 1 Capacity: 6
+1 2
+Length: 2 Capacity: 6
+#+end_example
+
+#+begin_src cpp :results output
+#include <iostream>
+#include <vector>
+#include <limits>
+using namespace std;
+
+int main() {
+    vector<int> a{};
+
+    while(true) {
+        cout << "Enter the digits or -1 to finish: "  << '\n';
+        int x{};
+        cin >> x;
+
+        if(!cin) {
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(),'\n');
+        }
+        if(x == -1) {
+            break;
+        }
+
+        a.push_back(x);
+    }
+
+    for(auto i:a) {
+        cout << i << ' ';
+    }
+
+    return 0;
+}
+#+end_src
+** std::vector<bool>
+:PROPERTIES:
+:ID:       777c7d81-b2e4-446f-9dea-151450a23115
+:END:
+#+begin_src cpp :results output
+#include <iostream>
+#include <vector>
+using namespace std;
+
+int main() {
+    vector<bool> B{true,false,false};
+    for(auto i : B) {
+        cout << i << ' ';
+    }
+    cout << '\n';
+    B[2] = true;
+    for(auto i : B) {
+        cout << i << ' ';
+    }
+    return 0;
+}
+#+end_src
+
+#+RESULTS:
+: 1 0 0
+: 1 0 1
+First, std::vector<bool> has a fairly high amount of overhead (sizeof(std::vector<bool>) is 40 bytes on the author’s machine), so you won’t save memory unless you’re allocating more Boolean values than the overhead for your architecture.
+
+Second, the performance of std::vector<bool> is highly dependent upon the implementation (as implementations aren’t even required to do optimization, let alone do it well). Per this article, a highly optimized implementation can be significantly faster than alternatives. However, a poorly optimized implementation will be slower.
+
+Third and most importantly, std::vector<bool> is not a vector (it is not required to be contiguous in memory), nor does it hold bool values (it holds a collection of bits), nor does it meet C++’s definition of a container.
+** Quiz questions
+#+begin_src cpp :results output
+#include <iostream>
+#include <vector>
+using namespace std;
+
+enum Game {health_portions,torches,arrows};
+
+int print(const vector<int>& a) {
+    int sum = 0;
+    for(auto i:a) {
+        sum += i;
+    }
+    return sum;
+}
+
+int main() {
+    vector<int> bag{1,5,10};
+    cout << "You have total " << print(bag) << " items" << '\n';
+    return 0;
+}
+#+end_src
+
+#+RESULTS:
+: You have total 16 items
+
+#+begin_src cpp :results output
+#include <iostream>
+#include <vector>
+#include <string_view>
+using namespace std;
+
+enum Game {health_portions,torches,arrows};
+
+string_view enumtostring(Game ref) {
+    switch(ref) {
+        case health_portions : return "health portions";
+        case  torches : return "torches";
+        case arrows : return "arrows";
+        default: return "Error";
+    }
+}
+
+void print(vector<int>& a) {
+   for(int i=0;i<3;i++) {
+       cout << "You have " << a[i] << ' ' << enumtostring(static_cast<Game>(i)) << '\n';
+   }
+}
+
+int total(vector<int>& a) {
+    int sum = 0;
+    for(auto i : a) {
+        sum += i;
+    }
+    return sum;
+}
+
+int main() {
+    vector<int> inventory{1,5,10};
+    print(inventory);
+    cout << "You have total " << total(inventory) << " items" << '\n';
+    return 0;
+}
+#+end_src
+
+#+RESULTS:
+: You have 1 health portions
+: You have 5 torches
+: You have 10 arrows
+: You have total 16 items
+
+
+#+begin_src cpp :results output
+#include <iostream>
+#include <vector>
+using namespace std;
+
+void max(const vector<int>& a) {
+    int max = a[0];
+    int maxindex;
+    size_t length = a.size();
+    for(size_t index = 0;index < length;index++) {
+        if(a[index] > max) {
+            max = a[index];
+            maxindex = static_cast<int>(index);
+        }
+    }
+    cout << "Max element has index " << maxindex << " and value " << max << '\n';
+}
+
+void min(const vector<int>& a) {
+    int min = a[0];
+    int minindex;
+    size_t length = a.size();
+    for(size_t index = 1;index < length; index++) {
+        if(a[index] < min) {
+            min = a[index];
+            minindex = static_cast<int>(index);
+        }
+    }
+
+    cout << "Min element has index "  << minindex << " and value " << min << '\n';
+}
+
+int main() {
+    vector<int> a{3,8,2,5,7,8,2};
+    min(a);
+    max(a);
+    return 0;
+}
+#+end_src
+** std::arrays
+
+#+begin_src cpp :results output
+#include <iostream>
+#include <array>
+using namespace std;
+
+int main() {
+    array<int, 5> a{};
+    cout << a[0] << '\n';
+
+    constexpr int len{8};
+    array<int, len> b{};
+    cout << b[1] << '\n';
+
+    enum Colors {
+        white,
+        green,
+        blue,
+        black
+    };
+
+    array<int, black> c{};
+    cout << b[10] << '\n';
+
+    return 0;
+}
+#+end_src
+
+#+RESULTS:
+: 0
+: 0
+: -1098323968
+
+*Defining your std::array as constexpr whenever possible. if Your std::array is not a constexpr, consider using std::vector instead*
+
+#+begin_src cpp :results output
+#include <iostream>
+#include <array>
+using namespace std;
+
+int main() {
+    array a1 {1,2,3,4};
+    cout << a1[0];
+    return 0;
+}
+#+end_src
