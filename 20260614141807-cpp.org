@@ -4497,3 +4497,46 @@ int main() {
     return 0;
 }
 #+end_src
+* Iterators
+
+#+begin_src cpp :results output
+#include <iostream>
+#include <array>
+using namespace std;
+
+int main() {
+    array a{0,1,2,3,5,5};
+
+    auto begin{&a[0]};
+    auto end{begin + size(a)};
+
+    for(auto ptr{begin};ptr != end;++ptr) {
+        cout << *ptr << ' ';
+    }
+    return 0;
+}
+#+end_src
+
+#+RESULTS:
+: 0 1 2 3 5 5
+
+#+begin_src cpp :results output
+#include <iostream>
+#include <array>
+using namespace std;
+
+int main() {
+    array a{0,1,2,3,4,5};
+
+    auto begin{a.begin()};
+    auto end{a.end()};
+
+    for(auto ptr{begin}; ptr != end;++ptr) {
+        cout << *ptr << ' ';
+    }
+    return 0;
+}
+#+end_src
+
+#+RESULTS:
+: 0 1 2 3 4 5
