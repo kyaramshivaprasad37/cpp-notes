@@ -1491,6 +1491,22 @@ int main() {
 
 #+RESULTS:
 : 5
+** R-value refernces
+#+begin_src cpp :results output
+#include <iostream>
+using namespace std;
+
+int main() {
+    int& rvalueref = 5; // we cannot do this. Because we are assigning lvalueref to rvalue;
+    int&& rvalueref = 5; // rvalue ref can be done like this
+    cout << rvalueref << '\n';
+    return 0;
+}
+#+end_src
+
+#+RESULTS:
+: 5
+
 ** Pass by reference
 :PROPERTIES:
 :ID: Pass by reference
@@ -5863,10 +5879,300 @@ public:
 
     friend std::ostream& operator<<(std::ostream& out, const Fraction& f1)
     {
-	out << f1.m_numerator << '/' << f1.m_denominator;
-	return out;
+     out << f1.m_numerator << '/' << f1.m_denominator;
+     return out;
     }
 };
+
+#+end_src
+
+
+#+begin_src cpp :results output
+#include <iostream>
+using namespace std;
+
+class Something{
+public:
+    int* m_data;
+    Something(int data) {
+        m_data = new int(data);
+    }
+    ~Something() {
+        delete m_data;
+    }
+};
+
+int main() {
+    Something S{20};
+    Something R = S;
+    cout << *R.m_data << '\n';
+    return 0;
+}
+#+end_src
+* Smart pointers
+:PROPERTIES:
+:ID:       c95f0d72-fbcf-4fd7-ac81-816f18704072
+:END:
+
+#+begin_src cpp :results output
+#include <iostream>
+using namespace std;
+
+template <typename T>
+class Auto_ptr{
+    T* m_ptr;
+public:
+    Auto_ptr(T* ptr= nullptr) : m_ptr{ptr} {}
+
+    ~Auto_ptr() { delete m_ptr; }
+
+    T& operator*() const {return *m_ptr;}  // returns the actual resource object
+    T* operator->() const {return m_ptr;}  // returns raw pointer m_ptr
+};
+
+class Resource{
+    string m_name{};
+    int m_data{};
+public:
+    Resource(string name, int data) : m_name{name} , m_data {data} {cout << "constructor ran\n";}
+    ~Resource() {{cout << "Destructor ran\n";}}
+
+    void print() {
+        cout << m_name << " " << m_data << '\n';
+    }
+};
+
+int main() {
+    Auto_ptr<Resource> res = new Resource("Shiva", 20);
+    res->print();
+    return 0;
+}
 #+end_src
 
 #+RESULTS:
+: constructor ran
+: Shiva 20
+: Destructor ran
+
+Exaplanation from claude
+#+begin_src cpp :results output
+#include <iostream>
+#include <string>
+
+template <typename T>
+class Auto_ptr1
+{
+    T* m_ptr {};
+public:
+    Auto_ptr1(T* ptr = nullptr) : m_ptr(ptr) {}
+    ~Auto_ptr1() { delete m_ptr; }
+
+    T& operator*() const { return *m_ptr; }
+    T* operator->() const { return m_ptr; }
+};
+
+class Resource
+{
+    std::string m_name;
+    int m_health;
+public:
+    Resource(std::string name, int health)
+        : m_name(name), m_health(health)
+    {
+        std::cout << m_name << " created with health " << m_health << "\n";
+    }
+
+    ~Resource() { std::cout << m_name << " destroyed\n"; }
+
+    void takeDamage(int dmg) { m_health -= dmg; }
+    void show() const { std::cout << m_name << " health: " << m_health << "\n"; }
+};
+
+int main()
+{
+    std::cout << "main starts\n";
+
+    {   // inner scope
+        Auto_ptr1<Resource> player(new Resource("Player", 100));
+
+        player->show();        // calls m_ptr->show()
+        player->takeDamage(30);
+        player->show();
+        (*player).show();      // same thing using operator*
+
+        std::cout << "leaving inner scope\n";
+    }   // player (the Auto_ptr1) dies here -> delete m_ptr -> Resource destructor runs
+
+    std::cout << "back in main, player is gone\n";
+}
+
+#+end_src
+
+** move semantics
+:PROPERTIES:
+:ID:       658c47e2-db18-42d7-b634-583276a5f4ea
+:END:
+
+What if, instead of having our copy constructor and assignment operator copy the pointer (“copy semantics”), we instead transfer/move ownership of the pointer from the source to the destination object? This is the core idea behind move semantics. Move semantics means the class will transfer ownership of the object rather than making a copy
+
+#+begin_src cpp :results output
+#include <iostream>
+using namespace std;
+
+template <typename T>
+class Auto_ptr{
+    T* m_ptr{};
+public:
+    Auto_ptr(T* ptr = nullptr) : m_ptr {ptr} {}
+
+    ~Auto_ptr() {
+        delete m_ptr;
+    }
+
+    Auto_ptr& operator=(Auto_ptr& a) {
+        if(&a == this) {
+            return *this;
+        }
+        delete m_ptr;
+        m_ptr = a.m_ptr;
+        a.m_ptr = nullptr;
+        return *this;
+    }
+
+    T& operator*() {return *m_ptr;}
+    T* operator->() {return m_ptr;}
+};
+
+class Resource{
+    int m_data;
+public:
+    Resource(int data) : m_data {data} {cout << "Constrouctor ran\n";}
+    void getData() {
+        cout << m_data << '\n';
+    }
+    ~Resource() {cout << "Destrouctor ran\n";}
+};
+
+int main() {
+    Auto_ptr<Resource> res1 = new Resource(10);
+    Auto_ptr<Resource> res2;
+    res2 = res1;
+    res2->getData();
+    return 0;
+}
+#+end_src
+
+#+RESULTS:
+: Constrouctor ran
+: 10
+: Destrouctor ran
+
+*rvalue reference* - the rvalue reference allows to capture temporary object in the move constructor and move its resources to another object.
+
+*move constructor* - Allows stealing resources from a temporary object and provide those resources to some other object.
+
+#+begin_src cpp :results output
+#include <iostream>
+#include <cstring>
+using namespace std;
+
+class String{
+    char* m_data;
+public:
+    // Constructor
+    String(const char* s)  {
+        m_data = new char[strlen(s) + 1]; // + 1 for terminator
+        strcpy(m_data, s);
+        cout << "Constructed" << '\n';
+    }
+
+    //Copy construtor
+    String(const String& other)  {
+        m_data = new char[strlen(other.m_data) + 1];
+        strcpy(m_data , other.m_data);
+        cout << "copied" << '\n';
+    }
+
+    //Destructor
+    ~String() {
+        delete[] m_data;
+        cout << "Destroyed" << '\n';
+    }
+
+    void print() {
+        cout << m_data << '\n';
+    }
+};
+
+int main() {
+    String s1{"shiva"};
+    String s2 = s1;
+    s1.print();
+    s2.print();
+    return 0;
+}
+#+end_src
+
+#+RESULTS:
+: Constructed
+: copied
+: shiva
+: shiva
+: Destroyed
+: Destroyed
+
+
+In the above program we just copied one object data to another using copy constructor with this two strings will be created and memory is occupied by both.
+Lets see how this is done by move constructor using rvalue references
+
+#+begin_src cpp :results output
+#include <iostream>
+#include <cstring>
+using namespace std;
+
+class String{
+    char* m_data{};
+public:
+    String(const char* s) {
+        m_data = new char[strlen(s) + 1];
+        strcpy(m_data, s);
+        cout << "Constructed" << '\n';
+    }
+
+    //move constructor
+    String(String&& other) {  // here we used && because in the main s1 is treated as temporary object which is rvalue
+        m_data = other.m_data;  // here s1 and s2 are pointing to same data because of reference
+        other.m_data = nullptr;  // set data of s1 to null
+        cout << "Moved\n";
+    }
+
+    ~String() {
+        delete[] m_data;
+        cout << "Destroyed" << '\n';
+    }
+
+    void print() {
+        if(m_data) {
+            cout << m_data << "\n";
+        }else{
+            cout << "Empty" << '\n';
+        }
+    }
+};
+
+int main() {
+    String s1{"shiva"};
+    String s2 = move(s1);  // here s1 is treated as a temporary object
+    s1.print();
+    s2.print();
+    return 0;
+}
+#+end_src
+
+#+RESULTS:
+: Constructed
+: Moved
+: Empty
+: shiva
+: Destroyed
+: Destroyed
