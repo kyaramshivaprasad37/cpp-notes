@@ -620,6 +620,76 @@ int main() {
     return 0;
 }
 #+end_src
+
+** some functions
+#+begin_src cpp :results output
+#include <iostream>
+using namespace std;
+
+int main() {
+    string name = "Shiva";
+    cout << name.front();
+    cout << name.back();
+
+    const char* ptr = name.c_str();
+
+    cout << *ptr << '\n';
+    ptr++;
+    cout << *ptr << '\n';
+
+    name.reserve(100);
+    cout << name.capacity()<< '\n';
+
+    name.shrink_to_fit();
+    cout << name.capacity() << '\n';
+
+    name.resize(20); //pad with \0;
+    name.resize(15, '!'); //pad with !
+    name.resize(3); //trancate
+
+
+    string s = "Hello";
+    cout << s.substr(1,3)<<'\n';
+    cout << s.substr(1) << '\n';
+
+    string h = "Hello world";
+    size_t pos = h.find_first_of("aeiou"); //any vowel
+    size_t pos1 = h.find_first_not_of("aeiou"); //any vowel
+    cout << pos << '\n';
+    cout << pos1 << '\n';
+
+    string str = "hello hello";
+    size_t start = 0;
+    while((pos = str.find("o",start)) != string::npos) {
+        cout << pos << " ";
+        start = pos +1;
+    }
+    cout << '\n';
+
+    string hi = "Hello world!";
+    hi.replace(7,4, "hehe");
+
+    // auto start = hi.begin(); //same result
+    // auto end = start + 5;
+    cout << hi  << '\n';
+    return 0;
+}
+#+end_src
+
+#+RESULTS:
+#+begin_example
+SaS
+h
+100
+15
+ell
+ello
+1
+0
+4 10
+Hello whehe!
+#+end_example
+
 * Operators
 :PROPERTIES:
 :ID: Operators
@@ -2770,6 +2840,74 @@ int main() {
 #+RESULTS:
 : copy construtor is called
 : 12 3
+*** array of object
+:PROPERTIES:
+:ID:       4b4d1504-5ce3-4eb0-b9e4-f204de563916
+:END:
+#+begin_src cpp :results output
+#include <iostream>
+using namespace std;
+
+class Student{
+public:
+    string name;
+    int age;
+    Student() {}
+    Student(string s, int a) : name{s},age{a} {}
+};
+
+int main() {
+    Student s[10];
+    s[0].name = "shiva";
+    s[0].age = 19;
+    s[1].name = "Prasad";
+    s[1].age = 19;
+    s[2].name = "shiva";
+    s[2].age = 19;
+    for(int i =0;i<3;i++) {
+        cout << s[i].name <<  " " <<  s[i].age << '\n';
+    }
+    return 0;
+}
+#+end_src
+
+#+RESULTS:
+: shiva 19
+: Prasad 19
+: shiva 19
+
+#+begin_src cpp :results output
+#include <iostream>
+using namespace std;
+
+class Student{
+public:
+    string name;
+    int age;
+    Student() {}
+    Student(string s, int a) : name{s},age{a} {}
+};
+
+int main() {
+    Student s[] = {
+        {"shiva",1},
+        {"Prasad",2},
+        {"sunny",3},
+    };
+
+    for(int i =0;i<3;i++) {
+        cout << s[i].name <<  " " <<  s[i].age << '\n';
+    }
+    return 0;
+}
+
+#+end_src
+
+#+RESULTS:
+: shiva 1
+: Prasad 2
+: sunny 3
+
 *** Copy elison
 :PROPERTIES:
 :ID:       cb683dcd-2755-4ed2-85a8-c1ea0626e6b2
@@ -3403,7 +3541,7 @@ class Storage{
     int m_n{};
 
 public:
-    Storageaint a, int n) : m_a {a} , m_n{n} {}
+    Storage(int a, int n) : m_a {a} , m_n{n} {}
 
     friend void Display::displaystorage(const Storage& storage);
 };
@@ -4451,6 +4589,9 @@ int main() {
 }
 #+end_src
 ** std::arrays
+:PROPERTIES:
+:ID:       6c8378ea-04df-4bab-9c0d-18455ecef5d5
+:END:
 
 #+begin_src cpp :results output
 #include <iostream>
@@ -4498,6 +4639,9 @@ int main() {
 }
 #+end_src
 * Iterators
+:PROPERTIES:
+:ID:       fc016b77-388b-4db4-aa48-963fab54dbe7
+:END:
 
 #+begin_src cpp :results output
 #include <iostream>
@@ -4520,6 +4664,7 @@ int main() {
 #+RESULTS:
 : 0 1 2 3 5 5
 
+
 #+begin_src cpp :results output
 #include <iostream>
 #include <array>
@@ -4540,3 +4685,1188 @@ int main() {
 
 #+RESULTS:
 : 0 1 2 3 4 5
+* Introduction to standard library algorithms
+:PROPERTIES:
+:ID:       59f9f174-a742-40b6-b2b1-27a4126a62ca
+:END:
+** std::find - find an element by value
+:PROPERTIES:
+:ID:       6f68aaaa-7763-4787-8313-d0c6d010b5bf
+:END:
+std::find searches for a first occurence of an element in a container.
+ takes 3 parameters: an iterator to the starting element in the sequence, an iterator to the ending element in the sequence, and a value to search for. It returns an iterator pointing to the element (if it is found) or the end of the container (if the element is not found).
+
+ #+begin_src cpp :results output
+#include <iostream>
+#include <array>
+#include <algorithm>
+using namespace std;
+
+int main() {
+    array a{1,2,3,4,5,6};
+    int ele{5};
+    auto found{find(a.begin(), a.end(), ele)};
+    if(found == a.end()) {
+        cout << "element not found";
+    }else {
+        cout << *found << '\n';
+    }
+    return 0;
+}
+#+end_src
+
+#+RESULTS:
+: 5
+
+ iterators use or mimics the syntax of pointers to replace or see the value of element. But they are not actually pointers.
+** std::find_if - find an element that matches some condition
+:PROPERTIES:
+:ID:       5bf53b47-95b3-45ef-a648-43a6cbe66741
+:END:
+#+begin_src cpp :results output
+#include <iostream>
+#include <array>
+#include <string_view>
+#include <algorithm>
+using namespace std;
+
+bool contains(string_view str) {
+    return str.find("sad") != string_view::npos;
+}
+
+int main() {
+    array<string_view, 4> a{"shiva", "prasad", "kyaram", "sunny"};
+
+    auto found {find_if(a.begin(), a.end(), contains)};
+
+    if(found == a.end()) {
+        cout << "Not found" << '\n';
+    }else {
+        cout << *found << '\n';
+    }
+
+    return 0;
+}
+#+end_src
+
+#+RESULTS:
+: prasad
+** std::count and std::count_if to count how many occurences there are
+:PROPERTIES:
+:ID:       9881d197-962f-44f6-84e7-fbfce39261ea
+:END:
+#+begin_src cpp :results output
+#include <iostream>
+#include <string_view>
+#include <algorithm>
+#include <array>
+using namespace std;
+
+bool containsnut(string_view str) {
+    return str.find("nut") != string_view::npos;
+}
+
+int main() {
+    array<string_view, 5> a{"apple", "walnut", "peanut", "banana", "nut"};
+
+    auto nuts {count_if(a.begin(), a.end(), containsnut)};
+
+    cout << nuts << '\n';
+
+    return 0;
+}
+#+end_src
+** std::sort
+:PROPERTIES:
+:ID:       7aaac077-a32d-49f2-9b79-d0576f2b72d3
+:END:
+#+begin_src cpp :results output
+#include <iostream>
+#include <array>
+#include <algorithm>
+using namespace std;
+bool greatest(int a, int b) {
+    return (a>b);
+}
+
+int main() {
+    array arr{1,7,4,6,2,6};
+    sort(arr.begin(), arr.end(), greatest);
+    for(int i : arr) {
+        cout << i << ' ';
+    }
+    cout << '\n';
+    return 0;
+}
+#+end_src
+
+#+RESULTS:
+: 7 6 6 4 2 1
+
+#+begin_src cpp :results output
+#include <iostream>
+#include <array>
+#include <algorithm>
+using namespace std;
+// bool greatest(int a, int b) {
+//     return (a<b);
+// }
+
+int main() {
+    array arr{1,7,4,6,2,6};
+    sort(arr.begin(), arr.end());
+    for(int i : arr) {
+        cout << i << ' ';
+    }
+    cout << '\n';
+    return 0;
+}
+#+end_src
+
+#+RESULTS:
+: 1 2 4 6 6 7
+** std::for_each
+:PROPERTIES:
+:ID:       7613e555-a24d-45dd-ac8b-deb1b90c4baa
+:END:
+
+#+begin_src cpp :results output
+#include <iostream>
+#include <array>
+#include <algorithm>
+using namespace std;
+
+void dou(int& i) {
+    i = i*2;
+}
+
+int main() {
+    array a{1,2,3,4};
+    for_each(a.begin(), a.end(), dou);
+
+    for(auto i : a) {
+        cout << i << ' ';
+    }
+    cout << '\n';
+    return 0;
+}
+#+end_src
+
+#+RESULTS:
+: 2 4 6 8
+
+#+begin_src cpp :results output
+#include <iostream>
+#include <array>
+#include <chrono> // for std::chrono functions
+
+using namespace std;
+class Timer
+{
+private:
+	// Type aliases to make accessing nested type easier
+	using Clock = std::chrono::steady_clock;
+	using Second = std::chrono::duration<double, std::ratio<1> >;
+
+	std::chrono::time_point<Clock> m_beg { Clock::now() };
+
+public:
+	void reset()
+	{
+		m_beg = Clock::now();
+	}
+
+	double elapsed() const
+	{
+		return std::chrono::duration_cast<Second>(Clock::now() - m_beg).count();
+	}
+};
+
+int main() {
+    array a{12,3,4,5,6};
+    Timer t;
+    for(auto i : a) {
+        cout << i << ' ';
+    }
+    cout << t.elapsed() << '\n';
+    return 0;
+}
+#+end_src
+
+#+RESULTS:
+: 12 3 4 5 6 3.8302e-05
+* Dynamic memory allocation with new and delete
+:PROPERTIES:
+:ID:       6f15ad86-34ed-425d-9874-eb215890c8c3
+:END:
+** new
+:PROPERTIES:
+:ID:       0050abd5-f638-44ee-8dba-d86cd4d69ec7
+:END:
+#+begin_src cpp :results output
+#include <iostream>
+using namespace std;
+
+int main() {
+    new int a;
+    return 0;
+}
+#+end_src
+
+In the above case, we’re requesting an integer’s worth of memory from the operating system. The new operator creates the object using that memory, and then returns a pointer containing the address of the memory that has been allocated.
+
+#+begin_src cpp :results output
+#include <iostream>
+using namespace std;
+
+int main() {
+    int* ptr = new int;
+    cout << *ptr << '\n';
+
+    *ptr = 44;
+    cout << *ptr << '\n';
+
+    return 0;
+}
+#+end_src
+
+#+RESULTS:
+: 0
+: 44
+
+Note that accessing *heap-allocated* objects is generally slower than accessing stack-allocated objects. Because the compiler knows the address of stack-allocated objects, it can go directly to that address to get a value. Heap allocated objects are typically accessed via pointer. This requires two steps: *one to get the address of the object (from the pointer), and another to get the value.*
+
+#+begin_src cpp :results output
+#include <iostream>
+using namespace std;
+
+int main() {
+    int* ptr{new int {9}};
+    int* ptr1{new int {1}};
+    cout << *ptr << '\n';
+    cout << *ptr1 << '\n';
+    return 0;
+}
+#+end_src
+
+#+RESULTS:
+: 9
+: 1
+** delete
+:PROPERTIES:
+:ID:       d8ffafdf-aec0-4124-8736-c7975a1e5a0b
+:END:
+#+begin_src cpp :results output
+#include <iostream>
+using namespace std;
+
+int main() {
+    int* ptr {new int (9)};
+    delete ptr;
+    ptr = NULL;
+    cout << *ptr << '\n';
+    return 0;
+}
+#+end_src
+
+#+RESULTS:
+
+The delete operator does not actually delete anything. It simply returns the memory being pointed to back to the operating system. The operating system is then free to reassign that memory to another application (or to this application again later).
+
+Although the syntax makes it look like we’re deleting a variable, this is not the case! The pointer variable still has the same scope as before, and can be assigned a new value (e.g. nullptr) just like any other variable.
+
+Note that deleting a pointer that is not pointing to dynamically allocated memory may cause bad things to happen.
+
+#+begin_src cpp :results output
+int* value { new (std::nothrow) int{} }; // ask for an integer's worth of memory
+if (!value) // handle case where new returned null
+{
+    // Do error handling here
+    std::cerr << "Could not allocate memory\n";
+}
+#+end_src
+
+
+memory leak
+#+begin_src cpp :results output
+#include <iostream>
+using namespace std;
+
+int main() {
+    {
+        int* ptr{new int (5)};  //dynamically allocated int specific block
+    }
+    // ptr has been destroyed after the above block
+    // but we never deallocated the memory so the os can now either access it or delete so it just becomes useless now;
+
+    return 0;
+}
+#+end_src
+* Dynamically allocating arrays
+:PROPERTIES:
+:ID:       f5882cae-641c-4957-9ccb-3f4e924f0190
+:END:
+#+begin_src cpp :results output
+#include <iostream>
+using namespace std;
+
+int main() {
+    int length{3};
+    int* ptr{new int[length]{}};
+    ptr[0] = 1;
+    cout << ptr[0];
+    delete[] ptr;
+    return 0;
+}
+#+end_src
+
+#+RESULTS:
+: 1
+
+#+begin_src cpp :results output
+#include <iostream>
+using namespace std;
+
+int main() {
+    size_t len=5;
+    int* array {new int[len]{1,2,3,4,5}};
+    cout << array[3];
+    return 0;
+}
+#+end_src
+
+#+RESULTS:
+: 4
+
+
+#+begin_src cpp :results output
+#include <iostream>
+#include <algorithm>
+#include <string_view>
+using namespace std;
+
+// bool small(string_view a, string_view b) {
+//     return (a<b);
+// }
+
+int main() {
+    size_t len;
+    cout << "Enter the no of Names: " << '\n';
+    cin >> len;
+    auto *arr{new string[len]{}};
+    for(size_t i = 0;i<len;i++) {
+        getline(cin>>ws, arr[i]);
+    }
+
+    sort(arr, arr + len);
+
+    for(size_t i= 0;i<len;i++){
+        cout << arr[i] << '\n';
+    }
+
+    delete[] arr;
+
+    return 0;
+}
+#+end_src
+
+#+RESULTS:
+: Enter the no of Names:
+
+#+begin_src cpp :results output
+#include <iostream>
+using namespace std;
+
+class Color{
+public:
+    enum color {
+        a,
+        b,
+        c,
+        e,
+        f
+    };
+};
+
+int main() {
+    Color::color o{};
+    cout << o;
+    cout << sizeof(o);
+    return 0;
+}
+#+end_src
+
+#+RESULTS:
+:
+* Destructor indetail
+:PROPERTIES:
+:ID:       0334ee2b-b51a-451d-b97b-643aa09581d4
+:END:
+A destructor is another special kind of class member function that is executed when an object of that class is destroyed. Whereas constructors are designed to initialize a class, destructors are designed to help clean up.
+
+When an object goes out of scope normally, or a dynamically allocated object is explicitly deleted using the delete keyword, the class destructor is automatically called (if it exists) to do any necessary clean up before the object is removed from memory. For simple classes (those that just initialize the values of normal member variables), a destructor is not needed because C++ will automatically clean up the memory for you.
+
+However, if your class object is holding any resources (e.g. dynamic memory, or a file or database handle), or if you need to do any kind of maintenance before the object is destroyed, the destructor is the perfect place to do so, as it is typically the last thing to happen before the object is destroyed.
+
+#+begin_src cpp :results output
+#include <iostream>
+using namespace std;
+
+class Array{
+    int* m_ar{};
+    int m_length{};
+public:
+    Array(int length){
+        m_ar = new int[static_cast<size_t>(length)]{};
+        m_length = length;
+    }
+    ~Array() {
+        delete[] m_ar;
+    }
+
+    void setValue(int index,int value) {
+        m_ar[index] = value;
+    }
+
+    int getValue(int index) {
+        return m_ar[index];
+    }
+
+    int getLength() {
+        return m_length;
+    }
+};
+
+int main() {
+    Array ar(10);
+    for(int i =0;i < ar.getLength(); i++) {
+        ar.setValue(i,i+1);
+    }
+    cout << ar.getValue(2);
+    return 0;
+} //ar is destroyed here
+#+end_src
+
+#+RESULTS:
+: 3
+
+* RAII[[https://share.gemini.google/3gFhyGLcNj3P][ link]]
+:Properties:
+:ID:       920749bb-f11d-45db-89ce-329a6e7bb708
+:END:
+* Introduction to Lamdas (anonymous functions)
+
+Syntax of Lamda function
+
+[ captureClause ] ( parameters ) -> returnType
+{
+        statements;
+}
+
+Normal Function
+#+begin_src cpp :results output
+bool greater(int a, int b) {
+    return a > b;
+}
+#+end_src
+
+Lamda function
+#+begin_src cpp :results output
+auto is_greater = [](int a,int b)
+    {return a > b;};
+#+end_src
+
+#+begin_src cpp :results output
+#include <iostream>
+#include <algorithm>
+#include <vector>
+using namespace std;
+
+int main() {
+    vector<int> arr{1,2,3,4,5,6};
+    int limit = 3;
+
+    int count = count_if(arr.begin(), arr.end(), [limit](int n) {return n > limit;});
+
+    cout << count;
+
+    return 0;
+}
+#+end_src
+
+#+RESULTS:
+: 3
+
+#+begin_src cpp :results output
+#include <algorithm>
+#include <array>
+#include <iostream>
+#include <string_view>
+
+int main()
+{
+  constexpr std::array<std::string_view, 4> arr{ "apple", "banana", "walnut", "lemon" };
+
+  // Define the function right where we use it.
+  auto found{ std::find_if(arr.begin(), arr.end(),
+                           [](std::string_view str) // here's our lambda, no capture clause
+                           {
+                             return str.find("nut") != std::string_view::npos;
+                           }) };
+
+  if (found == arr.end())
+  {
+    std::cout << "No nuts\n";
+  }
+  else
+  {
+    std::cout << "Found " << *found << '\n';
+  }
+
+  return 0;
+}
+#+end_src
+
+#+RESULTS:
+: Found walnut
+
+we can store lamda in a named variable and pass it to a function.
+#+begin_src cpp :results output
+auto isEven{
+    [](int i)
+    {
+        return (i % 2) == 0;
+    }
+};
+
+return std::all_of(array.begin(),array.end(),isEven);
+#+end_src
+
+
+Storing a lamda for post-defination
+
+#+begin_src cpp :results output
+#include <iostream>
+#include <functional>
+using namespace std;
+
+int main() {
+    //using functional pointer
+    double (*addnumbers1)(double, double) {
+        [](double a,double b) {
+            return a+b;
+        }
+    };
+
+    cout << addnumbers1(1,2) << '\n';
+
+    //using std::function
+    function addnumbers2{
+        [](double a, double b) {
+            return a + b;
+        }
+    };
+
+    cout << addnumbers2(5,6) << '\n';
+
+    //using auto
+    auto addnumbers3 {
+        [](double a, double b) {
+            return a + b;
+        }
+    };
+
+    cout << addnumbers3(1,6) << '\n';
+
+    return 0;
+}
+#+end_src
+
+#+RESULTS:
+: 3
+: 11
+: 7
+
+passing lamda to a function
+example of passing  a function as parameter to another function
+#+begin_src cpp :results output
+#include <iostream>
+using namespace std;
+
+int add(int a, int b) { return a + b; }
+int mul(int a, int b) { return a * b; }
+
+int apply(int x, int y, int (*op)(int, int)) {
+    return op(x, y);
+}
+
+int main() {
+    cout << apply(3, 4, add) << "\n";  // 7
+    cout << apply(3, 4, mul) << "\n";  // 12
+}
+#+end_src
+
+now using lamda
+#+begin_src cpp :results output
+#include <iostream>
+#include <functional>
+using namespace std;
+//using std::function parameter
+void repeat(int n, const function<void(int)>& fn) {
+    for(int i = 0; i < n;i++) {
+        fn(i);
+    }
+}
+
+//using template
+template <typename T>
+void repeat2(int n, const T& fn) {
+    for(int i = 0; i < n ; i++){
+        fn(i);
+    }
+}
+
+int main() {
+
+    auto lamda{
+        [](int i) {
+            cout << i << ' ';
+        }
+    };
+
+    repeat(3,lamda);
+    repeat2(3,lamda);
+
+    return 0;
+}
+#+end_src
+
+#+RESULTS:
+: 0 1 2 0 1 2
+
+#+begin_src cpp :results output
+#include <iostream>
+using namespace std;
+
+void repeat(int n, print()) {
+    for(int i =0; i < n; i++){
+        print(i);
+    }
+}
+
+int print(int i) {
+    cout << i;
+}
+
+int main() {
+
+    return 0;
+}
+#+end_src
+
+#+RESULTS:
+
+** Generic Lamdas
+:PROPERTIES:
+:ID:       3a220f14-100f-4143-bc5e-950a3dac20ca
+:END:
+Lamdas woth one or more auto type parameters which works with wide variety of types are called generic lamdas
+
+The std::adjacent_find function in C++ searches a range [first, last) for the first pair of consecutive elements that are equal (or satisfy a given binary predicate), returning an iterator to the first element of that pair.  If no such pair is found, it returns the last iterator.
+
+Syntax and Parameters
+Defined in the <algorithm> header, the function has two primary overloads:
+
+Equality Check: std::adjacent_find(first, last) compares elements using operator==.
+Predicate Check: std::adjacent_find(first, last, pred) uses a binary predicate pred to determine if two elements match.
+
+#+begin_src cpp :results output
+#include <iostream>
+#include <array>
+#include <algorithm>
+#include <string_view>
+using namespace std;
+
+int main() {
+    constexpr array month {
+        "January",
+        "February",
+        "March",
+        "April",
+        "May",
+        "June",
+        "July",
+        "August",
+        "September",
+        "October",
+        "November",
+        "December"
+    };
+
+     const auto sameletter{adjacent_find(month.begin(), month.end(),
+                                         [](const auto& a,const auto& b){
+                                             return (a[0] == b[0]);
+    })};
+    if(sameletter != month.end()) {
+        cout << *sameletter << " and " << *next(sameletter) << " are equal";
+    }
+
+    return 0;
+}
+#+end_src
+
+#+RESULTS:
+: June and July are equal
+
+#+begin_src cpp :results output
+#include <iostream>
+#include <array>
+#include <algorithm>
+#include <string_view>
+using namespace std;
+
+int main() {
+    constexpr array month {
+        "January",
+        "February",
+        "March",
+        "April",
+        "May",
+        "June",
+        "July",
+        "August",
+        "September",
+        "October",
+        "November",
+        "December"
+    };
+
+    auto fiveletter{
+        count_if(month.begin(), month.end(),
+            [](std::string_view str) {
+            return (str.length() == 5);
+            })};
+
+    cout << fiveletter << '\n';
+}
+
+#+end_src
+* Operator overloading.
+:PROPERTIES:
+:ID:       915aaad2-5f5b-4901-ab87-7b352302d36b
+:END:
+using function overloading to overload operators is called operator overloading.i
+
+First, almost any existing operator in C++ can be overloaded. The exceptions are: conditional (?:), sizeof, scope (::), member selector (.), pointer member selector (.*), typeid, and the casting operators.
+
+Second, you can only overload the operators that exist. You can not create new operators or rename existing operators. For example, you could not create an operator** to do exponents.
+
+Third, at least one of the operands in an overloaded operator must be a user-defined type. This means you could overload operator+(int, Mystring), but not operator+(int, double).
+
+*Ways to overload operator*
+1. the member function way
+2. friend function way
+3. normal way
+
+** opearator overloading using friend function*
+#+begin_src cpp :results output
+#include <iostream>
+using namespace std;
+
+class Cents{
+    int m_cents{};
+public:
+    Cents(int cents) : m_cents {cents} {}
+
+    friend Cents operator+(Cents& c1, Cents& c2);
+
+    int getCents() {
+       return m_cents;
+    }
+};
+
+Cents operator+(Cents& c1, Cents& c2) {
+    return c1.m_cents + c2.m_cents;
+}
+
+
+int main() {
+    Cents a{1};
+    Cents b{2};
+    cout << a.getCents() << '\n';
+    Cents sum{a + b};
+    cout  << sum.getCents() << '\n';
+    return 0;
+}
+#+end_src
+
+#+RESULTS:
+: 1
+: 3
+
+#+begin_src cpp :results output
+#include <iostream>
+using namespace std;
+
+class Cents{
+    int m_cents{};
+public:
+    Cents(int cents) : m_cents{cents} {}
+
+    friend Cents operator-(Cents& c1, Cents& c2);
+
+    int getCents() {
+        return m_cents;
+    }
+};
+
+Cents operator-(Cents& c1, Cents& c2) {
+    return c1.m_cents - c2.m_cents;
+}
+
+int main() {
+    Cents a{2};
+    Cents b{3};
+    cout << b.getCents() << '\n';
+    Cents minus{a- b};
+    cout << minus.getCents() << '\n';
+    return 0;
+}
+#+end_src
+
+#+RESULTS:
+: 3
+: -1
+
+with different type
+Cents, int
+
+For adding different types we need to write two oveloading functions one for  x + cents(4) and cents(4) + x because these are treated as diff rather than one like in same type.
+
+#+begin_src cpp :results output
+#include <iostream>
+using namespace std;
+class Cents{
+    int m_cents{};
+public:
+    Cents(int cents) : m_cents {cents} {}
+
+    friend Cents operator+(Cents& c, int x);
+
+    friend Cents operator+(int x, Cents& c);
+
+    int getCents() {
+        return m_cents;
+    }
+};
+
+Cents operator+(Cents& c, int x) {
+    return c.m_cents + x;
+}
+
+Cents operator+(int x, Cents& c) {
+    return c.m_cents + x;
+}
+
+int main() {
+    Cents a{3};
+    Cents sum=a+4;
+    cout << sum.getCents();
+    return 0;
+}
+#+end_src
+
+#+RESULTS:
+: 7
+** overloading operator using normal functions
+
+#+begin_src cpp :results output
+#include <iostream>
+using namespace std;
+
+class Cents{
+    int m_cents{};
+public:
+    Cents(int cents) : m_cents{cents} {}
+
+    int getCents() {
+        return m_cents;
+    }
+};
+
+Cents operator+(Cents& c1, Cents& c2) {
+    return (c1.getCents() + c2.getCents());
+}
+
+int main() {
+    Cents a{2};
+    Cents b{3};
+    Cents sum{a + b};
+    cout << sum.getCents();
+    return 0;
+}
+#+end_src
+
+#+RESULTS:
+: 5
+** overloading I/O operators
+overloading >> operator
+#+begin_src cpp :results output
+#include <iostream>
+using namespace std;
+
+class Cents{
+    int m_cents{};
+    string m_country{};
+public:
+    Cents(int cents, string country) : m_cents {cents}, m_country {country} {};
+
+    friend ostream& operator<<(ostream& out, Cents& c);
+
+    int getCents() {
+        return m_cents;
+    }
+};
+
+ostream& operator<<(ostream& out, Cents& c) {
+    out << c.m_cents << ' '  << c.m_country;
+    return out;
+}
+
+int main() {
+    Cents a{20, "India"};
+    cout << a;
+    return 0;
+}
+#+end_src
+
+#+RESULTS:
+: 20 India
+
+#+begin_src cpp :results output
+#include <iostream>
+using namespace std;
+
+class Point{
+    int m_x{};
+    int m_y{};
+    int m_z{};
+public:
+    Point(int x= 0, int y=0 , int z=0) : m_x {x}, m_y{y} , m_z{z} {};
+
+    friend ostream& operator<<(ostream& out, Point& p);
+    friend istream& operator>>(istream& out, Point& p);
+};
+
+ostream& operator<<(ostream& out, Point& p) {
+    out << "( " << p.m_x << ", " << p.m_y << ", " << p.m_z << " )";
+    return out;
+}
+
+istream& operator>>(istream& in, Point& p) {
+    in >> p.m_x >> p.m_y >> p.m_z;
+    return in;
+}
+
+int main() {
+    Point p;
+    cin >> p;
+    cout << p;
+    return 0;
+}
+#+end_src
+** overloading operators using member function
+
+#+begin_src cpp :results output
+#include <iostream>
+using namespace std;
+
+class Cents{
+    int m_cents{};
+public:
+    Cents(int cents) : m_cents{cents} {}
+
+    int getCents() {
+        return m_cents;
+    }
+};
+
+Cents Cents::operator+(int value) {
+    return Cents {m_cents + value};
+}
+
+int main() {
+
+    Cents c1{1};
+    Cents c2{c1 + 1};
+    cout << c2.getCents();
+
+    return 0;
+}
+#+end_src
+
+#+RESULTS:
+** overloading unary operators +,-,!
+:PROPERTIES:
+:ID:       4d8d3871-d0a6-49bf-8b5d-95e4c9d58456
+:END:
+
+#+begin_src cpp :results output
+#include <iostream>
+using namespace std;
+
+class Cents{
+    int  m_cents{};
+public:
+    Cents(int cents) : m_cents{cents}{}
+    Cents operator-();
+
+    int getCents() {
+        return m_cents;
+    }
+};
+
+Cents Cents::operator-() {
+    return -m_cents;
+}
+
+int main() {
+    Cents c{2};
+    cout << -c.getCents();
+    return 0;
+}
+#+end_src
+
+#+RESULTS:
+: -2
+** overloading comparison operators
+:PROPERTIES:
+:ID:       855d9394-e7b4-475d-90fb-2dea5bae927c
+:END:
+#+begin_src cpp :results output
+#include <iostream>
+using namespace std;
+
+class Car{
+    string m_make{};
+    string m_model{};
+public:
+    Car(string make, string model) : m_make {make} , m_model {model} {}
+
+    friend bool operator==(Car& c1, Car& c2);
+    friend bool operator!=(Car& c1, Car& c2);
+};
+
+bool operator==(Car& c1, Car& c2) {
+    return (c1.m_make == c2.m_make && c1.m_model == c2.m_model);
+}
+
+bool operator!=(Car& c1, Car& c2) {
+    return (c1.m_make != c2.m_make || c1.m_model != c2.m_model);
+}
+
+int main() {
+    Car c1{"Toyota", "A"};
+    Car c2("Toyota", "B");
+    if(c1 == c2) {
+        cout << "Equal" << '\n';
+    }else {
+        cout << "Not equal" << '\n';
+    }
+    return 0;
+}
+#+end_src
+
+#+RESULTS:
+: Not equal
+** overloading operator[]
+ #+begin_src cpp :results output
+#include <iostream>
+
+class IntList
+{
+private:
+    int m_list[10]{};
+
+public:
+    int& operator[] (int index)
+    {
+        return m_list[index];
+    }
+};
+
+/*
+// Can also be implemented outside the class definition
+int& IntList::operator[] (int index)
+{
+    return m_list[index];
+}
+,*/
+
+int main()
+{
+    IntList list{};
+    list[2] = 3; // set a value
+    std::cout << list[2] << '\n'; // get a value
+
+    return 0;
+}
+
+#+end_src
+
+#+RESULTS:
+: 3
+** shallow vs deep copying
+:PROPERTIES:
+:ID:       ad1e3bc7-0c20-4573-9ccf-c74e37d35e0b
+:END:
+#+begin_src cpp :results output
+#include <cassert>
+#include <iostream>
+
+class Fraction
+{
+private:
+    int m_numerator { 0 };
+    int m_denominator { 1 };
+
+public:
+    // Default constructor
+    Fraction(int numerator = 0, int denominator = 1)
+        : m_numerator{ numerator }
+        , m_denominator{ denominator }
+    {
+        assert(denominator != 0);
+    }
+
+    // Possible implementation of implicit copy constructor
+    Fraction(const Fraction& f)
+        : m_numerator{ f.m_numerator }
+        , m_denominator{ f.m_denominator }
+    {
+    }
+
+    // Possible implementation of implicit assignment operator
+    Fraction& operator= (const Fraction& fraction)
+    {
+        // self-assignment guard
+        if (this == &fraction)
+            return *this;
+
+        // do the copy
+        m_numerator = fraction.m_numerator;
+        m_denominator = fraction.m_denominator;
+
+        // return the existing object so we can chain this operator
+        return *this;
+    }
+
+    friend std::ostream& operator<<(std::ostream& out, const Fraction& f1)
+    {
+	out << f1.m_numerator << '/' << f1.m_denominator;
+	return out;
+    }
+};
+#+end_src
+
+#+RESULTS:
