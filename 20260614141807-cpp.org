@@ -6062,14 +6062,12 @@ int main() {
 }
 #+end_src
 
-#+RESULTS:
-: Constrouctor ran
-: 10
-: Destrouctor ran
-
 *rvalue reference* - the rvalue reference allows to capture temporary object in the move constructor and move its resources to another object.
 
-*move constructor* - Allows stealing resources from a temporary object and provide those resources to some other object.
+** *move constructor* - Allows stealing resources from a temporary object and provide those resources to some other object.
+:PROPERTIES:
+:ID:       c71242cb-142c-4bda-a604-7be5dbd0a9a3
+:END:
 
 #+begin_src cpp :results output
 #include <iostream>
@@ -6168,11 +6166,340 @@ int main() {
     return 0;
 }
 #+end_src
+** move assignment
+:PROPERTIES:
+:ID:       4bcd91e9-615b-49ca-b8f1-9d5bfc0218f2
+:END:
+
+invoked when we overwrite data of a object that has already been created with another object
+
+rough example for move constructor and move assignment
+
+#+begin_src cpp :results output
+#include <iostream>
+using namespace std;
+
+template <typename T>
+class Auto_ptr{
+    T* m_ptr{};
+public:
+    Auto_ptr(T* ptr = nullptr) : m_ptr {ptr} {}
+
+    // move constructor
+    Auto_ptr(Auto_ptr&& other) noexcept : m_ptr{other.m_ptr} {other.m_ptr = nullptr;}
+
+    //move assignment
+    Auto_ptr& operator=(Auto_ptr&& other) {
+        if(&other == this) {
+            return *this;
+        }
+
+        delete m_ptr;
+        m_ptr = other.m_ptr;
+        other.m_ptr = nullptr;
+        return *this;
+    }
+
+    ~Auto_ptr() {
+        delete m_ptr;
+    }
+
+    T& operator*() const {return *m_ptr;}
+    T* operator->() const {return m_ptr;}
+};
+
+class Resource{
+    int m_data{};
+public:
+    Resource(int data) : m_data{data} {cout << "Constructed\n";}
+
+    int getData() {
+        return m_data;
+    }
+
+    ~Resource() {cout << "Destructed\n";}
+};
+
+int main() {
+    Auto_ptr<Resource> res1 = new Resource(5);
+    Auto_ptr<Resource> res2 = new Resource(10);
+
+    res2 = move(res1);
+    cout << res2->getData() << '\n';
+
+    return 0;
+}
+#+end_src
 
 #+RESULTS:
 : Constructed
-: Moved
-: Empty
-: shiva
-: Destroyed
-: Destroyed
+: Constructed
+: Destructed
+: 5
+: Destructed
+
+
+#+begin_src cpp :results output
+#include <iostream>
+
+template<typename T>
+class Auto_ptr4
+{
+	T* m_ptr {};
+public:
+    // Constructor
+	Auto_ptr4(T* ptr = nullptr)
+		: m_ptr { ptr }
+	{
+	}
+
+    // Destructor
+	~Auto_ptr4()
+	{
+		delete m_ptr;
+	}
+
+	// Copy constructor
+	// Do deep copy of a.m_ptr to m_ptr
+    // called when new object is created and immediately initialized it with existing object
+	Auto_ptr4(const Auto_ptr4& a)
+	{
+		m_ptr = new T;
+		,*m_ptr = *a.m_ptr;          // accessing atual object not memory address
+	}
+
+	// Move constructor
+	// Transfer ownership of a.m_ptr to m_ptr
+	Auto_ptr4(Auto_ptr4&& a) noexcept               // a promise to compiler that this fun will not generate error because it is just swapping memory address
+		: m_ptr { a.m_ptr }                       // here two object ponting to same address
+	{
+		a.m_ptr = nullptr; // making it null because when fun is over its constructor is called and actual data is deleted. if we point it to null no actual will be deleted
+	}
+
+	// Copy assignment
+	// Do deep copy of a.m_ptr to m_ptr
+	Auto_ptr4& operator=(const Auto_ptr4& a)
+	{
+		// Self-assignment detection
+		if (&a == this)          // if box1 = box2 then stop and return this
+			return *this;
+
+		// Release any resource we're holding
+		delete m_ptr;              // it already has data if we dont delete it before overwriting memory leak will happen
+
+		// Copy the resource
+		m_ptr = new T;
+		,*m_ptr = *a.m_ptr;
+
+		return *this;
+	}
+
+	// Move assignment
+	// Transfer ownership of a.m_ptr to m_ptr
+	Auto_ptr4& operator=(Auto_ptr4&& a) noexcept
+	{
+		// Self-assignment detection
+		if (&a == this)
+			return *this;
+
+		// Release any resource we're holding
+		delete m_ptr;
+
+		// Transfer ownership of a.m_ptr to m_ptr
+		m_ptr = a.m_ptr;
+		a.m_ptr = nullptr;
+
+		return *this;
+	}
+
+	T& operator*() const { return *m_ptr; }
+	T* operator->() const { return m_ptr; }
+	bool isNull() const { return m_ptr == nullptr; }
+};
+
+class Resource
+{
+public:
+	Resource() { std::cout << "Resource acquired\n"; }
+	~Resource() { std::cout << "Resource destroyed\n"; }
+};
+
+Auto_ptr4<Resource> generateResource()
+{
+	Auto_ptr4<Resource> res{new Resource};
+	return res; // this return value will invoke the move constructor
+}
+
+int main()
+{
+	Auto_ptr4<Resource> mainres;
+	mainres = generateResource(); // this assignment will invoke the move assignment
+
+	return 0;
+}
+
+#+end_src
+** Types of smart pointer
+:PROPERTIES:
+:ID:       79435994-4ac4-44ac-aec6-b72b62ecc71a
+:END:
+ There are 4 smart pointer class
+ 1. std::auto_ptr
+ 2. std::unique_ptr
+ 3. std::shared_ptr
+ 4. std::weak_ptr
+
+*** std::unique_ptr
+:PROPERTIES:
+:ID:       61653ce5-9738-45f5-b694-28c7fa6f5264
+:END:
+
+std::unique_ptr is the C++11 replacement for std::auto_ptr. It should be used to manage any dynamically allocated object that is not shared by multiple objects. That is, std::unique_ptr should completely own the object it manages, not share that ownership with other classes. std::unique_ptr lives in the <memory> header.
+
+#+begin_src cpp :results output
+#include <iostream>
+#include <memory>
+using namespace std;
+
+class Resource{
+public:
+    Resource() {cout << "Allocated\n";}
+    ~Resource() {cout << "Deallocated\n";}
+};
+
+int main() {
+    unique_ptr<Resource> res{new Resource()};
+    return 0;
+}
+#+end_src
+
+#+RESULTS:
+: Allocated
+: Deallocated
+
+std::unique_ptr is based on move semantics so it only owns one object. means it will transfer the ownership
+
+#+begin_src cpp :results output
+#include <iostream>
+#include <memory>
+#include <utility>
+using namespace std;
+
+class Resource{
+public:
+    Resource() {cout << "Allocated\n";}
+    ~Resource() {cout << "Deallocated\n";}
+};
+
+int main() {
+    unique_ptr<Resource> res1{new Resource{}};  // resource allocated
+    unique_ptr<Resource> res2{};  // null
+
+    cout << "res1 is " <<  (res1 ? "not null\n" : "null\n");
+    cout << "res2 is " <<  (res2 ? "not null\n" : "null\n");
+
+    res2 = move(res1); // here res1 = res2 wont compile because copy assignmant is disabled
+
+    cout << "res1 is " <<  (res1 ? "not null\n" : "null\n");
+    cout << "res2 is " <<  (res2 ? "not null\n" : "null\n");
+
+    return 0;
+}
+#+end_src
+
+#+RESULTS:
+: Allocated
+: res1 is not null
+: res2 is null
+: res1 is null
+: res2 is not null
+: Deallocated
+
+Unlike std::auto_ptr, std::unique_ptr is smart enough to know whether to use scalar delete or array delete, so std::unique_ptr is okay to use with both scalar objects and arrays.
+
+*Passing std::unique_ptr to a function*
+
+#+begin_src cpp :results output
+#include <iostream>
+#include <memory> // for std::unique_ptr
+#include <utility> // for std::move
+
+class Resource
+{
+public:
+	Resource() { std::cout << "Resource acquired\n"; }
+	~Resource() { std::cout << "Resource destroyed\n"; }
+};
+
+std::ostream& operator<<(std::ostream& out, const Resource&)
+{
+	out << "I am a resource";
+	return out;
+}
+
+// This function takes ownership of the Resource, which isn't what we want
+void takeOwnership(std::unique_ptr<Resource> res)
+{
+     if (res)
+          std::cout << *res << '\n';
+} // the Resource is destroyed here
+
+int main()
+{
+    auto ptr{ std::make_unique<Resource>() };
+
+//    takeOwnership(ptr); // This doesn't work, need to use move semantics
+    takeOwnership(std::move(ptr)); // ok: use move semantics
+
+    std::cout << "Ending program\n";
+
+    return 0;
+}
+#+end_src
+
+we can pass std::unique to a function like this but it will take ownership which means the object is going to be destroyed at the end of the function. which we dont want.
+Instead we pass like this
+
+#+begin_src cpp :results output
+#include <memory> // for std::unique_ptr
+#include <iostream>
+
+class Resource
+{
+public:
+	Resource() { std::cout << "Resource acquired\n"; }
+	~Resource() { std::cout << "Resource destroyed\n"; }
+};
+
+std::ostream& operator<<(std::ostream& out, const Resource&)
+{
+	out << "I am a resource";
+	return out;
+}
+
+// The function only uses the resource, so we'll accept a pointer to the resource, not a reference to the whole std::unique_ptr<Resource>
+void useResource(const Resource* res)
+{
+	if (res)
+		std::cout << *res << '\n';
+	else
+		std::cout << "No resource\n";
+}
+
+int main()
+{
+	auto ptr{ std::make_unique<Resource>() };
+
+	useResource(ptr.get()); // note: get() used here to get a pointer to the Resource
+
+	std::cout << "Ending program\n";
+
+	return 0;
+} // The Resource is destroyed here
+#+end_src
+
+#+RESULTS:
+: Resource acquired
+: I am a resource
+: Ending program
+: Resource destroyed

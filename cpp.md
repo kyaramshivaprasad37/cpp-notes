@@ -1,137 +1,141 @@
 
 # Table of Contents
 
-1.  [C++ Basics](#org0e33789)
-    1.  [Objects and Variables](#orge453bc6)
-        1.  [Variable assigment](#org50b3ea6)
-        2.  [maybe unused](#orgca9d818)
-        3.  [cout and cin](#orgab5fe6a)
-        4.  [Uninitialized variables and undefined behavioure](#orgaef4985)
-        5.  [Keywords and Identifiers](#orgbd6ce48)
-    2.  [Functions and Files](#org1baa9ac)
-        1.  [Void functions](#orgd93ce26)
-    3.  [size<sub>t</sub> link to topic](#org887f85f)
-    4.  [Char(ASCII TABLE LINK) here](#orgf2aed50)
-    5.  [Implicit and Explicit Coversion](#org1ea68cb)
-        1.  [Sign conversion using static<sub>cast</sub>](#orgf33e80c)
-        2.  [Quiz Questions](#org1218f2a)
-2.  [Fundamental Data Types](#orgcd15f4d)
-    1.  [Numeral Systems (decimal, binary, hexadecimal)](#org7e4be16)
-        1.  [Octal](#orgb307271)
-        2.  [hexadecimal](#org460a94d)
-        3.  [Binary](#orgbe2f71a)
-        4.  [Outputting values in decimal, octal and hexadecimal](#org30b8841)
-        5.  [Outputting values in Binary using std::bitset](#orgeab48e5)
-3.  [Strings](#org0a84f01)
-    1.  [Strings (std::string)](#orge975a43)
-    2.  [Strings (std::string<sub>view</sub>)](#org8eb33a0)
-    3.  [some functions](#orgec5ec41)
-4.  [Operators](#orgde15f65)
-5.  [Bit Manipulation](#org06ce963)
-    1.  [Uses of <bitset> library](#org6ece0f8)
-    2.  [Bitmanipulation by bit masks](#org5f8b0be)
-6.  [Namespace and scope resolution](#org9f8b3da)
-    1.  [Static local variables](#org42d5974)
-7.  [Control Flow](#org6d9cbc1)
-    1.  [Switch case](#org0d31cfc)
-    2.  [goto statements](#org4d7b3ed)
-    3.  [While loop](#org9be293f)
-    4.  [Do While](#org6919d50)
-    5.  [For Loop](#org5a9740d)
-    6.  [std::exit](#orgf60e0d8)
-8.  [Mersenne Twister](#org938ad45)
-9.  [Function Templates](#org08d55ae)
-10. [Constexpr and Consteval Functions](#orgc717479)
-11. [Compound data types](#org02f6401)
-    1.  [L-value references](#org6c01415)
-        1.  [Non-const L value references](#org7f36f3b)
-        2.  [Const L-value referencs](#org3eeae32)
-    2.  [R-value refernces](#org04734c5)
-    3.  [Pass by reference](#org785286b)
-    4.  [pass by const lvalue reference](#org99f66fc)
-    5.  [why prefer std::string<sub>view</sub> to const std::string&](#orgb3974fa)
-    6.  [Pointers](#org714cb1e)
-        1.  [Deference operator](#org0c107a1)
-        2.  [Pointer](#orgfc4bf6a)
-        3.  [Address of operator returns a pointer](#orgdb95fca)
-        4.  [null pointers as boolean values](#org604b07d)
-        5.  [pointer to const](#org4b23354)
-        6.  [pass by address](#orgf8e7a6d)
-    7.  [Operator overloading](#org6ebbbd1)
-    8.  [Enumerations](#org50a2f89)
-        1.  [Unscoped Enumerations](#org2450862)
-        2.  [scoped Enumerations](#org2eae6eb)
-    9.  [Struct](#org594122a)
-    10. [Classes (OOP)](#org02b3681)
-        1.  [member functions](#org401926f)
-        2.  [returning data members by lvalue reference](#orgebe18e4)
-        3.  [constructor](#org3c405f9)
-        4.  [temporary object](#org62b12fa)
-        5.  [delegating constructor](#org7869046)
-        6.  [copy constructor](#org59502b6)
-        7.  [pass by value and copy construtor](#org525606e)
-        8.  [array of object](#org329339b)
-        9.  [Copy elison](#orgd4bde7a)
-        10. [User defined conversions](#org23b16ec)
-        11. [constexpr member functions](#orgc376490)
-        12. [the hidden this pointer](#org91237f6)
-        13. [member function chaining using \*this](#orgcc83b19)
-        14. [Destructor](#org90a745e)
-        15. [static member variables and functions](#org71c4df7)
-        16. [friend non-member functions](#org2fd4aff)
-        17. [friend class and friend member function](#orgc6f0f79)
-12. [Dynamic arrays](#orga2f1a21)
-    1.  [Introduction to std::vector](#org7e7787f)
-        1.  [passing a std::vector using generic template or abbreviated function template](#orgf29fb74)
-        2.  [move semantics](#orgee2d0ea)
-        3.  [arrays and loop](#org853d377)
-        4.  [template arrays and loop](#org4cd926f)
-    2.  [Range based for Loops](#org4183a9d)
-    3.  [Using unscoped emumerators for indexing](#org5d7830a)
-    4.  [resizing std::vector at runtime](#orge1f7f22)
-        1.  [length and capacity](#org5e8dc7c)
-        2.  [shrink<sub>to</sub><sub>fit</sub>](#org55fde8f)
-    5.  [std::vector and stack behaviour](#orged70e85)
-    6.  [reserve member function](#org94720fc)
-    7.  [std::vector<bool>](#orgc9277c6)
-    8.  [Quiz questions](#org0e6f5dc)
-    9.  [std::arrays](#org0cb0fe8)
-13. [Iterators](#orgbd1b873)
-14. [Introduction to standard library algorithms](#org1b7014c)
-    1.  [std::find - find an element by value](#org3b11276)
-    2.  [std::find<sub>if</sub> - find an element that matches some condition](#org948589b)
-    3.  [std::count and std::count<sub>if</sub> to count how many occurences there are](#org0374628)
-    4.  [std::sort](#org3e5bec5)
-    5.  [std::for<sub>each</sub>](#orgc7e1e35)
-15. [Dynamic memory allocation with new and delete](#orgc83e858)
-    1.  [new](#org38daea4)
-    2.  [delete](#org8005a8b)
-16. [Dynamically allocating arrays](#org392c459)
-17. [Destructor indetail](#orgdf12888)
-18. [RAII link](#orgb884f31)
-19. [Introduction to Lamdas (anonymous functions)](#org11e3be1)
-    1.  [Generic Lamdas](#org2c9569a)
-20. [Operator overloading.](#org519ff62)
-    1.  [opearator overloading using friend function\*](#org3fd0522)
-    2.  [overloading operator using normal functions](#org3668b9a)
-    3.  [overloading I/O operators](#orgadb4f89)
-    4.  [overloading operators using member function](#orgb7e8457)
-    5.  [overloading unary operators +,-,!](#orgca2a2d7)
-    6.  [overloading comparison operators](#orgccdd612)
-    7.  [overloading operator[]](#org27dd1d7)
-    8.  [shallow vs deep copying](#org2ed8f47)
-21. [Smart pointers](#orgc7ea5c6)
-    1.  [move semantics](#org7096705)
+1.  [C++ Basics](#org883ccb6)
+    1.  [Objects and Variables](#org73d5513)
+        1.  [Variable assigment](#org92d37e8)
+        2.  [maybe unused](#org530dc7c)
+        3.  [cout and cin](#org4721867)
+        4.  [Uninitialized variables and undefined behavioure](#orgc290dcc)
+        5.  [Keywords and Identifiers](#orge468efd)
+    2.  [Functions and Files](#orga30395f)
+        1.  [Void functions](#org142c02c)
+    3.  [size<sub>t</sub> link to topic](#org9b8b7f5)
+    4.  [Char(ASCII TABLE LINK) here](#org20c67f1)
+    5.  [Implicit and Explicit Coversion](#orgfe0a05e)
+        1.  [Sign conversion using static<sub>cast</sub>](#org4f65f5d)
+        2.  [Quiz Questions](#orgaf46675)
+2.  [Fundamental Data Types](#org026c15d)
+    1.  [Numeral Systems (decimal, binary, hexadecimal)](#org650f62b)
+        1.  [Octal](#org1483b32)
+        2.  [hexadecimal](#org08396e0)
+        3.  [Binary](#org4533a71)
+        4.  [Outputting values in decimal, octal and hexadecimal](#orgf4ac66a)
+        5.  [Outputting values in Binary using std::bitset](#org5010d88)
+3.  [Strings](#org67de579)
+    1.  [Strings (std::string)](#org7f1ce87)
+    2.  [Strings (std::string<sub>view</sub>)](#org9a075bb)
+    3.  [some functions](#org20a3bda)
+4.  [Operators](#org21519cd)
+5.  [Bit Manipulation](#org8d9f647)
+    1.  [Uses of <bitset> library](#org1c91b45)
+    2.  [Bitmanipulation by bit masks](#orge77643a)
+6.  [Namespace and scope resolution](#org00c9212)
+    1.  [Static local variables](#org2d0760f)
+7.  [Control Flow](#orga039322)
+    1.  [Switch case](#org8057cf2)
+    2.  [goto statements](#org7e53d44)
+    3.  [While loop](#org1cd4cbc)
+    4.  [Do While](#org526f9b3)
+    5.  [For Loop](#orgf29239e)
+    6.  [std::exit](#org6b712a0)
+8.  [Mersenne Twister](#org68701f6)
+9.  [Function Templates](#org8130203)
+10. [Constexpr and Consteval Functions](#orgbcc7bd1)
+11. [Compound data types](#orgede283c)
+    1.  [L-value references](#org57ea87a)
+        1.  [Non-const L value references](#org41965c9)
+        2.  [Const L-value referencs](#org0667970)
+    2.  [R-value refernces](#org52bd649)
+    3.  [Pass by reference](#org421ac8f)
+    4.  [pass by const lvalue reference](#org4422040)
+    5.  [why prefer std::string<sub>view</sub> to const std::string&](#orge1efeee)
+    6.  [Pointers](#org53636ee)
+        1.  [Deference operator](#org0038dc9)
+        2.  [Pointer](#orgc5723ae)
+        3.  [Address of operator returns a pointer](#org86e253a)
+        4.  [null pointers as boolean values](#orge8c4881)
+        5.  [pointer to const](#orgc4318b2)
+        6.  [pass by address](#org6d875da)
+    7.  [Operator overloading](#org1a3dae6)
+    8.  [Enumerations](#orgea17f38)
+        1.  [Unscoped Enumerations](#org34b540a)
+        2.  [scoped Enumerations](#org7a0dac4)
+    9.  [Struct](#orgc0d7015)
+    10. [Classes (OOP)](#org183099b)
+        1.  [member functions](#org04c8292)
+        2.  [returning data members by lvalue reference](#orgb639481)
+        3.  [constructor](#orgc1fea53)
+        4.  [temporary object](#org1f193ae)
+        5.  [delegating constructor](#org3b0f528)
+        6.  [copy constructor](#org76de3fe)
+        7.  [pass by value and copy construtor](#org99415e3)
+        8.  [array of object](#org57341e4)
+        9.  [Copy elison](#org28ed428)
+        10. [User defined conversions](#org77bf4e4)
+        11. [constexpr member functions](#orge7a8d21)
+        12. [the hidden this pointer](#orgb851a61)
+        13. [member function chaining using \*this](#orgdc6c6f9)
+        14. [Destructor](#org03f1dd5)
+        15. [static member variables and functions](#org6f286a7)
+        16. [friend non-member functions](#orgec49eb9)
+        17. [friend class and friend member function](#org7f862e1)
+12. [Dynamic arrays](#orgb50aec0)
+    1.  [Introduction to std::vector](#org5e332f4)
+        1.  [passing a std::vector using generic template or abbreviated function template](#org13bd612)
+        2.  [move semantics](#org9de6f8c)
+        3.  [arrays and loop](#orgf829172)
+        4.  [template arrays and loop](#org666b38e)
+    2.  [Range based for Loops](#orgf563982)
+    3.  [Using unscoped emumerators for indexing](#org3283d1a)
+    4.  [resizing std::vector at runtime](#org8d39f84)
+        1.  [length and capacity](#orgdbbdcd8)
+        2.  [shrink<sub>to</sub><sub>fit</sub>](#org7e49263)
+    5.  [std::vector and stack behaviour](#orgaae2f95)
+    6.  [reserve member function](#orgb21e917)
+    7.  [std::vector<bool>](#orgfa143d2)
+    8.  [Quiz questions](#org3ecc4f6)
+    9.  [std::arrays](#org068e8a0)
+13. [Iterators](#org9f9245d)
+14. [Introduction to standard library algorithms](#orgaecbaea)
+    1.  [std::find - find an element by value](#org6575027)
+    2.  [std::find<sub>if</sub> - find an element that matches some condition](#org634f235)
+    3.  [std::count and std::count<sub>if</sub> to count how many occurences there are](#orgcb3cffd)
+    4.  [std::sort](#org511b117)
+    5.  [std::for<sub>each</sub>](#orgd10b2fd)
+15. [Dynamic memory allocation with new and delete](#org177388d)
+    1.  [new](#org5d01e79)
+    2.  [delete](#org75d5d11)
+16. [Dynamically allocating arrays](#org70e41ce)
+17. [Destructor indetail](#org9a8b57c)
+18. [RAII link](#org6948dd4)
+19. [Introduction to Lamdas (anonymous functions)](#orgdb25dd7)
+    1.  [Generic Lamdas](#orge5c8fc2)
+20. [Operator overloading.](#org092794e)
+    1.  [opearator overloading using friend function\*](#org598810e)
+    2.  [overloading operator using normal functions](#orgec76531)
+    3.  [overloading I/O operators](#org46caa00)
+    4.  [overloading operators using member function](#org24f72bf)
+    5.  [overloading unary operators +,-,!](#org309d82d)
+    6.  [overloading comparison operators](#orgf00088a)
+    7.  [overloading operator[]](#orgd949e9e)
+    8.  [shallow vs deep copying](#org738f9c7)
+21. [Smart pointers](#org307cb92)
+    1.  [move semantics](#orgb43f3b3)
+    2.  [**move constructor** - Allows stealing resources from a temporary object and provide those resources to some other object.](#org835dfb0)
+    3.  [move assignment](#orgdc38666)
+    4.  [Types of smart pointer](#org19ad8a8)
+        1.  [std::unique<sub>ptr</sub>](#org57b6a0f)
 
 filetags: CPP
 
 
-<a id="org0e33789"></a>
+<a id="org883ccb6"></a>
 
 # C++ Basics
 
 
-<a id="orge453bc6"></a>
+<a id="org73d5513"></a>
 
 ## Objects and Variables
 
@@ -153,7 +157,7 @@ Memory is allocated during the run time.
     }
 
 
-<a id="org50b3ea6"></a>
+<a id="org92d37e8"></a>
 
 ### Variable assigment
 
@@ -176,7 +180,7 @@ Memory is allocated during the run time.
     int e {};      // value-initialization (empty braces)
 
 
-<a id="orgca9d818"></a>
+<a id="org530dc7c"></a>
 
 ### maybe unused
 
@@ -197,7 +201,7 @@ Memory is allocated during the run time.
     }
 
 
-<a id="orgab5fe6a"></a>
+<a id="org4721867"></a>
 
 ### cout and cin
 
@@ -236,7 +240,7 @@ Memory is allocated during the run time.
     }
 
 
-<a id="orgaef4985"></a>
+<a id="orgc290dcc"></a>
 
 ### Uninitialized variables and undefined behavioure
 
@@ -251,7 +255,7 @@ Returns garbage value -&#x2014;> Memory address
     }
 
 
-<a id="orgbd6ce48"></a>
+<a id="orge468efd"></a>
 
 ### Keywords and Identifiers
 
@@ -442,7 +446,7 @@ List of 92 keywords
 </table>
 
 
-<a id="org1baa9ac"></a>
+<a id="orga30395f"></a>
 
 ## Functions and Files
 
@@ -465,7 +469,7 @@ List of 92 keywords
     }
 
 
-<a id="orgd93ce26"></a>
+<a id="org142c02c"></a>
 
 ### Void functions
 
@@ -497,12 +501,12 @@ List of 92 keywords
     }
 
 
-<a id="org887f85f"></a>
+<a id="org9b8b7f5"></a>
 
 ## size<sub>t</sub>[ link to topic](https://www.learncpp.com/cpp-tutorial/fixed-width-integers-and-size-t/)
 
 
-<a id="orgf2aed50"></a>
+<a id="org20c67f1"></a>
 
 ## Char(ASCII TABLE LINK) [here](https://www.learncpp.com/cpp-tutorial/chars/)
 
@@ -528,7 +532,7 @@ List of 92 keywords
     }
 
 
-<a id="org1ea68cb"></a>
+<a id="orgfe0a05e"></a>
 
 ## Implicit and Explicit Coversion
 
@@ -553,7 +557,7 @@ Syntax for Exclipit conversion -&#x2014;> static<sub>cast</sub><new<sub>type</su
     }
 
 
-<a id="orgf33e80c"></a>
+<a id="org4f65f5d"></a>
 
 ### Sign conversion using static<sub>cast</sub>
 
@@ -589,7 +593,7 @@ Syntax for Exclipit conversion -&#x2014;> static<sub>cast</sub><new<sub>type</su
     }
 
 
-<a id="org1218f2a"></a>
+<a id="orgaf46675"></a>
 
 ### Quiz [Questions](https://www.learncpp.com/cpp-tutorial/chapter-4-summary-and-quiz/)
 
@@ -651,17 +655,17 @@ Q3.
     }
 
 
-<a id="orgcd15f4d"></a>
+<a id="org026c15d"></a>
 
 # Fundamental Data Types
 
 
-<a id="org7e4be16"></a>
+<a id="org650f62b"></a>
 
 ## Numeral Systems (decimal, binary, hexadecimal)
 
 
-<a id="orgb307271"></a>
+<a id="org1483b32"></a>
 
 ### Octal
 
@@ -685,7 +689,7 @@ For representing it as octal number we use &ldquo;0&rdquo; infront of the number
     }
 
 
-<a id="org460a94d"></a>
+<a id="org08396e0"></a>
 
 ### hexadecimal
 
@@ -704,7 +708,7 @@ To use hexadecimal we use prefix &ldquo;0x&rdquo;
     }
 
 
-<a id="orgbe2f71a"></a>
+<a id="org4533a71"></a>
 
 ### Binary
 
@@ -726,7 +730,7 @@ We use prefix 0b for binary numbers
     }
 
 
-<a id="org30b8841"></a>
+<a id="orgf4ac66a"></a>
 
 ### Outputting values in decimal, octal and hexadecimal
 
@@ -745,7 +749,7 @@ We use prefix 0b for binary numbers
     }
 
 
-<a id="orgeab48e5"></a>
+<a id="org5010d88"></a>
 
 ### Outputting values in Binary using std::bitset
 
@@ -766,12 +770,12 @@ We use prefix 0b for binary numbers
     }
 
 
-<a id="org0a84f01"></a>
+<a id="org67de579"></a>
 
 # Strings
 
 
-<a id="orge975a43"></a>
+<a id="org7f1ce87"></a>
 
 ## Strings (std::string)
 
@@ -791,7 +795,7 @@ The header <string> helps to input and output strings of different size
     }
 
 
-<a id="org8eb33a0"></a>
+<a id="org9a075bb"></a>
 
 ## Strings (std::string<sub>view</sub>)
 
@@ -858,7 +862,7 @@ Example
     }
 
 
-<a id="orgec5ec41"></a>
+<a id="org20a3bda"></a>
 
 ## some functions
 
@@ -915,7 +919,7 @@ Example
     }
 
 
-<a id="orgde15f65"></a>
+<a id="org21519cd"></a>
 
 # Operators
 
@@ -933,12 +937,12 @@ Exponent
     }
 
 
-<a id="org06ce963"></a>
+<a id="org8d9f647"></a>
 
 # Bit Manipulation
 
 
-<a id="org6ece0f8"></a>
+<a id="org1c91b45"></a>
 
 ## Uses of <bitset> library
 
@@ -1017,7 +1021,7 @@ It has
     }
 
 
-<a id="org5f8b0be"></a>
+<a id="orge77643a"></a>
 
 ## Bitmanipulation by bit masks
 
@@ -1119,7 +1123,7 @@ Q1. Write a program that asks the user to input a number between 0 and 255. Prin
     }
 
 
-<a id="org9f8b3da"></a>
+<a id="org00c9212"></a>
 
 # Namespace and scope resolution
 
@@ -1147,7 +1151,7 @@ Q1. Write a program that asks the user to input a number between 0 and 255. Prin
     }
 
 
-<a id="org42d5974"></a>
+<a id="org2d0760f"></a>
 
 ## Static local variables
 
@@ -1192,12 +1196,12 @@ example with static
     }
 
 
-<a id="org6d9cbc1"></a>
+<a id="orga039322"></a>
 
 # Control Flow
 
 
-<a id="org0d31cfc"></a>
+<a id="org8057cf2"></a>
 
 ## Switch case
 
@@ -1225,7 +1229,7 @@ example with static
     }
 
 
-<a id="org4d7b3ed"></a>
+<a id="org7e53d44"></a>
 
 ## goto statements
 
@@ -1250,7 +1254,7 @@ example with static
     }
 
 
-<a id="org9be293f"></a>
+<a id="org1cd4cbc"></a>
 
 ## While loop
 
@@ -1344,17 +1348,17 @@ example with static
     }
 
 
-<a id="org6919d50"></a>
+<a id="org526f9b3"></a>
 
 ## Do While
 
 
-<a id="org5a9740d"></a>
+<a id="orgf29239e"></a>
 
 ## For Loop
 
 
-<a id="orgf60e0d8"></a>
+<a id="org6b712a0"></a>
 
 ## std::exit
 
@@ -1393,7 +1397,7 @@ std::atexit is called automatically when std::exit is called --------&#x2013;&#x
 here cleanup is a function.
 
 
-<a id="org938ad45"></a>
+<a id="org68701f6"></a>
 
 # Mersenne Twister
 
@@ -1411,7 +1415,7 @@ here cleanup is a function.
     }
 
 
-<a id="org08d55ae"></a>
+<a id="org8130203"></a>
 
 # Function Templates
 
@@ -1431,7 +1435,7 @@ here cleanup is a function.
     }
 
 
-<a id="orgc717479"></a>
+<a id="orgbcc7bd1"></a>
 
 # Constexpr and Consteval Functions
 
@@ -1477,11 +1481,11 @@ These functions are also called as immediate fucntions
     }
 
 
-<a id="org02f6401"></a>
+<a id="orgede283c"></a>
 
 # Compound data types
 
-<div class="mindmap" id="orgd3d4539">
+<div class="mindmap" id="org73e4c55">
 <p>
    ╭─ Functions
    ├─ C-style arrays
@@ -1501,12 +1505,12 @@ These functions are also called as immediate fucntions
 </div>
 
 
-<a id="org6c01415"></a>
+<a id="org57ea87a"></a>
 
 ## L-value references
 
 
-<a id="org7f36f3b"></a>
+<a id="org41965c9"></a>
 
 ### Non-const L value references
 
@@ -1530,7 +1534,7 @@ These functions are also called as immediate fucntions
     }
 
 
-<a id="org3eeae32"></a>
+<a id="org0667970"></a>
 
 ### Const L-value referencs
 
@@ -1607,7 +1611,7 @@ with diif data types.
     }
 
 
-<a id="org04734c5"></a>
+<a id="org52bd649"></a>
 
 ## R-value refernces
 
@@ -1622,7 +1626,7 @@ with diif data types.
     }
 
 
-<a id="org785286b"></a>
+<a id="org421ac8f"></a>
 
 ## Pass by reference
 
@@ -1687,7 +1691,7 @@ So we use pass by reference.
 Here we can notice the address of passbyreference and original varible is same.
 
 
-<a id="org99f66fc"></a>
+<a id="org4422040"></a>
 
 ## pass by const lvalue reference
 
@@ -1716,7 +1720,7 @@ pass by const lvalue reference can be bind to modifiable, non-modifiable lvalues
     }
 
 
-<a id="orgb3974fa"></a>
+<a id="orge1efeee"></a>
 
 ## why prefer std::string<sub>view</sub> to const std::string&
 
@@ -1792,12 +1796,12 @@ pass by const lvalue reference can be bind to modifiable, non-modifiable lvalues
     }
 
 
-<a id="org714cb1e"></a>
+<a id="org53636ee"></a>
 
 ## Pointers
 
 
-<a id="org0c107a1"></a>
+<a id="org0038dc9"></a>
 
 ### Deference operator
 
@@ -1818,7 +1822,7 @@ While \* is used to return value at a given memory address as an lvalue.
     }
 
 
-<a id="orgfc4bf6a"></a>
+<a id="orgc5723ae"></a>
 
 ### Pointer
 
@@ -1883,7 +1887,7 @@ A Pointer is an object that holds a memory address as its value. This allows us 
 -   In a 32 bit computer 4 bytes are taken and in 64 bit computer 8 bytes are taken.
 
 
-<a id="orgdb95fca"></a>
+<a id="org86e253a"></a>
 
 ### Address of operator returns a pointer
 
@@ -1903,7 +1907,7 @@ The address of operator doesnt returns address of its operand as literal, Instea
     }
 
 
-<a id="org604b07d"></a>
+<a id="orge8c4881"></a>
 
 ### null pointers as boolean values
 
@@ -1924,7 +1928,7 @@ The address of operator doesnt returns address of its operand as literal, Instea
     }
 
 
-<a id="org4b23354"></a>
+<a id="orgc4318b2"></a>
 
 ### pointer to const
 
@@ -1981,7 +1985,7 @@ With this we cannot change the address and the value.
     }
 
 
-<a id="orgf8e7a6d"></a>
+<a id="org6d875da"></a>
 
 ### pass by address
 
@@ -2015,7 +2019,7 @@ With this we cannot change the address and the value.
     }
 
 
-<a id="org6ebbbd1"></a>
+<a id="org1a3dae6"></a>
 
 ## Operator overloading
 
@@ -2087,14 +2091,14 @@ Operator overloading = writing your own function that runs when someone uses +, 
     }
 
 
-<a id="org50a2f89"></a>
+<a id="orgea17f38"></a>
 
 ## Enumerations
 
 Enumerations are implicitly constexpr.
 
 
-<a id="org2450862"></a>
+<a id="org34b540a"></a>
 
 ### Unscoped Enumerations
 
@@ -2195,7 +2199,7 @@ Each enumeration is numbered from 0. We can explicitly number a enumeration, any
     }
 
 
-<a id="org2eae6eb"></a>
+<a id="org7a0dac4"></a>
 
 ### scoped Enumerations
 
@@ -2225,7 +2229,7 @@ Each enumeration is numbered from 0. We can explicitly number a enumeration, any
     }
 
 
-<a id="org594122a"></a>
+<a id="orgc0d7015"></a>
 
 ## Struct
 
@@ -2319,7 +2323,7 @@ Variables inside a group are called members.
     }
 
 
-<a id="org02b3681"></a>
+<a id="org183099b"></a>
 
 ## Classes (OOP)
 
@@ -2344,7 +2348,7 @@ Variables inside a group are called members.
     }
 
 
-<a id="org401926f"></a>
+<a id="org04c8292"></a>
 
 ### member functions
 
@@ -2431,7 +2435,7 @@ Variables inside a group are called members.
     \}
 
 
-<a id="orgebe18e4"></a>
+<a id="orgb639481"></a>
 
 ### returning data members by lvalue reference
 
@@ -2483,7 +2487,7 @@ Variables inside a group are called members.
     }
 
 
-<a id="org3c405f9"></a>
+<a id="orgc1fea53"></a>
 
 ### constructor
 
@@ -2629,7 +2633,7 @@ Reducing construtor using default arguments
     }
 
 
-<a id="org62b12fa"></a>
+<a id="org1f193ae"></a>
 
 ### temporary object
 
@@ -2662,11 +2666,11 @@ Reducing construtor using default arguments
 -   callling a constructor in a function creates a temporary object
 
 
-<a id="org7869046"></a>
+<a id="org3b0f528"></a>
 
-### delegating [constructor](#org3c405f9)
+### delegating [constructor](#orgc1fea53)
 
-To make one [constructor](#org3c405f9) delegate to another construtor simply call the constructor in member initialization list of another [constructor](#org3c405f9).
+To make one [constructor](#orgc1fea53) delegate to another construtor simply call the constructor in member initialization list of another [constructor](#orgc1fea53).
 
     #include <iostream>
     using namespace std;
@@ -2687,13 +2691,13 @@ To make one [constructor](#org3c405f9) delegate to another construtor simply cal
     }
 
 
-<a id="org59502b6"></a>
+<a id="org76de3fe"></a>
 
-### copy [constructor](#org3c405f9)
+### copy [constructor](#orgc1fea53)
 
 A copy construtor is a construtor that is used to initialize an object using an existing object.
 
-A copy [constructor](#org3c405f9) is implicitly created by compiler when we create a object using another object like in below. Although we can create copy [constructor](#org3c405f9) manually.
+A copy [constructor](#orgc1fea53) is implicitly created by compiler when we create a object using another object like in below. Although we can create copy [constructor](#orgc1fea53) manually.
 
     #include <iostream>
     using namespace std;
@@ -2806,7 +2810,7 @@ using = delete to prevent copies
     }
 
 
-<a id="org525606e"></a>
+<a id="org99415e3"></a>
 
 ### pass by value and copy construtor
 
@@ -2843,7 +2847,7 @@ in the beow code when an object is passed as value to a function then explicitly
     }
 
 
-<a id="org329339b"></a>
+<a id="org57341e4"></a>
 
 ### array of object
 
@@ -2897,14 +2901,14 @@ in the beow code when an object is passed as value to a function then explicitly
     }
 
 
-<a id="orgd4bde7a"></a>
+<a id="org28ed428"></a>
 
 ### Copy elison
 
 Copy elision is a compiler optimization technique that allows the compiler to remove unnecessary copying of objects. In other words, in cases where the compiler would normally call a copy constructor, the compiler is free to rewrite the code to avoid the call to the copy constructor altogether. When the compiler optimizes away a call to the copy constructor, we say the constructor has been elided.
 
 
-<a id="org23b16ec"></a>
+<a id="org77bf4e4"></a>
 
 ### User defined conversions
 
@@ -2935,7 +2939,7 @@ These type of functions are called **user defined functions**.
     }
 
 
-<a id="orgc376490"></a>
+<a id="orge7a8d21"></a>
 
 ### constexpr member functions
 
@@ -3030,7 +3034,7 @@ here when object is created the construtor is called which is of type class Numb
     }
 
 
-<a id="org91237f6"></a>
+<a id="orgb851a61"></a>
 
 ### the hidden this pointer
 
@@ -3139,7 +3143,7 @@ then the set<sub>a</sub> function also changes in the class as
     }
 
 
-<a id="orgcc83b19"></a>
+<a id="orgdc6c6f9"></a>
 
 ### member function chaining using \*this
 
@@ -3217,7 +3221,7 @@ a.add(3).sub(1).mul(3) -&#x2013;&#x2014;> a.sub(1).mul(3)
 -   it creates a temporary Cal using default values of members and assigns it to current object.
 
 
-<a id="org90a745e"></a>
+<a id="org03f1dd5"></a>
 
 ### Destructor
 
@@ -3255,7 +3259,7 @@ a.add(3).sub(1).mul(3) -&#x2013;&#x2014;> a.sub(1).mul(3)
     Destructor1
 
 
-<a id="org71c4df7"></a>
+<a id="org6f286a7"></a>
 
 ### static member variables and functions
 
@@ -3351,7 +3355,7 @@ here we accessed a private data member using static member function without crea
 -   static member functions do not have \*this pointer.
 
 
-<a id="org2fd4aff"></a>
+<a id="orgec49eb9"></a>
 
 ### friend non-member functions
 
@@ -3403,7 +3407,7 @@ defining friend non-member inside a class
     }
 
 
-<a id="orgc6f0f79"></a>
+<a id="org7f862e1"></a>
 
 ### friend class and friend member function
 
@@ -3571,12 +3575,12 @@ Instead we can do something like this
     }
 
 
-<a id="orga2f1a21"></a>
+<a id="orgb50aec0"></a>
 
 # Dynamic arrays
 
 
-<a id="org7e7787f"></a>
+<a id="org5e332f4"></a>
 
 ## Introduction to std::vector
 
@@ -3687,7 +3691,7 @@ we can use template
     }
 
 
-<a id="orgf29fb74"></a>
+<a id="org13bd612"></a>
 
 ### passing a std::vector using generic template or abbreviated function template
 
@@ -3748,7 +3752,7 @@ we can also create a template that can accpet any type of object.
     }
 
 
-<a id="orgee2d0ea"></a>
+<a id="org9de6f8c"></a>
 
 ### move semantics
 
@@ -3757,7 +3761,7 @@ we can also create a template that can accpet any type of object.
 -   Normally when an object is being initialized with an object of the same type, copy semantic will be used.
 
 
-<a id="org853d377"></a>
+<a id="orgf829172"></a>
 
 ### arrays and loop
 
@@ -3783,7 +3787,7 @@ we can also create a template that can accpet any type of object.
     }
 
 
-<a id="org4cd926f"></a>
+<a id="org666b38e"></a>
 
 ### template arrays and loop
 
@@ -3911,7 +3915,7 @@ And cin.ignore the dump what we dont want means it clear the clogged pipe of inp
 The &rsquo;\n&rsquo; is for the cin.ignore to know where it to stop.
 
 
-<a id="org4183a9d"></a>
+<a id="orgf563982"></a>
 
 ## Range based for Loops
 
@@ -3963,7 +3967,7 @@ Avoid this for strings. use reference
 -   const auto& - when u only want to view elements.
 
 
-<a id="org5d7830a"></a>
+<a id="org3283d1a"></a>
 
 ## Using unscoped emumerators for indexing
 
@@ -3985,7 +3989,7 @@ Avoid this for strings. use reference
     }
 
 
-<a id="orge1f7f22"></a>
+<a id="org8d39f84"></a>
 
 ## resizing std::vector at runtime
 
@@ -4034,7 +4038,7 @@ Avoid this for strings. use reference
 -   The capacity and length of the std::vector are set to the new values.
 
 
-<a id="org5e8dc7c"></a>
+<a id="orgdbbdcd8"></a>
 
 ### length and capacity
 
@@ -4077,7 +4081,7 @@ After we called v.resize(3), the length was changed to 3 to fulfill our request 
 Finally, we called v.resize(5). Because the vector already had a capacity of 5, it did not need to reallocate. It simply changed the length back to 5, and value-initialized the last two elements.
 
 
-<a id="org55fde8f"></a>
+<a id="org7e49263"></a>
 
 ### shrink<sub>to</sub><sub>fit</sub>
 
@@ -4112,7 +4116,7 @@ Finally, we called v.resize(5). Because the vector already had a capacity of 5, 
     }
 
 
-<a id="orged70e85"></a>
+<a id="orgaae2f95"></a>
 
 ## std::vector and stack behaviour
 
@@ -4230,7 +4234,7 @@ stack behaviour with std::vector
     }
 
 
-<a id="org94720fc"></a>
+<a id="orgb21e917"></a>
 
 ## reserve member function
 
@@ -4297,7 +4301,7 @@ stack behaviour with std::vector
     }
 
 
-<a id="orgc9277c6"></a>
+<a id="orgfa143d2"></a>
 
 ## std::vector<bool>
 
@@ -4325,7 +4329,7 @@ Second, the performance of std::vector<bool> is highly dependent upon the implem
 Third and most importantly, std::vector<bool> is not a vector (it is not required to be contiguous in memory), nor does it hold bool values (it holds a collection of bits), nor does it meet C++’s definition of a container.
 
 
-<a id="org0e6f5dc"></a>
+<a id="org3ecc4f6"></a>
 
 ## Quiz questions
 
@@ -4425,7 +4429,7 @@ Third and most importantly, std::vector<bool> is not a vector (it is not require
     }
 
 
-<a id="org0cb0fe8"></a>
+<a id="org068e8a0"></a>
 
 ## std::arrays
 
@@ -4467,7 +4471,7 @@ Third and most importantly, std::vector<bool> is not a vector (it is not require
     }
 
 
-<a id="orgbd1b873"></a>
+<a id="org9f9245d"></a>
 
 # Iterators
 
@@ -4504,12 +4508,12 @@ Third and most importantly, std::vector<bool> is not a vector (it is not require
     }
 
 
-<a id="org1b7014c"></a>
+<a id="orgaecbaea"></a>
 
 # Introduction to standard library algorithms
 
 
-<a id="org3b11276"></a>
+<a id="org6575027"></a>
 
 ## std::find - find an element by value
 
@@ -4536,7 +4540,7 @@ std::find searches for a first occurence of an element in a container.
 iterators use or mimics the syntax of pointers to replace or see the value of element. But they are not actually pointers.
 
 
-<a id="org948589b"></a>
+<a id="org634f235"></a>
 
 ## std::find<sub>if</sub> - find an element that matches some condition
 
@@ -4565,7 +4569,7 @@ iterators use or mimics the syntax of pointers to replace or see the value of el
     }
 
 
-<a id="org0374628"></a>
+<a id="orgcb3cffd"></a>
 
 ## std::count and std::count<sub>if</sub> to count how many occurences there are
 
@@ -4590,7 +4594,7 @@ iterators use or mimics the syntax of pointers to replace or see the value of el
     }
 
 
-<a id="org3e5bec5"></a>
+<a id="org511b117"></a>
 
 ## std::sort
 
@@ -4631,7 +4635,7 @@ iterators use or mimics the syntax of pointers to replace or see the value of el
     }
 
 
-<a id="orgc7e1e35"></a>
+<a id="orgd10b2fd"></a>
 
 ## std::for<sub>each</sub>
 
@@ -4692,12 +4696,12 @@ iterators use or mimics the syntax of pointers to replace or see the value of el
     }
 
 
-<a id="orgc83e858"></a>
+<a id="org177388d"></a>
 
 # Dynamic memory allocation with new and delete
 
 
-<a id="org38daea4"></a>
+<a id="org5d01e79"></a>
 
 ## new
 
@@ -4738,7 +4742,7 @@ Note that accessing **heap-allocated** objects is generally slower than accessin
     }
 
 
-<a id="org8005a8b"></a>
+<a id="org75d5d11"></a>
 
 ## delete
 
@@ -4782,7 +4786,7 @@ memory leak
     }
 
 
-<a id="org392c459"></a>
+<a id="org70e41ce"></a>
 
 # Dynamically allocating arrays
 
@@ -4859,7 +4863,7 @@ memory leak
     }
 
 
-<a id="orgdf12888"></a>
+<a id="org9a8b57c"></a>
 
 # Destructor indetail
 
@@ -4907,12 +4911,12 @@ However, if your class object is holding any resources (e.g. dynamic memory, or 
     } //ar is destroyed here
 
 
-<a id="orgb884f31"></a>
+<a id="org6948dd4"></a>
 
 # RAII[ link](https://share.gemini.google/3gFhyGLcNj3P)
 
 
-<a id="org11e3be1"></a>
+<a id="orgdb25dd7"></a>
 
 # Introduction to Lamdas (anonymous functions)
 
@@ -5097,7 +5101,7 @@ now using lamda
     }
 
 
-<a id="org2c9569a"></a>
+<a id="orge5c8fc2"></a>
 
 ## Generic Lamdas
 
@@ -5176,7 +5180,7 @@ Predicate Check: std::adjacent<sub>find</sub>(first, last, pred) uses a binary p
     }
 
 
-<a id="org519ff62"></a>
+<a id="org092794e"></a>
 
 # Operator overloading.
 
@@ -5195,7 +5199,7 @@ Third, at least one of the operands in an overloaded operator must be a user-def
 3.  normal way
 
 
-<a id="org3fd0522"></a>
+<a id="org598810e"></a>
 
 ## opearator overloading using friend function\*
 
@@ -5293,7 +5297,7 @@ For adding different types we need to write two oveloading functions one for  x 
     }
 
 
-<a id="org3668b9a"></a>
+<a id="orgec76531"></a>
 
 ## overloading operator using normal functions
 
@@ -5323,7 +5327,7 @@ For adding different types we need to write two oveloading functions one for  x 
     }
 
 
-<a id="orgadb4f89"></a>
+<a id="org46caa00"></a>
 
 ## overloading I/O operators
 
@@ -5388,7 +5392,7 @@ overloading >> operator
     }
 
 
-<a id="orgb7e8457"></a>
+<a id="org24f72bf"></a>
 
 ## overloading operators using member function
 
@@ -5419,7 +5423,7 @@ overloading >> operator
     }
 
 
-<a id="orgca2a2d7"></a>
+<a id="org309d82d"></a>
 
 ## overloading unary operators +,-,!
 
@@ -5448,7 +5452,7 @@ overloading >> operator
     }
 
 
-<a id="orgccdd612"></a>
+<a id="orgf00088a"></a>
 
 ## overloading comparison operators
 
@@ -5485,7 +5489,7 @@ overloading >> operator
     }
 
 
-<a id="org27dd1d7"></a>
+<a id="orgd949e9e"></a>
 
 ## overloading operator[]
 
@@ -5521,7 +5525,7 @@ overloading >> operator
     }
 
 
-<a id="org2ed8f47"></a>
+<a id="org738f9c7"></a>
 
 ## shallow vs deep copying
 
@@ -5594,7 +5598,7 @@ overloading >> operator
     }
 
 
-<a id="orgc7ea5c6"></a>
+<a id="org307cb92"></a>
 
 # Smart pointers
 
@@ -5684,7 +5688,7 @@ Exaplanation from claude
     }
 
 
-<a id="org7096705"></a>
+<a id="orgb43f3b3"></a>
 
 ## move semantics
 
@@ -5737,7 +5741,10 @@ What if, instead of having our copy constructor and assignment operator copy the
 
 **rvalue reference** - the rvalue reference allows to capture temporary object in the move constructor and move its resources to another object.
 
-**move constructor** - Allows stealing resources from a temporary object and provide those resources to some other object.
+
+<a id="org835dfb0"></a>
+
+## **move constructor** - Allows stealing resources from a temporary object and provide those resources to some other object.
 
     #include <iostream>
     #include <cstring>
@@ -5823,4 +5830,306 @@ Lets see how this is done by move constructor using rvalue references
         s2.print();
         return 0;
     }
+
+
+<a id="orgdc38666"></a>
+
+## move assignment
+
+invoked when we overwrite data of a object that has already been created with another object
+
+rough example for move constructor and move assignment
+
+    #include <iostream>
+    using namespace std;
+    
+    template <typename T>
+    class Auto_ptr{
+        T* m_ptr{};
+    public:
+        Auto_ptr(T* ptr = nullptr) : m_ptr {ptr} {}
+    
+        // move constructor
+        Auto_ptr(Auto_ptr&& other) noexcept : m_ptr{other.m_ptr} {other.m_ptr = nullptr;}
+    
+        //move assignment
+        Auto_ptr& operator=(Auto_ptr&& other) {
+            if(&other == this) {
+                return *this;
+            }
+    
+            delete m_ptr;
+            m_ptr = other.m_ptr;
+            other.m_ptr = nullptr;
+            return *this;
+        }
+    
+        ~Auto_ptr() {
+            delete m_ptr;
+        }
+    
+        T& operator*() const {return *m_ptr;}
+        T* operator->() const {return m_ptr;}
+    };
+    
+    class Resource{
+        int m_data{};
+    public:
+        Resource(int data) : m_data{data} {cout << "Constructed\n";}
+    
+        int getData() {
+            return m_data;
+        }
+    
+        ~Resource() {cout << "Destructed\n";}
+    };
+    
+    int main() {
+        Auto_ptr<Resource> res1 = new Resource(5);
+        Auto_ptr<Resource> res2 = new Resource(10);
+    
+        res2 = move(res1);
+        cout << res2->getData() << '\n';
+    
+        return 0;
+    }
+
+    #include <iostream>
+    
+    template<typename T>
+    class Auto_ptr4
+    {
+    	T* m_ptr {};
+    public:
+        // Constructor
+    	Auto_ptr4(T* ptr = nullptr)
+    		: m_ptr { ptr }
+    	{
+    	}
+    
+        // Destructor
+    	~Auto_ptr4()
+    	{
+    		delete m_ptr;
+    	}
+    
+    	// Copy constructor
+    	// Do deep copy of a.m_ptr to m_ptr
+        // called when new object is created and immediately initialized it with existing object
+    	Auto_ptr4(const Auto_ptr4& a)
+    	{
+    		m_ptr = new T;
+    		*m_ptr = *a.m_ptr;          // accessing atual object not memory address
+    	}
+    
+    	// Move constructor
+    	// Transfer ownership of a.m_ptr to m_ptr
+    	Auto_ptr4(Auto_ptr4&& a) noexcept               // a promise to compiler that this fun will not generate error because it is just swapping memory address
+    		: m_ptr { a.m_ptr }                       // here two object ponting to same address
+    	{
+    		a.m_ptr = nullptr; // making it null because when fun is over its constructor is called and actual data is deleted. if we point it to null no actual will be deleted
+    	}
+    
+    	// Copy assignment
+    	// Do deep copy of a.m_ptr to m_ptr
+    	Auto_ptr4& operator=(const Auto_ptr4& a)
+    	{
+    		// Self-assignment detection
+    		if (&a == this)          // if box1 = box2 then stop and return this
+    			return *this;
+    
+    		// Release any resource we're holding
+    		delete m_ptr;              // it already has data if we dont delete it before overwriting memory leak will happen
+    
+    		// Copy the resource
+    		m_ptr = new T;
+    		*m_ptr = *a.m_ptr;
+    
+    		return *this;
+    	}
+    
+    	// Move assignment
+    	// Transfer ownership of a.m_ptr to m_ptr
+    	Auto_ptr4& operator=(Auto_ptr4&& a) noexcept
+    	{
+    		// Self-assignment detection
+    		if (&a == this)
+    			return *this;
+    
+    		// Release any resource we're holding
+    		delete m_ptr;
+    
+    		// Transfer ownership of a.m_ptr to m_ptr
+    		m_ptr = a.m_ptr;
+    		a.m_ptr = nullptr;
+    
+    		return *this;
+    	}
+    
+    	T& operator*() const { return *m_ptr; }
+    	T* operator->() const { return m_ptr; }
+    	bool isNull() const { return m_ptr == nullptr; }
+    };
+    
+    class Resource
+    {
+    public:
+    	Resource() { std::cout << "Resource acquired\n"; }
+    	~Resource() { std::cout << "Resource destroyed\n"; }
+    };
+    
+    Auto_ptr4<Resource> generateResource()
+    {
+    	Auto_ptr4<Resource> res{new Resource};
+    	return res; // this return value will invoke the move constructor
+    }
+    
+    int main()
+    {
+    	Auto_ptr4<Resource> mainres;
+    	mainres = generateResource(); // this assignment will invoke the move assignment
+    
+    	return 0;
+    }
+
+
+<a id="org19ad8a8"></a>
+
+## Types of smart pointer
+
+There are 4 smart pointer class
+
+1.  std::auto<sub>ptr</sub>
+2.  std::unique<sub>ptr</sub>
+3.  std::shared<sub>ptr</sub>
+4.  std::weak<sub>ptr</sub>
+
+
+<a id="org57b6a0f"></a>
+
+### std::unique<sub>ptr</sub>
+
+std::unique<sub>ptr</sub> is the C++11 replacement for std::auto<sub>ptr</sub>. It should be used to manage any dynamically allocated object that is not shared by multiple objects. That is, std::unique<sub>ptr</sub> should completely own the object it manages, not share that ownership with other classes. std::unique<sub>ptr</sub> lives in the <memory> header.
+
+    #include <iostream>
+    #include <memory>
+    using namespace std;
+    
+    class Resource{
+    public:
+        Resource() {cout << "Allocated\n";}
+        ~Resource() {cout << "Deallocated\n";}
+    };
+    
+    int main() {
+        unique_ptr<Resource> res{new Resource()};
+        return 0;
+    }
+
+std::unique<sub>ptr</sub> is based on move semantics so it only owns one object. means it will transfer the ownership
+
+    #include <iostream>
+    #include <memory>
+    #include <utility>
+    using namespace std;
+    
+    class Resource{
+    public:
+        Resource() {cout << "Allocated\n";}
+        ~Resource() {cout << "Deallocated\n";}
+    };
+    
+    int main() {
+        unique_ptr<Resource> res1{new Resource{}};  // resource allocated
+        unique_ptr<Resource> res2{};  // null
+    
+        cout << "res1 is " <<  (res1 ? "not null\n" : "null\n");
+        cout << "res2 is " <<  (res2 ? "not null\n" : "null\n");
+    
+        res2 = move(res1); // here res1 = res2 wont compile because copy assignmant is disabled
+    
+        cout << "res1 is " <<  (res1 ? "not null\n" : "null\n");
+        cout << "res2 is " <<  (res2 ? "not null\n" : "null\n");
+    
+        return 0;
+    }
+
+Unlike std::auto<sub>ptr</sub>, std::unique<sub>ptr</sub> is smart enough to know whether to use scalar delete or array delete, so std::unique<sub>ptr</sub> is okay to use with both scalar objects and arrays.
+
+**Passing std::unique<sub>ptr</sub> to a function**
+
+    #include <iostream>
+    #include <memory> // for std::unique_ptr
+    #include <utility> // for std::move
+    
+    class Resource
+    {
+    public:
+    	Resource() { std::cout << "Resource acquired\n"; }
+    	~Resource() { std::cout << "Resource destroyed\n"; }
+    };
+    
+    std::ostream& operator<<(std::ostream& out, const Resource&)
+    {
+    	out << "I am a resource";
+    	return out;
+    }
+    
+    // This function takes ownership of the Resource, which isn't what we want
+    void takeOwnership(std::unique_ptr<Resource> res)
+    {
+         if (res)
+              std::cout << *res << '\n';
+    } // the Resource is destroyed here
+    
+    int main()
+    {
+        auto ptr{ std::make_unique<Resource>() };
+    
+    //    takeOwnership(ptr); // This doesn't work, need to use move semantics
+        takeOwnership(std::move(ptr)); // ok: use move semantics
+    
+        std::cout << "Ending program\n";
+    
+        return 0;
+    }
+
+we can pass std::unique to a function like this but it will take ownership which means the object is going to be destroyed at the end of the function. which we dont want.
+Instead we pass like this
+
+    #include <memory> // for std::unique_ptr
+    #include <iostream>
+    
+    class Resource
+    {
+    public:
+    	Resource() { std::cout << "Resource acquired\n"; }
+    	~Resource() { std::cout << "Resource destroyed\n"; }
+    };
+    
+    std::ostream& operator<<(std::ostream& out, const Resource&)
+    {
+    	out << "I am a resource";
+    	return out;
+    }
+    
+    // The function only uses the resource, so we'll accept a pointer to the resource, not a reference to the whole std::unique_ptr<Resource>
+    void useResource(const Resource* res)
+    {
+    	if (res)
+    		std::cout << *res << '\n';
+    	else
+    		std::cout << "No resource\n";
+    }
+    
+    int main()
+    {
+    	auto ptr{ std::make_unique<Resource>() };
+    
+    	useResource(ptr.get()); // note: get() used here to get a pointer to the Resource
+    
+    	std::cout << "Ending program\n";
+    
+    	return 0;
+    } // The Resource is destroyed here
 
