@@ -6503,3 +6503,239 @@ int main()
 : I am a resource
 : Ending program
 : Resource destroyed
+*** std::shared_ptr
+ with std::shared_ptr it is fine that multiple std::shared_ptr to point to same resource
+
+ #+begin_src cpp :results output
+#include <iostream>
+#include <memory>
+using namespace std;
+
+class Resource{
+public:
+    Resource() { cout << "Constructor called\n";}
+    ~Resource() { cout << "Destructor called\n";}
+};
+
+int main() {
+    Resource* res {new Resource()};
+    shared_ptr<Resource> ptr1{res};
+    {
+        shared_ptr<Resource> ptr2{ptr1};
+        cout << "Killing one shared pointer\n";
+    }
+    cout << "Killing another shared pointer\n";
+    return 0;
+}
+#+end_src
+
+#+RESULTS:
+: Constructor called
+: Killing one shared pointer
+: Killing another shared pointer
+: Destructor called
+
+consider this code
+#+begin_src cpp :results output
+#include <iostream>
+#include <memory>
+using namespace std;
+
+class Resource{
+public:
+    Resource() {cout << "Constructor called\n";}
+    ~Resource() {cout << "Destructor called\n";}
+};
+
+int main() {
+    Resource* res{new Resource};
+    shared_ptr<Resource> ptr1{res};    // ptr1 is pointing to res
+    {
+        shared_ptr<Resource> ptr2{res};  // ptr2 is also pointing to res but it has no idea that ptr1 is also pointing
+        cout << "Killig shared ptr\n";   // so when ptr2 goes out of scope it thinks it is the only object that poiting to it and calls destructor
+    }
+    cout << "Killing another shared ptr\n";
+    return 0;
+} // here ptr1 also goess out of scope so it also calls destructor
+#+end_src
+
+#+RESULTS:
+
+Unlike std::unique_ptr, which uses a single pointer internally, std::shared_ptr uses two pointers internally. One pointer points at the resource being managed. The other points at a “control block”, which is a dynamically allocated object that tracks of a bunch of stuff, including how many std::shared_ptr are pointing at the resource. When a std::shared_ptr is created via a std::shared_ptr constructor, the memory for the managed object (which is usually passed in) and control block (which the constructor creates) are allocated separately. However, when using std::make_shared(), this can be optimized into a single memory allocation, which leads to better performance.
+
+Shared pointers can be created from unique pointers
+
+A std::unique_ptr can be converted into a std::shared_ptr via a special std::shared_ptr constructor that accepts a std::unique_ptr r-value. The contents of the std::unique_ptr will be moved to the std::shared_ptr.
+
+However, std::shared_ptr can not be safely converted to a std::unique_ptr. This means that if you’re creating a function that is going to return a smart pointer, you’re better off returning a std::unique_ptr and assigning it to a std::shared_ptr if and when that’s appropriate.
+
+
+
+* File handling
+:PROPERTIES:
+:ID:       108c38b9-7373-4ca0-b436-1b6047dbac92
+:END:
+
+#+begin_src cpp :results output
+#include <iostream>
+using namespace std;
+
+int main() {
+    ofstream outFile("data.txt");  // write, overwrite
+    if(outFile.is_open()){
+        outFile << "Hello World" << endl;
+        outFile.close();
+    }
+
+    ifstream inFile("data.txt");  //read
+    string line;
+    if(inFile.is_open()) {
+        while(getline(inFile, line))
+            cout << line << endl;
+        inFile.close();
+    }
+
+    ofstream appendFile(
+        "data.txt",ios::app;
+        )
+        appendFile << "Appended line" ;
+    return 0;
+}
+#+end_src
+
+The six file mode flags
+1. ios::in      -  open for reading
+2. ios::out     -  open for writing
+3. ios::app     -  append
+4. ios::ate     -  seek to the end immediately upon opening (but writes still can go anywhere)
+5. ios::trunc   -  erase any existing data when opened
+6. ios::binary  -  treat file as raw binary data ,not as text
+7. ios::out | ios::trunc - write mode, explicitly overwriting
+8. ios::in | ios::out - open the same file for both reading and writing at once
+
+
+Default, append, truncate
+   #+begin_src cpp :results output
+ofstream file1("model1.txt");
+file1 << "Content";
+file.close();
+
+ofstream file2("model2.txt");
+file2 << "First line";
+file2.close();
+ofstream file2b("mode2.txt", ios::app);  // preserve first line
+file2b << "Second line";
+
+ofstream file3("mode3.txt");
+file3<< "original content";
+file3.close();
+ofstream file3b("mode3.txt", ios::out | ios::trunc);  // erase original
+file3b << "New content";
+#+end_src
+
+Read-write mode and Binary mode
+#+begin_src cpp :results output
+fstream file4("mode4.txt", ios::in | ios::out | ios::trunct);
+file4 << "Line 1\nLine 2";
+file4.seekg(0);
+string line;
+while (getline(file4, line))
+    cout << line;
+
+struct Data {
+    int id;
+    double value;
+    char name[20];
+};
+Data d1 = {1,3.14, "pi"};
+
+ofstream bin("data.bin",ios::binary);
+bin.write((char*)&dl, sizeof(Data));
+
+ifstream binIn("data.bin", ios::binary);
+Data d2;
+binIn.read((char*)&d2, sizeof(Data));
+
+#+end_src
+
+*Line by Line , word by word and character by character*
+
+#+begin_src cpp :results output
+ifstream inFile("data.txt");
+string line;
+while(getline(inFile, line))
+    cout << line;
+
+ifstream inFile2("data.txt");
+string word
+while(inFile2 >> word)
+    cout << word;
+
+ifstream inFile3("data.txt");
+char ch;
+while(inFile3.get(ch))
+    cout << ch;
+#+end_src
+
+#+begin_src cpp :results output
+class Person {
+public:
+    int id;
+    string name, city;
+    int age;
+
+    string toCSV() const {
+        return to_string(id) + "," + name + "," + to_string(age) + "," + city;
+    }
+
+    static Person fromCSV(const string& line) {
+        Person s;
+        string field;
+        stringstream ss(line);     // converts string into something we can read like file
+        getline(ss,field,',');     // put string uptil "," into field
+        s.id = stoi(field);        // converting id - string to id-int before insert into object
+        getline(ss, s.name, ',');  // directly inserting into object since name is already string
+        getline(ss, s.city, ',');
+        getline(ss, field, ',');
+        s.age = stoi(feild);
+        return s;
+    }
+};
+#+end_src
+
+*Sequential access - Log manager*
+
+#+begin_src cpp :results output
+class LogManager{
+    string filename;
+public:
+    void logEvent(const string& e) {
+        ofstream file(filename, ios::app);
+        file << e << endl;
+    }
+
+    bool searchlog(const string& kw) {
+        ifstream file(filename);
+        string line;
+        while(getline(file, line)) {
+            if(line.find(kw) != string::npos) {
+                return true;
+            }
+        }
+        return false;
+    }
+}
+#+end_src
+
+*Random access* - Database write and read
+#+begin_src cpp :results output
+struct Record{
+    int id;
+    char name[50];
+    double balance;
+}
+
+void writeRecord(const Record& rec, int position) {
+    fstream file(filename, ios::in | ios::out |ios::binary)
+}
+#+end_src
