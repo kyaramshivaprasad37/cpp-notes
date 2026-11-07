@@ -1,0 +1,555 @@
+:PROPERTIES:
+:ID:       b4e1de30-5d2d-4082-b4e6-11e8fb27fd28
+:END:
+#+title: SQL Joins(dbms)
+#+date: %U
+#+filetags: :dbms
+* SQL Joins
+:PROPERTIES:
+:ID: sql-joins-overview
+:END:
+
+A  JOIN is used to combine rows from two or more tables based on a related column between them.
+
+** Types of Joins (Overview)
+
+| Join Type    | Returns                                                     | NULLs?          |
+|--------------+-------------------------------------------------------------+-----------------|
+| INNER JOIN   | Only matching rows from both tables                         | No              |
+| LEFT JOIN    | All rows from left + matching from right                    | Right side      |
+| RIGHT JOIN   | All rows from right + matching from left                    | Left side       |
+| FULL JOIN    | All rows from both tables                                   | Both sides      |
+| CROSS JOIN   | Every combination of rows (Cartesian product)               | No (no ON)      |
+| SELF JOIN    | Table joined with itself using aliases                      | Depends on type |
+| NATURAL JOIN | Auto-joins on columns with same name & compatible data type | No              |
+| THETA JOIN   | Rows matching any comparison operator (=, <, >, <=, >=, <>)   | Depends         |
+| EQUI JOIN    | Special Theta Join using only = operator                    | No              |
+
+-----
+
+* 1. INNER JOIN
+:PROPERTIES:
+:ID: sql-inner-join
+:END:
+
+#+begin_quote
+INNER JOIN is used when you want to combine rows from two tables based on matching values in a shared column.
+#+end_quote
+
+** Key Points
+- Only logically related data is combined
+- Data from both tables remains consistent
+- Irrelevant or unmatched rows are automatically filtered out
+- If the join column contains NULL → that row is *automatically excluded*
+- Compares Table A column with Table B column; if values *match* → included, if *not match* → ignored
+
+** Syntax
+#+begin_src sql
+SELECT column1, column2, ...
+FROM table1
+INNER JOIN table2
+ON table1.common_column = table2.common_column;
+#+end_src
+
+** Example Tables
+
+*departments*
+| dept_id | dept_name        |
+|---------+------------------|
+|     101 | Computer Science |
+|     102 | Mechanical       |
+|     103 | Civil            |
+
+*students*
+| student_id | name  | dept_id |
+|------------+-------+---------|
+|          1 | Amit  |     101 |
+|          2 | Neha  |     102 |
+|          3 | Ravi  |     101 |
+|          4 | Meena |    NULL |
+
+** Query
+#+begin_src sql
+SELECT students.student_id,
+       students.name,
+       departments.dept_id,
+       departments.dept_name
+FROM students
+JOIN departments
+ON students.dept_id = departments.dept_id;
+#+end_src
+
+** Result
+| student_id | name | dept_id | dept_name        |
+|------------+------+---------+------------------|
+|          1 | Amit |     101 | Computer Science |
+|          2 | Neha |     102 | Mechanical       |
+|          3 | Ravi |     101 | Computer Science |
+
+#+begin_quote
+*Note:* Meena is excluded because her dept_id is NULL and cannot match any value.
+#+end_quote
+
+-----
+
+* 2. LEFT OUTER JOIN
+:PROPERTIES:
+:ID: sql-left-join
+:END:
+
+#+begin_quote
+LEFT JOIN is used to return all the rows from the left table, along with the matching rows from the right table.
+#+end_quote
+
+** How It Works
+- SQL first selects every row from Table A (the left table)
+- It then attempts to match each row with rows in Table B (the right table)
+- If a match is found → SQL merges the columns from both tables into a single row
+- If no match found → SQL still returns the row from the left table, and right table columns are filled with *NULL*
+
+** Key Points
+- table1 → left table
+- table2 → right table
+- All rows from table1 appear in the result
+
+** Syntax
+#+begin_src sql
+SELECT column1, column2, ...
+FROM table1
+LEFT JOIN table2
+ON table1.common_column = table2.common_column;
+#+end_src
+
+** Query (using example tables)
+#+begin_src sql
+SELECT *
+FROM students
+LEFT JOIN departments
+ON students.dept_id = departments.dept_id;
+#+end_src
+
+** Result
+| student_id | name  | dept_id | dept_id | dept_name        |
+|------------+-------+---------+---------+------------------|
+|          1 | Amit  |     101 |     101 | Computer Science |
+|          2 | Neha  |     102 |     102 | Mechanical       |
+|          3 | Ravi  |     101 |     101 | Computer Science |
+|          4 | Meena |    NULL |         |                  |
+
+Meena appears with NULLs on the right side because she has no matching dept_id.
+
+-----
+
+* 3. RIGHT OUTER JOIN
+:PROPERTIES:
+:ID: sql-right-join
+:END:
+
+#+begin_quote
+When you need to retrieve all rows from the right table, even when no matching data exists in the left table, a RIGHT JOIN is used.
+#+end_quote
+
+#+begin_quote
+This behavior makes RIGHT JOIN the mirror image of LEFT JOIN.
+#+end_quote
+
+** RIGHT JOIN is helpful when:
+- The right table contains the key reference or master data
+- Every row from the right table must appear in the output
+- Unmatched left-table values should still be shown as NULL
+- You need to identify right table rows with no corresponding match in the left table
+
+** How It Works
+- SQL first selects all rows from the right table
+- If a match exists in the left table → the rows are combined
+- If no match exists → the left table columns are filled with NULL
+
+** Syntax
+#+begin_src sql
+SELECT column1, column2, ...
+FROM table1
+RIGHT JOIN table2
+ON table1.common_column = table2.common_column;
+#+end_src
+
+- table2 is the right table → all its rows appear
+- Unmatched left-table values become NULL
+
+** Query
+#+begin_src sql
+SELECT *
+FROM students
+RIGHT JOIN departments
+ON students.dept_id = departments.dept_id;
+#+end_src
+
+** Result
+| student_id | name | dept_id | dept_id | dept_name        |
+|------------+------+---------+---------+------------------|
+|          1 | Amit |     101 |     101 | Computer Science |
+|          2 | Neha |     102 |     102 | Mechanical       |
+|          3 | Ravi |     101 |     101 | Computer Science |
+|            |      |         |     103 | Civil            |
+
+Civil (dept_id 103) appears with NULLs on the left side — no student belongs to it.
+
+-----
+
+* 4. FULL OUTER JOIN
+:PROPERTIES:
+:ID: sql-full-outer-join
+:END:
+
+#+begin_quote
+FULL OUTER JOIN is used to retrieve all rows from both tables, showing matching rows where they exist and NULLs where they do not.
+#+end_quote
+
+** Key Points
+- Returns all rows from both tables
+- Non-matching values are filled with NULL
+
+** Syntax
+#+begin_src sql
+SELECT column1, column2, ...
+FROM table1
+FULL JOIN table2
+ON table1.common_column = table2.common_column;
+#+end_src
+
+** Query
+#+begin_src sql
+SELECT *
+FROM students
+FULL JOIN departments
+ON students.dept_id = departments.dept_id;
+#+end_src
+
+** Result
+| student_id | name  | dept_id | dept_id | dept_name        |
+|------------+-------+---------+---------+------------------|
+|          1 | Amit  |     101 |     101 | Computer Science |
+|          2 | Neha  |     102 |     102 | Mechanical       |
+|          3 | Ravi  |     101 |     101 | Computer Science |
+|          4 | Meena |    NULL |         |                  |
+|            |       |         |     103 | Civil            |
+
+- Meena (no dept) → right side NULLs
+- Civil dept (no student) → left side NULLs
+
+-----
+
+* 5. CROSS JOIN
+:PROPERTIES:
+:ID: sql-cross-join
+:END:
+
+#+begin_quote
+CROSS JOIN is used when you want to generate all possible combinations of rows between two tables.
+#+end_quote
+
+** Key Points
+- Pairs every row from Table A with every row from Table B → full *Cartesian product*
+- Since no matching condition is used, all rows from both tables participate
+- No rows are filtered out
+- NULL values do *not* affect the output because CROSS JOIN does not depend on matching columns
+
+** Syntax
+#+begin_src sql
+SELECT column1, column2, ...
+FROM table1
+CROSS JOIN table2;
+#+end_src
+
+- table1 → left table
+- table2 → right table
+- All combinations of rows from both tables appear in the result
+
+** Query
+#+begin_src sql
+SELECT *
+FROM students
+CROSS JOIN departments;
+#+end_src
+
+** Result (4 students × 3 departments = 12 rows)
+| student_id | name  | dept_id | dept_id | dept_name        |
+|------------+-------+---------+---------+------------------|
+|          1 | Amit  |     101 |     101 | Computer Science |
+|          1 | Amit  |     101 |     102 | Mechanical       |
+|          1 | Amit  |     101 |     103 | Civil            |
+|          2 | Neha  |     102 |     101 | Computer Science |
+|          2 | Neha  |     102 |     102 | Mechanical       |
+|          2 | Neha  |     102 |     103 | Civil            |
+|          3 | Ravi  |     101 |     101 | Computer Science |
+|          3 | Ravi  |     101 |     102 | Mechanical       |
+|          3 | Ravi  |     101 |     103 | Civil            |
+|          4 | Meena |    NULL |     101 | Computer Science |
+|          4 | Meena |    NULL |     102 | Mechanical       |
+|          4 | Meena |    NULL |     103 | Civil            |
+
+-----
+
+* 6. SELF JOIN
+:PROPERTIES:
+:ID: sql-self-join
+:END:
+
+#+begin_quote
+SELF JOIN is used to join a table with itself.
+#+end_quote
+
+** Key Points
+- A SELF JOIN compares rows within the same table by treating it as two separate tables using *aliases*
+- Helps identify internal or hierarchical relationships
+- Joins rows related to each other based on matching values in specific columns
+- *Aliases are required* to differentiate between the two instances of the same table
+
+** Syntax
+#+begin_src sql
+SELECT a.column1, b.column2, ...
+FROM table_name AS a
+JOIN table_name AS b
+ON a.common_column = b.common_column;
+#+end_src
+
+- Both a and b refer to the same table
+- The ON condition defines how rows relate within the table
+- Results show pairs of internally related rows
+
+** Example Table: employees
+| employee_id | name    | department_id |
+|-------------+---------+---------------|
+|           1 | Alice   |          1001 |
+|           2 | Bob     |          1002 |
+|           3 | Charlie |          1001 |
+|           4 | Dana    |          1003 |
+|           5 | Erin    |          1002 |
+
+** Query — Find employees in the same department
+#+begin_src sql
+SELECT a.name AS Employee1,
+       b.name AS Employee2
+FROM employees AS a
+JOIN employees AS b
+ON a.department_id = b.department_id
+WHERE a.employee_id <> b.employee_id;
+#+end_src
+
+- The table employees is treated as two separate tables using aliases a and b
+- SQL compares the department_id in both copies
+- If two employees have the same department_id → they are paired
+- =a.employee_id <> b.employee_id= ensures an employee is not paired with themselves
+
+** Result (SELF JOIN with INNER JOIN)
+| Employee1 | Employee2 |
+|-----------+-----------|
+| Alice     | Charlie   |
+| Bob       | Erin      |
+| Charlie   | Alice     |
+| Erin      | Bob       |
+
+-----
+
+* 7. NATURAL JOIN
+:PROPERTIES:
+:ID: sql-natural-join
+:END:
+
+#+begin_quote
+NATURAL JOIN automatically joins two tables using columns that have the same name and compatible data types.
+#+end_quote
+
+** Key Points
+- Removes the need to explicitly write a join condition
+- Only columns with identical names in both tables are used for the join
+- Matching rows from both tables are combined
+- Duplicate join columns are shown only *once* in the result
+- Since SQL identifies common columns automatically, NATURAL JOIN is convenient for tables designed with consistent naming conventions
+- If *multiple columns share the same name*, all of them will be used for matching
+- If *no common column exists*, NATURAL JOIN behaves like a CROSS JOIN and returns all combinations of rows
+
+** Syntax
+#+begin_src sql
+SELECT *
+FROM table1
+NATURAL JOIN table2;
+#+end_src
+
+Or with explicit columns:
+#+begin_src sql
+SELECT table1.col1, table1.col2, table2.col3, ...
+FROM table1
+NATURAL JOIN table2;
+#+end_src
+
+- When using =SELECT *=, column order may vary
+- When selecting columns explicitly, the output order is predictable and recommended when the output format matters
+
+** Query
+#+begin_src sql
+SELECT *
+FROM students
+NATURAL JOIN departments;
+#+end_src
+
+** Result
+| student_id | name | dept_id | dept_name        |
+|------------+------+---------+------------------|
+|          1 | Amit |     101 | Computer Science |
+|          2 | Neha |     102 | Mechanical       |
+|          3 | Ravi |     101 | Computer Science |
+
+Meena is excluded (dept_id is NULL, cannot match). Civil dept excluded (no student has dept_id 103).
+The common column =dept_id= appears only once.
+
+-----
+
+* 8. THETA JOIN
+:PROPERTIES:
+:ID: sql-theta-join
+:END:
+
+#+begin_quote
+A Theta Join is used when two tables are joined using any comparison operator such as =, <, >, <=, >=, <>.
+#+end_quote
+
+** Key Points
+- In PostgreSQL, Theta Join is written using =JOIN ... ON= — there is no separate keyword for it
+- Rows between two tables can be compared flexibly
+- Joins are not limited to equal matching
+- More complex relationships can be expressed using a variety of comparison operators
+- Theta Join works by comparing column values from Table A and Table B based on the specified condition
+- If the condition evaluates to TRUE → rows are included; if FALSE → rows are excluded
+
+** Syntax — Using INNER JOIN
+#+begin_src sql
+SELECT columns
+FROM table1
+JOIN table2
+ON table1.column < table2.column;
+#+end_src
+
+Using additional conditions:
+#+begin_src sql
+SELECT columns
+FROM table1
+JOIN table2
+ON table1.column = table2.column
+AND table2.column > value;
+#+end_src
+
+** Example — Find student-department pairs where dept_id > 101
+
+*Task:* Find all student-department pairs where the department ID is greater than 101.
+
+#+begin_src sql
+SELECT students.student_id,
+       students.name,
+       departments.dept_id,
+       departments.dept_name
+FROM students
+JOIN departments
+ON students.dept_id = departments.dept_id
+AND departments.dept_id > 101;
+#+end_src
+
+- SQL checks for matching dept_id values between students and departments
+- Then applies the condition =departments.dept_id > 101=
+- Only rows that satisfy both conditions are returned
+- This creates a Theta Join using the => operator=
+
+** How it works (step-by-step)
+
+Step 1 — INNER JOIN result:
+| student_id | name | dept_id | dept_name        |
+|------------+------+---------+------------------|
+|          1 | Amit |     101 | Computer Science |
+|          2 | Neha |     102 | Mechanical       |
+|          3 | Ravi |     101 | Computer Science |
+
+Step 2 — Apply AND departments.dept_id > 101:
+| student_id | name | dept_id | dept_name  |
+|------------+------+---------+------------|
+|          2 | Neha |     102 | Mechanical |
+
+-----
+
+* 9. EQUI JOIN
+:PROPERTIES:
+:ID: sql-equi-join
+:END:
+
+#+begin_quote
+An EQUI JOIN is used to combine rows from two tables only when the values in the specified columns are equal. It uses only the equality (=) operator and excludes unmatched rows.
+#+end_quote
+
+** Key Points
+- EQUI JOIN is a *special case of a Theta Join*
+- While all Equi Joins are Theta Joins, *not all Theta Joins are Equi Joins*
+- EQUI JOIN checks whether a column from Table A is equal to a column from Table B
+- If values match → row appears in final output; if they do not match → that row is ignored
+- Only the equality operator (=) is used
+- Only matching rows are included in the result
+
+** Syntax
+#+begin_src sql
+SELECT column1, column2, ...
+FROM table1
+JOIN table2
+ON table1.common_column = table2.common_column;
+#+end_src
+
+** Query
+#+begin_src sql
+SELECT students.student_id,
+       students.name,
+       departments.dept_id,
+       departments.dept_name
+FROM students
+JOIN departments
+ON students.dept_id = departments.dept_id;
+#+end_src
+
+- SQL compares students.dept_id with departments.dept_id
+- If the values are equal, the rows get combined
+- Only matching rows appear in the final result
+- This join strictly relies on the = operator, making it an Equi Join
+
+** Result
+| student_id | name | dept_id | dept_name        |
+|------------+------+---------+------------------|
+|          1 | Amit |     101 | Computer Science |
+|          2 | Neha |     102 | Mechanical       |
+|          3 | Ravi |     101 | Computer Science |
+
+#+begin_quote
+*Note:* Meena is excluded because her dept_id is NULL and cannot match any value.
+#+end_quote
+
+** Equi Join vs Theta Join
+
+| Property             | Equi Join       | Theta Join                  |
+|----------------------+-----------------+-----------------------------|
+| Operator used        | Only =          | Any: =, <, >, <=, >=, <>   |
+| Is it a Theta Join?  | Yes             | Yes (parent category)       |
+| Unmatched rows       | Excluded        | Excluded if condition false |
+| Flexibility          | Limited (=only) | High (any comparison)       |
+
+-----
+
+* Quick Reference — All Joins
+:PROPERTIES:
+:ID: sql-joins-quick-ref
+:END:
+
+| Join         | Syntax keyword         | Needs ON?    | All left rows?    | All right rows? | NULL filled? |
+|--------------+------------------------+--------------+-------------------+-----------------+--------------|
+| INNER JOIN   | INNER JOIN / JOIN      | Yes          | No                | No              | No           |
+| LEFT JOIN    | LEFT JOIN              | Yes          | Yes               | No              | Right cols   |
+| RIGHT JOIN   | RIGHT JOIN             | Yes          | No                | Yes             | Left cols    |
+| FULL JOIN    | FULL JOIN / FULL OUTER | Yes          | Yes           Yes | Both sides      |              |
+| CROSS JOIN   | CROSS JOIN             | No           | Yes (all combos)  | Yes             | No           |
+| SELF JOIN    | JOIN (with aliases)    | Yes          | Depends           | Depends         | Depends      |
+| NATURAL JOIN | NATURAL JOIN           | No (auto)    | No                | No              | No           |
+| THETA JOIN   | JOIN                   | Yes (any op) | No                | No              | No           |
+| EQUI JOIN    | JOIN                   | Yes (= only) | No                | No              | No           |

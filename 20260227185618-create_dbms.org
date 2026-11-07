@@ -1,0 +1,96 @@
+:PROPERTIES:
+:ID:       ad896465-87d7-4905-82a2-86da1e3925dd
+:END:
+#+title: CREATE(dbms)
+#+filetags: :dbms:
+#+PROPERTY: header-args:sql :engine mysql :dbuser root :dbpassword Shiva37@. :database myDB
+
+* Create Database & Role
+#+begin_src sql
+CREATE DATABASE database_name;
+CREATE ROLE role_name ;
+#+end_src
+
+* Create Database with Parameters (PostgreSQL)
+#+begin_src sql
+CREATE DATABASE database_name
+WITH
+OWNER = role_name,
+TEMPLATE = template,
+ENCODING = 'UTF8',
+LC_COLLATE = 'en_US.UTF-8',
+LC_CTYPE = 'en_US.UTF-8',
+TABLESPACE = tablespace_name,
+CONNECTION LIMIT = max_connections;
+#+end_src
+
+    Table Creation and Column Constraints
+
+* Basic Table Example
+#+begin_src sql
+CREATE TABLE student (
+roll_no INT PRIMARY KEY,
+name VARCHAR(50),
+dept VARCHAR(30),
+grade CHAR(2)
+);
+#+end_src
+
+* Identity Columns (Auto-Increment)
+#+begin_src sql
+CREATE TABLE table_name (
+column_name INT GENERATED {ALWAYS | BY DEFAULT} AS IDENTITY
+(START WITH n INCREMENT BY n)
+);
+-- ALWAYS: Overrides user input
+-- BY DEFAULT: Uses identity unless value provided manually
+#+end_src
+
+    Specialized Constraints
+    ** Unique and Alternate Keys
+    #+begin_src sql
+    -- Inline Unique
+    CREATE TABLE table_name (
+    column_name data_type UNIQUE,
+    column_name data_type DEFAULT default_value
+    );
+
+-- Composite Unique (Alternate Key)
+CREATE TABLE table_name (
+column1 data_type,
+column2 data_type,
+UNIQUE (column1, column2)
+);
+#+end_src
+
+* Check Constraints
+#+begin_src sql
+CREATE TABLE table_name (
+column1 data_type CHECK (condition),
+CONSTRAINT constraint_name CHECK (condition)
+);
+#+end_src
+
+    Referential Integrity (Foreign Keys)
+    Defining how data relates between tables and how to handle deletions/updates.
+
+* Foreign Key Syntax
+#+begin_src sql
+CREATE TABLE table_name (
+column_name data_type,
+FOREIGN KEY (column_name) REFERENCES parent_table (parent_column)
+ON DELETE action_name
+ON UPDATE action_name
+);
+#+end_src
+
+* Actions for ON DELETE / ON UPDATE
+These define what happens to the "child" row when the "parent" row is changed or removed:
+
+    CASCADE: Automatically delete or update the child rows.
+
+    SET NULL: Sets the child foreign key column to NULL.
+
+    SET DEFAULT: Sets the child foreign key to its default value.
+
+    RESTRICT: Prevents the change/deletion of the parent row if children exist.

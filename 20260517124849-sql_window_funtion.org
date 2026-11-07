@@ -1,0 +1,81 @@
+:PROPERTIES:
+:ID:       790e1649-e1b7-4d4e-b93b-e4f5fe3e9efd
+:END:
+#+title: SQL WINDOW FUNTION
+#+filetags: :dbms:
+#+PROPERTY: header-args:sql :engine mysql :dbuser root :dbpassword Shiva37@. :database dbms_lab
+
+* Window function introduction
+:PROPERTIES:
+:ID: Window function introduction
+:END:
+
+Unlike aggregate functions (such as SUM() or AVG()), window function do not group rows into a single output row; they return a value for each row in the original table.
+
+ #+begin_src sql
+function_name(expression)
+OVER (
+        [PARTITION BY partition_expression]
+        [ORDER BY order_expression]
+        [frame_clause]
+ )
+ #+end_src`
+* ROW_NUMBER()
+:PROPERTIES:
+:ID: Row_number()
+:END:
+
+Assigns a unique sequential number to each row within each row partition based on the ORDER BY clause.
+
+#+begin_src sql
+SELECT
+    emp_id, department, sale_amount,
+    ROW_NUMBER() OVER (
+                 PARTITION BY department
+                 ORDER BY sale_amount DESC, emp_id ASC
+) AS row_num
+FROM sales_data;
+#+end_src
+* RANK and DENSE RANK
+:PROPERTIES:
+:ID: Rank and Dense rank
+:END:
+
+Both give same rank to tied values.
+
+Rank       ---> leaves gaps after ties
+Dense Rank ---> does not leave gaps
+
+#+begin_src sql
+SELECT
+    emp_id, department, sale_amount,
+    RANK() OVER (PARTITION BY department ORDER BY sale_amount DESC) as rank,
+    DENSE_RANK() OVER (PARTITION BY department ORDER BY sale_amount DESC) as dense_rank
+FROM sales_data;
+#+end_src
+* SUM(), AVG(), COUNT() as Window Functions
+:PROPERTIES:
+:ID: SUM(), AVG(), COUNT() as Window Functions
+:END:
+
+#+begin_src sql
+SELECT
+    emp_id, department, sale_amount,
+    SUM(sale_amount) OVER (PARTITION BY depaerment) as dept_total,
+    AVG(sale_amount) OVER (PARTITION BY department) as dept_avg
+FROM sales_data;
+#+end_src
+
+
+* LAG and LEAD
+:PROPERTIES:
+:ID: Lag and Lead
+:END:
+
+#+begin_src sql
+SELECT
+    emp_id, department, sale_amount,
+    LAG(sale_amount, 1) OVER (ORDER BY sale_date) as previous_sale,
+    LEAD(sale_amount, 1) OVER (ORDER BY sale_date) as next_sale
+FROM sales_date;
+#+end_src

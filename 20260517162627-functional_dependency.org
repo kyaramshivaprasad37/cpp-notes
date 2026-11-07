@@ -1,0 +1,21 @@
+:PROPERTIES:
+:ID:       4c9549ae-d7e1-4993-ad05-93eb4f8e0ce5
+:END:
+#+title:SQL FUNCTIONAL DEPENDENCY
+#+filetags: :dbms:
+#+PROPERTY: header-args:sql :engine mysql :dbuser root :dbpassword Shiva37@. :database dbms_lab
+
+ Represents relation b/w attributes in a relatinal database.
+ X uniquely determines Y ------> Y is said to be functional dependent on X (X -> Y)
+* Rules of Functional Dependency
+- Augmentation
+  X -> Y then XZ -> YZ
+- Transitive
+  X -> Y and Y -> Z then X-> Z
+* Types of Functional Dependency
+1. Trivial functional Dependency
+   Y ⊆ X then: X -> Y (Trival FD)
+   (product_id, stock_count) -> product_id
+2. Non-Trival functional dependency
+   A non-trival FD means that the dependent attribute is not part of the determinant. So it gives new information
+   Y ⊄ X Then X -> Y (Non -trival FD)

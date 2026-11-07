@@ -1,0 +1,109 @@
+:PROPERTIES:
+:ID:       5635ce05-ccfc-4a35-949a-15a556c4c487
+:END:
+#+title: ALTER(dbms)
+#+filetags: :dbms:
+#+PROPERTY: header-args:sql :engine mysql :dbuser root :dbpassword Shiva37@. :database dbms_lab
+
+
+SQL Table Modification and Constraints
+
+* Rename Database
+:PROPERTIES:
+:ID:       468dfa2d-7d66-4455-843a-ab08b7cf9b23
+:END:
+#+begin_src sql
+ALTER DATABASE current_database_name RENAME TO new_database_name ;
+#+end_src
+
+* Rename Table
+:PROPERTIES:
+:ID:       0f9ca437-cdad-495f-946d-276ee8799ed0
+:END:
+#+begin_src sql
+ALTER TABLE table_name RENAME TO new_table_name;
+#+end_src
+
+* Rename Column
+:PROPERTIES:
+:ID:       1a205b58-a495-4a42-ba89-ee337f532e40
+:END:
+#+begin_src sql
+ALTER TABLE table_name RENAME COLUMN old_column_name TO new_column_name;
+#+end_src
+
+* Add Column
+:PROPERTIES:
+:ID:       5dc0ee37-9a21-4370-b43e-f160b4b7b132
+:END:
+#+begin_src sql
+ALTER TABLE table_name ADD COLUMN new_column_name data_type;
+#+end_src
+
+* Add Column with Default Value
+:PROPERTIES:
+:ID:       d3d39d0c-60ab-4550-a5fa-5c26d7b410ec
+:END:
+#+begin_src sql
+ALTER TABLE table_name ADD COLUMN column_name data_type DEFAULT value;
+#+end_src
+
+* Modify Identity/Sequence
+:PROPERTIES:
+:ID:       bab0a819-906d-4810-8f46-bedc269db0dd
+:END:
+#+begin_src sql
+ALTER TABLE table_name ALTER COLUMN column_name RESTART WITH new_value;
+#+end_src
+* Set NOT NULL
+:PROPERTIES:
+:ID:       a20c4a55-979c-403a-b365-d0229cd925a8
+:END:
+#+begin_src sql
+ALTER TABLE table_name ALTER COLUMN column_name SET NOT NULL;
+#+end_src
+
+* Drop NOT NULL
+:PROPERTIES:
+:ID:       a626cf86-735f-40d5-be43-8e72a3700917
+:END:
+#+begin_src sql
+ALTER TABLE table_name ALTER COLUMN column_name DROP NOT NULL;
+#+end_src
+
+    Advanced Constraints
+    Adding and removing rules for data integrity (Unique, Foreign Keys, Checks).
+* Unique Constraint
+:PROPERTIES:
+:ID:       d4afb0bb-60ed-449e-9126-c1ea175117cd
+:END:
+#+begin_src sql
+ALTER TABLE table_name ADD CONSTRAINT constraint_name UNIQUE (column_name);
+#+end_src
+
+* Foreign Key Constraint
+:PROPERTIES:
+:ID:       10a43d2c-2617-4638-872c-47c743396c2a
+:END:
+#+begin_src sql
+ALTER TABLE table_name
+ADD CONSTRAINT constraint_name
+FOREIGN KEY (column_name)
+REFERENCES parent_table (column_name);
+#+end_src
+
+* Check Constraint
+:PROPERTIES:
+:ID:       8e575ccb-a15b-4d02-b396-80f2bd3a3c88
+:END:
+#+begin_src sql
+ALTER TABLE table_name ADD CONSTRAINT constraint_name CHECK (condition);
+#+end_src
+
+* Drop Constraint
+:PROPERTIES:
+:ID:       8dcdf279-fb7d-4894-8539-f3583787de72
+:END:
+#+begin_src sql
+ALTER TABLE table_name DROP CONSTRAINT constraint_name;
+#+end_src

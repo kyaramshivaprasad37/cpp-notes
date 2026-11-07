@@ -2734,7 +2734,7 @@ public:
 
 int main() {
     Number x{3,5};
-    Number y{x}; // here copy construtor is called
+    Number y = x; // here copy construtor is called
     x.print();
     y.print();
     return 0;
@@ -6593,6 +6593,32 @@ The part (member) can only belong to one object (class) at a time
 The part (member) has its existence managed by the object (class)
 The part (member) does not know about the existence of the object (class)
 
+#+begin_src cpp :results output
+#include <iostream>
+using namespace std;
+
+class Engine{
+public:
+    int capacity = 100;
+    void fun() {
+        cout << "Engine started" << '\n';
+    }
+};
+
+jclass Car{
+public:
+    void fun1() {
+        cout << "Car stared" << '\n'
+    }
+}
+
+int main() {
+
+    return 0;
+}
+#+end_src
+
+
 *2. Aggregation*
 
 To qualify as an aggregation, a whole object and its parts must have the following relationship:
@@ -6853,7 +6879,6 @@ bool deleteById(int id) {
 *Measuring text vs binary* - file size in practice
 #+begin_src cpp :results output
 struct Data{
-    int intValue;
     double doubleValue;
     char charValue;
     bool boolValue;
@@ -6873,6 +6898,8 @@ static void displayFileSize(const string& t, const string& b) {
 }
 
 #+end_src
+
+#+RESULTS:
 
 * Inheritance (is-a)
 :PROPERTIES:
@@ -7149,6 +7176,182 @@ int main()
 }
 #+end_src
 
+** multiple inheritance and ambigutiy error
+:PROPERTIES:
+:ID:       27a2d3f8-ee3d-4fc1-b932-0b600455d4ff
+:END:
+
+#+begin_src cpp :results output
+#include <iostream>
+using namespace std;
+
+class P1{
+public:
+    void f1() {
+        cout << "F1() in P1\n";
+    }
+};
+
+class P2{
+public:
+    void f2() {
+        cout << "F2() in p2\n";
+    }
+};
+
+class Child: public P1,public P2{
+
+};
+
+int main() {
+    Child C;
+    C.f1();
+    C.f2();
+    return 0;
+}
+#+end_src
+
+#+RESULTS:
+: F1() in P1
+: F2() in p2
+
+ambiguty error
+
+#+begin_src cpp :results output
+#include <iostream>
+using namespace std;
+
+class P1{
+public:
+    void f1() {
+        cout << "F1() in P1\n";
+    }
+};
+
+class P2{
+public:
+    void f1() {
+        cout << "F2() in p2\n";
+    }
+};
+
+class Child: public P1,public P2{
+
+};
+
+int main() {
+    Child C;
+    C.f1();
+    C.f2();
+    return 0;
+}
+#+end_src
+
+/tmp/babel-6zz3ka/C-src-NoXTKm.cpp:31:7: error: request for member ‘f1’ is ambiguous
+   31 |     C.f1();
+      |       ^~
+/tmp/babel-6zz3ka/C-src-NoXTKm.cpp:20:10: note: candidates are: ‘void P2::f1()’
+
+#+begin_src cpp :results output
+#include <iostream>
+using namespace std;
+
+class P1{
+public:
+    void f1() {
+        cout << "F1() in P1\n";
+    }
+};
+
+class P2{
+public:
+    void f1() {
+        cout << "F1() in p2\n";
+    }
+};
+
+class Child: public P1,public P2{
+
+};
+
+int main() {
+    Child C;
+    C.P1::f1();
+    C.P2::f1();
+    return 0;
+}
+#+end_src
+
+#+RESULTS:
+: F1() in P1
+: F1() in p2
+** diamond problem and virtual class
+:PROPERTIES:
+:ID:       48679647-65de-4b83-869a-8d98c10b661e
+:END:
+
+#+begin_src cpp :results output
+#include <iostream>
+using namespace std;
+
+class Parent{
+public:
+    int x = 20;
+};
+
+class A : public Parent{
+
+};
+
+class B : public Parent{
+
+};
+
+class Demo : public A , public B{
+
+};
+
+int main() {
+    Demo obj;
+    cout << obj.x << '\n';
+    return 0;
+}
+#+end_src
+
+ambiguity error
+
+using virtual to solve this
+
+#+begin_src cpp :results output
+#include <iostream>
+using namespace std;
+
+class Parent{
+public:
+    int x = 20;
+};
+
+class A : virtual public Parent{
+
+};
+
+class B :virtual public Parent{
+
+};
+
+class Demo : public A , public B{
+
+};
+
+int main() {
+    Demo obj;
+    cout << obj.x << '\n';
+    return 0;
+}
+#+end_src
+
+#+RESULTS:
+: 20
 ** Adding new functionality to derived class
 :PROPERTIES:
 :ID:       48107a72-bf89-4bcd-aec0-4d6f497a3892
@@ -7299,3 +7502,212 @@ The identifier add has two forms: add(int, int) and add(double, double).
 Compile-time polymorphism refers to forms of polymorphism that are resolved by the compiler. These include function overload resolution, as well as template resolution.
 
 Runtime polymorphism refers to forms of polymorphism that are resolved at runtime. This includes virtual function resolution.
+** The override specifier
+:PROPERTIES:
+:ID:       27b59bbb-c26b-4cb1-9a17-e0c43d3cd8d1
+:END:
+consider this code
+
+#+begin_src cpp :results output
+#include <iostream>
+using namespace std;
+
+class A{
+public:
+    virtual string_view getName1(int x) {return "A";}
+    virtual string_view getName2(int x) {return "A";}
+};
+
+class B : public A{
+public:
+    virtual string_view getName1(short x) {return "B";} // parameter is short
+    virtual string_view getName2(short x) const {return "B";} // const
+};
+
+int main() {
+    B b{};
+    A& base{b};
+    cout << base.getName1(1) << '\n';
+    cout << base.getName2(2) << '\n';
+    return 0;
+}
+#+end_src
+
+#+RESULTS:
+: A
+: A
+
+since the functions are virtual the output should be the most derived one but since the functions are diff there are not overridden so functions from class A are called
+
+To help address the issue of functions that are meant to be overrides but aren’t, the override specifier can be applied to any virtual function to tell the compiler to enforce that the function is an override. The override specifier is placed at the end of a member function declaration (in the same place where a function-level const goes). If a member function is const and an override, the const must come before override.
+
+#+begin_src cpp :results output
+#include <iostream>
+using namespace std;
+
+class A{
+public:
+    virtual string_view getName1(int x) {return "A";}
+    virtual string_view getName2(int x) {return "A";}
+};
+
+class B : public A{
+public:
+   // string_view getName1(short x) override {return "B";}
+    string_view getName2(int x) override {return "B";}
+};
+
+int main() {
+    B b{};
+    A& base{b};
+    cout << base.getName1(1) << '\n';
+    cout << base.getName2(2) << '\n';
+    return 0;
+}
+#+end_src
+
+#+RESULTS:
+: A
+: B
+** The final specifier
+:PROPERTIES:
+:ID:       c641753a-9439-4214-a891-8ec6a79823f6
+:END:
+#+begin_src cpp :results output
+#include <string_view>
+
+class A
+{
+public:
+	virtual std::string_view getName() const { return "A"; }
+};
+
+class B : public A
+{
+public:
+	// note use of final specifier on following line -- that makes this function not able to be overridden in derived classes
+	std::string_view getName() const override final { return "B"; } // okay, overrides A::getName()
+};
+
+class C : public B
+{
+public:
+	std::string_view getName() const override { return "C"; } // compile error: overrides B::getName(), which is final
+};
+#+end_src
+
+stop overriding from the class
+
+#+begin_src cpp :results output
+#include <string_view>
+
+class A
+{
+public:
+	virtual std::string_view getName() const { return "A"; }
+};
+
+class B final : public A // note use of final specifier here
+{
+public:
+	std::string_view getName() const override { return "B"; }
+};
+
+class C : public B // compile error: cannot inherit from final class
+{
+public:
+	std::string_view getName() const override { return "C"; }
+};
+#+end_src
+
+
+#+begin_src cpp :results output
+#include <iostream>
+using namespace std;
+
+class A{
+public:
+    void f1() {cout << "f1" << '\n';}
+    void f2() {cout << "f2" << '\n';}
+};
+
+class B : public A{
+public:
+    void f3() {cout << "f3" << '\n';}
+    void f4() {cout << "f4" << '\n';}
+};
+
+class C : public B{
+public:
+    void f5() {cout << "f5" << '\n';}
+    void f6() {cout << "f6" << '\n';}
+};
+
+int main() {
+    C obj;
+    obj.f5();
+    obj.f3();
+    obj.f1();
+    return 0;
+}
+#+end_src
+
+#+RESULTS:
+: f5
+: f3
+: f1
+* Conversion
+:PROPERTIES:
+:ID:       4df2e4a1-3e63-4468-8d30-3fedfa2f054c
+:END:
+** basic to class
+:PROPERTIES:
+:ID:       f6702996-066b-4295-909f-8e170e07a9ba
+:END:
+#+begin_src cpp :results output
+#include <iostream>
+using namespace std;
+
+class Demo{
+    int x:
+public:
+    Demo(int y) {
+        x = y;
+    }
+};
+
+int main() {
+    int y = 20;
+    Demo obj(y);  // this is called basic to class conversion
+    return 0;
+}
+#+end_src
+** class to basic
+:PROPERTIES:
+:ID:       2c96e5a4-c5d4-4585-884f-7dabe105a739
+:END:
+#+begin_src cpp :results output
+#include <iostream>
+using namespace std;
+
+class Demo{
+    int x;
+public:
+    Demo(int y) {
+        x = y;
+    }
+    operator int() { //float
+        return x;
+    }
+};
+
+int main() {
+    Demo obj(5);
+    int y = obj; //float
+    cout << y << '\n';
+    return 0;
+}
+#+end_src
+
+#+RESULTS:
+: 5

@@ -1,0 +1,72 @@
+:PROPERTIES:
+:ID:       ae78476e-a462-4ca1-82d6-5aae2322df40
+:END:
+#+title: SQL NORMALIZATION
+#+filetags: :dbms:
+#+PROPERTY: header-args:sql :engine mysql :dbuser root :dbpassword Shiva37@. :database dbms_lab
+
+Normalization is a process of organizing data in a database so that it becomes:
++ Easy to search
++ Easy to update
++ Free from unnecessary duplicates
++ Logical and meaninful
+
+* Types of Anamolies
+:PROPERTIES:
+:ID: Types of Anamolies
+:END:
+* Insertion Anamaly
+:PROPERTIES:
+:collapsed: true
+:END:
+An insertion anamoly occurs when we are unable to insert new data into a table because some related information is missing.
+
++ WE cannot insert data because part of the primary key is missing
++ we are forced to enter NULL or duplicate values for unrelated attributes.
++ The table stores more than one type of information together.
+** Update Anamaly
+The update Anamoly occurs when data redundancy (the same information stored multiple times) leads to data inconsistency after an update operation.
+** Deletion Anamaly
+The Deletion Anamoly is the third major inconsistency that occurs in poorly designed (unnormalized) database. It refers to the uninteded loss of important information about one entity when a record about a completely different , unrelated entity is deleted.
+* Types of Normalization
+:PROPERTIES:
+:ID: Types of Normalization
+:collapsed: true
+:END:
+** First Normal Form (1NF)
+A relation is said to be in First Normal form (1NF) if and only if every attriibute (column) contains atomic values only and there are no repeating groups if columns.
++ All values are atomic
++ No multiple values
++ No lists, sets or repeting groups
++ Each column holds one value only
+
+- No Duplicates Rows
+* TRIM, STRING_TO_ARRAY and UNNEST
+:PROPERTIES:
+:ID: Trim, string_to_array and unnest
+:collapsed: true
+:END:
+** Trim
+#+begin_src sql
+TRIM([LEADING | TRAILING | BOTH] [characters] FROM string)
+#+end_src
+
+#+begin_src sql
+SELECT TRIM('  Hello World  '); ---Output: 'Hello World';
+SELECT TRIM(BOTH '-' FROM '----SHIVA----');  ---'SHIVA'
+#+end_src
+** String_to_array
+#+begin_src sql
+STRING_TO_ARRAY(string, delimeter [, null_string])
+
+SELECT STRING_TO_ARRAY('Math,science,History', ',') --- {Math,Science,History}
+#+end_src
+** UNNEST()
+ It expands a array to multiple rows
+
+ We can use it on a array colums or
+ we can first convert the string column into an array using STRING_TO_ARRAY then use unnest to make into seperate rows
+
+ #+begin_src sql
+UNNEST()
+ #+end_src

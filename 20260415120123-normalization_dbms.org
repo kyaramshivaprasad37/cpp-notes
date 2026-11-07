@@ -1,0 +1,30 @@
+:PROPERTIES:
+:ID:       43887344-e6c0-488d-993d-5b680935bca9
+:END:
+#+title: Normalization(dbms)
+#+filetags: :dbms:
+#+PROPERTY: header-args:sql :engine mysql :dbuser root :dbpassword Shiva37@. :database dbms_lab
+
+* Functional Dependency
+ Y is said to be Determinant on X (if X uniquely identifies Y)
+ Represented as X ->  Y
+
+** Types Of Dependencies
+*** Trival
+Reg No --> {marks,Reg No} --- It has itself in the attribute
+Derives itself
+*** No Trival
+Reg No --> {course}
+* Normalization
+** 1NF
++ Non Atomic
+  | 1,2,3 | --> Not atomic |
+  |       |                |
+
++ Atomic
+  | 1 | 2 | 3 |
+  |   |   |   |
+** 2NF
++ 1NF
++ No partial Dependency
+  In case of 2NF,It should have Composite key(two or more primary keys)

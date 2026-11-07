@@ -1,0 +1,112 @@
+* FastAPI
+:PROPERTIES:
+:ID:       83c1fbe9-2154-457b-8b21-6c1a94cac868
+:END:
+first we import fastAPT from fastapi
+** creating a basic post and get system
+:PROPERTIES:
+:ID:       b02e3d90-faa0-456c-8858-41ad5eb13da1
+:END:
+** get
+:PROPERTIES:
+:ID:       5a38e10b-a137-459b-8c9b-defd93519d76
+:END:
+- we create a *app object* which stores all about our API ~app = FastAPI~
+- we have to store our data i.e objects in a arrays since as of now we dont have database connected (for temporary)  ~my_posts~
+- we create a function with get which returns data in my_posts lets call it ~get_posts~ the name actually doesnt matter what matter is decorator
+- the decorator tells from app object use this fun and this path for this get_post fun.(something like that)
+  Two phases: startup (when the file loads) and request time (when someone hits the URL).
+
+Phase 1: startup (registration)
+
+When Python reads this line:
+
+python
+@app.get("/posts")
+def get_posts():
+    return my_posts
+
+it does get_posts = app.get("/posts")(get_posts). Inside, app saves a line in its routing table, like:
+
+python
+routes = {
+    ("GET", "/posts"): get_posts,
+}
+
+Your function is not run here. It’s only stored. (Unlike my shout example, FastAPI’s decorator returns your original function untouched, it just registers it on the side.)
+
+Phase 2: a request comes in
+
+You open http://localhost:8000/posts in the browser. Here’s the flow:
+
+Browser sends GET /posts
+Uvicorn (the server) receives it and hands it to app
+app looks up ("GET", "/posts") in its table and finds get_posts
+app calls get_posts(), which returns your my_posts list
+app converts that Python list into JSON
+The JSON is sent back to the browser as the response
+Browser ──► Uvicorn ──► app (looks up table) ──► get_posts() ──► my_posts
+Browser ◄── Uvicorn ◄── app (list → JSON) ◄─────────────────────┘
+
+Your function only does the middle part: return the data. FastAPI handles the rest (routing, JSON conversion, status code 200, headers).
+
+That’s also why the method matters. @app.get("/posts") and @app.post("/posts") are two separate entries in the table, same URL but different method, so they can point to different functions.
+
+in this way we use get_posts fun to return data *the function name doesnt matter because it is handled by fastapi* *what matters is decorator and path* i.e ~@app.get("/posts")~
+** put
+:PROPERTIES:
+:ID:       097ea54b-3c95-4eb9-85ec-54f1515a195b
+:END:
+- now we can easily use put to store in our ~my_posts~ arrays which is storing data
+- we have to just append the new data to my_posts
+- lets see how thats done
+#+begin_src python
+@app.post("/posts")
+def create_post(payLoad : dict = Body(...)):
+    my_posts.append(payLoad)
+    return {"data" : payLoad} #returning the newly created data so that we can now its worked
+#+end_src
+
+So when a POST comes in with {"title": "hello"}:
+
+1. FastAPI reads the body
+2. Converts the JSON into a Python dict
+3. Passes it into your function as payLoad
+
+Now we can use the Post class we defined at the start which tell how the schema should be.
+
+#+begin_src python
+@app.get("/posts")
+def create_post(post : Post):
+    temp_post = post.dict()
+    temp_post['id'] - randrange(1, 1000000) #since in the schema we have id we just randomly using a id every time we create a post
+    my_posts.append(temp_post)
+    return {"data": temp_post}
+#+end_src
+
+** getting post with specific id
+we create a function called ~get_post~ which has decorator ~@app.get{"/posts/{id"}~
+
+here id is called path parameter
+#+begin_src python
+def get_post(id):
+    post = find_post(int{id})
+    return {"post": post}
+#+end_src
+
+here find_post is some fun which checks the id and and returns it if it is my_posts array else it returns null
+
+here we converted id to int because the type if id is class
+
+#+begin_src python
+@app.get("/posts/{id}")
+def get_post(id : int):
+    post = find_post(id)
+    return {"post_detail": post}
+#+end_src
+
+making status code 404 if post is not found
+
+we use of lib from FastAPI called ~Response~
+if not post:
+        response.status_code = 404

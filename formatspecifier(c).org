@@ -1,0 +1,115 @@
+#+title: Formatspecifier
+
+Special tokens that begin with a % sysbol,
+followed by a character that specifies the data type
+and optional modifiers(width,precision,flags).
+They control how data is displayed or interpreted.
+
+#+begin_src C :results output
+#include <stdio.h>
+
+int main() {
+
+    int age = 25;
+    float price = 19.99;
+    double pi = 3.141592;
+    char currency = '$';
+    char name[] = "Shiva";
+
+    printf("%d\n",age);
+    printf("%f\n",price);
+    printf("%lf\n",pi);
+    printf("%c\n",currency);
+    printf("%s\n",name);
+
+    return 0;
+}
+#+end_src
+
+#+RESULTS:
+: 25
+: 19.990000
+: 3.141592
+: $
+: Shiva
+
+* Optinal modifies
+
+** Width
+
+#+begin_src C :results output
+
+#include <stdio.h>
+
+int main() {
+
+    int num1 = 1;
+    int num2 = 10;
+    int num3 = 100;
+
+    printf("%3d\n",num1);
+    printf("%3d\n",num2);
+    printf("%3d\n",num3);
+
+    printf("%-3d\n",num1);
+    printf("%-3d\n",num2);
+    printf("%-3d\n",num3);
+
+    printf("%04d\n",num1);
+    printf("%04d\n",num2);
+    printf("%04d\n",num3);
+
+    int num4 = -100;
+    int num5 = 100;
+
+    printf("%+d\n",num4);
+    printf("%+d\n",num5);
+
+    return 0;
+}
+
+
+#+end_src
+
+#+RESULTS:
+#+begin_example
+  1
+ 10
+100
+1
+10
+100
+0001
+0010
+0100
+-100
++100
+#+end_example
+** Precision
+#+begin_src C :results output
+#include <stdio.h>
+
+int main() {
+
+    float price1 = 19.99;
+    float price2 = 1.50;
+    float price3 = -100.00;
+
+    printf("%.3f\n",price1);
+    printf("%.1f\n",price2);
+    printf("%.1f\n",price3);
+
+    printf("%+7.2f\n",price1);
+    printf("%+7.2f\n",price2);
+    printf("%+7.2f\n",price3);
+    return 0 ;
+}
+#+end_src
+
+#+RESULTS:
+: 19.990
+: 1.5
+: -100.0
+:  +19.99
+:   +1.50
+: -100.00

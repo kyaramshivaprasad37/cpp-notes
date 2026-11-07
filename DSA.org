@@ -1,0 +1,265 @@
+:PROPERTIES:
+:ID:       65d38716-96c4-47f1-b515-b71616f2b0ba
+:END:
+#+title: DSA
+* Arrays
+:PROPERTIES:
+:ID:       1455c819-792f-474c-a6f3-41ddfcf5585b
+:END:
+** sorting 0s 1s and 2s
+:PROPERTIES:
+:ID:       43536b95-7eec-421d-915d-644c1f197940
+:END:
+
+Better approach
+
+going through arr one time and couting how many 1s and 2s and 0s are there and then rewrting manually.
+
+
+#+begin_src cpp :results output
+#include <iostream>
+using namespace std;
+
+int main() {
+    int a[] = {0,1,2,0,1,2,1,2,0,0,1};
+    int c0 = 0;
+    int c1 = 0;
+    int c2 = 0;
+    int l = sizeof(a)/sizeof(a[0]);
+    for(int i =0; i < l; i++) {
+        if(a[i] == 0) {
+            c0++;
+        }else if(a[i] == 1) {
+            c1++;
+        }else{
+            c2++;
+        }
+    }
+    for(int i = 0;i < c0;i++) {
+        a[i] = 0;
+    }
+    for(int i = c0; i < c0 + c1;i++) {
+        a[i] = 1;
+    }
+    for(int i = c0+c1; i < c0 + c1 + c2;i++) {
+        a[i] = 2;
+    }
+
+    for(int i =0; i < l;i++) {
+        cout << a[i] << ' ';
+    }
+    return 0;
+}
+#+end_src
+
+#+RESULTS:
+: 0 0 0 0 1 1 1 1 2 2 2
+
+optimal approach - Dutch national flag algorithm
+#+begin_src cpp :results output
+#include <iostream>
+using namespace std;
+
+int main() {
+    int a[] = {0,1,2,0,1,2,1,2,0,0,1};
+    int n = sizeof(a)/sizeof(a[0]);
+    int mid = 0;
+    int low = 0;
+    int high = n-1;
+
+    while(mid <= high) {
+        if(a[mid] == 0) {
+            swap(a[mid], a[low]);
+            mid++;
+            low++;
+        }else if(a[mid] == 1) {
+            mid++;
+        }else{
+            swap(a[mid], a[high]);
+            high--;
+        }
+    }
+    for(int i =0;i < n; i++) {
+        cout << a[i] << ' ';
+    }
+    return 0;
+}
+#+end_src
+
+#+RESULTS:
+: 0 0 0 0 1 1 1 1 2 2 2
+** majory element - I
+:PROPERTIES:
+:ID:       e3b4d30b-e8f0-4454-adc2-cd31b16b9c7f
+:END:
+
+better
+#+begin_src cpp :results output
+#include <iostream>
+#include <map>
+using namespace std;
+
+int main() {
+    int a[] = {7,7,5,7,5,1,5,7,5,5,7,7,5,5,5,5};
+    int n = sizeof(a)/sizeof(a[0]);
+    map<int, int> mpp;
+    for(int i =0; i < n; i++) {
+        mpp[a[i]]++;
+    }
+    for(auto i : mpp) {
+        if(i.second >= n/2) {
+            cout << i.first << ' ' << i.second;
+            break;
+        }
+    }
+    return 0;
+}
+#+end_src
+
+#+RESULTS:
+: 5 9
+* Linked List
+:PROPERTIES:
+:ID:       e650fde4-2717-46d4-b4fe-4e99bbb93268
+:END:
+** Circular Linked List
+:PROPERTIES:
+:ID:       f4b5a581-3381-418e-a7bf-ec48bee08246
+:END:
+
+#+begin_src cpp :results output
+#include <iostream>
+
+struct DataNode{
+    int data;
+    DataNode* next;
+}
+
+struct HeaderNode{
+    int size;
+    DataNode* next;
+}
+
+HeaderNode* createCircularHeaderList() {
+    HeaderNode* h = new HeaderNode();
+
+    h->size = 0;
+    h->next = (DataNode*)h;
+
+    return h;
+}
+
+bool isEmpty(HeaderNode* h)  {
+    return h->next = (DataNode*)h;
+}
+#+end_src
+
+example
+#+begin_src cpp :results output
+#include <iostream>
+
+// 1. The Blueprints (Structures)
+struct DataNode {
+    int data;
+    DataNode* next;
+};
+
+struct HeaderNode {
+    int size;
+    DataNode* next;
+};
+
+// 2. Initialize the Empty List
+HeaderNode* createCircularHeaderList() {
+    HeaderNode* h = new HeaderNode();
+    h->size = 0;
+    h->next = (DataNode*)h; // Self-loop using the cast
+    return h;
+}
+
+// 3. Check if Empty
+bool isEmpty(HeaderNode* h) {
+    return h->next == (DataNode*)h;
+}
+
+// 4. Insert at Beginning (Topic 1)
+void insertAtBeginning(HeaderNode* h, int value) {
+    DataNode* newNode = new DataNode();
+    newNode->data = value;
+
+    // Point new node to the current first data node (or back to header if empty)
+    newNode->next = h->next;
+
+    // Header points to the new node
+    h->next = newNode;
+
+    // Increment the metadata size counter
+    h->size++;
+}
+
+// 5. Traverse and Display
+void displayList(HeaderNode* h) {
+    if (isEmpty(h)) {
+        std::cout << "List is empty\n";
+        return;
+    }
+
+    DataNode* current = h->next;
+
+    std::cout << "List contents (" << h->size << " nodes): ";
+    // Loop until we hit the header again
+    while (current != (DataNode*)h) {
+        std::cout << "[" << current->data << "] -> ";
+        current = current->next;
+    }
+    std::cout << "(back to header)\n";
+}
+
+// 6. The Main Function to run it all
+int main() {
+    // Create our list at memory Address 100 (conceptually)
+    HeaderNode* myList = createCircularHeaderList();
+
+    std::cout << "Initial state:\n";
+    displayList(myList);
+    std::cout << "-----------------------\n";
+
+    // Insert data
+    insertAtBeginning(myList, 10);
+    insertAtBeginning(myList, 20);
+    insertAtBeginning(myList, 30);
+
+    // Display after insertions
+    // Note: Because we insert at the BEGINNING, 30 will be first!
+    std::cout << "After inserting 10, 20, 30 at the beginning:\n";
+    displayList(myList);
+
+    return 0;
+}
+#+end_src
+
+#+RESULTS:
+: Initial state:
+: List is empty
+: -----------------------
+: After inserting 10, 20, 30 at the beginning:
+: List contents (3 nodes): [30] -> [20] -> [10] -> (back to header)
+** Doubly linked list
+
+#+begin_src cpp :results output
+#include <iostream>
+using namespace std;
+
+struct Node{
+    int val;
+    Node* next;
+    Node* back;
+};
+
+
+
+int main() {
+
+    return 0;
+}
+#+end_src

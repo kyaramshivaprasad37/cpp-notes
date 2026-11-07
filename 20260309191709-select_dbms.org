@@ -1,0 +1,81 @@
+:PROPERTIES:
+:ID:       bfa560f2-a6e4-416b-a964-c4c8de164820
+:END:
+#+title: SELECT(dbms)
+#+filetags: :dbms:
+#+PROPERTY: header-args:sql :engine mysql :dbuser root :dbpassword Shiva37@. :database dbms_lab
+
+* Basic Query Structure
+
+** Simple Selection
+#+begin_src sql
+SELECT column1, column2 FROM table_name ;
+#+end_src
+
+** Aliasing
+#+begin_src sql
+SELECT column1 AS alias1, column2 AS alias2 FROM table_name;
+#+end_src
+
+** Filtering and Ordering
+#+begin_src sql
+SELECT column1, column2 FROM table_name
+WHERE condition
+ORDER BY column_name [ASC|DESC];
+#+end_src
+
+* Conditional and Specialized Queries
+
+** Handling Nulls
+#+begin_src sql
+SELECT * FROM table_name WHERE column1 IS NULL;
+#+end_src
+
+** Column Operations & Aliasing
+#+begin_src sql
+SELECT column_name1 OPERATOR column_name2 AS alias_name FROM table_name;
+#+end_src
+
+** Pattern Matching and Ranges
+#+begin_src sql
+SELECT column1, column2 FROM table_name WHERE column_name LIKE pattern;
+SELECT column1 FROM table_name WHERE column_name NOT IN (value1, value2);
+#+end_src
+
+** Advanced Filtering
+#+begin_src sql
+SELECT column1 FROM table_name ORDER BY column_name LIMIT number;
+SELECT column1, column2 FROM table_name WHERE EXISTS (subquery);
+#+end_src
+
+* SQL Built-in Functions
+
+** Numeric Functions
+| Function | Description                  | Example                       |
+|----------+------------------------------+-------------------------------|
+| ABS      | Absolute value               | SELECT ABS(-10);              |
+| CEIL     | Rounds up to nearest integer | SELECT CEIL(4.7);             |
+| EXP      | Exponential (e^x)            | SELECT EXP(expression);       |
+| LN       | Natural logarithm            | SELECT LN(expression);        |
+| POWER    | Base to the exponent power   | SELECT POWER(base, exponent); |
+| MOD      | Remainder of division        | SELECT MOD(10, 3);            |
+| SQRT     | Square root                  | SELECT SQRT(25);              |
+
+** String Functions
+- LENGTH: SELECT LENGTH('string_value');
+- CONCAT: SELECT CONCAT(string1, string2, ...);
+- UPPER: SELECT UPPER('string_value');
+- ASCII: SELECT ASCII('character');
+- SUBSTRING: SELECT SUBSTRING(string_value, start_position, length);
+
+** Aggregate Functions
+#+begin_src sql
+SELECT COUNT(column_name) FROM table_name WHERE condition;
+SELECT SUM(column_name) FROM table_name WHERE condition;
+SELECT AVG(column_name) FROM table_name WHERE condition;
+#+end_src
+
+** Date/Time Functions
+#+begin_src sql
+SELECT EXTRACT(part FROM date_value);
+#+end_src

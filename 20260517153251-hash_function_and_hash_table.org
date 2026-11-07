@@ -1,0 +1,51 @@
+:PROPERTIES:
+:ID:       0edb9d57-58f3-4d11-9eb4-c265f4f98131
+:END:
+#+title: SQL HASH FUNCTION AND TABLE
+#+filetags: :dbms:
+#+PROPERTY: header-args:sql :engine mysql :dbuser root :dbpassword Shiva37@. :database dbms_lab
+
+* Hash Function
+- Hashing is a fast data access method used to find records doretly, without scanning whole file.
+- A hash function is a formula that converts a key into a bucket numeber.
+** Bucket
+A bucket is a storage unit that holds the records whose keys produce the same hash value.
+** Formula
+h(key) = key % 5
+* Hash Table
+- a hash table is a collection of buckets.
+* Quadratic Probing
+ hi(key) = ((h(key) + i²)) % m
+ m ---> size of hash table
+* Double Hashing
+h1(key) = key % m
+h2(key) = 5 - (key % 5)
+New position = (h1(key) + i x h2(key)) % table size
+
+10, 24, 31, 18
+
+10 ---->  h1(10) = 10%7 = 3
+24 ---->  h1(24) = 24%7 = 3 ----> occupied
+          h2(24) = 5 - (24 % 5)
+                 = 5 - 4
+                 = 1
+New position = (3 + 0 x 1) % 7 = 3
+             = (3 + 1 x 1) % 7 = 4  -----> Insert in B4.
+* Linear Hashing
+Initially split pointer points to B0.
+
+10 7 4
+
+B0 -> [ ]
+B1 -> [10, 7, 4]
+B2 -> [ ]
+
+When overflow happens
+1. Split the bucket pointed by the split pointer
+2. Create a new bucket (B3)
+3. Redistribute records of the split bucket
+   A new hash function temporarily created
+   Records originally in B0 are rehashed using this function amd moved between B0 and B3
+4. Move the split pointer
+   B0 --> B1
+5. Continue Gradual Growth

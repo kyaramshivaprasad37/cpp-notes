@@ -1,0 +1,21 @@
+:PROPERTIES:
+:ID:       dfa60fd3-e75a-4072-98c8-ac73e9dde3fc
+:END:
+#+title: UPSERT(dbms)
+#+filetags: :dbms:
+#+PROPERTY: header-args:sql :engine mysql :dbuser root :dbpassword Shiva37@. :database dbms_lab
+
+#+begin_src sql
+INSERT INTO table_name (column1, column2,..)
+VALUES (value1, value2,..)
+ON CONFLICT (conflict_target)
+DO action;
+#+end_src
+
+* Example
+#+begin_src sql
+INSERT INTO products(product_id,name,price)
+VALUES (1,1,'Laptop' ,1200)
+ON CONFLICT (product_id)
+DO UPDATE SET PRICE = EXCLUDED.price;
+#+end_src
